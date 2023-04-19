@@ -1,0 +1,391 @@
+@import url("race.css");
+@import url("ui.css");
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    transition: 0.1s all;
+}
+
+:root {
+    --bg: #f0f0f0;
+    --text: #000000;
+    --border: #000000;
+}
+
+nav {
+    display: block;
+    width: 100%;
+    margin: 0px;
+}
+
+body {
+    background-color: #1e1e1e;
+}
+
+ul{
+    display: inline-flex;
+	list-style: none;
+    margin-block-start: 0px;
+    padding-inline-start: 5px;
+    align-items: center;
+    color: #ddd;
+    font-weight: bold;
+}
+
+button{
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #c5c5c5;
+	padding: 10px;
+	margin: 5px;
+	transition: background-color 0.25s;
+    font-weight: bold;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+button:hover{
+	background-color: #ddd;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+.btn-driver-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--border);
+    color: var(--titles);
+	border-radius: 0;
+}
+.btn-driver-name:hover {
+    background-color: var(--border);
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 2px black);
+}
+.btn-driver-name h1 {
+    margin-bottom: 0 !important;
+}
+
+a {
+    text-decoration: none;
+	color: black;
+}
+
+h1 {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--border);
+    color: var(--titles);
+    padding: 5px;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.interface {
+    display: flex;
+    display: none;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+#main-menu {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5em;
+}
+#main-menu h1 {
+    font-size: 48px;
+    background-color: transparent;
+    color: #ff3434;
+}
+#main-menu select {
+    padding: 1em;
+    margin: 2em;
+    font-size: 14px;
+    font-weight: bold;
+}
+#main-menu button {
+    padding: 1em;
+}
+
+#team-menu {
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+}
+#team-menu-interface {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#game-options {
+    display: flex;
+    flex-direction: column;
+}
+#game-options label{
+    padding: 20px;
+}
+
+#drivers {
+    margin-left: 20px;
+    display: flex;
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+}
+.driver-card {
+    border-right: 2px solid var(--border);
+    text-align: center;
+    width: 200px
+}
+.driver-card:last-child{
+    border-right: 0;
+}
+.driver-card img {
+    max-width: 100%;
+    max-height: 128px;
+    border: 1px solid #222;
+}
+.driver-card-portrait {
+    min-width: 98px;
+    min-height: 130px;
+}
+.driver-card h1 {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.driver-card .country-flag {
+    margin-right: 5px;
+}
+.driver-info-bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.driver-info-bars h2 {
+    width: 70px;
+    text-align: end;
+    margin: 0;
+    margin-right: 5px;
+}
+.driver-info-bars .progress-bar-background {
+    width: 100px;
+    border-radius: 0px;
+    box-shadow: 0px 0px #222;
+    height: auto;
+}
+.driver-info-bars .progress-bar {
+    letter-spacing: 0.5px;
+    border-radius: 0px;
+    font-size: 12px;
+    padding-top: 1px;
+}
+.country-flag{
+    height: 18px;
+    vertical-align: middle;
+    border: 1px solid #222 !important;
+    border-radius: 0 !important;
+}
+
+#info {
+    border: 2px solid var(--border);
+    min-width: 200px;
+    height: max-content;
+    box-shadow: 1px 1px #222;
+    text-align: center;
+    background-color: var(--bg);
+}
+#info h1{
+    margin-bottom: 5px;
+    padding: 5px 0px 5px 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#info .country-flag{
+    margin-right: 5px;
+}
+
+#team-logo {
+    padding: 2px;
+}
+
+#coach {
+    align-self: flex-start;
+}
+
+#money {
+    text-align: center;
+    padding: 10px;
+}
+
+#money-icon {
+    align-self: center;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+#next-race {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#next-race-name {
+    margin: 10px;
+    font-size: 14px;
+}
+#next-race-name .country-flag{
+    margin-right: 5px;
+}
+
+#btn-play{
+    padding: 10px 2em;
+}
+
+#players {
+    margin: 10px;
+}
+
+#trust {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+#trust h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+#trust div {
+    margin: 0;
+}
+#trust > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+#car {
+    background-color: var(--bg);
+    border: 2px solid var(--border);
+    margin-left: 20px;
+    text-align: center;
+}
+#car h1{
+    margin: 0;
+}
+#car > div{
+    border-top: 1px solid var(--border);
+}
+
+.bars-table table {
+    margin: 5px;
+}
+.bars-table table {
+    display: flex;
+    justify-content: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+.bars-table tr {
+    width: 100%;
+}
+.bars-table td {
+    padding: 0;
+    text-align: start;
+}
+.bars-table .progress-bar-background {
+    border: 0;
+}
+.bars-table td:nth-child(1) {
+    padding-right: 2px;
+    text-align: end;
+    font-weight: bold;
+}
+.bars-table td:nth-child(2) {
+    padding: 0;
+    border: 1px solid black;
+}
+
+#engineering {
+    background-color: var(--bg);
+    border: 2px solid var(--border);
+    margin-left: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.progress-bar-background {
+    width: 100px;
+    height: 15px;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+    justify-content: center;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    background-color: var(--border);
+    justify-content: center;    
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+.progress-bar span {
+    display: flex;
+    padding: 0px 50px;
+    justify-content: center;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(1px 1px #222);
+}
+
+.navbar-icon {  
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(1px 1px #222);
+}

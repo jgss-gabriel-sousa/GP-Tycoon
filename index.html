@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="styles.css"/>
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    
+    <script src="./lib/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="./lib/sweetalert2.min.css">
+
+    <script src="app.js" type="module" defer></script>
+    <script src="events.js" type="module" defer></script>
+    
+    <title>Grand Prix Tycoon</title>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <div id="team-menu">
+            <nav>
+                <ul>
+                    <li><button id="btn-options">Opções</button></li>
+                    <li><button id="btn-standings">Camp. Pilotos</button></li>
+                    <li><button id="btn-team-standings">Camp. Construtores</button></li>
+                    <li><button id="btn-market">Mercado</button></li>
+                    <li><button id="btn-historic">Histórico</button></li>
+                </ul>
+            </nav>
+            <div id="team-menu-interface">
+                <div id="info">
+                    <h1 id="year">2023</h1>
+                    <div id="team">
+                        <div>
+                            <img id="team-logo" class="logo" alt="Team Logo">
+                            <h1 id="name"></h1>
+                        </div>
+                        <div id="money"></div>
+                        <div id="trust">
+                            <div id="trust-board">
+                                <p>Confiança Diretoria</p>
+                                <div class="progress-bar-background">
+                                    <div id="board-bar" class="progress-bar"><span></span></div>
+                                </div>
+                            </div>
+                            <div id="trust-fans">
+                                <p>Confiança Patrocinadores</p>
+                                <div class="progress-bar-background">
+                                    <div id="fans-bar" class="progress-bar"><span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="next-race">
+                        <h1>Próxima Corrida</h1>
+                        <h2 id="next-race-name"></h2>
+                        <button id="btn-play">Continuar</button>
+                    </div>
+
+                </div>
+                <div id="drivers"></div>
+                <div id="car" class="bars-table">
+                    <h1>Carro</h1>
+                    <div id="car-info"></div>
+                    <div id="chassis"></div>
+                    <div id="engine">
+                        <h1>Motor</h1>
+                    </div>
+                </div>
+                <div id="engineering">
+                    <h1>Engenheiros</h1>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-menu">
+            <h1>GP Tycoon</h1>
+            <select id="select-team">
+                <option value="Red Bull">Red Bull</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="Ferrari">Ferrari</option>
+                <option value="Aston Martin">Aston Martin</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Haas">Haas</option>
+                <option value="McLaren">McLaren</option>
+                <option value="Alfa Romeo">Alfa Romeo</option>
+                <option value="AlphaTauri">AlphaTauri</option>
+                <option value="Williams">Williams</option>
+            </select>
+            <button id="start-game">Começar Jogo</button>
+        </div>
+
+        <div id="players-menu">
+            Players MENU
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,116 @@
+#race {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#time-table table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+#time-table tbody {
+    box-shadow: 1px 1px #222;
+}
+
+#time-table th {
+    border: 1px solid #222;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #101014;
+    color: #f8f9fa;
+    padding: 5px;
+    box-shadow: 1px 1px 2px #555;
+}
+#time-table tr:hover{
+    background-color: #ffff99;
+    font-weight: bold;
+}
+
+#time-table td:first-child {
+    background-color: #101014;
+    color: #f8f9fa;
+    font-weight: bold;
+    width: 50px;
+}
+
+#time-table td {
+    border: 1px solid #424548;
+    padding: 3px;
+    text-align: center;
+    color: #222;
+    width: 200px;
+}
+#time-table td:first-child {
+    width: 45px;
+}
+
+#podium {
+    background-image: url("./img/podium.png");
+    min-height: 387px;
+    min-width: 387px;
+    max-height: 387px;
+    max-width: 387px;
+    border: 1px solid #222;
+}
+.podium-img {
+    height: 120px;
+    width: 90px;
+    border: 1px solid #333;
+    margin: 5px;
+    position: relative;
+}
+#podium img:nth-child(1) {
+    top: 210px;
+    left: 35px;
+}
+#podium img:nth-child(2) {
+    top: 175px;
+    left: 35px;
+}
+#podium img:nth-child(3) {
+    top: 210px;
+    left: 35px;
+}
+#podium img:nth-child(4) {
+    top: 35px;
+    left: -160px;
+    height: auto;
+    width: 50px;
+    max-height: 30px;
+}
+
+#end-season h1 {
+    background-color: transparent;
+    text-decoration: underline;
+    color: #000;
+    font-size: 16px;
+}
+#end-season table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000;
+}
+#end-season th {
+    border: 1px solid #424548;
+    font-weight: bold;
+    background-color: #101014;
+    color: #f8f9fa;
+}
+#end-season td {
+    border: 1px solid #424548;
+    font-size: 14px;
+    padding: 0.4em;
+}
+#end-season td:nth-child(-n+2),
+#end-season td:last-child {
+    width: 40px;
+}
+
+#end-season td {
+    width: 200px;
+}
+#end-season tr:nth-child(2) {
+    font-weight: bold;
+}
