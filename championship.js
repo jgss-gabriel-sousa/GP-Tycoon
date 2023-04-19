@@ -4,6 +4,7 @@ import { game, UpdateAfterRace, YearUpdate, UpdateTeamsStats } from "./game.js";
 import { seasonOverviewUI } from "./ui.js";
 import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";
+import { accentsTidy } from "./utils.js";
 
 export class Championship {
     constructor() {
@@ -56,21 +57,21 @@ export class Championship {
                 </tr>
                 <tr class="first-position">
                     <td>1º</td>
-                    <td><img class="country-flag" src="img/flags/${game.drivers[this.standings[0][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.drivers[this.standings[0][0]].country)}.webp"></td>
                     <td>${this.standings[0][0]}</td>
                     <td>${game.drivers[this.standings[0][0]].team}</td>
                     <td>${this.standings[0][1]}</td>
                 </tr>
                 <tr class="second-position">
                     <td>2º</td>
-                    <td><img class="country-flag" src="img/flags/${game.drivers[this.standings[1][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.drivers[this.standings[1][0]].country)}.webp"></td>
                     <td>${this.standings[1][0]}</td>
                     <td>${game.drivers[this.standings[1][0]].team}</td>
                     <td>${this.standings[1][1]}</td>
                 </tr>
                 <tr class="third-position">
                     <td>3º</td>
-                    <td><img class="country-flag" src="img/flags/${game.drivers[this.standings[2][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.drivers[this.standings[2][0]].country)}.webp"></td>
                     <td>${this.standings[2][0]}</td>
                     <td>${game.drivers[this.standings[2][0]].team}</td>
                     <td>${this.standings[2][1]}</td>
@@ -90,21 +91,21 @@ export class Championship {
                 </tr>
                 <tr class="first-position">
                     <td>1º</td>
-                    <td><img class="country-flag" src="img/flags/${game.teams[this.teamStandings[0][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.teams[this.teamStandings[0][0]].country)}.webp"></td>
                     <td>${this.teamStandings[0][0]}</td>
                     <td>${game.teams[this.teamStandings[0][0]].engine}</td>
                     <td>${this.teamStandings[0][1]}</td>
                 </tr>
                 <tr class="second-position">
                     <td>2º</td>
-                    <td><img class="country-flag" src="img/flags/${game.teams[this.teamStandings[1][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.teams[this.teamStandings[1][0]].country)}.webp"></td>
                     <td>${this.teamStandings[1][0]}</td>
                     <td>${game.teams[this.teamStandings[1][0]].engine}</td>
                     <td>${this.teamStandings[1][1]}</td>
                 </tr>
                 <tr class="third-position">
                     <td>3º</td>
-                    <td><img class="country-flag" src="img/flags/${game.teams[this.teamStandings[2][0]].country}.webp"></td>
+                    <td><img class="country-flag" src="img/flags/${accentsTidy(game.teams[this.teamStandings[2][0]].country)}.webp"></td>
                     <td>${this.teamStandings[2][0]}</td>
                     <td>${game.teams[this.teamStandings[2][0]].engine}</td>
                     <td>${this.teamStandings[2][1]}</td>
@@ -417,7 +418,7 @@ export class Championship {
                         <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp">
                         <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp">
                         <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp">
-                        <img class="podium-img" src="img/flags/${game.drivers[finalResult[0].name].country}.webp">
+                        <img class="podium-img" src="img/flags/${accentsTidy(game.drivers[finalResult[0].name].country)}.webp">
                     </div>
                 </div>
                 `,

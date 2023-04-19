@@ -27,7 +27,7 @@ function genDriversHTML(){
         html += `
             <img class="driver-card-portrait" src="img/drivers/${e.name}.webp" onerror="this.src='img/drivers/generic.webp';">
             <button class="btn-driver-name view-driver" value="${e.name}">
-                <img class="country-flag" src="img/flags/${e.country}.webp"> ${e.name}
+                <img class="country-flag" src="img/flags/${accentsTidy(e.country)}.webp"> ${e.name}
             </button>
         `
         
@@ -245,7 +245,7 @@ export function genTeamHTML(){
     document.querySelector("#team-logo").src = "./img/teams/"+game.team+".png";
 
     document.querySelector("#year").innerText = `${game.championship.year}`;
-    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${teams[game.team].country}.webp"> ${game.team}`;
+    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
     document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${numberF(teams[game.team].cash*1000,"extended")}</p>`;;
 
     setBarProgress(teams[game.team].boardTrust,"#board-bar");
@@ -254,7 +254,7 @@ export function genTeamHTML(){
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
 
-        document.querySelector("#next-race-name").innerHTML = `<img class="country-flag" src="img/flags/${circuitsData[nextRace].country}.webp">`+nextRace;
+        document.querySelector("#next-race-name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(circuitsData[nextRace].country)}.webp">`+nextRace;
     }
     else{
         document.querySelector("#next-race-name").innerHTML = `Resumo da Temporada`;

@@ -14,7 +14,7 @@ export function viewDriver(name){
                 <tr>
                     <td><h2>País: </h2></td>
                     <td>
-                        <h2><img class="country-flag" src="img/flags/${driver.country}.webp">
+                        <h2><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp">
                         ${countryCodes[driver.country]}</h2>
                     </td>
                 </tr>

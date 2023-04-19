@@ -2,6 +2,7 @@ import { game } from "./game.js"
 import { circuitsData } from "./data/circuits.js"
 import { gameOptions } from "./ui/gameOptions.js"
 import { viewDriver } from "./ui/viewDriver.js"
+import { accentsTidy } from "./utils.js"
 
 export function gameOptionsUI(){
     gameOptions();
@@ -30,7 +31,7 @@ export function historicUI(){
         html += `
         <tr>
             <td>${e.year}</td>
-            <td><img class="country-flag" src="img/flags/${e.driverCountry}.webp"></td>
+            <td><img class="country-flag" src="img/flags/${accentsTidy(e.driverCountry)}.webp"></td>
             <td>${e.driverChampion}</td>
             <td>${e.driverTeam}</td>
             <td>${e.driverEngine}</td>
@@ -53,7 +54,7 @@ export function historicUI(){
         html += `
         <tr>
             <td>${e.year}</td>
-            <td><img class="country-flag" src="img/flags/${e.constructorCountry}.webp"></td>
+            <td><img class="country-flag" src="img/flags/${accentsTidy(e.constructorCountry)}.webp"></td>
             <td>${e.constructorChampion}</td>
             <td>${e.constructorEngine}</td>
         </tr>`;
@@ -90,7 +91,7 @@ export function teamRankingUI(){
         <tr>
             <td>${pos++}º</td>  
             <td style="background-color: ${game.teams[e[0]].result_bg_color}; color: ${game.teams[e[0]].result_font_color}">${e[0]}</td>
-            <td><img class="country-flag" src="img/flags/${game.teams[e[0]].country}.webp"></td>  
+            <td><img class="country-flag" src="img/flags/${accentsTidy(game.teams[e[0]].country)}.webp"></td>  
             <td>${e[1]}</td>
             <td>${e[2]}</td>
             <td>${e[3]}</td>
@@ -119,7 +120,7 @@ export function seasonOverviewUI(thenCall){
                     <th>Piloto</th>`;
 
     game.championship.tracks.forEach(e => {
-        html += `<th><img class="country-flag" src="img/flags/${circuitsData[e].country}.webp"><br>${circuitsData[e].abbrev}</th>`;
+        html += `<th><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[e].country)}.webp"><br>${circuitsData[e].abbrev}</th>`;
     });
     html += "<th>Pts</th></th>";
                 
