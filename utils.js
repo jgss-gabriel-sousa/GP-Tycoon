@@ -76,6 +76,13 @@ export function blankSpaceRmv(string){
     return string.replace(/\s/g, "_");
 }
 
+export function genID(string){
+    string = string.replace(/\s/g, "-");
+    string = string.replace(/\./g, "-");
+    string = accentsTidy(string);
+    return string;
+}
+
 export function accentsTidy(string){
     let r = string.toLowerCase();
     const non_asciis = {'a': '[àáâãäå]', 'ae': 'æ', 'c': 'ç', 'e': '[èéêë]', 'i': '[ìíîï]', 'n': 'ñ', 'o': '[òóôõö]', 'oe': 'œ', 'u': '[ùúûűü]', 'y': '[ýÿ]'};

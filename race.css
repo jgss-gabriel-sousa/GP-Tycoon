@@ -114,3 +114,27 @@
 #end-season tr:nth-child(2) {
     font-weight: bold;
 }
+
+.grid-status-improve {
+    background-color: #3AB73580;
+}
+.grid-status-pole {
+    background-color: #a829d680;
+}
+
+#race-cars {
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    min-height: 450px;
+    height: 450px;
+    border: 1px solid;
+    padding: 10px;
+    padding-top: 0;
+    align-items: flex-start;
+    border-top: 5px dashed;
+    position: relative;
+}
+#race-cars div {
+    position: absolute;
+}

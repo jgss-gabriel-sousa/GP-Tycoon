@@ -1,8 +1,13 @@
 @import url("race.css");
 @import url("ui.css");
 
+@font-face {
+    font-family: Montserrat;
+    src: url("./Montserrat.ttf");
+}
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Montserrat, Helvetica, sans-serif;
     transition: 0.1s all;
 }
 
@@ -27,9 +32,13 @@ ul{
 	list-style: none;
     margin-block-start: 0px;
     padding-inline-start: 5px;
-    align-items: center;
+    align-items: stretch;
     color: #ddd;
     font-weight: bold;
+}
+
+li button{
+    height: 100%;
 }
 
 button{
@@ -132,6 +141,7 @@ p {
     margin: 2em;
     font-size: 14px;
     font-weight: bold;
+    text-align: center;
 }
 #main-menu button {
     padding: 1em;
@@ -350,6 +360,33 @@ p {
     margin-left: 20px;
     text-align: center;
     width: 200px;
+}
+#engineering h1 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+#engineering table {
+    display: flex;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+    border: 1px solid var(--border);
+}
+#engineering td {
+    text-align: start;
+    padding: 5px;
+    font-weight: bold;
+}
+#engineering td:first-child {
+    text-align: end;
+    background-color: var(--border);
+    color: var(--titles);
+}
+#engineering .progress-bar-background {
+    width: 90px;
+}
+#engineering .progress-bar span {
+    padding: 0px 45px;
 }
 
 .progress-bar-background {

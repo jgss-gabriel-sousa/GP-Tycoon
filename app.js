@@ -143,18 +143,10 @@ function genCarHTML(){
     <h1>Chassis</h1>
     <table>
         <tr>
-            <td>Arrasto:</td>
+            <td>Aerodinâmica:</td>
             <td>
                 <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${car.drag}%;"><span>${car.drag}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Câmbio:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${car.gearbox}%;"><span>${car.gearbox}%</span></div>
+                    <div class="progress-bar" style="width:${car.aerodynamic}%;"><span>${car.aerodynamic}%</span></div>
                 </div>
             </td>
         </tr>
@@ -222,10 +214,69 @@ function genCarHTML(){
     elEngine.innerHTML = html;
 }
 
+function genEngHTML(){
+    const el = document.querySelector("#engineering");
+    let html = "";
+
+    const team = game.teams[game.team];
+
+    html = `
+    <h1>Engenheiros</h1>
+    <table>
+        <tr>
+            <td>Diretor Técnico:</td>
+            <td>${team.engineers.technicalDirector}</td>
+        </tr>
+        <tr>
+            <td>Aerodinamicista:</td>
+            <td>${team.engineers.chiefAerodynamicist}</td>
+        </tr>
+        <tr>
+            <td>Designer:</td>
+            <td>${team.engineers.chiefDesigner}</td>
+        </tr>
+        <tr>
+            <td>Engenheiro:</td>
+            <td>${team.engineers.chiefEngineering}</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>Aerodinamica</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${engine.reliability}%;"><span>${engine.reliability}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Administração</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${engine.reliability}%;"><span>${engine.reliability}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Engenharia</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${engine.reliability}%;"><span>${engine.reliability}%</span></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    `
+    
+    el.innerHTML = html;
+}
+
 export function genTeamHTML(){
     game.championship.createStandings();
     genDriversHTML();
     genCarHTML();
+    genEngHTML();
 
     const teams = game.teams;
 

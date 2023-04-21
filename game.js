@@ -35,14 +35,13 @@ export function StartTeamsStats(){
         const engine = game.engines[team.engine];
 
         car.weight = Math.round((car.downforce + car.speed)/2);
-        car.gearbox = car.speed;
-        car.drag = car.downforce;
+        car.aerodynamic = car.speed;
         car.chassisReliability = car.reliability;
 
         delete car.speed;
         
         car.corners = Math.round((car.downforce + car.weight)/2);
-        car.straights = Math.round((car.drag + car.gearbox + car.weight)/3);
+        car.straights = Math.round((car.aerodynamic + car.weight)/2);
         car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
     }
 }
@@ -54,8 +53,7 @@ export function UpdateTeamsStats(){
         const engine = game.engines[team.engine];
         
         if(team.name == "Rred Bull"){
-            car.drag = 100;
-            car.gearbox = 100;
+            car.aerodynamic = 100;
             car.weight = 100;
             car.downforce = 100;
         }
