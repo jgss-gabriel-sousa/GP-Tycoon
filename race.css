@@ -8,15 +8,12 @@
     border: 1px solid black;
     border-collapse: collapse;
     font-size: 12px;
-}
-
-#time-table tbody {
     box-shadow: 1px 1px #222;
+    width: 100%;
 }
-
 #time-table th {
     border: 1px solid #222;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     background-color: #101014;
     color: #f8f9fa;
@@ -27,19 +24,17 @@
     background-color: #ffff99;
     font-weight: bold;
 }
-
 #time-table td:first-child {
     background-color: #101014;
     color: #f8f9fa;
     font-weight: bold;
     width: 50px;
 }
-
 #time-table td {
     border: 1px solid #424548;
-    padding: 3px;
+    padding: 2px;
     text-align: center;
-    color: #222;
+    color: #1c1c1c;
     width: 200px;
 }
 #time-table td:first-child {
@@ -115,14 +110,19 @@
     font-weight: bold;
 }
 
-.grid-status-improve {
-    background-color: #3AB73580;
-}
 .grid-status-pole {
     background-color: #a829d680;
 }
+.grid-status-done-Q2 {
+    background-color: #96969680;
+}
+.grid-status-done-Q1 {
+    background-color: #50505080;
+}
 
 #race-cars {
+    background-color: #a5a5a5;
+    z-index: 999;
     display: flex;
     flex-direction: column;
     min-width: 400px;
@@ -134,7 +134,19 @@
     align-items: flex-start;
     border-top: 5px dashed;
     position: relative;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 #race-cars div {
     position: absolute;
+    color: #f8f9fa;
+    font-weight: bold;
+    top: 425px;
+}
+
+#race-status{
+    position: absolute;
+    top: 0px;
+    left: 295px;
+    width: 128px;
 }

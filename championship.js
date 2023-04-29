@@ -1,60 +1,83 @@
 import { genTeamHTML } from "./app.js";
 import { circuitsData } from "./data/circuits.js";
-import { game, UpdateAfterRace, YearUpdate, UpdateTeamsStats } from "./game.js";
+import { game, UpdateAfterRace, YearUpdate, BeforeRaceUpdateTeamsStats } from "./game.js";
 import { seasonOverviewUI } from "./ui.js";
 import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";
-import { accentsTidy, genID } from "./utils.js";
+import { accentsTidy, genID, rollDice } from "./utils.js";
 
 export class Championship {
-    constructor() {
-        this.year = 2023;
+    constructor(LoadedChampionship) {
+        this.loaded = LoadedChampionship;
 
-        this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-        this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-        
-        this.results = {};
-        this.standings = [];
-        this.teamStandings = [];
-        this.actualRound = 1;
-        this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
-
-        this.historic = [
-            {
-                year: 2022,
-                driverChampion: "Max Verstappen",
-                driverCountry: "NL",
-                driverTeam: "Red Bull",
-                driverEngine: "Red Bull",
-    
-                constructorChampion: "Red Bull",
-                constructorCountry: "AT",
-                constructorEngine: "Red Bull",
-            }
-        ];
-        
-        this.drivers = [];
-
-        this.teams.forEach(t => {
-            const team = teamsData[t];
-
-            this.drivers.push(driversData[team.driver1].name);
-            this.drivers.push(driversData[team.driver2].name);
-        });
-
-        this.race = {
-            grid: {},
-            raceDrivers: [],
-            finalResult: [],
-            positions: [],
-
-            retires: [],
-            sumLaptime: 0,
-            meanLaptime: 0,
-            rain: 0,
-            lap: 0,
-            simTick: 0,
+        if(this.loaded){
+            this.teams = this.loaded.teams;
+            this.tracks = this.loaded.tracks;
+            this.results = this.loaded.results;
+            this.standings = this.loaded.standings;
+            this.teamStandings = this.loaded.teamStandings;
+            this.actualRound = this.loaded.actualRound;
+            this.pointsSystem = this.loaded.pointsSystem;
+            this.budgetCap = this.loaded.budgetCap;
+            this.historic = this.loaded.historic;
+            this.drivers = this.loaded.drivers;
+            this.teams = this.loaded.teams;
+            this.race = this.loaded.race;
         }
+        else{
+            this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
+            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            //this.tracks = ["Bahrein","Arábia Saudita"];
+            
+            this.results = {};
+            this.standings = [];
+            this.teamStandings = [];
+            this.actualRound = 1;
+            this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
+            this.budgetCap = 145000;
+
+            this.historic = [
+                {
+                    year: 2022,
+                    driverChampion: "Max Verstappen",
+                    driverCountry: "NL",
+                    driverTeam: "Red Bull",
+                    driverEngine: "Red Bull",
+        
+                    constructorChampion: "Red Bull",
+                    constructorCountry: "AT",
+                    constructorEngine: "Red Bull",
+                }
+            ];
+            
+            this.drivers = [];
+
+            this.teams.forEach(t => {
+                const team = teamsData[t];
+
+                this.drivers.push(driversData[team.driver1].name);
+                this.drivers.push(driversData[team.driver2].name);
+            });
+
+            this.race = {
+                grid: {},
+                qSection: "Q1",
+                qDrivers: [],
+
+                raceDrivers: [],
+                finalResult: [],
+                positions: [],
+                condition: "",
+                safetyCarLaps: 0,
+
+                retires: [],
+                rain: 0,
+                lap: 0,
+                simTick: 0,
+            }
+        }
+
+        delete this.loaded;
     }
 
     EndSeason(){
@@ -128,14 +151,14 @@ export class Championship {
         </div>`
 
         Swal.fire({
-            title: "<strong>Fim de Temporada - "+this.year+"</strong>",
+            title: "Fim de Temporada - "+game.year,
             html: html,
             width: "42em",
             focusConfirm: true,
             allowOutsideClick: false,
             confirmButtonText: "Ok",
         }).then(() => {
-            game.YearUpdate();
+            YearUpdate();
         });
     }
 
@@ -147,29 +170,58 @@ export class Championship {
         let poleTime = 0;
         let poleName = "";
 
+        if(this.race.qSection == "Q2" && this.race.qDrivers.length == 0){
+            for(let i = 0; i < 15; i++) {
+                this.race.qDrivers.push(oldGrid[i].name);
+                oldGrid[i].time = 999;
+            }
+        }
+
+        if(this.race.qSection == "Q3" && this.race.qDrivers.length == 15){
+            this.race.qDrivers = [];
+            for(let i = 0; i < 10; i++) {
+                this.race.qDrivers.push(oldGrid[i].name);
+                oldGrid[i].time = 999;
+            }
+        }
+
         for(const d in this.drivers){
-            const base = circuitsData[raceName].baseLapTime;
             const driverName = this.drivers[d];
+
+            if(this.race.qSection != "Q1" && !this.race.qDrivers.includes(driverName)){
+                grid[driverName] = {
+                    name: driverName,
+                    time: -1,
+                }
+                continue;
+            }
+
+            const base = circuitsData[raceName].baseLapTime;
             const car = game.teams[game.drivers[driverName].team].car;
-            
             const circuitCorners = circuitsData[raceName].corners/100;
             const circuitStraights = circuitsData[raceName].straights/100;
-            
-            const randomF = 1 + (Math.random() * 0.5 - 0.25);
+            const randomF = 1 + (Math.random() * 1.5 - 0.75);
+            const driverF = (1 - game.drivers[driverName].speed/100) * (1 + (Math.random() * 1 - 0.75));
+            const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners ;
+            const straightF = (1 - (car.straights/100)) * randomF * circuitStraights ;
 
-            const driverF = (1 - game.drivers[driverName].speed/100);
-            
-            const cornersF = (1 - (car.corners/100)) * circuitCorners;
-            const straightF = (1 - (car.straights/100)) * circuitStraights;
-            const carF = cornersF*straightF;
-            const gapF = 0.1; //Bigger Value = Smaller Gap
+            let divider;
 
-            const lapTime = (base/60) + ((base*driverF*carF) / (base*gapF*randomF));
+            if(this.race.qSection == "Q1") divider = 59;
+            if(this.race.qSection == "Q2") divider = 59.5;
+            if(this.race.qSection == "Q3") divider = 60;
+
+            let lapTime = base/divider + ((base*driverF*cornersF*straightF) / (base*Math.pow(0.8,3)));
+
+            if((Math.random()*100) < 70){
+                lapTime *= 1.5;
+            }
 
             grid[driverName] = {
                 name: driverName,
                 time: lapTime,
-                status: "same",
+                status: "",
+                qSection: 3,
             }
         }
         
@@ -189,10 +241,18 @@ export class Championship {
 
                 if(grid[d].time > oldTime){
                     grid[d] = oldGrid[id];
-                    grid[d].status = "same";
                 }
-                else{
-                    grid[d].status = "improve";
+                else if(grid[d].time == -1){
+                    grid[d] = oldGrid[id];
+                    
+                    if(id > 9){
+                        grid[d].status = "done-Q2";
+                        grid[d].qSection = 2;
+                    }
+                    if(id > 14){
+                        grid[d].status = "done-Q1";
+                        grid[d].qSection = 1;
+                    }
                 }
 
                 if(grid[d].time < poleTime || poleTime == 0){
@@ -201,11 +261,9 @@ export class Championship {
                 }
             }
         }
-        
-        if(poleName != "")
-            grid[poleName].status = "pole";
 
         grid = Object.values(grid).sort((a, b) => a.time - b.time);
+        grid = grid.sort((a, b) => b.qSection - a.qSection);
         this.race.grid = grid;
     }
 
@@ -233,7 +291,7 @@ export class Championship {
                     name: grid[k].name,
                     actualLap: 0,
                     lapTime: 0,
-                    totalTime: i++ / 80,
+                    totalTime: i++ / 60,
                     racing: true,
                 });
             }
@@ -242,15 +300,16 @@ export class Championship {
                 this.race.rain = true;
         }
 
-        let sumLaptime = 0;
         let d = 0;
+        let newRaceCondition = "";
 
         for(; d < raceDrivers.length; d++) {
             if(!raceDrivers[d].racing)  continue;
 
             const base = circuitsData[raceName].baseLapTime;
             const driverName = this.drivers[d];
-            const car = game.teams[game.drivers[driverName].team].car;
+            const team = game.drivers[driverName].team;
+            const car = game.teams[team].car;
         
             const circuitCorners = circuitsData[raceName].corners/100;
             const circuitStraights = circuitsData[raceName].straights/100;
@@ -268,63 +327,55 @@ export class Championship {
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights * rainF;
             
 
-            let lapTime = base/55 + ((base*driverF*cornersF*straightF) / (base*Math.pow(1.5,3)*rainF));
-
-            sumLaptime += lapTime;
-            if(meanLaptime != 0){
-
-                const delta = 0.01;
-
-                if(lapTime <= meanLaptime*(1-delta) || lapTime >= meanLaptime*(1+delta)){
-                    ;//lapTime = meanLaptime;
-                }
-            }
+            let lapTime = base/55 + ((base*driverF*cornersF*straightF) / (base*Math.pow(1,3)*rainF));
 
             if(d > 0){
                 const diff = (raceDrivers[d].totalTime+lapTime) - raceDrivers[d-1].totalTime;
                 
-                if(diff < 0.025 && diff > 0){
+                if(diff <= 0.025 && diff >= 0){
+                    const defender = game.drivers[raceDrivers[d-1].name];
+                    const attacker = game.drivers[raceDrivers[d].name];
+                    const teamDefender = game.drivers[raceDrivers[d-1].name].team;
+                    const teamAttacker = game.drivers[raceDrivers[d].name].team;
+                    const defenderCar = (game.teams[teamDefender].car.corners * game.teams[teamDefender].car.straights)/100;
+                    const attackerCar = (game.teams[teamAttacker].car.corners * game.teams[teamAttacker].car.straights)/100;
+                    
                     const overtakeRoll = Math.floor(Math.random() * 100);
-                    const overtakeDC = (game.drivers[raceDrivers[d].name].speed * game.drivers[raceDrivers[d-1].name].speed) / (game.drivers[raceDrivers[d].name].speed + game.drivers[raceDrivers[d-1].name].speed); 
+                    let overtakeDC = Math.round(defender.speed+defenderCar - ((attackerCar + attacker.speed)/2)); 
+                    if(overtakeDC <= 0) overtakeDC = 1;
 
-                    if(game.drivers[raceDrivers[d].name].speed > game.drivers[raceDrivers[d-1].name].speed){
-                        if(overtakeRoll > overtakeDC){
-                            lapTime = raceDrivers[d-1].lapTime-0.01;
-                        }
-                        else{
-                            lapTime += 0.01;
-                        }
+                    if(overtakeRoll > overtakeDC){
+                        lapTime = raceDrivers[d-1].lapTime-diff-0.0166;
                     }
                     else{
-                        if(overtakeRoll < overtakeDC){
-                            lapTime = raceDrivers[d-1].lapTime-0.01;
-                        }
-                        else{
-                            lapTime += 0.01;
-                        }
+                        lapTime += 0.035;
                     }
                 }
             }
 
-
-            const failureChanceRoll = Math.floor(Math.random() * 5000);
+            const failureChanceRoll = Math.floor(Math.random() * 1600);
             const failureRoll = Math.floor(Math.random() * 100);
             let failureChance = 5;
 
             if(retires.length < (raceDrivers.length-3) && failureChanceRoll <= failureChance && failureRoll >= car.reliability){
                 raceDrivers[d].racing = false;
 
-                const engineReliability = game.engines[game.teams[game.drivers[driverName].team].engine].reliability;
+                const engineReliability = game.engines[game.teams[team].engine].reliability;
                 let failureReason;
 
                 if(failureRoll >= Math.round(car.chassisReliability/(car.chassisReliability+engineReliability))){
-                    failureReason = ["Freios","Câmbio","Vazamento de Óleo","Radiador","Pneus","Suspensão","Transmissão","Direção","Pane Hidráulica"];
+                    failureReason = ["Freios","Câmbio","Vazamento de Óleo","Radiador","Suspensão","Transmissão","Direção","Pane Elétrica","Pane Hidráulica"];
                 }
                 else{
                     failureReason = "Motor";
                 }
 
                 failureReason = failureReason[Math.floor(Math.random() * 100) % failureReason.length];
+
+                if(Math.floor(Math.random() * 100) < 30){
+                    newRaceCondition = "vsc";
+                    this.race.safetyCarLaps = rollDice("2d4+0");
+                }
 
                 retires.unshift({
                     name: raceDrivers[d].name,
@@ -345,10 +396,18 @@ export class Championship {
             if(lap == 0) crashChance = 10;
 
             if(rain)
-                crashChance *= 2;
+                crashChance *= 3;
+
+            if(this.race.condition == "sc")
+                crashChance = -1;
 
             if(retires.length < (raceDrivers.length-3) && crashChanceRoll <= crashChance && crashRoll >= driverEscape){
                 raceDrivers[d].racing = false;
+
+                if(Math.floor(Math.random() * 100) < 100){
+                    newRaceCondition = "sc";
+                    this.race.safetyCarLaps = rollDice("3d4+0");
+                }
 
                 retires.unshift({
                     name: raceDrivers[d].name,
@@ -358,21 +417,22 @@ export class Championship {
                 continue;
             }
 
+            if(this.race.condition == "vsc" || this.race.condition == "sc"){
+                lapTime = raceDrivers[0].lapTime;
+            }
+
             raceDrivers[d].lapTime = lapTime;
             raceDrivers[d].totalTime += lapTime;
             raceDrivers[d].actualLap++;
-/*
-            if(fastestLap > lapTime || fastestLap == -1){
-                fastestLap = lapTime;
-                fastestLapDriver = raceDrivers[d].name;
-            }*/
+
+            if(this.race.condition == "sc"){
+                raceDrivers[d].totalTime = raceDrivers[0].totalTime+(d/60);
+            }
         }
-        this.race.meanLaptime = sumLaptime/d;
 
         //######################################################################
 
         let finalResult = raceDrivers.sort((a, b) => a.totalTime - b.totalTime);
-        //retires.reverse();
 
         const aux = [];
         this.race.positions = [];
@@ -387,9 +447,22 @@ export class Championship {
 
         this.race.simTick++;
 
-        if(this.race.simTick >= 5){
+        if(newRaceCondition != ""){
+            this.race.condition = newRaceCondition;
+        }
+
+
+        if(this.race.simTick >= 3){
             this.race.lap++;
             this.race.simTick = 0;
+            this.race.safetyCarLaps--;
+
+            if(this.race.condition == "sc" && this.race.safetyCarLaps <= 0){
+                this.race.condition = "";
+            }
+            if(this.race.condition == "vsc" && this.race.safetyCarLaps <= 0){
+                this.race.condition = "";
+            }
         }
     }
     
@@ -399,11 +472,16 @@ export class Championship {
         const milliseconds = Math.floor(((minutes - minutesInt) * 60 - seconds) * 1000);
         const secondsStr = seconds.toString().padStart(2, '0');
         const millisecondsStr = milliseconds.toString().padStart(3, '0');
-        return minutesInt + ':' + secondsStr + ':' + millisecondsStr;
+
+        if(minutesInt <= 0)
+            return secondsStr + ':' + millisecondsStr;
+        if(minutesInt > 0)
+            return minutesInt + ':' + secondsStr + ':' + millisecondsStr;
     }
 
     genGridTableHTML(status){
-        this.QualifySection();
+        if(status != "end")
+            this.QualifySection();
 
         const grid = this.race.grid;
 
@@ -411,26 +489,53 @@ export class Championship {
         <table><tr>
             <th>Pos</th>
             <th>Piloto</th>
+            <th>Equipe</th>
             <th>Tempo</th>
             <th>Diff ant.</th>
             <th>Diff 1º</th>
         </tr>`;
 
+        let i = 0;
         for(const k in grid) {
-            if(status == "end" || k == 0){
+            
+            i++;
+            if(i == 11 && this.race.qSection == "Q2"){
+                TimeTableHTML += "<tr><td colspan='6'></td></tr>"
+            }
+            if(i == 16 && this.race.qSection == "Q1"){
+                TimeTableHTML += "<tr><td colspan='6'></td></tr>"
+            }
+
+            if(status == "end"){
                 if(k == 0)
+                    TimeTableHTML += `<tr class="grid-status-pole">`
+                else if(grid[k].status == "done-Q2" || grid[k].status == "done-Q1"){
                     TimeTableHTML += `<tr class="grid-status-${grid[k].status}">`
+                }
                 else
                     TimeTableHTML += `<tr>`
             }
             else
                 TimeTableHTML += `<tr class="grid-status-${grid[k].status}">`
 
+            const teamName = game.drivers[grid[k].name].team;
+            const bgColor = game.teams[teamName].result_bg_color;
+            const textColor = game.teams[teamName].result_font_color;
+            let time = Number(grid[k].time);
+
+            if(time == 999){
+                time = "";
+            }
+            else{
+                time = this.timeConvert(time);
+            }
+
             TimeTableHTML += `
                 <td>${Number(k)+1}º</td>
                 <td>${grid[k].name}</td>
-                <td>${this.timeConvert(Number(grid[k].time))}</td>`
-        
+                <td style="background-color: ${bgColor}; color:${textColor}">${teamName}</td>
+                <td>${time}</td>`
+
             if(k == 0)
                 TimeTableHTML += `<td colspan="2">Pole Position</td>`
             else
@@ -449,7 +554,7 @@ export class Championship {
     genRaceTableHTML(status){
         if(this.race.finalResult.length == 0)
             this.RaceSection("start");
-        else
+        else if(status != "podium" && status != "end")
             this.RaceSection();
 
         const finalResult = this.race.finalResult;
@@ -489,7 +594,12 @@ export class Championship {
                 else if(k < game.championship.pointsSystem.length) classPos = "scorer-position";
                 else classPos = "non-scorer-position";
 
-                TimeTableHTML += `<td class="${classPos}">+${this.timeConvert(Number(finalResult[k].totalTime) - Number(finalResult[0].totalTime))}</td>`
+                if(status == "podium"){
+                    TimeTableHTML += `<td class="${classPos}">+${this.timeConvert(Number(finalResult[k].totalTime) - Number(finalResult[0].totalTime))}</td>`
+                }
+                else{
+                    TimeTableHTML += `<td class="${classPos}">+${this.timeConvert(Number(finalResult[k].totalTime) - Number(finalResult[k-1].totalTime))}</td>`
+                }
             }
 
             TimeTableHTML += `</tr>`;
@@ -507,9 +617,9 @@ export class Championship {
 
         if(status == "podium"){
             TimeTableHTML = `
-            <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp">
-            <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp">
-            <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp">
+            <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp" onerror="this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp" onerror="this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp" onerror="this.src='img/drivers/generic.webp';">
             <img class="podium-img" src="img/flags/${accentsTidy(game.drivers[finalResult[0].name].country)}.webp">
             `
         }
@@ -525,20 +635,23 @@ export class Championship {
 
         if(status == "start"){
             TimeTableHTML = "";
+
+            TimeTableHTML += `
+                <img id="race-status">
+            `
+
             let i = 0;
             grid.forEach(e => {
                 let nameCode = e.name.split(" ");
+
                 if(nameCode[1].length >= 3){
                     nameCode = nameCode[1];
                 }
                 else{
                     nameCode = nameCode[1] + nameCode[2];
                 }
-                nameCode = nameCode.substring(0,3).toUpperCase();
-
-                if(e.name == "Nyck de Vries"){
-                    console.log(nameCode)
-                }
+                nameCode = nameCode.substring(0,3);
+                nameCode = accentsTidy(nameCode).toUpperCase();
 
                 TimeTableHTML += `
                 <div id="car-race-${genID(e.name)}">
@@ -580,20 +693,28 @@ export class Championship {
                     el.style.top = `${max - (lapMove) + diff}px`;
                     el.style.left = `${leftDiff}px`;
                     el.style.zIndex = `${-i*10}`;
-
-                    //el.style.top = `${lapMove}%`;
                 }
             });
+
+            const el = document.querySelector("#race-status");
+            const raceStatus = this.race.condition;
+
+            el.style.display = "block";
+
+            if(raceStatus == "vsc") el.src = "img/vsc_flag.webp";
+            else if(raceStatus == "sc")  el.src = "img/sc_flag.webp";
+            else if(raceStatus == "" && this.race.safetyCarLaps >= -5)   el.src = "img/green_flag.webp";
+            else el.style.display = "none";
         }
     }
 
     RunRaceSimulation(){
-        UpdateTeamsStats();
-
         if(this.actualRound > this.tracks.length){
             seasonOverviewUI("end");
             return;
         }
+
+        BeforeRaceUpdateTeamsStats();
 
         const raceName = this.tracks[this.actualRound-1];
         
@@ -601,24 +722,36 @@ export class Championship {
 
         let timerInterval;
         const qualifyUI = {
-            title: "<strong>Classificação GP <b>"+raceName+"</b></strong>",
+            title: `Classificação GP ${raceName}`,
             html: `
                 <div id="time-table">${TimeTableHTML}</div>
             `,
-            width: "42em",
+            width: "50em",
             focusConfirm: true,
             allowOutsideClick: false,
             confirmButtonText: "Ok",
             didOpen: () => {
                 Swal.disableButtons();
                 const timeTable = Swal.getHtmlContainer().querySelector("#time-table")
+                const qsection = Swal.getHtmlContainer().querySelector("#actual-qsection")
                 let i = 0;
 
                 timerInterval = setInterval(() => {
+                    i++;
                     TimeTableHTML = this.genGridTableHTML();
                     timeTable.innerHTML = TimeTableHTML;
 
-                    if(i++ == 5){
+                    if(i == 10 && this.race.qSection == "Q1"){
+                        this.race.qSection = "Q2";
+                        i = 0;
+                    }
+
+                    if(i == 10 && this.race.qSection == "Q2"){
+                        this.race.qSection = "Q3";
+                        i = 0;
+                    }
+
+                    if(i == 10 && this.race.qSection == "Q3"){
                         clearInterval(timerInterval);
                         TimeTableHTML = this.genGridTableHTML("end");
                         timeTable.innerHTML = TimeTableHTML;
@@ -629,7 +762,7 @@ export class Championship {
         }
 
         const raceUI = {
-            title: "<strong>GP "+raceName+"</strong>",
+            title: "GP "+raceName,
             html: `
             <div id="race">
                 <div id="race-cars"></div>
@@ -658,7 +791,7 @@ export class Championship {
                         clearInterval(timerInterval);
                         Swal.enableButtons();
                     }
-                }, 100);
+                }, localStorage.getItem("gpTycoon-race-sim-speed") ?? 250);
             },
         }
         
@@ -667,7 +800,7 @@ export class Championship {
         then(e => Swal.fire(raceUI)).
         then(e => 
         Swal.fire({
-            title: "<strong>Resultado GP "+raceName+"</strong>",
+            title: `Resultado GP ${raceName}`,
             html: `
             <div id="race">
                 <div id="time-table"></div>
@@ -682,7 +815,7 @@ export class Championship {
                 const timeTable = Swal.getHtmlContainer().querySelector("#time-table");
                 const podium = Swal.getHtmlContainer().querySelector("#podium");
 
-                timeTable.innerHTML = this.genRaceTableHTML();
+                timeTable.innerHTML = this.genRaceTableHTML("end");
                 podium.innerHTML = this.genRaceTableHTML("podium");
             },
         })).
@@ -704,8 +837,6 @@ export class Championship {
             game.drivers[finalResult[2].name].podiums++;
 
             //##############################################################
-            
-            console.log(this.race.positions)
 
             this.results[raceName] = this.race.positions;
             this.actualRound++;
@@ -715,13 +846,16 @@ export class Championship {
 
             this.race = {
                 grid: {},
+                qSection: "Q1",
+                qDrivers: [],
+
                 raceDrivers: [],
                 finalResult: [],
                 positions: [],
+                condition: "",
+                safetyCarLaps: 0,
     
                 retires: [],
-                sumLaptime: 0,
-                meanLaptime: 0,
                 rain: 0,
                 lap: 0,
                 simTick: 0,
@@ -773,7 +907,6 @@ export class Championship {
         const teamRanking = {};
 
         for (const t of this.teams) {
-            
             const team = game.teams[t];
 
             teamRanking[team.name] = {

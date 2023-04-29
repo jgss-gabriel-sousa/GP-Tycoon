@@ -5,6 +5,10 @@
     font-family: Montserrat;
     src: url("./Montserrat.ttf");
 }
+@font-face {
+    font-family: F1;
+    src: url("./Formula1-Bold_web_0.ttf");
+}
 
 * {
     font-family: Montserrat, Helvetica, sans-serif;
@@ -61,47 +65,26 @@ button:hover{
     filter: drop-shadow(0px 0px 2px black);
 }
 
-.btn-driver-name {
-    width: 100%;
-	padding: 5px;
-	margin: 0;
-	background-color: transparent;
-    cursor: pointer;
-    box-shadow: 0px 0px transparent;
-    border: 0;
-    font-size: 16px;
-    font-weight: bold;
-    background-color: var(--border);
-    color: var(--titles);
-	border-radius: 0;
-}
-.btn-driver-name:hover {
-    background-color: var(--border);
-    cursor: pointer;
-    filter: drop-shadow(0px 0px 2px black);
-}
-.btn-driver-name h1 {
-    margin-bottom: 0 !important;
-}
-
 a {
     text-decoration: none;
 	color: black;
 }
 
 h1 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+    font-family: F1;
     background-color: var(--border);
     color: var(--titles);
     padding: 5px;
-    margin-top: 0;
+    margin: 0;
 }
 
 h2 {
+    font-family: F1;
     font-size: 14px;
     font-weight: bold;
-    margin-top: 5px;
+    margin: 0;
 }
 
 p {
@@ -129,33 +112,47 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 5em;
+    display: none;
+}
+#main-menu img{
+    height: 200px;
+    filter: drop-shadow(-2px 1px 1px #ffffff94);
 }
 #main-menu h1 {
     font-size: 48px;
     background-color: transparent;
     color: #ff3434;
-}
-#main-menu select {
-    padding: 1em;
-    margin: 2em;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
+    text-shadow: 1px 1px black;
+    margin-top: 50px;
 }
 #main-menu button {
+    font-family: "F1";
     padding: 1em;
+    font-size: 16px;
+    width: 200px;
+    margin-bottom: 20px;
+}
+#main-menu button:hover {
+    transform: scale(1.05,1.05);
+}
+#main-menu small {
+    color: #e5e5e5;
+    position: absolute;
+    top: 90%;
 }
 
 #team-menu {
     color: var(--text);
     display: flex;
     flex-direction: column;
+    display: none;
 }
 #team-menu-interface {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+}
+#team-menu-interface > div {
+    margin-bottom: 10px;
 }
 
 #game-options {
@@ -166,16 +163,23 @@ p {
     padding: 20px;
 }
 
+#drivers-car-section {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: center;
+}
+
 #drivers {
-    margin-left: 20px;
+    margin-bottom: 10px;
     display: flex;
     border: 2px solid var(--border);
-    background-color: var(--bg);
 }
 .driver-card {
+    background-color: var(--bg);
     border-right: 2px solid var(--border);
     text-align: center;
-    width: 200px
+    width: 210px;
 }
 .driver-card:last-child{
     border-right: 0;
@@ -206,7 +210,6 @@ p {
 .driver-info-bars h2 {
     width: 70px;
     text-align: end;
-    margin: 0;
     margin-right: 5px;
 }
 .driver-info-bars .progress-bar-background {
@@ -221,11 +224,29 @@ p {
     font-size: 12px;
     padding-top: 1px;
 }
-.country-flag{
-    height: 18px;
-    vertical-align: middle;
-    border: 1px solid #222 !important;
-    border-radius: 0 !important;
+.btn-driver-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--border);
+    color: var(--titles);
+	border-radius: 0;
+}
+.btn-driver-name:hover {
+    background-color: var(--border);
+    cursor: pointer;
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    text-shadow: 0px 0px 1px black;
+}
+.btn-driver-name h1 {
+    margin-bottom: 0 !important;
 }
 
 #info {
@@ -237,12 +258,14 @@ p {
     background-color: var(--bg);
 }
 #info h1{
-    margin-bottom: 5px;
     padding: 5px 0px 5px 0px;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#info h1:first-child{
+    margin-bottom: 5px;
 }
 #info .country-flag{
     margin-right: 5px;
@@ -260,7 +283,11 @@ p {
     text-align: center;
     padding: 10px;
 }
-
+#money:hover {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+}
 #money-icon {
     align-self: center;
     padding-right: 5px;
@@ -271,12 +298,14 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
     margin-bottom: 10px;
 }
 #next-race-name {
     margin: 10px;
     font-size: 14px;
+}
+#next-race-name h2:first-child{
+    margin-bottom: 5px;
 }
 #next-race-name .country-flag{
     margin-right: 5px;
@@ -298,7 +327,6 @@ p {
 }
 
 #trust h2 {
-    margin-top: 0;
     margin-bottom: 5px;
 }
 #trust div {
@@ -312,30 +340,29 @@ p {
 }
 
 #car {
-    background-color: var(--bg);
     border: 2px solid var(--border);
-    margin-left: 20px;
     text-align: center;
+    display: flex;
 }
-#car h1{
-    margin: 0;
+#car table{
+    padding: 5px;
 }
 #car > div{
-    border-top: 1px solid var(--border);
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    width: 210px;
 }
-
-.bars-table table {
+#engine h2{
     margin: 5px;
 }
+
 .bars-table table {
     display: flex;
     justify-content: center;
     border-spacing: 0;
     border-collapse: collapse;
     font-size: 12px;
-}
-.bars-table tr {
-    width: 100%;
+    margin: 5px 0px;
 }
 .bars-table td {
     padding: 0;
@@ -354,39 +381,142 @@ p {
     border: 1px solid black;
 }
 
-#engineering {
-    background-color: var(--bg);
-    border: 2px solid var(--border);
-    margin-left: 20px;
+#engineering,
+#development {
+    margin-left: 10px;
     text-align: center;
-    width: 200px;
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+    height: fit-content;
 }
-#engineering h1 {
-    margin: 0;
-    padding-bottom: 10px;
-}
-#engineering table {
-    display: flex;
+#engineering table,
+#development table {
     border-spacing: 0;
     border-collapse: collapse;
     font-size: 12px;
-    border: 1px solid var(--border);
 }
-#engineering td {
-    text-align: start;
-    padding: 5px;
-    font-weight: bold;
-}
-#engineering td:first-child {
-    text-align: end;
+#engineering th,
+#development th {
+    padding-right: 5px;
     background-color: var(--border);
     color: var(--titles);
+    text-align: end;
 }
-#engineering .progress-bar-background {
-    width: 90px;
+#engineering td {
+    padding: 5px;
+    font-weight: bold;
+    width: 50%;
 }
-#engineering .progress-bar span {
-    padding: 0px 45px;
+#engineers-name td:first-child {
+    text-align: end;
+}
+#new-car {
+    width: 100%;
+    margin-bottom: 10px;
+}
+#new-car th{
+    font-family: "F1";
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+#new-car tr:nth-child(2) > td {
+    padding-top: 10px;
+}
+#new-car td{
+    padding: 0px;
+}
+#new-car td:first-child{
+    text-align: end;
+    padding-right: 5px;
+}
+
+#dev-pts td:first-child {
+    text-align: end;
+    width: 50%;
+}
+#dev-pts {
+    display: flex;
+    flex-direction: row;
+    border: 0px solid var(--border);
+    border-top: 2px solid var(--border);
+    justify-content: center;
+}
+#dev-pts div {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 50%;
+}
+#dev-pts > div:first-child {
+    border-right: 2px solid var(--border);
+}
+#dev-pts h1 {
+    font-size: 12px;
+    background-color: transparent;
+    color: var(--text);
+}
+#dev-pts h2 {
+    padding: 5px;
+    font-size: 12px;
+}
+#dev-focus td,
+#dev-focus td {
+    text-align: start;
+}
+#dev-focus td:first-child {
+    width: 100%;
+}
+#dev-focus td {
+    min-width: 45px;
+    text-align: center;
+}
+
+#development {
+    margin-left: 10px;
+    text-align: center;
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+    width: auto;
+}
+#development table {
+    width: 100%;
+    padding: 5px;
+}
+#development td {
+    padding: 5px;
+}
+#development td:nth-child(2) {
+    min-width: 40px;
+}
+#development th {
+    text-align: center;
+    padding: 5px;
+}
+#investments td:nth-child(2) {
+    min-width: 60px;
+}
+
+
+.btn-eng-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text);
+	border-radius: 0;
+}
+.btn-eng-name:hover {
+    background-color: var(--border);
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    color: var(--titles);
+    cursor: pointer;
 }
 
 .progress-bar-background {
@@ -425,4 +555,87 @@ p {
     width: 32px;
     height: 32px;
     filter: drop-shadow(1px 1px #222);
+}
+
+.country-flag{
+    width: 27px;
+    height: 18px;
+    vertical-align: middle;
+    border: 1px solid #222 !important;
+    border-radius: 0 !important;
+}
+
+.slidercontainer {
+    width: 100%;
+}
+  
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 5px;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    background: var(--border);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: var(--border);
+    cursor: pointer;
+}
+
+
+@media (max-width: 1000px) {
+    #drivers {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #team-menu-interface {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #car,
+    #drivers{
+        border: 0;
+    }
+    #car,
+    #engineering{
+        display: flex;
+        width: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #car h1,
+    #engineering h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #engineering > div{
+        border: 1px solid var(--border);
+    }   
+    #drivers-car-section {
+        margin-left: 0;
+    }
+    .driver-card {
+        border: 2px solid var(--border) !important; 
+    }
 }

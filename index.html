@@ -23,6 +23,7 @@
         <div id="team-menu">
             <nav>
                 <ul>
+                    <li><button id="btn-save-game">Salvar</button></li>
                     <li><button id="btn-options">Opções</button></li>
                     <li><button id="btn-standings">Camp. Pilotos</button></li>
                     <li><button id="btn-team-standings">Camp. Construtores</button></li>
@@ -38,64 +39,37 @@
                             <img id="team-logo" class="logo" alt="Team Logo">
                             <h1 id="name"></h1>
                         </div>
-                        <div id="money"></div>
-                        <div id="trust">
-                            <div id="trust-board">
-                                <p>Confiança Diretoria</p>
-                                <div class="progress-bar-background">
-                                    <div id="board-bar" class="progress-bar"><span></span></div>
-                                </div>
-                            </div>
-                            <div id="trust-fans">
-                                <p>Confiança Patrocinadores</p>
-                                <div class="progress-bar-background">
-                                    <div id="fans-bar" class="progress-bar"><span></span></div>
-                                </div>
-                            </div>
-                        </div>
+                        <div id="money" class="view-financial-report"></div>
                     </div>
                     <div id="next-race">
                         <h1>Próxima Corrida</h1>
-                        <h2 id="next-race-name"></h2>
+                        <div id="next-race-name"></div>
                         <button id="btn-play">Continuar</button>
                     </div>
 
                 </div>
-                <div id="drivers"></div>
-                <div id="car" class="bars-table">
-                    <h1>Carro</h1>
-                    <div id="car-info"></div>
-                    <div id="chassis"></div>
-                    <div id="engine">
-                        <h1>Motor</h1>
+                <div id="drivers-car-section">
+                    <div id="drivers"></div>
+                    <div id="car" class="bars-table">
+                        <div id="car-info"></div>
+                        <div id="chassis"></div>
+                        <div id="engine"></div>
                     </div>
                 </div>
-                <div id="engineering">
-                    <h1>Engenheiros</h1>
-                </div>
+                <div id="engineering"></div>
+                <div id="development"></div>
             </div>
         </div>
 
         <div id="main-menu">
             <h1>GP Tycoon</h1>
-            <select id="select-team">
-                <option value="Red Bull">Red Bull</option>
-                <option value="Mercedes">Mercedes</option>
-                <option value="Ferrari">Ferrari</option>
-                <option value="Aston Martin">Aston Martin</option>
-                <option value="Alpine">Alpine</option>
-                <option value="Haas">Haas</option>
-                <option value="McLaren">McLaren</option>
-                <option value="Alfa Romeo">Alfa Romeo</option>
-                <option value="AlphaTauri">AlphaTauri</option>
-                <option value="Williams">Williams</option>
-            </select>
-            <button id="start-game">Começar Jogo</button>
+            <img src="./icon.webp" alt="Logo">
+            <button id="start-game">Novo Jogo</button>
+            <button id="load-game">Carregar Jogo</button>
+            <small>Copyright © Gabriel Sousa</small>
         </div>
 
-        <div id="players-menu">
-            Players MENU
-        </div>
+        <div id="players-menu"></div>
     </main>
 </body>
 </html>

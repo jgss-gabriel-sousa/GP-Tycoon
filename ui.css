@@ -47,29 +47,33 @@
 }
 
 #season-overview{
-    border-collapse: collapse;
-    border: 1px solid #a2a9b1;
-    background-color: #f8f9fa;
-    width: 100%;
+    overflow-y: scroll;
+    height: 550px;
 }
 #season-overview table{
     color: #202122;
     margin: 1em 0;
+    border-collapse: collapse;
+    border: 1px solid #222;
+    background-color: #f8f9fa;
+    width: 100%;
+}
+#season-overview td{
+    border: 1px solid #cbcbcc;
+    border-bottom: 1px solid #888;
+    padding: 0.2em 0.4em;
+    font-size: 12px;
+    white-space: nowrap;
 }
 #season-overview th{
-    background-color: #eaecf0;
-    border: 1px solid #a2a9b1;
+    background-color: #101014;
+    color: #f8f9fa;
+    border: 1px solid #222;
     padding: 0.1em 0.2em;
     text-align: center;
     font-size: 12px;
     white-space: nowrap;
     max-width: 35px;
-}
-#season-overview td{
-    border: 1px solid #a2a9b1;
-    padding: 0.2em 0.4em;
-    font-size: 12px;
-    white-space: nowrap;
 }
 #season-overview td:nth-child(2){
     min-width: 120px;
@@ -77,10 +81,6 @@
 #season-overview tr:hover{
     background-color: #ffff99;
     font-weight: bold;
-}
-#season-overview .country-flag{
-    width: 32px;
-    margin-bottom: 3px;
 }
 #season-overview td:nth-child(2){
     max-width: fit-content;
@@ -90,6 +90,9 @@
 #season-overview td:last-child
 {
     background-color: #eaecf0;
+    background-color: #101014;
+    color: #f8f9fa;
+    border: 1px solid #222;
 }
 
 .first-position {
@@ -116,14 +119,18 @@
 }
 #view-driver table{
     margin: 5px;
-    min-width: 200px;
-    padding: 5px;
-    border: 1px solid #6b6b6b;
+    min-width: 300px;
+    padding: 0;
     height: fit-content;
+    border-collapse: collapse;
+    border: 2px solid #222;
 }
 #view-driver th{
-    padding: 5px 10px 10px 10px;
-    text-decoration: underline;
+    padding: 10px;
+    font-family: "F1";
+    background-color: #5c5c5c;
+    color: #f5f5f5;
+    border: 2px solid #222;
 }
 #view-driver h2{
     margin: 0;
@@ -135,10 +142,46 @@
 }
 #view-driver td {
     text-align: start;
+    padding: 5px;
 }
 #view-driver td:first-child {
     text-align: end;
+    font-weight: bold;
 }
+#view-driver-contract td{
+    font-size: 14px;
+}
+#view-driver-contract th{
+    font-size: 14px;
+}
+#view-eng {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#view-eng > div{
+    display: flex;
+    flex-direction: row;
+}
+#view-eng tr{
+    padding: 2px;
+}
+#eng-stats {
+    padding-right: 20px;
+    white-space: nowrap;
+}
+#eng-stats > div{
+    margin-bottom: 10px;
+}
+#eng-stats > div h1{
+    margin-bottom: 2px;
+}
+#eng-stats h1{
+    margin: 0;
+    background-color: #333;
+    color: #f5f5f5;
+}
+
 
 #historic-tables {
     display: flex;
@@ -173,4 +216,76 @@
     border: 1px solid #424548;
     font-size: 14px;
     padding: 0.4em;
+}
+
+#slider-contract-employees {
+    width: auto;
+}
+
+#view-driver-infos{
+    width: 100%;
+    text-align: start;
+    font-size: 14px;
+}
+#view-driver-infos td:first-child{
+    text-align: end;
+    padding: 5px;
+}
+
+#employees-actions {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+#employees-actions div {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 40px;
+}
+
+#employees-actions div button {
+    margin: 10px;
+    background-color: #a49ee6;
+}
+#employees-actions div button:last-child {
+    background-color: #e69298;
+}
+
+#financial-report table{
+    width: 100%;
+    border: 2px solid #222;
+    border-collapse: collapse;
+}
+#financial-report th{
+    background-color: #5c5c5c;
+    color: #f5f5f5;
+    border: 2px solid #222;
+    text-align: end;
+}
+#financial-report td{
+    text-align: end;
+    padding: 5px;
+    border: 1px solid #6b6b6b;
+    font-size: 14px;
+}
+#financial-report td:last-child{
+    text-align: center;
+    border-left: 2px solid #222;
+}
+#financial-report th:last-child{
+    min-width: 150px;
+    text-align: center;
+}
+#financial-report th{
+    padding: 5px;
+}
+
+#select-team {
+    padding: 1em;
+    margin: 2em;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 15em;
 }

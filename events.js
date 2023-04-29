@@ -1,7 +1,10 @@
 import { game } from "./game.js";
-import { genTeamHTML } from "./app.js"
-import { changeScreen } from "./screens.js"
-import { gameOptionsUI, teamRankingUI, historicUI, seasonOverviewUI, viewDriverUI } from "./ui.js";
+import { gameOptionsUI, teamRankingUI, historicUI, seasonOverviewUI, UpdateDataInfo } from "./ui.js";
+import { viewDriver } from "./ui/viewDriver.js"
+import { viewEng } from "./ui/viewEng.js"
+import { viewEmployees } from "./ui/viewEmployees.js";
+import { viewFinancialReport } from "./ui/viewFinancialReport.js";
+import { newGame, loadGame, saveGame } from "./ui/start-load-save.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();
@@ -22,12 +25,17 @@ document.querySelector("#btn-team-standings").addEventListener("click", () => {
 document.querySelector("#btn-historic").addEventListener("click", () => {
     historicUI();
 });
-
+document.querySelector("#money").addEventListener("click", () => {
+    viewFinancialReport(game.team);
+});
 document.querySelector("#start-game").addEventListener("click", () => {
-    game.team = document.querySelector("#select-team").value;
-
-    changeScreen("team-menu");
-    genTeamHTML();
+    newGame();
+});
+document.querySelector("#load-game").addEventListener("click", () => {
+    loadGame();
+});
+document.querySelector("#btn-save-game").addEventListener("click", () => {
+    saveGame();
 });
 
 window.onclick = e => {
@@ -35,6 +43,22 @@ window.onclick = e => {
     if(e.target.classList.contains("view-driver")){
         const btn = e.target;
 
-        viewDriverUI(btn.value);
+        viewDriver(btn.value);
+    }
+    if(e.target.classList.contains("view-eng")){
+        const btn = e.target;
+
+        viewEng(btn.value);
+    }
+    if(e.target.classList.contains("view-employees")){
+        const btn = e.target;
+
+        viewEmployees(btn.value);
+    }
+    if(e.target.classList.contains("dismiss-eng")){
+        const btn = e.target;
+        const name = btn.value;
+
+        //game.teams[game.team].
     }
 }

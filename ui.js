@@ -1,15 +1,60 @@
 import { game } from "./game.js"
 import { circuitsData } from "./data/circuits.js"
 import { gameOptions } from "./ui/gameOptions.js"
-import { viewDriver } from "./ui/viewDriver.js"
-import { accentsTidy } from "./utils.js"
+import { accentsTidy, NumberF } from "./utils.js"
+import { genEngHTML } from "./app.js"
 
 export function gameOptionsUI(){
     gameOptions();
 }
 
-export function viewDriverUI(name){
-    viewDriver(name);
+export function UpdateDataInfo(e){
+    const team = game.teams[game.team];
+
+    if(e == "slider-dev-focus-actual-season"){
+        team.devFocusActualSeason = document.getElementById("slider-dev-focus-actual-season").value;
+        
+        let nextValue = (100-team.devFocusActualSeason);
+
+        team.devFocusNextSeason = nextValue;
+
+        document.querySelector("#slider-dev-focus-actual-season").value = team.devFocusActualSeason;
+        document.querySelector("#dev-focus-actual").innerHTML = team.devFocusActualSeason+"%";
+
+        document.querySelector("#slider-dev-focus-next-season").value = nextValue;
+        document.querySelector("#dev-focus-next").innerHTML = nextValue+"%";
+    }
+    if(e == "slider-dev-focus-next-season"){
+        team.devFocusNextSeason = document.getElementById("slider-dev-focus-next-season").value;
+        
+        let actualValue = (100-team.devFocusNextSeason);
+        
+        team.devFocusActualSeason = actualValue;
+
+        document.querySelector("#slider-dev-focus-actual-season").value = actualValue ;
+        document.querySelector("#dev-focus-actual").innerHTML = actualValue+"%";
+
+        document.querySelector("#slider-dev-focus-next-season").value = team.devFocusNextSeason;
+        document.querySelector("#dev-focus-next").innerHTML = team.devFocusNextSeason+"%";
+    }
+    if(e == "slider-investment-aerodynamics"){
+        team.investments.aerodynamics = Number(document.getElementById("slider-investment-aerodynamics").value);
+        document.querySelector("#investment-aerodynamics").innerHTML = NumberF(team.investments.aerodynamics *1000,"ext-short",0);
+    }
+    if(e == "slider-investment-downforce"){
+        team.investments.downforce = Number(document.getElementById("slider-investment-downforce").value);
+        document.querySelector("#investment-downforce").innerHTML = NumberF(team.investments.downforce *1000,"ext-short",0);
+    }
+    if(e == "slider-investment-weight"){
+        team.investments.weight = Number(document.getElementById("slider-investment-weight").value);
+        document.querySelector("#investment-weight").innerHTML = NumberF(team.investments.weight *1000,"ext-short",0);
+    }
+    if(e == "slider-investment-reliability"){
+        team.investments.reliability = Number(document.getElementById("slider-investment-reliability").value);
+        document.querySelector("#investment-reliability").innerHTML = NumberF(team.investments.reliability *1000,"ext-short",0);
+    }
+
+    document.querySelector("#race-total-investment").innerHTML = NumberF((team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability) *1000,"ext-short",0);
 }
 
 export function historicUI(){
@@ -100,7 +145,7 @@ export function teamRankingUI(){
     html += `</table>`;
 
     Swal.fire({
-        title: `Classificação do Campeonato de Construtores ${game.championship.year}`,
+        title: `Classificação do Campeonato de Construtores ${game.year}`,
         html: html,
         width: "40em",
         showCloseButton: true,
@@ -114,10 +159,15 @@ export function seasonOverviewUI(thenCall){
 
     game.championship.createStandings();
 
-    html += `<table id="season-overview">
-                <tr>
-                    <th>Pos</th>
-                    <th>Piloto</th>`;
+    html += `
+    <div id="season-overview">
+        <table>
+            <tr>
+                <th>Pos</th>
+                <th>Piloto</th>
+                <th>País</th>
+                <th>Equipe</th>
+    `;
 
     game.championship.tracks.forEach(e => {
         html += `<th><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[e].country)}.webp"><br>${circuitsData[e].abbrev}</th>`;
@@ -126,10 +176,15 @@ export function seasonOverviewUI(thenCall){
                 
     let pos = 1;
     game.championship.standings.forEach(e => {
+        const team = game.drivers[e[0]].team;
+
         html += `
         <tr>
             <td>${pos}</td>
-            <td>${e[0]}</td>`;
+            <td>${e[0]}</td>
+            <td><img class="country-flag" src="img/flags/${accentsTidy(game.drivers[e[0]].country)}.webp"></td> 
+            <td style="background-color: ${game.teams[team].result_bg_color}; color: ${game.teams[team].result_font_color}">${team}</td>
+        `;
 
         game.championship.tracks.forEach(track => {
             let pos = "Ret";
@@ -170,15 +225,15 @@ export function seasonOverviewUI(thenCall){
 
         pos++;
     });
-    html += `</table>`;
+    html += `</table></div>`;
 
     Swal.fire({
-        title: `Classificação do Campeonato de Pilotos ${game.championship.year}`,
+        title: `Classificação do Campeonato de Pilotos ${game.year}`,
         html: html,
         width: "100%",
         showCloseButton: true,
         focusConfirm: false,
-        confirmButtonText: "Ok",
+        showConfirmButton: false,
     }).then(e => {
         if(thenCall == "end"){
             game.championship.EndSeason();

@@ -12,63 +12,63 @@ export function viewDriver(name){
             <table id="view-driver-infos">
                 <th colspan="2">Dados Pessoais</th>
                 <tr>
-                    <td><h2>País: </h2></td>
+                    <td>País:</td>
                     <td>
-                        <h2><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp">
-                        ${countryCodes[driver.country]}</h2>
+                        <img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp">
+                        ${countryCodes[driver.country]}
                     </td>
                 </tr>
                 <tr>
-                    <td><h2>Idade: </h2></td>
-                    <td><h2>${driver.age} anos</h2></td>
+                    <td>Idade:</td>
+                    <td>${driver.age} anos</td>
                 </tr>
                 <tr><td><span>&shy;</span></td></tr>
                 <tr>
-                    <td><h2>Títulos: </h2></td>
-                    <td><h2>${driver.titles}</h2></td>
+                    <td>Títulos:</td>
+                    <td>${driver.titles}</td>
                 </tr>
                 <tr>
-                    <td><h2>GP's: </h2></td>
-                    <td><h2>${driver.gps}</h2></td>
+                    <td>GP's:</td>
+                    <td>${driver.gps}</td>
                 </tr>
                 <tr>
-                    <td><h2>Vitórias: </h2></td>
-                    <td><h2>${driver.wins}</h2></td>
+                    <td>Vitórias:</td>
+                    <td>${driver.wins}</td>
                 </tr>
                 <tr>
-                    <td><h2>Pódios: </h2></td>
-                    <td><h2>${driver.podiums}</h2></td>
+                    <td>Pódios:</td>
+                    <td>${driver.podiums}</td>
                 </tr>
                 <tr>
-                    <td><h2>Poles: </h2></td>
-                    <td><h2>${driver.poles}</h2></td>
+                    <td>Poles:</td>
+                    <td>${driver.poles}</td>
                 </tr>
             </table>
             <table id="view-driver-contract">
                 <th colspan="2">Contrato</th>
                 <tr>
-                    <td><h2>Equipe: </h2></td>
-                    <td><h2>${driver.team}</h2></td>
+                    <td>Equipe:</td>
+                    <td>${driver.team}</td>
                 </tr>
                 <tr>
-                    <td><h2>Função: </h2></td>
-                    <td><h2>${driver.function}</h2></td>
+                    <td>Função:</td>
+                    <td>${driver.function}</td>
                 </tr>
                 <tr>
-                    <td><h2>Salário: </h2></td>`
+                    <td>Salário:</td>`
 
                 if(driver.salary > 1){
-                    html += `<td><h2>${driver.salary} Milhões por Corrida</h2></td>`
+                    html += `<td>${driver.salary} Milhões por Corrida</td>`
                 }
                 else{
-                    html += `<td><h2>${Math.floor(driver.salary*1000)} Mil por Corrida</h2></td>`
+                    html += `<td>${Math.floor(driver.salary*1000)} Mil por Corrida</td>`
                 }
 
                 html += `
                 </tr>
                 <tr>
-                    <td><h2>Duração: </h2></td>
-                    <td><h2>Até o fim de ${game.championship.year + driver.contractRemainingYears} (${driver.contractRemainingYears})</h2></td>
+                    <td>Duração:</td>
+                    <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>
                 </tr>
                 <tr><td><span>&shy;</span></td></tr>
                 <th colspan="2">Próx. Contrato</th>`
@@ -76,28 +76,28 @@ export function viewDriver(name){
     if(driver.contractRemainingYears == 0 && driver.newTeam){
             html+=`
                 <tr>
-                    <td><h2>Equipe: </h2></td>
-                    <td><h2>${driver.newTeam}</h2></td>
+                    <td>Equipe:</td>
+                    <td>${driver.newTeam}</td>
                 </tr>
                 <tr>
-                    <td><h2>Função: </h2></td>
-                    <td><h2>${driver.newFunction}</h2></td>
+                    <td>Função:</td>
+                    <td>${driver.newFunction}</td>
                 </tr>
                 <tr>
-                    <td><h2>Salário: </h2></td>`
+                    <td>Salário:</td>`
                 
                 if(driver.salary > 1){
-                    html += `<td><h2>${driver.newSalary} Milhões por Corrida</h2></td>`
+                    html += `<td>${driver.newSalary} Milhões por Corrida</td>`
                 }
                 else{
-                    html += `<td><h2>${Math.floor(driver.newSalary*1000)} Mil por Corrida</h2></td>`
+                    html += `<td>${Math.floor(driver.newSalary*1000)} Mil por Corrida</td>`
                 }
 
                 html += `
                 </tr>
                 <tr>
-                    <td><h2>Duração: </h2></td>
-                    <td><h2>Até o fim de ${game.championship.year + driver.contractRemainingYears} (${driver.contractRemainingYears})</h2></td>
+                    <td>Duração:</td>
+                    <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears})</td>
                 </tr>
             </table>
             </div>    
@@ -106,7 +106,7 @@ export function viewDriver(name){
     else if(driver.contractRemainingYears > 0){        
         html += `
             <tr>
-                <td colspan="2" style="text-align: center";><h2>Ainda sob contrato</h2></td>
+                <td colspan="2" style="text-align: center";>Ainda sob contrato</td>
             </tr>
         </table>
         </div>    
@@ -115,20 +115,20 @@ export function viewDriver(name){
     else{        
         html += `
                     <tr>
-                        <td><h2>Equipe: </h2></td>
-                        <td><h2>Nenhuma</h2></td>
+                        <td>Equipe:</td>
+                        <td>Nenhuma</td>
                     </tr>
                     <tr>
-                        <td><h2>Função: </h2></td>
-                        <td><h2>-</h2></td>
+                        <td>Função:</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td><h2>Salário: </h2></td>
-                        <td><h2>-</h2></td>
+                        <td>Salário:</td>
+                        <td>-</td>
                     </tr>
                     <tr>
-                        <td><h2>Duração: </h2></td>
-                        <td><h2>-</h2></td>
+                        <td>Duração:</td>
+                        <td>-</td>
                     </tr>
                 </table>
             </div>    
@@ -136,7 +136,7 @@ export function viewDriver(name){
     }
     
     Swal.fire({
-        title: `<strong>${name}</strong>`,
+        title: `${name}`,
         html: html,
         width: "max-content",
         showCloseButton: true,

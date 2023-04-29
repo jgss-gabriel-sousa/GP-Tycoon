@@ -1,10 +1,11 @@
-import { blankSpaceRmv, accentsTidy, numberF, setBarProgress } from "./utils.js"
+import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./app.js"
 import { Championship } from "./championship.js";
 import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";
 import { enginesData } from "./data/enginesData.js";
+import { engineersData } from "./data/engineersData.js";
 import { startDriversStats } from "./drivers.js";
 
 export const game = {
@@ -16,6 +17,7 @@ export const game = {
     drivers: {},
     teams: {},
     engines: {},
+    engineers: {},
 }
 
 function startGame(){
@@ -24,59 +26,270 @@ function startGame(){
     game.drivers = driversData;
     game.teams = teamsData;
     game.engines = enginesData;
+    game.engineers = engineersData;
+    StartEngStats();
     StartTeamsStats();
-    startDriversStats()
+    startDriversStats();
 } startGame();
 
-export function StartTeamsStats(){
+function StartEngStats(){
+    for(const e in game.engineers) {
+        const eng = game.engineers[e];
+
+        eng.name = e;
+        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 8)));
+    }
+
+    for(const t in game.teams) {
+        const team = game.teams[t];
+        const eng = game.engineers;
+
+        function tryGet(name){
+            if(!eng[name]){
+                return "";
+            }
+            else{
+                return eng[name].name;
+            }
+        }
+
+        team.teamPrincipal = tryGet(team.teamPrincipal);
+        team.engineers.technicalDirector = tryGet(team.engineers.technicalDirector);
+        team.engineers.chiefAerodynamicist = tryGet(team.engineers.chiefAerodynamicist);
+        team.engineers.chiefDesigner = tryGet(team.engineers.chiefDesigner);
+        team.engineers.chiefEngineering = tryGet(team.engineers.chiefEngineering);
+
+        if(team.teamPrincipal != "") eng[team.teamPrincipal].occupation = "Chefe de Equipe";
+        if(team.engineers.technicalDirector != "") eng[team.engineers.technicalDirector].occupation = "Diretor Técnico";
+        if(team.engineers.chiefAerodynamicist != "") eng[team.engineers.chiefAerodynamicist].occupation = "Aerodinamicista Chefe";
+        if(team.engineers.chiefDesigner != "") eng[team.engineers.chiefDesigner].occupation = "Designer Chefe";
+        if(team.engineers.chiefEngineering != "") eng[team.engineers.chiefEngineering].occupation = "Engenheiro Chefe";
+    }
+}
+
+function CalcTeamDevPoints(teamName){
+    const eng = game.engineers;
+    const team = game.teams[teamName];
+
+    let aeroPts = (eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2;
+    aeroPts += (eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100;
+    aeroPts += eng[team.engineers.chiefDesigner].aero;
+    aeroPts += eng[team.engineers.chiefAerodynamicist].aero * 2;
+    aeroPts /= 5;
+    aeroPts *= ((team.employees/1000)+1)/2;
+
+
+    let engPts = (eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2;
+    engPts += (eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100;
+    engPts += eng[team.engineers.chiefDesigner].eng;
+    engPts += eng[team.engineers.chiefEngineering].eng * 2;
+    engPts /= 5;
+    engPts *= ((team.employees/1000)+1)/2;
+
+    team.aeroPts = Math.round(aeroPts);
+    team.engPts = Math.round(engPts);
+}
+
+function StartTeamsStats(){
     for(const t in game.teams) {
         const team = game.teams[t];
         const car = team.car;
         const engine = game.engines[team.engine];
 
-        car.weight = Math.round((car.downforce + car.speed)/2);
+        car.weight = (car.downforce + car.speed)/2;
         car.aerodynamic = car.speed;
         car.chassisReliability = car.reliability;
 
         delete car.speed;
         
-        car.corners = Math.round((car.downforce + car.weight)/2);
-        car.straights = Math.round((car.aerodynamic + car.weight)/2);
-        car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
+        car.corners = (((car.downforce + car.weight)/2)*engine.torque)/100;
+        car.straights = (((car.aerodynamic + car.weight)/2)*engine.power)/100;
+        car.reliability = (car.chassisReliability * engine.reliability)/100;
+
+        team.newCar = {};
+        team.newCar.aerodynamic = 0;
+        team.newCar.downforce = 0;
+        team.newCar.weight = 0;
+        team.newCar.chassisReliability = 0;
+
+        team.aeroPts = 0;
+        team.engPts = 0;
+        team.devFocusActualSeason = team.devFocusActualSeason ?? 50;
+        team.devFocusNextSeason = team.devFocusNextSeason ?? 50;
+
+        team.factories = Math.ceil(team.employees/250);
+
+        team.investments = team.investments ?? {};
+        team.investments.aerodynamics = team.investments.aerodynamics ?? 500;
+        team.investments.weight = team.investments.weight ?? 500;
+        team.investments.downforce = team.investments.downforce ?? 500;
+        team.investments.reliability = team.investments.reliability ?? 500;
+        team.totalInvestments = 0;
+
+        team.financialReport = {};
+        team.financialReport["Prize per Point"] = 0;
+        team.financialReport["1st Driver"] = 0;
+        team.financialReport["2nd Driver"] = 0;
+        team.financialReport["Test Driver"] = 0;
+        team.financialReport["Engineers"] = 0;
+        team.financialReport["Employees"] = 0;
+        team.financialReport["Development Investments"] = 0;
+        team.financialReport["Major Sponsor"] = 0;
+        team.financialReport["Sponsors"] = 0;
+        team.financialReport["Factory Sponsor"] = 0;
+        team.financialReport["Balance"] = 0;
+        
+        CalcTeamDevPoints(team.name);
     }
 }
 
-export function UpdateTeamsStats(){
+export function BeforeRaceUpdateTeamsStats(){
+    for(const t in game.teams) {
+        const team = game.teams[t];
+        const car = team.car;
+        const engine = game.engines[team.engine];
+
+        car.corners = Math.round((((car.downforce + car.weight)/2)*engine.torque)/100);
+        car.straights = Math.round((((car.aerodynamic + car.weight)/2)*engine.power)/100);
+        car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
+        
+        team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
+    }
+}
+
+export function YearUpdateTeamsStats(){
     for(const t in game.teams) {
         const team = game.teams[t];
         const car = team.car;
         const engine = game.engines[team.engine];
         
-        if(team.name == "Rred Bull"){
-            car.aerodynamic = 100;
-            car.weight = 100;
-            car.downforce = 100;
-        }
+        car.aerodynamic = team.newCar.aerodynamic;
+        car.downforce = team.newCar.downforce;
+        car.weight = team.newCar.weight;
+        car.chassisReliability = team.newCar.chassisReliability;
+
+        team.newCar.aerodynamic = 0;
+        team.newCar.downforce = 0;
+        team.newCar.weight = 0;
+        team.newCar.chassisReliability = 0;
+
+        //team.engine = team.newEngine;
+
+        console.log(team.newCar)
+
+        team.totalInvestments = 0;
+
+        team.financialReport = {};
+        team.financialReport["Prize per Point"] = 0;
+        team.financialReport["1st Driver"] = 0;
+        team.financialReport["2nd Driver"] = 0;
+        team.financialReport["Test Driver"] = 0;
+        team.financialReport["Engineers"] = 0;
+        team.financialReport["Employees"] = 0;
+        team.financialReport["Development Investments"] = 0;
+        team.financialReport["Major Sponsor"] = 0;
+        team.financialReport["Sponsors"] = 0;
+        team.financialReport["Factory Sponsor"] = 0;
+        team.financialReport["Balance"] = 0;
     }
 }
 
 export function UpdateAfterRace(){    
     for(const t in game.teams) {
         const team = game.teams[t];
+        const eng = game.engineers;
 
-        team.cash -= game.drivers[team.driver1].salary * 1000;
-        team.cash -= game.drivers[team.driver2].salary * 1000;
-        team.cash -= game.drivers[team.test_driver].salary * 1000;
+        const actualRace = game.championship.tracks[game.championship.actualRound-2];
+        const raceResult = game.championship.results[actualRace];
+
+        // BALANCE ###########################################################
+        let balance = 0;
+        let teamPoints = 0;
+
+        for(let i = 0; i < game.championship.pointsSystem.length; i++){
+            if(raceResult[i] == team.driver1 || raceResult[i] == team.driver2){
+                teamPoints += game.championship.pointsSystem[i];
+            }
+        }
+        balance += teamPoints * 100;
+        team.financialReport["Prize per Point"] += teamPoints * 100;
+
+        balance -= game.drivers[team.driver1].salary*1000;
+        balance -= game.drivers[team.driver2].salary*1000;
+        balance -= game.drivers[team.test_driver].salary*1000;
+        team.financialReport["1st Driver"] += -game.drivers[team.driver1].salary*1000;
+        team.financialReport["2nd Driver"] += -game.drivers[team.driver2].salary*1000;
+        team.financialReport["Test Driver"] += -game.drivers[team.test_driver].salary*1000;
+
+        let EngineersConst = 0;
+        EngineersConst += eng[team.teamPrincipal].salary;
+        EngineersConst += eng[team.engineers.technicalDirector].salary;
+        EngineersConst += eng[team.engineers.chiefDesigner].salary;
+        EngineersConst += eng[team.engineers.chiefAerodynamicist].salary;
+        EngineersConst += eng[team.engineers.chiefEngineering].salary;
+        team.financialReport["Engineers"] += -EngineersConst;
+
+        balance -= EngineersConst;
+
+        balance -= team.employees * 2.5;
+        team.financialReport["Employees"] += -team.employees * 2.5;
+
+        balance -= team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
+
+        team.financialReport["Development Investments"] += -(team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
+
+        if(team.majorSponsor != "")
+            balance += team.majorSponsor_value;
+        balance += team.sponsor_value * team.sponsors.length;
+        balance += team.factorySponsor_value;
+
+        team.financialReport["Major Sponsor"] += team.majorSponsor_value;
+        team.financialReport["Sponsors"] += team.sponsor_value * team.sponsors.length;
+        team.financialReport["Factory Sponsor"] += team.factorySponsor_value;
+
+        team.cash += balance;
+        team.financialReport["Balance"] += balance;
+
+        //#####################################################
+
+        CalcTeamDevPoints(team.name);
+
+        function calcUpgradeNew(aeroOrEng, investment){
+            return (aeroOrEng/100)*(90*(investment/(investment+30))-80)*(team.devFocusNextSeason/100)*(23/game.championship.tracks.length);
+        }
+        function calcUpgradeActual(aeroOrEng, investment){
+            return aeroOrEng*((investment/(investment+1))*investment*0.000005)*(team.devFocusActualSeason/100)*(23/game.championship.tracks.length);
+        }
+
+        team.newCar.aerodynamic += calcUpgradeNew(team.aeroPts, team.investments.aerodynamics);
+        team.newCar.downforce += calcUpgradeNew(team.aeroPts, team.investments.downforce);
+        team.newCar.weight += calcUpgradeNew(team.engPts, team.investments.weight);
+        team.newCar.chassisReliability += calcUpgradeNew(team.engPts, team.investments.reliability);
+
+        team.car.aerodynamic += calcUpgradeActual(team.aeroPts, team.investments.aerodynamics);
+        team.car.downforce += calcUpgradeActual(team.aeroPts, team.investments.downforce);
+        team.car.weight += calcUpgradeActual(team.engPts, team.investments.weight);
+        team.car.chassisReliability += calcUpgradeActual(team.engPts, team.investments.reliability);
+
+        if(team.newCar.aerodynamic > 100) team.newCar.aerodynamic = 100;
+        if(team.newCar.downforce > 100) team.newCar.downforce = 100;
+        if(team.newCar.weight > 100) team.newCar.weight = 100;
+        if(team.newCar.chassisReliability > 100) team.newCar.chassisReliability = 100;
+
+        if(team.car.aerodynamic > 100) team.car.aerodynamic = 100;
+        if(team.car.downforce > 100) team.car.downforce = 100;
+        if(team.car.weight > 100) team.car.weight = 100;
+        if(team.car.chassisReliability > 100) team.car.chassisReliability = 100;
     }
 }
 
 export function YearUpdate(){
-    const driverName = this.standings[0][0];
+    const driverName = game.championship.standings[0][0];
     const driver = game.drivers[driverName];
-    const constructorName = this.teamStandings[0][0];
+    const constructorName = game.championship.teamStandings[0][0];
 
     game.championship.historic.push({
-        year: this.year,
+        year: game.year,
         driverChampion: driverName,
         driverCountry: game.drivers[driverName].country,
         driverTeam:  game.drivers[driverName].team,
@@ -96,6 +309,7 @@ export function YearUpdate(){
     game.championship.standings = [];
     game.championship.teamStandings = [];
 
-    UpdateTeamsStats();
+    YearUpdateTeamsStats();
+    BeforeRaceUpdateTeamsStats();
     genTeamHTML();
 }

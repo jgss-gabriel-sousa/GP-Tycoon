@@ -23,8 +23,8 @@ export function shuffleArr(array){
     }
 }
 
-export function numberF(number,format,precision){    
-    if(format == "extended"){
+export function NumberF(number,format,precision){    
+    if(format == "ext"){
         let value = "";
         const M = parseInt(number/1000000,10);
         const K = parseInt((number-(M*1000000))/1000,10);
@@ -42,7 +42,33 @@ export function numberF(number,format,precision){
         }
         else if(M <= 0 && K < 0){
             if(K != 0)
-                value += -(K)+" mil";    
+                value += -(K)+" mil"; 
+        }
+        return value;
+    }
+    if(format == "ext-short"){
+        let value = "";
+        const M = parseInt(number/1000000,10);
+        const K = parseInt((number-(M*1000000))/1000,10);
+        const KK = parseInt((number-(M*1000000))/100000,10);
+
+        if(M > 0 || M <= 0){
+            value = M+"M";
+        }
+        if(M > 0 && K > 0){
+            if(K != 0)
+                value = M+"."+KK+"M";
+        }
+        if(M <= 0 && K > 0){
+            if(K != 0)
+                value = K+"K";
+        }
+        if(M == 0 && K == 0){
+            value = K+"K";
+        }
+        else if(M < 0 && K < 0){
+            if(K != 0)
+                value += -(K)+"K"; 
         }
 
         return value;
