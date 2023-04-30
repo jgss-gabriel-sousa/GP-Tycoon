@@ -42,7 +42,7 @@
 }
 
 #podium {
-    background-image: url("./img/podium.png");
+    background-image: url("./img/podium.webp");
     min-height: 387px;
     min-width: 387px;
     max-height: 387px;
@@ -149,4 +149,11 @@
     top: 0px;
     left: 295px;
     width: 128px;
+}
+
+@media (max-width: 900px) {
+    #race{
+        flex-direction: column;
+        align-items: center;
+    }
 }

@@ -74,7 +74,6 @@ export function loadGame(){
         if(result.isConfirmed && savedGames[document.querySelector("#select-team").value]){
             const newGame = savedGames[document.querySelector("#select-team").value];
 
-            game.uiTeamColors= newGame.uiTeamColors,
             game.team= newGame.team,
             game.year= newGame.year,
             game.championship= new Championship(newGame.championship),
@@ -103,6 +102,7 @@ export function loadGame(){
 export async function saveGame(){
     if(!game.gameName){
         const { value: name } = await Swal.fire({
+            title: "Dê um nome para o Save",
             allowOutsideClick: false,
             allowEscapeKey: false,
             showCancelButton: true,
@@ -112,7 +112,7 @@ export async function saveGame(){
                 if(!value) return "Digite um nome!";
             }
         });
-
+        
         if(name){
             game.gameName = name;
         }

@@ -60,31 +60,9 @@ function genDriversHTML(){
                 </tr>
             </table>
             <br>
+            <p>Salário: ${NumberF(e.salary * 1000000,"ext-short",0)} por Corrida</p>
+        </div>
         `
-        
-        if(e.salary > 1){
-            html += `<p>Salário: ${e.salary}M por Corrida</p>`
-        }
-        else{
-            html += `<p>Salário: ${Math.floor(e.salary*1000)}K por Corrida</p>`
-        }
-        
-        if(i < 2){
-            let pos;
-            let pts;
-            for(const k in game.championship.standings) {
-                if(game.championship.standings[k][0] == e.name){
-                    pos = Number(k)+1;
-                    pts = game.championship.standings[k][1];
-                }
-            }
-    
-            html += `
-            <br>
-            `
-        }
-
-        html += "</div>"
         i++;
     });
     
@@ -345,6 +323,11 @@ export function genEngHTML(){
                     </div>
                 </td>
             </tr>
+            <tr><td><span>&shy;</span></td></tr>
+            <tr>
+                <td>Motor Prox. Temp.:</td>
+                <td>${team.newEngine == "" ? `<button class="select-engine">Negociar</button>` : team.newEngine+` (${team.engineContract})`}</td>
+            </tr>
         </table>
     </div>`;
     el.innerHTML = html;
@@ -420,14 +403,20 @@ export function genDevelopmentHTML(){
             <tr>
                 <th>Total da Temporada: </th>
                 <th id="total-investment">${NumberF(team.totalInvestments *1000,"ext-short",0)}</th>
-            </tr>`
+            </tr>
+            `
     
     if(game.championship.budgetCap > 0){
         html += `
             <tr>
+                <th>Restante para o Teto: </th>
+                <th id="total-investment">${NumberF((game.championship.budgetCap-team.totalInvestments) *1000,"ext-short",0)}</th>
+            </tr>
+            <tr>
                 <th>Teto de Gastos: </th>
                 <th id="budget-cap">${NumberF(game.championship.budgetCap *1000,"ext-short",0)}</th>
-            </tr>`
+            </tr>
+            `
     }
         
     html += `
@@ -445,7 +434,7 @@ export function genTeamHTML(){
 
     const teams = game.teams;
 
-    if(game.uiTeamColors){
+    if(localStorage.getItem("gpTycoon-ui-team-colors") == "true" ?? true){
         document.querySelector(":root").style.setProperty("--bg", teams[game.team].bg_color);
         document.querySelector(":root").style.setProperty("--border", teams[game.team].border_color);
         document.querySelector(":root").style.setProperty("--text", teams[game.team].font_color);

@@ -229,4 +229,14 @@ export const circuitsData = {
         straights: 50,
         corners: 50,
     },
+    "Indianapolis":{
+        abbrev: "INDY",
+        circuit: "Indianapolis",
+        country: "US",
+        baseLapTime: 20.0,
+        rainChance: 0,
+        laps: 10,
+        straights: 90,
+        corners: 10,
+    },
 }

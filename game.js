@@ -7,6 +7,7 @@ import { teamsData } from "./data/teamsData.js";
 import { enginesData } from "./data/enginesData.js";
 import { engineersData } from "./data/engineersData.js";
 import { startDriversStats } from "./drivers.js";
+import { selectEngine } from "./ui/selectEngine.js";
 
 export const game = {
     activeScreen: "main-menu",
@@ -96,6 +97,11 @@ function StartTeamsStats(){
         const car = team.car;
         const engine = game.engines[team.engine];
 
+        if(team.engineContract != 0)
+            team.newEngine = team.engine;
+        else
+            team.newEngine = "";
+
         car.weight = (car.downforce + car.speed)/2;
         car.aerodynamic = car.speed;
         car.chassisReliability = car.reliability;
@@ -173,9 +179,18 @@ export function YearUpdateTeamsStats(){
         team.newCar.weight = 0;
         team.newCar.chassisReliability = 0;
 
-        //team.engine = team.newEngine;
+        team.engineContract--;
 
-        console.log(team.newCar)
+        if(team.newEngine != ""){
+            team.engine = team.newEngine;
+            team.engineContract = team.newEngineContract;
+        }
+        else{
+            selectEngine(true);
+        }
+
+        if(team.engineContract == 0)
+            team.newEngine = "";
 
         team.totalInvestments = 0;
 
@@ -191,6 +206,7 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Sponsors"] = 0;
         team.financialReport["Factory Sponsor"] = 0;
         team.financialReport["Balance"] = 0;
+        team.financialReport["Engine"] = 0;
     }
 }
 
@@ -255,10 +271,20 @@ export function UpdateAfterRace(){
         CalcTeamDevPoints(team.name);
 
         function calcUpgradeNew(aeroOrEng, investment){
-            return (aeroOrEng/100)*(90*(investment/(investment+30))-80)*(team.devFocusNextSeason/100)*(23/game.championship.tracks.length);
+            let up = (aeroOrEng/100)*(90*(investment/(investment+30))-80)*(team.devFocusNextSeason/100)*(23/game.championship.tracks.length);
+            
+            if(Math.random()*100 < 10){
+                up *= ((game.drivers[team.test_driver].speed * game.drivers[team.test_driver].pace)/10000);
+            }
+            return up;
         }
         function calcUpgradeActual(aeroOrEng, investment){
-            return aeroOrEng*((investment/(investment+1))*investment*0.000005)*(team.devFocusActualSeason/100)*(23/game.championship.tracks.length);
+            let up = aeroOrEng*((investment/(investment+1))*investment*0.000005)*(team.devFocusActualSeason/100)*(23/game.championship.tracks.length);
+            
+            if(Math.random()*100 < 10){
+                up *= ((game.drivers[team.test_driver].speed * game.drivers[team.test_driver].pace)/10000);
+            }
+            return up;
         }
 
         team.newCar.aerodynamic += calcUpgradeNew(team.aeroPts, team.investments.aerodynamics);
@@ -270,6 +296,8 @@ export function UpdateAfterRace(){
         team.car.downforce += calcUpgradeActual(team.aeroPts, team.investments.downforce);
         team.car.weight += calcUpgradeActual(team.engPts, team.investments.weight);
         team.car.chassisReliability += calcUpgradeActual(team.engPts, team.investments.reliability);
+
+
 
         if(team.newCar.aerodynamic > 100) team.newCar.aerodynamic = 100;
         if(team.newCar.downforce > 100) team.newCar.downforce = 100;

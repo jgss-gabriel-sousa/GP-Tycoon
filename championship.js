@@ -26,8 +26,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Bahrein","Arábia Saudita"];
+            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            this.tracks = ["Indianapolis"];
             
             this.results = {};
             this.standings = [];
@@ -628,6 +628,12 @@ export class Championship {
     }
 
     carsHTML(status){
+        if(!(localStorage.getItem("gpTycoon-visual-race-sim") == "true" ?? true)){
+            if(status == "start")
+                document.querySelector("#race-cars").style.display = "none";
+            return;
+        }
+
         const finalResult = this.race.finalResult;
         const grid = this.race.grid;
 
@@ -757,7 +763,7 @@ export class Championship {
                         timeTable.innerHTML = TimeTableHTML;
                         Swal.enableButtons();
                     }
-                }, 500);
+                }, (Number(localStorage.getItem("gpTycoon-race-sim-speed"))*2) ?? 500);
             },
         }
 
@@ -791,7 +797,7 @@ export class Championship {
                         clearInterval(timerInterval);
                         Swal.enableButtons();
                     }
-                }, localStorage.getItem("gpTycoon-race-sim-speed") ?? 250);
+                }, Number(localStorage.getItem("gpTycoon-race-sim-speed")) ?? 500);
             },
         }
         
@@ -928,7 +934,7 @@ export class Championship {
                 if(pos == 0){
                     team.wins++;
                 }
-                if(pos <= 3){
+                if(pos < 3){
                     team.podiums++;
                 }
 

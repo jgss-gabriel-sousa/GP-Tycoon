@@ -56,6 +56,10 @@ export function viewFinancialReport(teamName){
                 <td>Investimentos de Desenvolvimento</td>
                 <td>${NumberF(-team.financialReport["Development Investments"] * 1000,"ext",0)}</td>
             </tr>
+            <tr>
+                <td>Contrato de Motores</td>
+                <td>${NumberF(-team.financialReport["Engine"] * 1000,"ext",0)}</td>
+            </tr>
             
             <tr>
                 <th>Total: </th>
