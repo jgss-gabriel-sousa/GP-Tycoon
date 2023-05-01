@@ -1,4 +1,4 @@
-{
+export const countryCodes = {
     "AF": "Afeganistão",
     "AL": "Albânia",
     "DZ": "Argélia",

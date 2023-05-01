@@ -1,5 +1,5 @@
 import { accentsTidy } from "../utils.js";
-import countryCodes from '../data/countryCodes.json' assert {type: 'json'}
+import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../game.js";
 
 export function viewEng(name){

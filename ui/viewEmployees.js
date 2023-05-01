@@ -1,5 +1,3 @@
-import { accentsTidy } from "../utils.js";
-import countryCodes from '../data/countryCodes.json' assert {type: 'json'}
 import { game } from "../game.js";
 import { NumberF } from "../utils.js";
 

@@ -91,8 +91,8 @@ function CalcTeamDevPoints(teamName){
     engPts *= ((team.employees/1000)+1)/2;
 
     if(team.brokeCostCap){
-        aeroPts -= aeroPts * 0.25;
-        engPts -= engPts * 0.25;
+        aeroPts -= aeroPts * team.brokeCostCapPenalty;
+        engPts -= engPts * team.brokeCostCapPenalty;
     }
 
     team.aeroPts = Math.round(aeroPts);
@@ -130,6 +130,7 @@ function StartTeamsStats(){
         team.aeroPts = 0;
         team.engPts = 0;
         team.brokeCostCap = false;
+        team.brokeCostCapPenalty = 0;
         team.devFocusActualSeason = team.devFocusActualSeason ?? 50;
         team.devFocusNextSeason = team.devFocusNextSeason ?? 50;
 
@@ -193,10 +194,6 @@ export function YearUpdateTeamsStats(){
 
         team.engineContract--;
 
-        if(team.name == game.team){
-            console.log(team.newEngine)
-        }
-
         if(team.engineContract == 0 && team.newEngine != ""){
             team.engine = team.newEngine;
             team.engineContract = team.newEngineContract;
@@ -210,7 +207,8 @@ export function YearUpdateTeamsStats(){
             team.brokeCostCap = false;
         else{
             team.brokeCostCap = true;
-            Swal.fire("<p>Sua equipe estourou o Teto de Gastos, seus Pontos de Desenvolvimento serão penalizados em 25%</p>")
+            team.brokeCostCapPenalty = (team.totalInvestments/game.championship.budgetCap)-1;
+            Swal.fire(`<p>Sua equipe estourou o Teto de Gastos, seus Pontos de Desenvolvimento serão penalizados em ${Math.round(team.brokeCostCapPenalty*100)}%</p>`)
         }
 
         team.totalInvestments = 0;
