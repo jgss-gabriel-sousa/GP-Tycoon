@@ -6,7 +6,7 @@ import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";
 import { enginesData } from "./data/enginesData.js";
 import { engineersData } from "./data/engineersData.js";
-import { startDriversStats } from "./drivers.js";
+import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
 import { selectEngine } from "./ui/selectEngine.js";
 
 export const game = {
@@ -376,6 +376,7 @@ export function YearUpdate(){
     game.championship.results = {};
     game.championship.teamStandings = [];
 
+    YearUpdateDriversStats();
     YearUpdateTeamsStats();
     BeforeRaceUpdateTeamsStats();
     genTeamHTML();

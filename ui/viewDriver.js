@@ -1,4 +1,4 @@
-import { accentsTidy } from "../utils.js";
+import { accentsTidy, NumberF } from "../utils.js";
 import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../game.js";
 import { market } from "./market.js";
@@ -49,91 +49,85 @@ export function viewDriver(name, returnToMarket){
                 <th colspan="2">Contrato</th>
                 <tr>
                     <td>Equipe:</td>
-                    <td>${driver.team}</td>
+                    <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
+                    ${driver.team}</td>
                 </tr>
                 <tr>
                     <td>Função:</td>
                     <td>${driver.status}</td>
                 </tr>
                 <tr>
-                    <td>Salário:</td>`
-
-                if(driver.salary > 1){
-                    html += `<td>${driver.salary} Milhões por Corrida</td>`
-                }
-                else{
-                    html += `<td>${Math.floor(driver.salary*1000)} Mil por Corrida</td>`
-                }
-
-                html += `
+                    <td>Salário:</td>
+                    <td>${NumberF(driver.salary*1000000,"ext",0)} por Corrida</td>
                 </tr>
                 <tr>
                     <td>Duração:</td>
                     <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>
-                </tr>
-                <tr><td><span>&shy;</span></td></tr>
-                <th colspan="2">Próx. Contrato</th>`
+                </tr>`
                     
     if(driver.contractRemainingYears == 0 && driver.newTeam){
             html+=`
+                <tr><th colspan="2">Próx. Contrato</th></tr>
                 <tr>
                     <td>Equipe:</td>
-                    <td>${driver.newTeam}</td>
+                    <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
+                    ${driver.newTeam}</td>
                 </tr>
                 <tr>
                     <td>Função:</td>
                     <td>${driver.newStatus}</td>
                 </tr>
                 <tr>
-                    <td>Salário:</td>`
-                
-                if(driver.salary > 1){
-                    html += `<td>${driver.newSalary} Milhões por Corrida</td>`
-                }
-                else{
-                    html += `<td>${Math.floor(driver.newSalary*1000)} Mil por Corrida</td>`
-                }
-
-                html += `
+                    <td>Salário:</td>
+                    <td>${NumberF(driver.newSalary*1000000,"ext",0)} por Corrida</td>
                 </tr>
                 <tr>
                     <td>Duração:</td>
-                    <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears})</td>
+                    <td>Até o fim de ${game.year + driver.newContractRemainingYears} (${driver.newContractRemainingYears})</td>
                 </tr>
             </table>
             </div>    
             `;
     }
-    else if(driver.contractRemainingYears > 0){        
+    else if(driver.contractRemainingYears <= 0){        
         html += `
+            <tr><th colspan="2">Próx. Contrato</th></tr>
             <tr>
-                <td colspan="2" style="text-align: center";>Ainda sob contrato</td>
+                <td>Equipe:</td>
+                <td>Nenhuma</td>
             </tr>
+            <tr>
+                <td>Função:</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Salário:</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Duração:</td>
+                <td>-</td>
+            </tr>`
+            
+        if((!game.teams[game.team].new1driver || !game.teams[game.team].new2driver || !game.teams[game.team].newTdriver)){
+            html +=`
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button id="negotiate">Negociar</button>
+                </td>
+            </tr>`
+        }
+
+        html +=`
         </table>
         </div>    
         `;
     }
-    else{        
+    else{
         html += `
-                    <tr>
-                        <td>Equipe:</td>
-                        <td>Nenhuma</td>
-                    </tr>
-                    <tr>
-                        <td>Função:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Salário:</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Duração:</td>
-                        <td>-</td>
-                    </tr>
-                </table>
-            </div>    
-        `;
+        </table>
+        </div>  
+        `
     }
     
     Swal.fire({
@@ -147,4 +141,128 @@ export function viewDriver(name, returnToMarket){
         if(returnToMarket)
             market();
     });
+
+    if(document.querySelector("#negotiate"))
+        document.querySelector("#negotiate").addEventListener("click", () => negotiate(driver.name, returnToMarket));
+}
+
+function negotiate(driverName, returnToMarket){
+    let html = "";
+    const driver = game.drivers[driverName];
+    const team = game.teams[game.team];
+
+    html += `
+    <div id="negotiate-market">
+        <img id="view-driver-driver-img" src="img/drivers/${driver.name}.webp" onerror="this.src='img/drivers/generic.webp';">
+        
+        <div>
+            <div class="slidercontainer">
+                <input id="slider-duration" class="slider" type="range" min="1" value="1" step="1" max="5">
+            </div>
+            <p id="years">1 Ano</p>
+            <br>
+
+            <div class="slidercontainer">
+                <input id="slider-salary" class="slider" type="range" min="${(driver.salary/2)*1000}" step="5" value="${driver.salary*1000}" max="${driver.salary*2000}">
+            </div>
+            <p id="salary">Salário: ${NumberF(driver.salary * 1000000,"ext-short",0)} por corrida</p>
+            <br>
+
+            <p id="salary">Salário Anterior: ${NumberF(driver.salary * 1000000,"ext-short",0)} por corrida</p>
+            <br>
+
+            <select>
+                ${team.new1driver == "" ? "<option>1º Piloto</option>" : ""}
+                ${team.new2driver == "" ? "<option>2º Piloto</option>" : ""}
+                ${team.newTdriver == "" ? "<option>Piloto de Testes</option>" : ""}
+            </select>
+            
+            <br>
+            <br>
+            <h4>Aprovação: <span id="approbation">--</span>%</h4>
+        </div>
+    </div>
+    `
+
+    Swal.fire({
+        title: `${driver.name}`,
+        html: html,
+        width: "40em",
+        showCloseButton: false,
+        focusConfirm: true,
+        showConfirmButton: true,
+        showDenyButton: true,
+        confirmButtonText: "Confirmar",
+        denyButtonText: "Cancelar",
+    }).then((result) => {
+        if(result.isConfirmed){
+            if(!document.querySelector("select").innerText){
+                ;
+            }
+            else{
+                if((Math.random()*100) < approbationCalc(driver.name)){
+                    driver.newTeam = game.team;
+                    driver.newStatus = document.querySelector("select").innerText;
+                    driver.newSalary = Number(document.querySelector("#slider-salary").value)/1000;
+                    driver.newContractRemainingYears = Number(document.querySelector("#slider-duration").value);
+                    team.newTdriver = driver.name;
+
+                    Swal.fire("Contrato Assinado");
+                }
+                else{
+                    Swal.fire("Contrato Recusado");
+                }
+            }
+
+        }else if(result.isDenied){
+        }
+
+        if(returnToMarket){
+            //market();
+        }
+    });
+
+    approbationCalc(driver.name);
+
+    document.querySelector("#slider-duration").addEventListener("input", () => {
+        const sliderValue = Number(document.querySelector("#slider-duration").value);
+
+        document.querySelector("#years").innerHTML = sliderValue == 1 ? sliderValue+" ano" : sliderValue+" anos";
+        approbationCalc(driver.name);
+    });
+
+    document.querySelector("#slider-salary").addEventListener("input", () => {
+        const sliderValue = Number(document.querySelector("#slider-salary").value);
+
+        document.querySelector("#salary").innerHTML = "Salário: "+NumberF(sliderValue * 1000,"ext-short",0)+" por corrida";
+        approbationCalc(driver.name);
+    });
+}
+
+function approbationCalc(driverName){
+    const driver = game.drivers[driverName];
+    let value;
+
+    if(!document.querySelector("select").innerText){
+        document.querySelector("#approbation").innerText = "--";
+        return;
+    }
+
+    const duration = Number(document.querySelector("#slider-duration").value);
+    const salary = Number(document.querySelector("#slider-salary").value)/1000;
+    value = 70;
+    value *= (duration * 0.5) / (driver.experience/100);
+    value *= Math.pow(salary / driver.salary,2);
+
+    if((salary / driver.salary) < 1){
+        value *=  Math.pow(salary / driver.salary,8);
+    }
+
+    if(value > 100)
+        value = 100;
+    if(value < 5)
+        value = 0;
+
+    document.querySelector("#approbation").innerText = Math.round(value);
+    return Math.round(value);
 }

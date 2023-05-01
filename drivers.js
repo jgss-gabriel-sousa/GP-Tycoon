@@ -4,7 +4,8 @@ import { rollDice } from "./utils.js"
 export function startDriversStats(){
     for(const d in game.drivers){
         const driver = game.drivers[d];
-
+        
+        driver.contractInterest = [];
         if(driver.newTeam == undefined)
             driver.newTeam = "";
 
@@ -22,29 +23,31 @@ export function startDriversStats(){
 
         driver.motivation = rollDice("5d20+30");
         if(driver.motivation > 100) driver.motivation = 100;
-    }
-
-    updateStats();
-};
-
-function updateStats(){
-    for(const d in game.drivers){
-        const driver = game.drivers[d];
 
         const ability = Math.pow((driver.speed*0.5 + driver.pace*0.5)/100, 2);
         driver.salary = ((Math.pow(ability*1.1, 6)) + (Math.pow(10, driver.titles/10) * 0.025)) * (ability*2);
-        if(driver.status == "Piloto de Testes"){
-            driver.salary /= 4;
-        }
         driver.salary = driver.salary.toFixed(2);
     }
 };
 
-function newYearUpdateStats(){
+export function YearUpdateDriversStats(){
     for(const d in game.drivers){
         const driver = game.drivers[d];
         driver.age++;
         driver.motivation = rollDice("5d20+30");
         if(driver.motivation > 100) driver.motivation = 100;
+
+        if(driver.contractRemainingYears == 0){
+            driver.team = driver.newTeam;
+            driver.status = driver.newStatus;
+            driver.salary = driver.newSalary;
+            driver.contractRemainingYears = driver.newContractRemainingYears;
+
+            driver.newTeam = "";
+            driver.newStatus = "";
+            driver.newSalary = 0;
+            driver.newContractRemainingYears = 0;
+        }
+        driver.contractRemainingYears--;
     }
 }

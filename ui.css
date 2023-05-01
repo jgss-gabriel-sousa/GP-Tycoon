@@ -338,7 +338,6 @@
 #market td {
     font-size: 12px;
     border: #777 1px solid;
-    height: 40px;
 }
 #market th {
     font-size: 14px;
@@ -347,10 +346,6 @@
 #market button{
     margin: 0;
     font-size: 12px;
-}
-#market td:last-child{
-    border: transparent;
-    width: 80px;
 }
 #market td:first-child{
     width: 35px;
@@ -361,10 +356,11 @@
     text-align: start;
     border-left: transparent;
 }
-#market td:nth-child(2):hover{
+#market tr:hover{
     cursor: pointer;
     font-weight: bold;
     text-decoration: underline;
+    background-color: #ffff99;
 }
 
 #negotiate-market{
