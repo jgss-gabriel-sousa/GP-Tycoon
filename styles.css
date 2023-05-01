@@ -67,7 +67,11 @@ button:hover{
 
 a {
     text-decoration: none;
-	color: black;
+	color: #ddd;
+}
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 h1 {

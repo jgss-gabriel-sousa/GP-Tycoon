@@ -6,8 +6,6 @@ export function gameOptions(){
     const raceSpeedValue = localStorage.getItem("gpTycoon-race-sim-speed") ?? 100;
     const visualRaceSim = localStorage.getItem("gpTycoon-visual-race-sim") ?? true;
     const uiTeamColors = localStorage.getItem("gpTycoon-ui-team-colors") ?? true;
-    console.log(visualRaceSim)
-    console.log(uiTeamColors)
     
     let html = `
     <div id="game-options">

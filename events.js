@@ -70,3 +70,7 @@ window.onclick = e => {
         market();
     }
 }
+
+window.addEventListener("beforeunload", e => {
+    e.returnValue = "\o/";
+});

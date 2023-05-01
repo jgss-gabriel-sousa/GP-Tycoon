@@ -24,6 +24,9 @@ export const game = {
 function startGame(){
     changeScreen("main-menu");
 
+    if(!localStorage.getItem("gpTycoon-ui-team-colors"))
+        localStorage.setItem("gpTycoon-ui-team-colors","true");
+
     game.drivers = driversData;
     game.teams = teamsData;
     game.engines = enginesData;
