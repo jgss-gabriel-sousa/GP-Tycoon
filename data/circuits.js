@@ -18,6 +18,7 @@ export const circuitsData = {
         laps: 50,
         straights: 50,
         corners: 50,
+        crashMulti: 1.25,
     },
     "Austrália":{
         abbrev: "AUS",
@@ -28,6 +29,7 @@ export const circuitsData = {
         laps: 58,
         straights: 50,
         corners: 50,
+        crashMulti: 1.25,
     },
     "Azerbaijão":{
         abbrev: "AZE",
@@ -38,6 +40,7 @@ export const circuitsData = {
         laps: 51,
         straights: 70,
         corners: 30,
+        crashMulti: 1.25,
     },
     "Miami":{
         abbrev: "MIA",
@@ -48,6 +51,7 @@ export const circuitsData = {
         laps: 57,
         straights: 50,
         corners: 50,
+        crashMulti: 1.25,
     },
     "Emília-Romanha":{
         abbrev: "EMI",
@@ -68,6 +72,7 @@ export const circuitsData = {
         laps: 78,
         straights: 20,
         corners: 80,
+        crashMulti: 1.5,
     },
     "Espanha":{
         abbrev: "ESP",
@@ -88,6 +93,7 @@ export const circuitsData = {
         laps: 70,
         straights: 50,
         corners: 50,
+        crashMulti: 1.25,
     },
     "Áustria":{
         abbrev: "AUT",
@@ -158,6 +164,7 @@ export const circuitsData = {
         laps: 61,
         straights: 20,
         corners: 80,
+        crashMulti: 1.25,
     },
     "Japão":{
         abbrev: "JAP",
@@ -218,6 +225,7 @@ export const circuitsData = {
         laps: 50,
         straights: 70,
         corners: 30,
+        crashMulti: 1.25,
     },
     "Abu Dhabi":{
         abbrev: "ABU",
@@ -235,8 +243,9 @@ export const circuitsData = {
         country: "US",
         baseLapTime: 20.0,
         rainChance: 0,
-        laps: 10,
+        laps: 1,
         straights: 90,
         corners: 10,
+        crashMulti: 5,
     },
 }

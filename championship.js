@@ -26,8 +26,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            this.tracks = ["Indianapolis"];
+            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            //this.tracks = ["Indianapolis",];
             
             this.results = {};
             this.standings = [];
@@ -311,8 +311,9 @@ export class Championship {
             const team = game.drivers[driverName].team;
             const car = game.teams[team].car;
         
-            const circuitCorners = circuitsData[raceName].corners/100;
-            const circuitStraights = circuitsData[raceName].straights/100;
+            const circuit = circuitsData[raceName];
+            const circuitCorners = circuit.corners/100;
+            const circuitStraights = circuit.straights/100;
             
             let rainF = 1;
 
@@ -353,7 +354,7 @@ export class Championship {
                 }
             }
 
-            const failureChanceRoll = Math.floor(Math.random() * 1600);
+            const failureChanceRoll = Math.floor(Math.random() * (2500 / (circuit.failureMulti ?? 1)));
             const failureRoll = Math.floor(Math.random() * 100);
             let failureChance = 5;
 
@@ -385,7 +386,7 @@ export class Championship {
                 continue;
             }
 
-            const crashChanceRoll = Math.floor(Math.random() * 18000);
+            const crashChanceRoll = Math.floor(Math.random() * (18000 / (circuit.crashMulti ?? 1)));
             const crashRoll = Math.floor(Math.random() * 100);
             
             let driverExp = game.drivers[raceDrivers[d].name].experience / 100;

@@ -25,7 +25,7 @@ export const driversData = {
     "Lewis Hamilton": {
         name: "Lewis Hamilton",
         team: "Mercedes",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 37,
         country: "GB",
         speed: 95,
@@ -41,7 +41,7 @@ export const driversData = {
     "George Russell": {
         name: "George Russell",
         team: "Mercedes",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 24,
         country: "GB",
         speed: 96,
@@ -57,7 +57,7 @@ export const driversData = {
     "Mick Schumacher": {
         name: "Mick Schumacher",
         team: "Mercedes",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 22,
         country: "DE",
         speed: 82,
@@ -73,7 +73,7 @@ export const driversData = {
     "Max Verstappen": {
         name: "Max Verstappen",
         team: "Red Bull",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 25,
         country: "NL",
         speed: 98,
@@ -89,7 +89,7 @@ export const driversData = {
     "Sergio Pérez": {
         name: "Sergio Pérez",
         team: "Red Bull",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 32,
         country: "MX",
         speed: 91,
@@ -105,7 +105,7 @@ export const driversData = {
     "Daniel Ricciardo": {
         name: "Daniel Ricciardo",
         team: "Red Bull",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 33,
         country: "AU",
         speed: 88,
@@ -121,7 +121,7 @@ export const driversData = {
     "Charles Leclerc": {
         name: "Charles Leclerc",
         team: "Ferrari",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 24,
         country: "MC",
         speed: 97,
@@ -137,7 +137,7 @@ export const driversData = {
     "Carlos Sainz Jr.": {
         name: "Carlos Sainz Jr.",
         team: "Ferrari",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 24,
         country: "ES",
         speed: 87,
@@ -153,7 +153,7 @@ export const driversData = {
     "Antonio Giovinazzi": {
         name: "Antonio Giovinazzi",
         team: "Ferrari",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 29,
         country: "IT",
         speed: 84,
@@ -169,7 +169,7 @@ export const driversData = {
     "Fernando Alonso": {
         name: "Fernando Alonso",
         team: "Aston Martin",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 40,
         country: "ES",
         speed: 97,
@@ -185,7 +185,7 @@ export const driversData = {
     "Lance Stroll": {
         name: "Lance Stroll",
         team: "Aston Martin",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 23,
         country: "CA",
         speed: 87,
@@ -201,7 +201,7 @@ export const driversData = {
     "Felipe Drugovich": {
         name: "Felipe Drugovich",
         team: "Aston Martin",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 22,
         country: "BR",
         speed: 87,
@@ -217,7 +217,7 @@ export const driversData = {
     "Lando Norris": {
         name: "Lando Norris",
         team: "McLaren",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 22,
         country: "GB",
         speed: 93,
@@ -233,7 +233,7 @@ export const driversData = {
     "Oscar Piastri": {
         name: "Oscar Piastri",
         team: "McLaren",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 21,
         country: "AU",
         speed: 85,
@@ -249,7 +249,7 @@ export const driversData = {
     "Álex Palou": {
         name: "Álex Palou",
         team: "McLaren",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 26,
         country: "ES",
         speed: 88,
@@ -265,7 +265,7 @@ export const driversData = {
     "Valtteri Bottas": {
         name: "Valtteri Bottas",
         team: "Alfa Romeo",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 33,
         country: "FI",
         speed: 92,
@@ -281,7 +281,7 @@ export const driversData = {
     "Zhou Guanyu": {
         name: "Zhou Guanyu",
         team: "Alfa Romeo",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 23,
         country: "CN",
         speed: 86,
@@ -297,7 +297,7 @@ export const driversData = {
     "Théo Pourchaire": {
         name: "Théo Pourchaire",
         team: "AlphaTauri",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 19,
         country: "FR",
         speed: 85,
@@ -313,7 +313,7 @@ export const driversData = {
     "Yuki Tsunoda": {
         name: "Yuki Tsunoda",
         team: "AlphaTauri",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 22,
         country: "JP",
         speed: 88,
@@ -329,7 +329,7 @@ export const driversData = {
     "Nyck de Vries": {
         name: "Nyck de Vries",
         team: "AlphaTauri",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 27,
         country: "NL",
         speed: 85,
@@ -345,7 +345,7 @@ export const driversData = {
     "Liam Lawson": {
         name: "Liam Lawson",
         team: "AlphaTauri",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 20,
         country: "NZ",
         speed: 85,
@@ -361,7 +361,7 @@ export const driversData = {
     "Esteban Ocon": {
         name: "Esteban Ocon",
         team: "Alpine",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 26,
         country: "FR",
         speed: 88,
@@ -377,7 +377,7 @@ export const driversData = {
     "Pierre Gasly": {
         name: "Pierre Gasly",
         team: "Alpine",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 26,
         country: "FR",
         speed: 88,
@@ -393,7 +393,7 @@ export const driversData = {
     "Jack Doohan": {
         name: "Jack Doohan",
         team: "Alpine",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 19,
         country: "AU",
         speed: 84,
@@ -409,7 +409,7 @@ export const driversData = {
     "Kevin Magnussen": {
         name: "Kevin Magnussen",
         team: "Haas",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 30,
         country: "DK",
         speed: 86,
@@ -425,7 +425,7 @@ export const driversData = {
     "Nico Hülkenberg": {
         name: "Nico Hülkenberg",
         team: "Haas",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 35,
         country: "DE",
         speed: 87,
@@ -441,7 +441,7 @@ export const driversData = {
     "Pietro Fittipaldi": {
         name: "Pietro Fittipaldi",
         team: "Haas",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 26,
         country: "BR",
         speed: 83,
@@ -457,7 +457,7 @@ export const driversData = {
     "Alexander Albon": {
         name: "Alexander Albon",
         team: "Williams",
-        function: "1º Piloto",
+        status: "1º Piloto",
         age: 26,
         country: "TH",
         speed: 88,
@@ -473,7 +473,7 @@ export const driversData = {
     "Logan Sargeant": {
         name: "Logan Sargeant",
         team: "Williams",
-        function: "2º Piloto",
+        status: "2º Piloto",
         age: 22,
         country: "US",
         speed: 84,
@@ -489,7 +489,7 @@ export const driversData = {
     "Jamie Chadwick": {
         name: "Jamie Chadwick",
         team: "Williams",
-        function: "Piloto de Testes",
+        status: "Piloto de Testes",
         age: 24,
         country: "GB",
         speed: 82,

@@ -1,8 +1,9 @@
 import { accentsTidy } from "../utils.js";
 import countryCodes from '../data/countryCodes.json' assert {type: 'json'}
 import { game } from "../game.js";
+import { market } from "./market.js";
 
-export function viewDriver(name){
+export function viewDriver(name, returnToMarket){
     let html = "";
     const driver = game.drivers[name];
 
@@ -52,7 +53,7 @@ export function viewDriver(name){
                 </tr>
                 <tr>
                     <td>Função:</td>
-                    <td>${driver.function}</td>
+                    <td>${driver.status}</td>
                 </tr>
                 <tr>
                     <td>Salário:</td>`
@@ -81,7 +82,7 @@ export function viewDriver(name){
                 </tr>
                 <tr>
                     <td>Função:</td>
-                    <td>${driver.newFunction}</td>
+                    <td>${driver.newStatus}</td>
                 </tr>
                 <tr>
                     <td>Salário:</td>`
@@ -142,5 +143,8 @@ export function viewDriver(name){
         showCloseButton: true,
         focusConfirm: false,
         showConfirmButton: false,
+    }).then(r => {
+        if(returnToMarket)
+            market();
     });
 }

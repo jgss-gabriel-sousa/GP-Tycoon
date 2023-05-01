@@ -6,6 +6,7 @@ import { viewEmployees } from "./ui/viewEmployees.js";
 import { viewFinancialReport } from "./ui/viewFinancialReport.js";
 import { newGame, loadGame, saveGame } from "./ui/start-load-save.js";
 import { selectEngine } from "./ui/selectEngine.js";
+import { market } from "./ui/market.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();
@@ -64,5 +65,8 @@ window.onclick = e => {
     }
     if(e.target.classList.contains("select-engine")){
         selectEngine();
+    }
+    if(e.target.classList.contains("market")){
+        market();
     }
 }

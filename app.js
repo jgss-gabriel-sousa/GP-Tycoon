@@ -326,7 +326,7 @@ export function genEngHTML(){
             <tr><td><span>&shy;</span></td></tr>
             <tr>
                 <td>Motor Prox. Temp.:</td>
-                <td>${team.newEngine == "" ? `<button class="select-engine">Negociar</button>` : team.newEngine+` (${team.engineContract})`}</td>
+                <td>${team.engineContract == 1 ? `<button class="select-engine">Negociar</button>` : team.engine}</td>
             </tr>
         </table>
     </div>`;

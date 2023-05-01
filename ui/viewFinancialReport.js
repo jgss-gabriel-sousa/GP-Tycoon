@@ -18,6 +18,10 @@ export function viewFinancialReport(teamName){
                 <td>${NumberF(team.financialReport["Prize per Point"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
+                <td>Prêmio por Pos. no Camp. de Construtores</td>
+                <td>${NumberF(team.financialReport["Prize per Place"] * 1000,"ext",0)}</td>
+            </tr>
+            <tr>
                 <td>Patrocinador Principal</td>
                 <td>${NumberF(team.financialReport["Major Sponsor"] * 1000,"ext",0)}</td>
             </tr>

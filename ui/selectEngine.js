@@ -1,5 +1,4 @@
 import { NumberF } from "../utils.js";
-import countryCodes from '../data/countryCodes.json' assert {type: 'json'}
 import { game } from "../game.js";
 import { genTeamHTML } from "../app.js";
 
@@ -89,11 +88,12 @@ function negotiate(engineName, endSeason){
         denyButtonText: "Cancelar",
     }).then((result) => {
         if(result.isConfirmed){
-            if(endSeason == false){
+            if(endSeason == false || endSeason == undefined){
                 game.teams[game.team].newEngineContract = Number(document.querySelector("#slider-duration").value);
                 game.teams[game.team].newEngine = engineName;
                 game.teams[game.team].cash -= value;
                 game.teams[game.team].financialReport["Engine"] = -value;
+                game.teams[game.team].financialReport["Balance"] -= value;
                 genTeamHTML();
             }
             else{
@@ -101,7 +101,7 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].engine = engineName;
                 game.teams[game.team].cash -= value;
                 game.teams[game.team].financialReport["Engine"] = -value;
-
+                game.teams[game.team].financialReport["Balance"] -= value;
                 genTeamHTML();
             }
 
