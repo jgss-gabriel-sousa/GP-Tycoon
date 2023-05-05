@@ -5,8 +5,6 @@ export function viewFinancialReport(teamName){
     let html = "";
     const team = game.teams[teamName];
 
-    console.log(team.financialReport)
-
     html += `
     <div id="financial-report">
         <table>

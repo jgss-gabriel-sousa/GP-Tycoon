@@ -1,4 +1,4 @@
-import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress } from "./utils.js"
+import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./app.js"
 import { Championship } from "./championship.js";
@@ -181,7 +181,52 @@ export function YearUpdateTeamsStats(){
         const team = game.teams[t];
         const car = team.car;
         const engine = game.engines[team.engine];
+
+        team.driver1 = team.new1driver;
+        team.driver2 = team.new2driver;
+        team.test_driver = team.newTdriver;
+
+        if(!team.driver1 || !team.driver2 || !team.test_driver){
+            for(const k in game.drivers) {
+                const driver = game.drivers[k];
+
+                if(!driver.team){
+                    if(team.driver1 == ""){
+                        driver.team = team.name;
+                        driver.status = "1º Piloto";
+                        driver.contractRemainingYears = rollDice("1d4+0");
+                        driver.salary = driver.newSalary;
+                        team.new1driver = driver.name;
+                        team.driver1 = driver.name;
+                        continue;
+                    }
+                    if(!team.driver2){
+                        driver.team = team.name;
+                        driver.status = "2º Piloto";
+                        driver.contractRemainingYears = rollDice("1d4+0");
+                        driver.salary = driver.newSalary;
+                        team.new2driver = driver.name;
+                        team.driver2 = driver.name;
+                        continue;
+                    }
+                    if(!team.test_driver){
+                        driver.team = team.name;
+                        driver.status = "Piloto de Testes";
+                        driver.contractRemainingYears = rollDice("1d4+0");
+                        driver.salary = driver.newSalary;
+                        team.newTdriver = driver.name;
+                        team.test_driver = driver.name;
+                        continue;
+                    }
+                }
+            }
+        }
         
+        if(game.drivers[team.driver1].contractRemainingYears == 0)  team.new1driver = "";
+        if(game.drivers[team.driver2].contractRemainingYears == 0)  team.new2driver = "";
+        if(game.drivers[team.test_driver].contractRemainingYears == 0)  team.newTdriver = "";
+
+
         car.aerodynamic = team.newCar.aerodynamic;
         car.downforce = team.newCar.downforce;
         car.weight = team.newCar.weight;

@@ -34,8 +34,7 @@ export class Championship {
             this.teamStandings = [];
             this.actualRound = 1;
             this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
-            //this.budgetCap = 145000;
-            this.budgetCap = 6000;
+            this.budgetCap = 145000;
 
             this.historic = [
                 {
@@ -619,9 +618,9 @@ export class Championship {
 
         if(status == "podium"){
             TimeTableHTML = `
-            <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp" onerror="this.src='img/drivers/generic.webp';">
-            <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp" onerror="this.src='img/drivers/generic.webp';">
-            <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp" onerror="this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <img class="podium-img" src="img/flags/${accentsTidy(game.drivers[finalResult[0].name].country)}.webp">
             `
         }
@@ -663,7 +662,7 @@ export class Championship {
 
                 TimeTableHTML += `
                 <div id="car-race-${genID(e.name)}">
-                    <img src="img/car/${game.drivers[e.name].team}.bmp" onerror="this.src='img/car.png'; this.style='background-color:${game.teams[game.drivers[e.name].team].result_bg_color}'">
+                    <img src="img/car/${game.drivers[e.name].team}.bmp" onerror="this.onerror=null;this.src='img/car.png'; this.style='background-color:${game.teams[game.drivers[e.name].team].result_bg_color}'">
                     <p>${nameCode}</p>
                 </div>
                 `;

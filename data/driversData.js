@@ -296,7 +296,7 @@ export const driversData = {
     },
     "Théo Pourchaire": {
         name: "Théo Pourchaire",
-        team: "AlphaTauri",
+        team: "Alfa Romeo",
         status: "Piloto de Testes",
         age: 19,
         country: "FR",
@@ -501,5 +501,5 @@ export const driversData = {
         podiums: 0,
         poles: 0,
         contractRemainingYears: 0,
-    },
+    }
 }

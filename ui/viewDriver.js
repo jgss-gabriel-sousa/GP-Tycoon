@@ -9,7 +9,7 @@ export function viewDriver(name, returnToMarket){
 
     html += `
         <div id="view-driver">
-            <img id="view-driver-driver-img" src="img/drivers/${name}.webp" onerror="this.src='img/drivers/generic.webp';">
+            <img id="view-driver-driver-img" src="img/drivers/${name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <table id="view-driver-infos">
                 <th colspan="2">Dados Pessoais</th>
                 <tr>
@@ -153,7 +153,7 @@ function negotiate(driverName, returnToMarket){
 
     html += `
     <div id="negotiate-market">
-        <img id="view-driver-driver-img" src="img/drivers/${driver.name}.webp" onerror="this.src='img/drivers/generic.webp';">
+        <img id="view-driver-driver-img" src="img/drivers/${driver.name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
         
         <div>
             <div class="slidercontainer">
@@ -205,20 +205,26 @@ function negotiate(driverName, returnToMarket){
                     driver.newStatus = document.querySelector("select").innerText;
                     driver.newSalary = Number(document.querySelector("#slider-salary").value)/1000;
                     driver.newContractRemainingYears = Number(document.querySelector("#slider-duration").value);
-                    team.newTdriver = driver.name;
+                    
+                    if(driver.newStatus == "1º Piloto") team.new1driver = driver.name;
+                    if(driver.newStatus == "2º Piloto") team.new2driver = driver.name;
+                    if(driver.newStatus == "Piloto de Testes") team.newTdriver = driver.name;
 
-                    Swal.fire("Contrato Assinado");
+                    Swal.fire("Contrato Assinado").then(e => {
+                        if(returnToMarket)
+                            market();
+                    });
                 }
                 else{
-                    Swal.fire("Contrato Recusado");
+                    Swal.fire("Contrato Recusado").then(e => {
+                        if(returnToMarket)
+                            market();
+                    });
                 }
             }
 
         }else if(result.isDenied){
-        }
-
-        if(returnToMarket){
-            //market();
+            viewDriver(driver.name, returnToMarket)
         }
     });
 
@@ -251,7 +257,7 @@ function approbationCalc(driverName){
     const duration = Number(document.querySelector("#slider-duration").value);
     const salary = Number(document.querySelector("#slider-salary").value)/1000;
     value = 70;
-    value *= (duration * 0.5) / (driver.experience/100);
+    value *= (duration * 0.5) / ((driver.experience+10)/100);
     value *= Math.pow(salary / driver.salary,2);
 
     if((salary / driver.salary) < 1){

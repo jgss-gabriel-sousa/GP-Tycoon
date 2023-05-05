@@ -45,7 +45,6 @@ export function YearUpdateDriversStats(){
 
             driver.newTeam = "";
             driver.newStatus = "";
-            driver.newSalary = 0;
             driver.newContractRemainingYears = 0;
         }
         driver.contractRemainingYears--;

@@ -18,8 +18,13 @@ export function market(){
         </tr>
     `
 
-    for(const d in game.drivers) {
-        const driver = game.drivers[d];
+    const drivers = Object.values(game.drivers);
+
+    drivers.sort((a, b) => a.status.localeCompare(b.status));
+    drivers.sort((a, b) => a.team.localeCompare(b.team));
+
+    for(let i = 0; i < drivers.length; i++){
+        const driver = drivers[i];
         
         html += `
         <tr class="driver" id="${driver.name}">

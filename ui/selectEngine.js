@@ -104,8 +104,8 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].financialReport["Balance"] -= value;
                 genTeamHTML();
             }
-
-        }else if(result.isDenied){
+        }
+        else if(result.isDenied){
             selectEngine();
         }
     });

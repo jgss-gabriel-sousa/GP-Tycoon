@@ -26,7 +26,7 @@ function genDriversHTML(){
             if(i == 2)
                 html += "<h1>Piloto de Testes</h1>"
         html += `
-            <img class="driver-card-portrait" src="img/drivers/${e.name}.webp" onerror="this.src='img/drivers/generic.webp';">
+            <img class="driver-card-portrait" src="img/drivers/${e.name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <button class="btn-driver-name view-driver" value="${e.name}">
                 <img class="country-flag" src="img/flags/${accentsTidy(e.country)}.webp"> ${e.name}
             </button>
