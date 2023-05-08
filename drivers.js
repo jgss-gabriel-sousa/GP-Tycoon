@@ -37,10 +37,15 @@ export function YearUpdateDriversStats(){
         driver.motivation = rollDice("5d20+30");
         if(driver.motivation > 100) driver.motivation = 100;
 
+        driver.experience += 10;
+        if(driver.titles > 1) driver.experience = 100;
+        if(driver.experience > 100) driver.experience = 100;
+
+        if(driver.newSalary) driver.salary = driver.newSalary;
+
         if(driver.contractRemainingYears == 0){
             driver.team = driver.newTeam;
             driver.status = driver.newStatus;
-            driver.salary = driver.newSalary;
             driver.contractRemainingYears = driver.newContractRemainingYears;
 
             driver.newTeam = "";

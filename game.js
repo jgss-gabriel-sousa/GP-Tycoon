@@ -195,7 +195,6 @@ export function YearUpdateTeamsStats(){
                         driver.team = team.name;
                         driver.status = "1º Piloto";
                         driver.contractRemainingYears = rollDice("1d4+0");
-                        driver.salary = driver.newSalary;
                         team.new1driver = driver.name;
                         team.driver1 = driver.name;
                         continue;
@@ -204,7 +203,6 @@ export function YearUpdateTeamsStats(){
                         driver.team = team.name;
                         driver.status = "2º Piloto";
                         driver.contractRemainingYears = rollDice("1d4+0");
-                        driver.salary = driver.newSalary;
                         team.new2driver = driver.name;
                         team.driver2 = driver.name;
                         continue;
@@ -213,7 +211,6 @@ export function YearUpdateTeamsStats(){
                         driver.team = team.name;
                         driver.status = "Piloto de Testes";
                         driver.contractRemainingYears = rollDice("1d4+0");
-                        driver.salary = driver.newSalary;
                         team.newTdriver = driver.name;
                         team.test_driver = driver.name;
                         continue;

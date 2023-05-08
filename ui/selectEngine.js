@@ -94,7 +94,6 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].cash -= value;
                 game.teams[game.team].financialReport["Engine"] = -value;
                 game.teams[game.team].financialReport["Balance"] -= value;
-                genTeamHTML();
             }
             else{
                 game.teams[game.team].engineContract = 1;
@@ -102,8 +101,9 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].cash -= value;
                 game.teams[game.team].financialReport["Engine"] = -value;
                 game.teams[game.team].financialReport["Balance"] -= value;
-                genTeamHTML();
             }
+            
+            genTeamHTML();
         }
         else if(result.isDenied){
             selectEngine();

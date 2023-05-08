@@ -196,13 +196,13 @@ function negotiate(driverName, returnToMarket){
         denyButtonText: "Cancelar",
     }).then((result) => {
         if(result.isConfirmed){
-            if(!document.querySelector("select").innerText){
+            if(!document.querySelector("select").value){
                 ;
             }
             else{
                 if((Math.random()*100) < approbationCalc(driver.name)){
                     driver.newTeam = game.team;
-                    driver.newStatus = document.querySelector("select").innerText;
+                    driver.newStatus = document.querySelector("select").value;
                     driver.newSalary = Number(document.querySelector("#slider-salary").value)/1000;
                     driver.newContractRemainingYears = Number(document.querySelector("#slider-duration").value);
                     
