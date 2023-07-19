@@ -236,20 +236,24 @@ export function YearUpdateTeamsStats(){
 
         team.engineContract--;
 
-        if(team.engineContract == 0 && team.newEngine != ""){
+        if(team.engineContract <= 0 && team.newEngineContract){
             team.engine = team.newEngine;
             team.engineContract = team.newEngineContract;
+            team.newEngine = "";
+            team.newEngineContract = "";
         }
-        else if(team.engineContract == 0 && team.newEngine == ""){
+        else if(team.engineContract < 0 && team.newEngine == ""){
             selectEngine(true);
+            team.newEngine = "";
+            team.newEngineContract = "";
         }
-
             
         if((game.championship.budgetCap - team.totalInvestments) >= 0)
             team.brokeCostCap = false;
         else{
             team.brokeCostCap = true;
             team.brokeCostCapPenalty = (team.totalInvestments/game.championship.budgetCap)-1;
+            team.brokeCostCapPenalty = team.brokeCostCapPenalty > 0.95 ? 0.95 : team.brokeCostCapPenalty;
             Swal.fire(`<p>Sua equipe estourou o Teto de Gastos, seus Pontos de Desenvolvimento serão penalizados em ${Math.round(team.brokeCostCapPenalty*100)}%</p>`)
         }
 
@@ -420,6 +424,5 @@ export function YearUpdate(){
 
     YearUpdateDriversStats();
     YearUpdateTeamsStats();
-    BeforeRaceUpdateTeamsStats();
     genTeamHTML();
 }

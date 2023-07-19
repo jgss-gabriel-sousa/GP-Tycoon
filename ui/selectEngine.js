@@ -88,7 +88,7 @@ function negotiate(engineName, endSeason){
         denyButtonText: "Cancelar",
     }).then((result) => {
         if(result.isConfirmed){
-            if(endSeason == false || endSeason == undefined){
+            if(!endSeason){
                 game.teams[game.team].newEngineContract = Number(document.querySelector("#slider-duration").value);
                 game.teams[game.team].newEngine = engineName;
                 game.teams[game.team].cash -= value;
@@ -102,6 +102,13 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].financialReport["Engine"] = -value;
                 game.teams[game.team].financialReport["Balance"] -= value;
             }
+            
+            console.log("actual");
+            console.log(game.teams[game.team].engine);
+            console.log(game.teams[game.team].engineContract);
+            console.log("new");
+            console.log(game.teams[game.team].newEngine);
+            console.log(game.teams[game.team].newEngineContract);
             
             genTeamHTML();
         }
