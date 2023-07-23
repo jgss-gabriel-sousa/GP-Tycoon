@@ -2,7 +2,7 @@ export const teamsData = {
     "Red Bull": {
         name: "Red Bull",
         country: "AT",
-        engine: "Honda RBPT",
+        engine: "Red Bull",
         engineContract: 0,
         bg_color: "#23326A",
         border_color: "#9E1336",
@@ -352,7 +352,7 @@ export const teamsData = {
     "AlphaTauri": {
         name: "AlphaTauri",
         country: "IT",
-        engine: "Honda RBPT",
+        engine: "Red Bull",
         engineContract: 3,
         bg_color: "#f1f3f4",
         border_color: "#00293f",

@@ -28,7 +28,7 @@ export const enginesData = {
         blackList: ["Ferrari","Red Bull","Mercedes"],
         minContractLength: 2,
     },
-    "Honda RBPT": {
+    "Red Bull": {
         power: 100,
         torque: 85,
         reliability: 90,
