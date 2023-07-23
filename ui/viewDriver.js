@@ -109,13 +109,21 @@ export function viewDriver(name, returnToMarket){
                 <td>-</td>
             </tr>`
             
-        if((!game.teams[game.team].new1driver || !game.teams[game.team].new2driver || !game.teams[game.team].newTdriver)){
+        if((!game.teams[game.team].new1driver || !game.teams[game.team].new2driver || !game.teams[game.team].newTdriver) && !game.contractsFailed.includes(driver.name)){
             html +=`
             <tr>
                 <td colspan="2" style="text-align: center;">
                     <button id="negotiate">Negociar</button>
                 </td>
             </tr>`
+        }
+        if(game.contractsFailed.includes(driver.name)){
+            html +=`
+            <tr><td colspan="2" style="
+            text-align: center;
+            color: darkred;
+            ">
+                A negociação falhou, tente novamente depois</td></tr>`
         }
 
         html +=`
@@ -217,6 +225,8 @@ function negotiate(driverName, returnToMarket){
                 }
                 else{
                     Swal.fire("Contrato Recusado").then(e => {
+                        game.contractsFailed.push(driver.name);
+
                         if(returnToMarket)
                             market();
                     });

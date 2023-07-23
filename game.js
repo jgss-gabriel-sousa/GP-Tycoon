@@ -19,6 +19,7 @@ export const game = {
     teams: {},
     engines: {},
     engineers: {},
+    contractsFailed: [],
 }
 
 function startGame(){
@@ -290,6 +291,8 @@ export function UpdateAfterRace(){
     for (let i = 0; i < game.championship.teamStandings.length; i++) {
         sumOfTeamsPows += Math.pow((i+1),1.5);
     }
+
+    game.contractsFailed = [];
 
     for(const t in game.teams) {
         const team = game.teams[t];
