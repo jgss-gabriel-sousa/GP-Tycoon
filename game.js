@@ -1,4 +1,4 @@
-import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice } from "./utils.js"
+import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./app.js"
 import { Championship } from "./championship.js";
@@ -246,18 +246,36 @@ export function YearUpdateTeamsStats(){
             team.newEngineContract = "";
         }
         else if(team.engineContract < 0 && team.newEngine == ""){
-            selectEngine(true);
-            team.newEngine = "";
-            team.newEngineContract = "";
+            if(team.name == game.team){
+                selectEngine(true);
+                team.newEngine = "";
+                team.newEngineContract = "";
+            }
+            else{
+                const possibles = [];
+
+                for(const e in game.engines){
+                    if(!game.engines[e].blackList.includes(team.name)){
+                        possibles.push(e);
+                    }
+                }
+
+                team.newEngine = possibles[rand(0, possibles.length)];
+                team.newEngineContract = rand(1, 6);
+            }
         }
             
-        if((game.championship.budgetCap - team.totalInvestments) >= 0)
+        if((game.championship.budgetCap - team.totalInvestments) >= 0){
             team.brokeCostCap = false;
+            team.brokeCostCapPenalty = 0;
+        }
         else{
             team.brokeCostCap = true;
-            team.brokeCostCapPenalty = (team.totalInvestments/game.championship.budgetCap)-1;
+            team.brokeCostCapPenalty = (team.totalInvestments / game.championship.budgetCap) - 1;
             team.brokeCostCapPenalty = team.brokeCostCapPenalty > 0.95 ? 0.95 : team.brokeCostCapPenalty;
-            Swal.fire(`<p>Sua equipe estourou o Teto de Gastos, seus Pontos de Desenvolvimento serão penalizados em ${Math.round(team.brokeCostCapPenalty*100)}%</p>`)
+
+            if(team.name == game.team)
+                Swal.fire(`<p>Sua equipe estourou o Teto de Gastos, seus Pontos de Desenvolvimento serão penalizados em ${Math.round(team.brokeCostCapPenalty*100)}%</p>`)
         }
 
         team.totalInvestments = 0;
