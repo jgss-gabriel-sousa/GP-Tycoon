@@ -125,6 +125,7 @@ export function teamRankingUI(){
                 <tr>
                     <th>Pos</th>
                     <th colspan="2">Equipe</th>
+                    <th>Motor</th>
                     <th>Pontos</th>
                     <th>Vitórias</th>
                     <th>Pódios</th>
@@ -137,6 +138,7 @@ export function teamRankingUI(){
             <td>${pos++}º</td>  
             <td style="background-color: ${game.teams[e[0]].result_bg_color}; color: ${game.teams[e[0]].result_font_color}">${e[0]}</td>
             <td><img class="country-flag" src="img/flags/${accentsTidy(game.teams[e[0]].country)}.webp"></td>  
+            <td>${game.teams[e[0]].engine}</td>
             <td>${e[1]}</td>
             <td>${e[2]}</td>
             <td>${e[3]}</td>
@@ -147,7 +149,7 @@ export function teamRankingUI(){
     Swal.fire({
         title: `Classificação do Campeonato de Construtores ${game.year}`,
         html: html,
-        width: "40em",
+        width: "75%",
         showCloseButton: true,
         focusConfirm: false,
         confirmButtonText: "Ok",
