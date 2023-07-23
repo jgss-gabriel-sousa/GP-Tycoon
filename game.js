@@ -177,6 +177,8 @@ export function BeforeRaceUpdateTeamsStats(){
 }
 
 export function YearUpdateTeamsStats(){
+    game.championship.drivers = [];
+
     for(const t in game.teams) {
         const team = game.teams[t];
         const car = team.car;
@@ -275,6 +277,9 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Engine"] = 0;
         
         CalcTeamDevPoints(team.name);
+
+        game.championship.drivers.push(team.driver1);
+        game.championship.drivers.push(team.driver2);
     }
 }
 

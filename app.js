@@ -324,10 +324,16 @@ export function genEngHTML(){
                 </td>
             </tr>
             <tr><td><span>&shy;</span></td></tr>
-            <tr>
-                <td>Motor Prox. Temp.:</td>
-                <td>${(team.engineContract >= 1 || team.newEngine) ? `${team.newEngine} (${team.newEngineContract})` : `<button class="select-engine">Negociar</button>`}</td>
-            </tr>
+            `
+            if(team.engineContract < 1){
+                html += `
+                <tr>
+                    <td>Motor Prox. Temp.:</td>
+                    <td>${(team.engineContract >= 1 || team.newEngine) ? `${team.newEngine} (${team.newEngineContract})` : `<button class="select-engine">Negociar</button>`}</td>
+                </tr>
+                `
+            }
+            `
         </table>
     </div>`;
     el.innerHTML = html;
