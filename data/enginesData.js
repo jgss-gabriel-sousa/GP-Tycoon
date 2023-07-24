@@ -25,7 +25,7 @@ export const enginesData = {
         torque: 75,
         reliability: 70,
         cost: 10000,
-        blackList: ["Ferrari","Red Bull","Mercedes"],
+        blackList: ["Ferrari","Mercedes"],
         minContractLength: 2,
     },
     "Red Bull": {
@@ -50,6 +50,14 @@ export const enginesData = {
         reliability: 40,
         cost: 20000,
         blackList: ["Ferrari","Mercedes","Alpine"],
+        minContractLength: 3,
+    },
+    "Honda": {
+        power: 95,
+        torque: 80,
+        reliability: 80,
+        cost: 20000,
+        blackList: ["Ferrari","Mercedes","Alpine","Red Bull"],
         minContractLength: 3,
     },
 }

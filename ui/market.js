@@ -2,6 +2,7 @@ import { NumberF, accentsTidy } from "../utils.js";
 import { game } from "../game.js";
 import { genTeamHTML } from "../app.js";
 import { viewDriver } from "./viewDriver.js";
+import { viewEng } from "./viewEng.js"
 
 export function market(){
     let html = "";
@@ -70,6 +71,81 @@ export function market(){
 
         el.addEventListener("click", () => {
             viewDriver(el.id, true);
+        });
+    }
+}
+
+export function marketEng(){
+    let html = "";
+
+    html += `
+    <div id="market-eng">
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Salário</th>
+            <th>Função</th>
+        </tr>
+    `
+    
+    const engineers = Object.values(game.engineers);
+
+    engineers.sort((a, b) => a.team.localeCompare(b.team));
+
+    for(let i = 0; i < engineers.length; i++){
+        const eng = engineers[i];
+        if(eng.name == "") continue
+        if(eng.team == "") continue
+        
+        html += `
+        <tr class="driver" id="${eng.name}">
+            <td>${eng.name}</td>
+            <td>${eng.age} anos</td>
+            <td>${eng.salary}K</td>
+            <td style="background-color: ${game.teams[eng.team].result_bg_color}; color: ${game.teams[eng.team].result_font_color}">
+                ${eng.team} - ${eng.occupation}
+            </td>
+        </tr>`
+    }
+    html += `</table>
+    <br>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Salário</th>
+        </tr>`
+
+    for(let i = 0; i < engineers.length; i++){
+        const eng = engineers[i];
+        if(eng.name == "") continue
+        if(eng.team != "") continue
+        
+        html += `
+        <tr class="driver" id="${eng.name}">
+            <td>${eng.name}</td>
+            <td>${eng.age} anos</td>
+            <td>${eng.salary}K</td>
+        </tr>`
+    }
+    html += `</table></div>`
+    
+    Swal.fire({
+        title: `Mercado de Engenheiros`,
+        html: html,
+        width: "90%",
+        showCloseButton: true,
+        allowOutsideClick: true,
+        focusConfirm: false,
+        showConfirmButton: false,
+    });
+    
+    for(let i = 0; i < document.querySelectorAll(".driver").length; i++){
+        const el = document.querySelectorAll(".driver")[i];
+
+        el.addEventListener("click", () => {
+            viewEng(el.id, true);
         });
     }
 }

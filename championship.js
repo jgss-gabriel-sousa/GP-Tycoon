@@ -662,8 +662,8 @@ export class Championship {
 
                 TimeTableHTML += `
                 <div id="car-race-${genID(e.name)}">
-                    <img src="img/car/${game.drivers[e.name].team}.bmp" onerror="this.onerror=null;this.src='img/car.png'; this.style='background-color:${game.teams[game.drivers[e.name].team].result_bg_color}'">
                     <p>${nameCode}</p>
+                    <img class="car-icon" src="img/car/${game.drivers[e.name].team}.bmp" onerror="this.onerror=null;this.src='img/car.png'; this.style='background-color:${game.teams[game.drivers[e.name].team].result_bg_color}'">
                 </div>
                 `;
             });
@@ -681,14 +681,14 @@ export class Championship {
                 }
 
                 if(i != finalResult.length){
-                    const max = document.querySelector("#race-cars").offsetHeight - 100;
+                    const max = document.querySelector("#race-cars").offsetHeight - 155;
                     const maxDiff = document.querySelector("#race-cars").offsetWidth - 36;
                     const totalLaps = circuitsData[this.tracks[this.actualRound - 1]].laps;
                     
                     const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                     const lapMove = max * ((this.race.lap / totalLaps));
                     let leftDiff = (i*15) + Math.pow(diff*2,1.1);
-
+/*
                     if(leftDiff > maxDiff){
                         leftDiff = maxDiff;
                         el.childNodes[3].style.display = "none";
@@ -696,10 +696,10 @@ export class Championship {
                     else{
                         el.childNodes[3].style.display = "block";
                     }
-
-                    el.style.top = `${max - (lapMove) + diff}px`;
-                    el.style.left = `${leftDiff}px`;
-                    el.style.zIndex = `${-i*10}`;
+*/
+                    el.style.left = `${(max - (max - (lapMove) + diff)) + 40}px`;
+                    el.style.top = `${40 + (i*20)}px`;
+                    el.style.zIndex = `${i*10}`;
                 }
             });
 

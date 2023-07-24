@@ -6,6 +6,8 @@ export function selectEngine(endSeason){
     let html = "";
     const engines = game.engines;
 
+    console.log(game.teams[game.team]);
+
     html += `
     <table id="select-engine">
         <tr>
@@ -66,15 +68,14 @@ function negotiate(engineName, endSeason){
     html += `
     <div id="negotiate">
         <div class="slidercontainer">
-            <input id="slider-duration" class="slider" type="range" min="1" value="1" step="1" max="${endSeason ? 1 : 5}">
+            <input id="slider-duration" class="slider" type="range" min="${engine.minContractLength}" value="${engine.minContractLength}" step="1" max="${endSeason ? 1 : 5}">
         </div>
         
         <p id="years">1 Ano</p>
         <br>
         <p id="value">${NumberF(value*1000,"ext",0)}</p>
         <p>${endSeason ? `Contrato 25% mais caro e limitado a 1 ano, por demora em confirmar` : ""}</p>
-    </div>
-    `
+    </div>`
     
     Swal.fire({
         title: `Negociar Motores ${engineName}`,
@@ -96,19 +97,12 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].financialReport["Balance"] -= value;
             }
             else{
-                game.teams[game.team].engineContract = 1;
+                game.teams[game.team].engineContract = 0;
                 game.teams[game.team].engine = engineName;
                 game.teams[game.team].cash -= value;
                 game.teams[game.team].financialReport["Engine"] = -value;
                 game.teams[game.team].financialReport["Balance"] -= value;
             }
-            
-            console.log("actual");
-            console.log(game.teams[game.team].engine);
-            console.log(game.teams[game.team].engineContract);
-            console.log("new");
-            console.log(game.teams[game.team].newEngine);
-            console.log(game.teams[game.team].newEngineContract);
             
             genTeamHTML();
         }

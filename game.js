@@ -43,6 +43,7 @@ function StartEngStats(){
 
         eng.name = e;
         eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 8)));
+        eng.team = "";
     }
 
     for(const t in game.teams) {
@@ -64,11 +65,26 @@ function StartEngStats(){
         team.engineers.chiefDesigner = tryGet(team.engineers.chiefDesigner);
         team.engineers.chiefEngineering = tryGet(team.engineers.chiefEngineering);
 
-        if(team.teamPrincipal != "") eng[team.teamPrincipal].occupation = "Chefe de Equipe";
-        if(team.engineers.technicalDirector != "") eng[team.engineers.technicalDirector].occupation = "Diretor Técnico";
-        if(team.engineers.chiefAerodynamicist != "") eng[team.engineers.chiefAerodynamicist].occupation = "Aerodinamicista Chefe";
-        if(team.engineers.chiefDesigner != "") eng[team.engineers.chiefDesigner].occupation = "Designer Chefe";
-        if(team.engineers.chiefEngineering != "") eng[team.engineers.chiefEngineering].occupation = "Engenheiro Chefe";
+        if(team.teamPrincipal != "") {
+            eng[team.teamPrincipal].occupation = "Chefe de Equipe";   
+            eng[team.teamPrincipal].team = team.name;   
+        }
+        if(team.engineers.technicalDirector != ""){
+            eng[team.engineers.technicalDirector].occupation = "Diretor Técnico";
+            eng[team.engineers.technicalDirector].team = team.name; 
+        } 
+        if(team.engineers.chiefAerodynamicist != ""){
+            eng[team.engineers.chiefAerodynamicist].occupation = "Aerodinamicista Chefe";
+            eng[team.engineers.chiefAerodynamicist].team = team.name; 
+        } 
+        if(team.engineers.chiefDesigner != ""){
+            eng[team.engineers.chiefDesigner].occupation = "Designer Chefe";
+            eng[team.engineers.chiefDesigner].team = team.name; 
+        } 
+        if(team.engineers.chiefEngineering != ""){
+            eng[team.engineers.chiefEngineering].occupation = "Engenheiro Chefe";
+            eng[team.engineers.chiefEngineering].team = team.name; 
+        } 
     }
 }
 
@@ -238,14 +254,20 @@ export function YearUpdateTeamsStats(){
         team.newCar.chassisReliability = 0;
 
         team.engineContract--;
+        
+        if(team.name == game.team){
+            console.log(team.engineContract)
+        }
 
-        if(team.engineContract <= 0 && team.newEngineContract){
+        if(team.engineContract < 0 && team.newEngine != ""){
             team.engine = team.newEngine;
             team.engineContract = team.newEngineContract;
             team.newEngine = "";
             team.newEngineContract = "";
         }
-        else if(team.engineContract < 0 && team.newEngine == ""){
+        else if(team.engineContract == -1 && team.newEngine == ""){
+            console.log(team.name)
+
             if(team.name == game.team){
                 selectEngine(true);
                 team.newEngine = "";
@@ -384,12 +406,16 @@ export function UpdateAfterRace(){
         CalcTeamDevPoints(team.name);
 
         function calcUpgradeNew(aeroOrEng, investment){
+            const rand = (2+(Math.random() + 1))/3;
             let up = (aeroOrEng/100)*(90*(investment/(investment+30))-80)*(team.devFocusNextSeason/100)*(23/game.championship.tracks.length);
             
             if(Math.random()*100 < 10){
                 up *= ((game.drivers[team.test_driver].speed * game.drivers[team.test_driver].pace)/10000);
             }
-            return up;
+            if(Math.random()*100 < 5){
+                up *= -1;
+            }
+            return up*rand;
         }
         function calcUpgradeActual(aeroOrEng, investment){
             let up = aeroOrEng*((investment/(investment+1))*investment*0.000005)*(team.devFocusActualSeason/100)*(23/game.championship.tracks.length);

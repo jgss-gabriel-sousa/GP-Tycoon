@@ -126,7 +126,7 @@ export const teamsData = {
             aerodynamics: 1250,
             downforce: 1750,
             weight: 1250,
-            reliability: 3250,
+            reliability: 2000,
         }
     },
     "Aston Martin": {
@@ -286,7 +286,7 @@ export const teamsData = {
         teamPrincipal: "Andrea Stella",
         engineers: {
             technicalDirector: "",
-            chiefDesigner: "",
+            chiefDesigner: "James Key",
             chiefAerodynamicist: "Peter Prodromou",
             chiefEngineering: "Neil Houldey",
         },
@@ -299,10 +299,10 @@ export const teamsData = {
         devFocusActualSeason: 30,
         devFocusNextSeason: 70,
         investments: {
-            aerodynamics: 1500,
-            downforce: 1000,
-            weight: 1250,
-            reliability: 1500,
+            aerodynamics: 1250,
+            downforce: 750,
+            weight: 1000,
+            reliability: 1250,
         }
     },
     "Alfa Romeo": {
@@ -330,7 +330,7 @@ export const teamsData = {
         teamPrincipal: "Andreas Seidl",
         engineers: {
             technicalDirector: "Alessandro Alunni Bravi",
-            chiefDesigner: "",
+            chiefDesigner: "Jan Monchaux",
             chiefAerodynamicist: "Franck Sanchez",
             chiefEngineering: "Ruth Buscombe",
         },
@@ -417,7 +417,7 @@ export const teamsData = {
         },
         teamPrincipal: "James Vowles",
         engineers: {
-            technicalDirector: "",
+            technicalDirector: "Sven Smeets",
             chiefDesigner: "Dave Worner",
             chiefAerodynamicist: "Adam Kenyon",
             chiefEngineering: "Paul Williams",

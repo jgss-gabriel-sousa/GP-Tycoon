@@ -327,40 +327,47 @@
     background-color: transparent;
 }
 
-#market {
+#market, #market-eng {
     max-height: 500px;
     overflow-y: scroll;
 }
-#market table {
+#market table, #market-eng table {
     width: 100%;
     border-collapse: collapse;
 }
-#market td {
+#market td, #market-eng td {
     font-size: 12px;
     border: #777 1px solid;
+    padding: 5px;
 }
-#market th {
-    font-size: 14px;
+#market th, #market-eng th {
+    font-size: 16px;
     border-bottom: #555 1px solid;
 }
-#market button{
+#market button, #market-eng button {
     margin: 0;
     font-size: 12px;
 }
-#market td:first-child{
+#market td:first-child {
     width: 35px;
     text-align: center;
     border-right: transparent;
 }
-#market td:nth-child(2){
+#market td:nth-child(2) {
     text-align: start;
     border-left: transparent;
 }
-#market tr:hover{
+#market tr:hover, #market-eng tr:hover{
     cursor: pointer;
     font-weight: bold;
     text-decoration: underline;
     background-color: #ffff99;
+}
+#market tr:hover:first-child:hover, #market-eng tr:first-child:hover{
+    cursor: default;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 #negotiate-market{
@@ -369,4 +376,37 @@
 }
 #negotiate-market select{
     padding: 10px;
+}
+
+#change-eng-table{
+    margin: 5px;
+    min-width: 300px;
+    padding: 0;
+    height: fit-content;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+#change-eng-table td{
+    font-family: "F1";
+    color: #222;
+    padding: 5px 10px;
+}
+#change-eng-table td:first-child{
+    background-color: #5c5c5c;
+    border: 1px solid black;
+    color: #f5f5f5;
+}
+#change-eng-table td:last-child{
+    background-color: transparent;
+    border: 0;
+}
+
+.hide-btn {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 24px;
+}
+.hide-btn:hover {
+	background-color: transparent !important;
 }

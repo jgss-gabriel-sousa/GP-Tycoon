@@ -397,9 +397,9 @@ p {
     background-color: var(--border);
     color: var(--titles);
     text-align: end;
+    height: 35px;
 }
 #engineering td {
-    padding: 5px;
     font-weight: bold;
     width: 50%;
 }
@@ -487,12 +487,10 @@ p {
 }
 #development th {
     text-align: center;
-    padding: 5px;
 }
 #investments td:nth-child(2) {
     min-width: 60px;
 }
-
 
 .btn-eng-name {
     width: 100%;

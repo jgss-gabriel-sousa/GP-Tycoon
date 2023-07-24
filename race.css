@@ -121,7 +121,7 @@
 }
 
 #race-cars {
-    background-color: #a5a5a5;
+    background-color: #494949;
     z-index: 999;
     display: flex;
     flex-direction: column;
@@ -139,9 +139,22 @@
 }
 #race-cars div {
     position: absolute;
-    color: #f8f9fa;
+    color: white;
     font-weight: bold;
     top: 425px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.car-icon {
+    rotate: 90deg;
+}
+#race-cars p {
+    font-size: 10px;
+    margin-right: 5px;
+    background-color: #222;
+    border-radius: 5%;
+    padding: 2px;
 }
 
 #race-status{

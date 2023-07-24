@@ -64,7 +64,7 @@ export function viewFinancialReport(teamName){
             </tr>
             
             <tr>
-                <th>Total: </th>
+                <th>Balanço: </th>
                 <th>${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}</th>
             </tr>
         </table>
