@@ -35,7 +35,6 @@ export class Championship {
             this.actualRound = 1;
             this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
             this.budgetCap = 145000;
-            this.budgetCap = 6300;
 
             this.historic = [
                 {
