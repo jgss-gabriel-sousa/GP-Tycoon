@@ -39,6 +39,9 @@ ul{
     align-items: stretch;
     color: #ddd;
     font-weight: bold;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
 }
 
 li button{
