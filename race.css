@@ -132,7 +132,7 @@
     padding: 10px;
     padding-top: 0;
     align-items: flex-start;
-    border-top: 5px dashed;
+    border-right: 5px dashed #b5b5b5;
     position: relative;
     overflow-y: hidden;
     overflow-x: hidden;
