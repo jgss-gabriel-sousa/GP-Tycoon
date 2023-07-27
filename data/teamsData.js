@@ -19,7 +19,7 @@ export const teamsData = {
         car: {
             speed: 80,
             downforce: 86,
-            reliability: 85,
+            reliability: 100,
         },
         teamPrincipal: "Christian Horner",
         engineers: {
@@ -61,7 +61,7 @@ export const teamsData = {
         car: {
             speed: 57,
             downforce: 85,
-            reliability: 95,
+            reliability: 90,
         },
         teamPrincipal: "Toto Wolff",
         engineers: {
@@ -105,7 +105,7 @@ export const teamsData = {
         car: {
             speed: 76,
             downforce: 82,
-            reliability: 95,
+            reliability: 90,
         },
         teamPrincipal: "Frédéric Vasseur",
         engineers: {
@@ -193,7 +193,7 @@ export const teamsData = {
         car: {
             speed: 85,
             downforce: 35,
-            reliability: 85,
+            reliability: 40,
         },
         teamPrincipal: "Otmar Szafnauer",
         engineers: {
@@ -235,9 +235,9 @@ export const teamsData = {
         driver2: "Nico Hülkenberg",
         test_driver: "Pietro Fittipaldi",
         car: {
-            speed: 70,
+            speed: 65,
             downforce: 52,
-            reliability: 69,
+            reliability: 45,
         },
         teamPrincipal: "Günther Steiner",
         engineers: {
@@ -280,8 +280,8 @@ export const teamsData = {
         test_driver: "Álex Palou",
         car: {
             speed: 65,
-            downforce: 55,
-            reliability: 66,
+            downforce: 70,
+            reliability: 95,
         },
         teamPrincipal: "Andrea Stella",
         engineers: {
@@ -296,8 +296,8 @@ export const teamsData = {
         majorSponsor_value: 3000,
         sponsor_value: 1000,
         factorySponsor_value: 2000,
-        devFocusActualSeason: 30,
-        devFocusNextSeason: 70,
+        devFocusActualSeason: 70,
+        devFocusNextSeason: 30,
         investments: {
             aerodynamics: 1250,
             downforce: 750,
@@ -325,7 +325,7 @@ export const teamsData = {
         car: {
             speed: 57,
             downforce: 47,
-            reliability: 50,
+            reliability: 95,
         },
         teamPrincipal: "Andreas Seidl",
         engineers: {
@@ -367,9 +367,9 @@ export const teamsData = {
         driver2: "Nyck de Vries",
         test_driver: "Liam Lawson",
         car: {
-            speed: 46,
-            downforce: 56,
-            reliability: 94,
+            speed: 35,
+            downforce: 45,
+            reliability: 95,
         },
         teamPrincipal: "Franz Tost",
         engineers: {
@@ -411,8 +411,8 @@ export const teamsData = {
         driver2: "Logan Sargeant",
         test_driver: "Jamie Chadwick",
         car: {
-            speed: 45,
-            downforce: 55,
+            speed: 65,
+            downforce: 45,
             reliability: 80,
         },
         teamPrincipal: "James Vowles",
