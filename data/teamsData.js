@@ -204,10 +204,10 @@ export const teamsData = {
         },
         employees: 950,
         majorSponsor: "BWT",
-        sponsors: ["Castrol","BP"],
+        sponsors: ["Castrol"],
         majorSponsor_value: 2250,
-        sponsor_value: 1000,
-        factorySponsor_value: 1000,
+        sponsor_value: 1500,
+        factorySponsor_value: 1500,
         devFocusActualSeason: 45,
         devFocusNextSeason: 55,
         investments: {

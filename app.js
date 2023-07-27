@@ -325,7 +325,8 @@ export function genEngHTML(){
             </tr>
             <tr><td><span>&shy;</span></td></tr>
             `
-            if(team.engineContract < 1){
+            console.log(team)
+            if(team.engineContract == 0){
                 html += `
                 <tr>
                     <td>Motor Prox. Temp.:</td>
