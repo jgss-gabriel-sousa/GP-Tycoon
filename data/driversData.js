@@ -92,7 +92,7 @@ export const driversData = {
         status: "2º Piloto",
         age: 32,
         country: "MX",
-        speed: 91,
+        speed: 88,
         pace: 94,
         experience: 11,
         titles: 0,

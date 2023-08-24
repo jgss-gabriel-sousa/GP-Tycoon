@@ -325,7 +325,7 @@ export function genEngHTML(){
             </tr>
             <tr><td><span>&shy;</span></td></tr>
             `
-            console.log(team)
+            
             if(team.engineContract == 0){
                 html += `
                 <tr>

@@ -169,6 +169,7 @@
 #eng-stats {
     padding-right: 20px;
     white-space: nowrap;
+    border-collapse: collapse;
 }
 #eng-stats > div{
     margin-bottom: 10px;
@@ -180,6 +181,17 @@
     margin: 0;
     background-color: #333;
     color: #f5f5f5;
+}
+#eng-stats td{
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+#eng-stats tr:first-child{
+    margin: 0;
+    background-color: #333;
+    color: #f5f5f5;
+    padding: 10px;
+    font-size: 20px;
 }
 
 
@@ -409,4 +421,18 @@
 }
 .hide-btn:hover {
 	background-color: transparent !important;
+}
+
+#select-function {
+    padding: 1em;
+}
+
+#contract-eng{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+#contract-eng p{
+    font-size: 16px;
 }

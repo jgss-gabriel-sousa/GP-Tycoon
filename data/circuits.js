@@ -243,7 +243,7 @@ export const circuitsData = {
         country: "US",
         baseLapTime: 20.0,
         rainChance: 0,
-        laps: 1,
+        laps: 200,
         straights: 90,
         corners: 10,
         crashMulti: 5,
