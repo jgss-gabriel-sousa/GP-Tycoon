@@ -115,12 +115,11 @@ export async function saveGame(){
         
         if(name){
             game.gameName = name;
+            Swal.fire(`Jogo salvo com sucesso`);
         }
     }
     
     localStorage.setItem("gpTycoon-savegame-"+game.gameName, JSON.stringify(game));
-
-    Swal.fire(`Jogo salvo com sucesso`);
 }
 
 function deleteGame(gameName, savedGames){    
