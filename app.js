@@ -4,6 +4,9 @@ import { circuitsData } from "./data/circuits.js";
 import { enginesData } from "./data/enginesData.js";
 import { UpdateDataInfo } from "./ui.js";
 
+const tooltipUpdateRate = 750;
+const tooltipMaxWidth = 500;
+
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
     let html = "";
@@ -280,11 +283,11 @@ export function genEngHTML(){
         
         <div id="dev-pts">
             <div>
-                <h2>${team.aeroPts}</h2>
+                <h2 id="aero-pts-value">${team.aeroPts}</h2>
                 <h2>Aero</h2>
             </div>
             <div>
-                <h2>${team.engPts}</h2>
+                <h2 id="eng-pts-value">${team.engPts}</h2>
                 <h2>Eng</h2>
             </div>
         </div>
@@ -483,6 +486,56 @@ export function genTeamHTML(){
             UpdateDataInfo(el.id);
         });
     }
+
+    const tippyElements = [
+        "#dev-pts > div:nth-child(1) > h2:nth-child(2)",
+        "#dev-pts > div:nth-child(2) > h2:nth-child(2)",
+        "#aero-pts-value",
+        "#eng-pts-value",
+    ];
+    tippyElements.forEach(e => {
+        tippy(e, {
+            maxWidth: tooltipMaxWidth,
+            allowHTML: true,
+            theme: 'material',
+        });
+    });
+
+    setInterval(() => {
+        document.querySelector("#dev-pts > div:nth-child(1) > h2:nth-child(2)")._tippy.setContent(`
+            Pontos de Desenvolvimento de Aerodinâmica
+        `);
+        document.querySelector("#dev-pts > div:nth-child(2) > h2:nth-child(2)")._tippy.setContent(`
+            Pontos de Desenvolvimento de Engenharia
+        `);
+
+        const team = game.teams[game.team];
+        const eng = game.engineers;
+        let teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2)/5;
+        let technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100)/5;
+        let chiefDesigner_pts = (eng[team.engineers.chiefDesigner].aero)/5;
+        const chiefAerodynamicist_pts = (eng[team.engineers.chiefAerodynamicist].aero * 2)/5;
+        const employees_pts = ((team.employees/1000)+1)/2;
+        document.querySelector("#aero-pts-value")._tippy.setContent(`
+            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
+            <p>Diretor Técnico: ${technicalDirector_pts}</p>
+            <p>Designer Chefe: ${chiefDesigner_pts}</p>
+            <p>Aerodinamicista Chefe: ${chiefAerodynamicist_pts}</p>
+            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefAerodynamicist_pts} * ${employees_pts*100}%</p>
+        `);
+
+        teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
+        technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100)/5;
+        chiefDesigner_pts = (eng[team.engineers.chiefDesigner].eng)/5;
+        const chiefEngineering_pts = (eng[team.engineers.chiefEngineering].eng * 2)/5;
+        document.querySelector("#eng-pts-value")._tippy.setContent(`
+            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
+            <p>Diretor Técnico: ${technicalDirector_pts}</p>
+            <p>Designer Chefe: ${chiefDesigner_pts}</p>
+            <p>Engenheiro Chefe: ${chiefEngineering_pts}</p>
+            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefEngineering_pts} * ${employees_pts*100}%</p>
+        `);
+    },tooltipUpdateRate);
 };
 
 
