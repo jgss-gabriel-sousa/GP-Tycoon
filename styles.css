@@ -46,14 +46,15 @@ ul{
 
 li button{
     height: 100%;
+    display: flex;
 }
 
 button{
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #c5c5c5;
-	padding: 10px;
-	margin: 5px;
+	padding: 5px;
+	margin: 3px;
 	transition: background-color 0.25s;
     font-weight: bold;
     user-select: none;
@@ -99,6 +100,14 @@ p {
     margin-bottom: 5px;
     font-size: 12px;
     font-weight: bold;
+}
+
+nav img {
+    width: 24px;
+}
+
+abbr {
+    text-decoration: none;
 }
 
 .interface {
@@ -457,7 +466,6 @@ p {
 }
 #dev-pts h2 {
     padding: 5px;
-    font-size: 12px;
 }
 #dev-focus td,
 #dev-focus td {
