@@ -44,6 +44,7 @@ function StartEngStats(){
         eng.name = e;
         eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 8)));
         eng.team = "";
+        eng.occupation = "";
     }
 
     for(const t in game.teams) {
@@ -88,7 +89,7 @@ function StartEngStats(){
     }
 }
 
-function CalcTeamDevPoints(teamName){
+export function CalcTeamDevPoints(teamName){
     const eng = game.engineers;
     const team = game.teams[teamName];
 
@@ -174,6 +175,7 @@ function StartTeamsStats(){
         team.financialReport["Factory Sponsor"] = 0;
         team.financialReport["Balance"] = 0;
         team.financialReport["Engine"] = 0;
+        team.financialReport["Fines"] = 0;
         
         CalcTeamDevPoints(team.name);
     }
@@ -316,6 +318,7 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Factory Sponsor"] = 0;
         team.financialReport["Balance"] = 0;
         team.financialReport["Engine"] = 0;
+        team.financialReport["Fines"] = 0;
         
         CalcTeamDevPoints(team.name);
 
@@ -367,14 +370,12 @@ export function UpdateAfterRace(){
         EngineersConst += eng[team.engineers.chiefAerodynamicist].salary;
         EngineersConst += eng[team.engineers.chiefEngineering].salary;
         team.financialReport["Engineers"] += -EngineersConst;
-
         balance -= EngineersConst;
 
         balance -= team.employees * 2.5;
         team.financialReport["Employees"] += -team.employees * 2.5;
 
         balance -= team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
-
         team.financialReport["Development Investments"] += -(team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
 
         if(team.majorSponsor != "")
@@ -390,7 +391,7 @@ export function UpdateAfterRace(){
             const teamName = game.championship.teamStandings[i][0];
 
             if(teamName == team.name){
-                const value = ((20000000/(Math.pow(i+1,1.5)))/Math.pow(sumOfTeamsPows,1.5));
+                const value = ((3000000/(Math.pow(i+1,1.1)))/Math.pow(sumOfTeamsPows,1.08));
     
                 team.financialReport["Prize per Place"] += value;
                 balance += value;
@@ -414,6 +415,9 @@ export function UpdateAfterRace(){
             }
             if(Math.random()*100 < 5){
                 up *= -1;
+            }
+            if(Math.random()*100 < 5){
+                up *= 0;
             }
             return up*rand;
         }
