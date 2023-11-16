@@ -29,7 +29,7 @@ export class Championship {
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
             this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Indianapolis",];
+            //this.tracks = ["Indianapolis"]
             
             this.results = {};
             this.standings = [];
@@ -37,6 +37,7 @@ export class Championship {
             this.actualRound = 1;
             this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
             this.budgetCap = 145000;
+            //this.budgetCap = 6300;
 
             this.historic = [
                 {
@@ -76,6 +77,7 @@ export class Championship {
                 rain: 0,
                 lap: 0,
                 simTick: 0,
+                log: [],
             }
         }
 
@@ -307,7 +309,7 @@ export class Championship {
                     const strategy = Math.floor(Math.random() * 100);
 
                     if(strategy > 50) raceDrivers[i-1].tire = "S";
-                    else if(strategy < 25 && circuitsData[raceName].laps > 60) raceDrivers[i-1].tire = "H";
+                    else if(strategy < 25 && circuitsData[raceName].laps >= 60) raceDrivers[i-1].tire = "H";
                     else raceDrivers[i-1].tire = "M";
                 }
                 else{
@@ -338,12 +340,13 @@ export class Championship {
             if(rain)
                 rainF = 0.5;
 
-            const randomF = 1 + (Math.random() * (1*(1/rainF)) - 0.5*(1/rainF));
+            const randomF = 1;// + (Math.random() * (1*(1/rainF)) - 0.5*(1/rainF));
             
             const driverF = (1 - game.drivers[driverName].pace/100) * randomF;
 
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners * rainF;
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights * rainF;
+            const carFactor = cornersF * straightF;
             
             let tireDivider = 0;
             let tire = raceDrivers[d].tire;
@@ -353,7 +356,7 @@ export class Championship {
             if(tire == "S") tireDivider = 0.2;
             if(tire == "W") tireDivider = -0.2;
 
-            let lapTime = (base/(55+tireDivider)) + ((base*driverF*cornersF*straightF) / (base*Math.pow(1,3)*rainF));
+            let lapTime = (base/(55+tireDivider)) + (Math.pow(driverF,1) / (base*Math.pow(1,3)*rainF));
 
             //TIRE CHANGE
             const lapsRemaining = (circuit.laps - Math.floor(raceDrivers[d].actualLap/SIMULATION_TICKS));
@@ -365,7 +368,12 @@ export class Championship {
             }
 
             function changeTire(){
-                const pitVar = (Math.floor(Math.random() * 6) - 2) * (1/60);
+                let pitVar = (Math.floor(Math.random() * 6) - 2) * (1/60);
+
+                if(Math.random() * 100 == 1){
+                    pitVar *= Math.floor(Math.random() * 5)+1;
+                    this.race.log.push(raceDrivers[d].name+" teve problemas no pit");
+                } 
 
                 lapTime += 0.33 + pitVar;
                 raceDrivers[d].tireLap = 0;
@@ -380,8 +388,8 @@ export class Championship {
                     if(tireStrategy[0] == "S") changeTireTo("M");
                     else if(tireStrategy[0] == "M") changeTireTo("S");
                     else if(tireStrategy[0] == "H"){
-                        if(lapsRemaining < 20)  changeTireTo("S");
-                        else if(lapsRemaining < 40)  changeTireTo("M");
+                        if(lapsRemaining < 20*ST)  changeTireTo("S");
+                        else if(lapsRemaining < 40*ST)  changeTireTo("M");
                         else changeTireTo("H");
                     }
                     else if(tireStrategy[0] == "W") changeTireTo("W");
@@ -397,6 +405,9 @@ export class Championship {
                     else if(tireStrategy[0] == "W")
                         changeTireTo("W");
 
+                    else if(Array.from(tireStrategy).every(char => char === "H") && lapsRemaining <= 15*ST)
+                        changeTireTo("S");
+
                     else
                         changeTireTo("H");
                 }
@@ -409,10 +420,12 @@ export class Championship {
                 //console.log(raceDrivers[d].tire)
             }
 
+            const tireStrategy = raceDrivers[d].tireStrategy;
+
             if(this.race.condition == "sc" && tireLap > 10*SIMULATION_TICKS){
                 changeTire();
             }
-            if((lapsRemaining <= 15) && raceDrivers[d].tireStrategy.length == 1){
+            if((lapsRemaining <= 15) && tireStrategy[0] != "W" && Array.from(tireStrategy).every(char => char === tireStrategy[0])){
                 changeTire();
             }
             else{
@@ -420,7 +433,7 @@ export class Championship {
                     ;//console.log(raceDrivers[d].tireStrategy.length)
                 }
             }
-            if(tire == "H" && tireLap > 80*SIMULATION_TICKS)  changeTire();
+            if(tire == "H" && tireLap > 60*SIMULATION_TICKS)  changeTire();
             if(tire == "M" && tireLap > 40*SIMULATION_TICKS)  changeTire();
             if(tire == "S" && tireLap > 20*SIMULATION_TICKS)  changeTire();
             if(tire == "W" && tireLap > 40*SIMULATION_TICKS)  changeTire();
@@ -430,6 +443,7 @@ export class Championship {
             if(d > 0){
                 const diff = (raceDrivers[d].totalTime+lapTime) - raceDrivers[d-1].totalTime;
                 
+                /*
                 if(diff <= 0.025 && diff >= 0){
                     const defender = game.drivers[raceDrivers[d-1].name];
                     const attacker = game.drivers[raceDrivers[d].name];
@@ -442,16 +456,16 @@ export class Championship {
                     let overtakeDC = Math.round(defender.speed+defenderCar - ((attackerCar + attacker.speed)/2)); 
                     if(overtakeDC <= 0) overtakeDC = 1;
 
-                    if(overtakeRoll > overtakeDC){
-                        ;//lapTime = raceDrivers[d-1].lapTime-diff-0.0166;
+                    if(overtakeRoll >= overtakeDC){
+                        lapTime = raceDrivers[d-1].lapTime-diff-0.0166;
                     }
                     else{
-                        ;//lapTime += 0.035;
+                        lapTime += 0.035;
                     }
-                }
+                }*/
             }
 
-            const failureChanceRoll = Math.floor(Math.random() * (3000 / (circuit.failureMulti ?? 1)));
+            const failureChanceRoll = Math.floor(Math.random() * (4000 / (circuit.failureMulti ?? 1)));
             const failureRoll = Math.floor(Math.random() * 100);
             let failureChance = 5;
 
@@ -505,6 +519,7 @@ export class Championship {
                 if(Math.floor(Math.random() * 100) < 100){
                     newRaceCondition = "sc";
                     this.race.safetyCarLaps = rollDice("3d4+0");
+                    this.race.log.push(raceDrivers[d]+" se acidentou e gerou "+this.race.safetyCarLaps+" voltas de safety car");
                 }
 
                 retires.unshift({
@@ -950,6 +965,8 @@ export class Championship {
 
             const finalResult = this.race.finalResult;
 
+            //console.log(this.race.log)
+
             game.drivers[grid[0].name].poles++;
             game.drivers[finalResult[0].name].wins++;
             game.drivers[finalResult[0].name].podiums++;
@@ -979,11 +996,12 @@ export class Championship {
                 rain: 0,
                 lap: 0,
                 simTick: 0,
+                log: [],
             }
         });
     }
 
-    createStandings() {
+    createStandings(){
         const driverRanking = {};
 
         for (const d in this.drivers) {
