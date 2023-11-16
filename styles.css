@@ -3,11 +3,11 @@
 
 @font-face {
     font-family: Montserrat;
-    src: url("./Montserrat.ttf");
+    src: url("/font/Montserrat.ttf");
 }
 @font-face {
     font-family: F1;
-    src: url("./Formula1-Bold_web_0.ttf");
+    src: url("/font/Formula1-Bold_web_0.ttf");
 }
 
 * {
