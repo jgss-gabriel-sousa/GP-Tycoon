@@ -191,8 +191,8 @@ export const teamsData = {
         driver2: "Esteban Ocon",
         test_driver: "Jack Doohan",
         car: {
-            speed: 85,
-            downforce: 35,
+            speed: 40,
+            downforce: 80,
             reliability: 40,
         },
         teamPrincipal: "Otmar Szafnauer",
@@ -235,9 +235,9 @@ export const teamsData = {
         driver2: "Nico Hülkenberg",
         test_driver: "Pietro Fittipaldi",
         car: {
-            speed: 65,
-            downforce: 52,
-            reliability: 45,
+            speed: 55,
+            downforce: 50,
+            reliability: 90,
         },
         teamPrincipal: "Günther Steiner",
         engineers: {
@@ -279,7 +279,7 @@ export const teamsData = {
         driver2: "Oscar Piastri",
         test_driver: "Álex Palou",
         car: {
-            speed: 65,
+            speed: 67,
             downforce: 70,
             reliability: 95,
         },
@@ -323,8 +323,8 @@ export const teamsData = {
         driver2: "Zhou Guanyu",
         test_driver: "Théo Pourchaire",
         car: {
-            speed: 57,
-            downforce: 47,
+            speed: 55,
+            downforce: 45,
             reliability: 95,
         },
         teamPrincipal: "Andreas Seidl",
@@ -367,7 +367,7 @@ export const teamsData = {
         driver2: "Nyck de Vries",
         test_driver: "Liam Lawson",
         car: {
-            speed: 35,
+            speed: 30,
             downforce: 45,
             reliability: 95,
         },
