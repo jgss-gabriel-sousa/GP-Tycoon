@@ -67,9 +67,10 @@ export function viewEng(name, returnToMarket){
                 contractButton = true;
             }
             
-            html +=
-            `
-                <button id="change-eng" value="${name}">Trocar de Função</button>
+            if(eng.team == game.team)
+                html +=`<button id="change-eng" value="${name}">Trocar de Função</button>`;
+            
+        html += `
             </div>    
         </div>
     </div>`;
@@ -96,6 +97,7 @@ export function viewEng(name, returnToMarket){
             contractEng(name);
         });
     }
+    if(document.querySelector("#change-eng"))
     document.querySelector("#change-eng").addEventListener("click", () => {
         changeEng(name);
     });
@@ -346,59 +348,6 @@ function changeEng(name){
             }
 
             changeOccupation(eng.occupation);
-
-            console.log(team.teamPrincipal)
-            console.log(team.engineers)
-/*
-            const old_teamPrincipal = team.teamPrincipal;
-            const old_technicalDirector = team.engineers.technicalDirector;
-            const old_chiefDesigner = team.engineers.chiefDesigner;
-            const old_chiefAerodynamicist = team.engineers.chiefAerodynamicist;
-            const old_chiefEngineering = team.engineers.chiefEngineering;
-
-            if(newOccupation == "Chefe de Equipe")          team.teamPrincipal = eng.name;
-            if(newOccupation == "Diretor Técnico")          team.engineers.technicalDirector = eng.name;
-            if(newOccupation == "Designer Chefe")           team.engineers.chiefDesigner = eng.name;
-            if(newOccupation == "Aerodinamicista Chefe")    team.engineers.chiefAerodynamicist = eng.name;
-            if(newOccupation == "Engenheiro Chefe")         team.engineers.chiefEngineering = eng.name;
-
-
-            if(eng.occupation == "Chefe de Equipe"){ 
-                changeOccupation(newOccupation,"Chefe de Equipe")
-
-                if(newOccupation == "Chefe de Equipe"){
-                    game.engineers[old_teamPrincipal].occupation = "Chefe de Equipe";
-                    team.teamPrincipal = old_teamPrincipal;
-                }     
-                if(newOccupation == "Diretor Técnico"){
-                    game.engineers[old_technicalDirector].occupation = "Chefe de Equipe";
-                    team.engineers.technicalDirector = old_teamPrincipal;
-                }     
-                if(newOccupation == "Designer Chefe"){
-                    game.engineers[old_chiefDesigner].occupation = "Chefe de Equipe";
-                    team.engineers.chiefDesigner = old_teamPrincipal;
-                }     
-                if(newOccupation == "Aerodinamicista Chefe"){
-                    game.engineers[old_chiefAerodynamicist].occupation = "Chefe de Equipe";
-                    team.engineers.chiefAerodynamicist = old_teamPrincipal;
-                }     
-                if(newOccupation == "Engenheiro Chefe"){
-                    game.engineers[old_chiefEngineering].occupation = "Chefe de Equipe";
-                    team.engineers.chiefEngineering = old_teamPrincipal;
-                }
-            }        
-            if(eng.occupation == "Diretor Técnico"){ 
-
-            } 
-            if(eng.occupation == "Designer Chefe"){ 
-
-            } 
-            if(eng.occupation == "Aerodinamicista Chefe"){ 
-
-            } 
-            if(eng.occupation == "Engenheiro Chefe"){ 
-
-            } */
         }
         else if(result.isDenied){
             ;

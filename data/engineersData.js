@@ -16,7 +16,7 @@ export const engineersData = {
     //RED BULL
     "Pierre Waché":         {aero: 85,    eng: 90,    adm: 75,      country: "FR",  age:48},
     "Enrico Balbo":         {aero: 90,    eng: 80,    adm: 70,      country: "IT",  age:55},
-    "Adrian Newey":         {aero: 100,   eng: 100,   adm: 80,      country: "GB",  age:64},
+    "Adrian Newey":         {aero: 100,   eng: 100,   adm: 85,      country: "GB",  age:64},
     "Paul Monaghan":        {aero: 85,    eng: 95,    adm: 65,      country: "GB",  age:55},
 
     //MERCEDES

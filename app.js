@@ -3,9 +3,7 @@ import { game } from "./game.js"
 import { circuitsData } from "./data/circuits.js";
 import { enginesData } from "./data/enginesData.js";
 import { UpdateDataInfo } from "./ui.js";
-
-const tooltipUpdateRate = 750;
-const tooltipMaxWidth = 500;
+import { tooltips } from "./tooltips.js";
 
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
@@ -327,17 +325,23 @@ export function genEngHTML(){
                 </td>
             </tr>
             <tr><td><span>&shy;</span></td></tr>
-            `
-            
-            if(team.engineContract == 0){
+            <tr>
+                <td>Motor Prox. Temp.:</td>`
+                
+                if((team.engineContract >= 1 || team.newEngine) && team.newEngine){
+                    html += `<td>${team.newEngine} (${team.newEngineContract})</td>`
+                }
+                else if(team.engineContract >= 1){
+                    html += `<td>${team.engine} (${team.engineContract})</td>`
+                }
+                else if(team.engineContract < 0){
+                    html += `<td>${team.engine}</td>`
+                }
+                else{
+                    html += `<td><button class="select-engine">Negociar</button></td>`
+                }
                 html += `
-                <tr>
-                    <td>Motor Prox. Temp.:</td>
-                    <td>${(team.engineContract >= 1 || team.newEngine) ? `${team.newEngine} (${team.newEngineContract})` : `<button class="select-engine">Negociar</button>`}</td>
-                </tr>
-                `
-            }
-            `
+            </tr>
         </table>
     </div>`;
     el.innerHTML = html;
@@ -407,11 +411,11 @@ export function genDevelopmentHTML(){
                 <td id="investment-reliability">${NumberF(team.investments.reliability *1000,"ext-short",0)}</td>
             </tr>
             <tr>
-                <th>Total da Próxima Corrida: </th>
+                <th class="total-investments">Total da Próxima Corrida: </th>
                 <th id="race-total-investment">${NumberF((team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability) *1000,"ext-short",0)}</th>
             </tr>
             <tr>
-                <th>Total da Temporada: </th>
+                <th class="total-investments">Total da Temporada: </th>
                 <th id="total-investment">${NumberF(team.totalInvestments *1000,"ext-short",0)}</th>
             </tr>
             `
@@ -419,11 +423,11 @@ export function genDevelopmentHTML(){
     if(game.championship.budgetCap > 0){
         html += `
             <tr>
-                <th>Restante para o Teto: </th>
+                <th class="total-investments">Restante para o Teto: </th>
                 <th id="total-investment">${NumberF((game.championship.budgetCap-team.totalInvestments) *1000,"ext-short",0)}</th>
             </tr>
             <tr>
-                <th>Teto de Gastos: </th>
+                <th class="total-investments">Teto de Gastos: </th>
                 <th id="budget-cap">${NumberF(game.championship.budgetCap *1000,"ext-short",0)}</th>
             </tr>
             `
@@ -487,57 +491,8 @@ export function genTeamHTML(){
         });
     }
 
-    const tippyElements = [
-        "#dev-pts > div:nth-child(1) > h2:nth-child(2)",
-        "#dev-pts > div:nth-child(2) > h2:nth-child(2)",
-        "#aero-pts-value",
-        "#eng-pts-value",
-    ];
-    tippyElements.forEach(e => {
-        tippy(e, {
-            maxWidth: tooltipMaxWidth,
-            allowHTML: true,
-            theme: 'material',
-        });
-    });
-
-    setInterval(() => {
-        document.querySelector("#dev-pts > div:nth-child(1) > h2:nth-child(2)")._tippy.setContent(`
-            Pontos de Desenvolvimento de Aerodinâmica
-        `);
-        document.querySelector("#dev-pts > div:nth-child(2) > h2:nth-child(2)")._tippy.setContent(`
-            Pontos de Desenvolvimento de Engenharia
-        `);
-
-        const team = game.teams[game.team];
-        const eng = game.engineers;
-        let teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2)/5;
-        let technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100)/5;
-        let chiefDesigner_pts = (eng[team.engineers.chiefDesigner].aero)/5;
-        const chiefAerodynamicist_pts = (eng[team.engineers.chiefAerodynamicist].aero * 2)/5;
-        const employees_pts = ((team.employees/1000)+1)/2;
-        document.querySelector("#aero-pts-value")._tippy.setContent(`
-            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
-            <p>Diretor Técnico: ${technicalDirector_pts}</p>
-            <p>Designer Chefe: ${chiefDesigner_pts}</p>
-            <p>Aerodinamicista Chefe: ${chiefAerodynamicist_pts}</p>
-            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefAerodynamicist_pts} * ${employees_pts*100}%</p>
-        `);
-
-        teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
-        technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100)/5;
-        chiefDesigner_pts = (eng[team.engineers.chiefDesigner].eng)/5;
-        const chiefEngineering_pts = (eng[team.engineers.chiefEngineering].eng * 2)/5;
-        document.querySelector("#eng-pts-value")._tippy.setContent(`
-            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
-            <p>Diretor Técnico: ${technicalDirector_pts}</p>
-            <p>Designer Chefe: ${chiefDesigner_pts}</p>
-            <p>Engenheiro Chefe: ${chiefEngineering_pts}</p>
-            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefEngineering_pts} * ${employees_pts*100}%</p>
-        `);
-    },tooltipUpdateRate);
+    tooltips();
 };
-
 
 function mainMenu(){
     document.querySelector("#main-menu").style.display = "flex";

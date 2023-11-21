@@ -499,6 +499,9 @@ abbr {
 #development th {
     text-align: center;
 }
+#development .total-investments {
+    text-align: end;
+}
 #investments td:nth-child(2) {
     min-width: 60px;
 }

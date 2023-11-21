@@ -8,6 +8,8 @@ import { enginesData } from "./data/enginesData.js";
 import { engineersData } from "./data/engineersData.js";
 import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
 import { selectEngine } from "./ui/selectEngine.js";
+import { generateName } from "./data/nameData.js";
+import { getRandomCountry } from "./data/countryRanking.js";
 
 export const game = {
     activeScreen: "main-menu",
@@ -38,11 +40,44 @@ function startGame(){
 } startGame();
 
 function StartEngStats(){
+    function genEng(){
+        let name = "";
+        let country = "";
+
+        do {
+            const r = rand(0,100);
+            let gender = "";
+            if(r < 90) gender = "male"
+            else gender = "female"
+
+            country = getRandomCountry();
+            name = generateName(country, gender);
+
+        } while(game.engineers.hasOwnProperty(name));
+
+        let eng = {};
+        eng.name = name;
+        eng.country = country
+        eng.age = rollDice("6d8+20");
+        eng.aero = rollDice("5d8+60");
+        eng.adm = rollDice("5d8+60");
+        eng.eng = rollDice("5d8+60");
+        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 10)));
+        eng.team = "";
+        eng.occupation = "";
+
+        game.engineers[name] = eng;
+    }
+    
+    for(let i = Object.keys(game.engineers).length; i <= 70; i++) {
+        genEng();
+    }
+
     for(const e in game.engineers) {
         const eng = game.engineers[e];
 
         eng.name = e;
-        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 8)));
+        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 10)));
         eng.team = "";
         eng.occupation = "";
     }
@@ -208,8 +243,8 @@ export function YearUpdateTeamsStats(){
         team.test_driver = team.newTdriver;
 
         if(!team.driver1 || !team.driver2 || !team.test_driver){
-            for(const k in game.drivers) {
-                const driver = game.drivers[k];
+            for(const d in game.drivers) {
+                const driver = game.drivers[d];
 
                 if(!driver.team){
                     if(team.driver1 == ""){
@@ -256,10 +291,6 @@ export function YearUpdateTeamsStats(){
         team.newCar.chassisReliability = 0;
 
         team.engineContract--;
-        
-        if(team.name == game.team){
-            console.log(team.engineContract)
-        }
 
         if(team.engineContract < 0 && team.newEngine != ""){
             team.engine = team.newEngine;
@@ -268,8 +299,6 @@ export function YearUpdateTeamsStats(){
             team.newEngineContract = "";
         }
         else if(team.engineContract == -1 && team.newEngine == ""){
-            console.log(team.name)
-
             if(team.name == game.team){
                 selectEngine(true);
                 team.newEngine = "";
@@ -440,15 +469,14 @@ export function UpdateAfterRace(){
         team.car.weight += calcUpgradeActual(team.engPts, team.investments.weight);
         team.car.chassisReliability += calcUpgradeActual(team.engPts, team.investments.reliability);
 
-        if(team.newCar.aerodynamic > 100) team.newCar.aerodynamic = 100;
-        if(team.newCar.downforce > 100) team.newCar.downforce = 100;
-        if(team.newCar.weight > 100) team.newCar.weight = 100;
-        if(team.newCar.chassisReliability > 100) team.newCar.chassisReliability = 100;
-
-        if(team.car.aerodynamic > 100) team.car.aerodynamic = 100;
-        if(team.car.downforce > 100) team.car.downforce = 100;
-        if(team.car.weight > 100) team.car.weight = 100;
-        if(team.car.chassisReliability > 100) team.car.chassisReliability = 100;
+        const properties = ['aerodynamic', 'downforce', 'weight', 'chassisReliability'];
+        function limitPropertiesToRange(obj){
+            for(const prop of properties){
+                obj[prop] = Math.max(0, Math.min(100, obj[prop]));
+            }
+        }
+        limitPropertiesToRange(team.newCar);
+        limitPropertiesToRange(team.car);
     }
 }
 

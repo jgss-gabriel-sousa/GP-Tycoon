@@ -48,9 +48,17 @@ export function viewDriver(name, returnToMarket){
             <table id="view-driver-contract">
                 <th colspan="2">Contrato</th>
                 <tr>
-                    <td>Equipe:</td>
-                    <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
-                    ${driver.team}</td>
+                    <td>Equipe:</td>`
+                    
+                    if(driver.team != ""){
+                        html += `
+                        <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
+                            ${driver.team}
+                        </td>`
+                    }
+
+
+                html += `
                 </tr>
                 <tr>
                     <td>Função:</td>
@@ -59,11 +67,15 @@ export function viewDriver(name, returnToMarket){
                 <tr>
                     <td>Salário:</td>
                     <td>${NumberF(driver.salary*1000000,"ext",0)} por Corrida</td>
-                </tr>
-                <tr>
-                    <td>Duração:</td>
-                    <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>
                 </tr>`
+                
+                if(driver.contractRemainingYears >= 0){
+                    html += `
+                    <tr>
+                        <td>Duração:</td>
+                        <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>
+                    </tr>`
+                }
                     
     if(driver.contractRemainingYears == 0 && driver.newTeam){
             html+=`

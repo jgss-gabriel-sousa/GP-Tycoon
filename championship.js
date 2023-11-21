@@ -29,7 +29,7 @@ export class Championship {
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
             this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Indianapolis"]
+            //this.tracks = ["Test"]
             
             this.results = {};
             this.standings = [];
@@ -37,7 +37,6 @@ export class Championship {
             this.actualRound = 1;
             this.pointsSystem = [25,18,15,12,10,8,6,4,2,1];
             this.budgetCap = 145000;
-            //this.budgetCap = 6300;
 
             this.historic = [
                 {

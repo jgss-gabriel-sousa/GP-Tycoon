@@ -107,7 +107,7 @@ export function historicUI(){
     html += `</table></div></div>`;
 
     Swal.fire({
-        title: `Campeões Anteriores`,
+        title: `Histórico de Campeões`,
         html: html,
         width: "72em",
         showCloseButton: true,

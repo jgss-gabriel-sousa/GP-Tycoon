@@ -6,8 +6,6 @@ export function selectEngine(endSeason){
     let html = "";
     const engines = game.engines;
 
-    console.log(game.teams[game.team]);
-
     html += `
     <table id="select-engine">
         <tr>
@@ -42,6 +40,7 @@ export function selectEngine(endSeason){
         width: "max-content",
         showCloseButton: !endSeason ?? true,
         allowOutsideClick: !endSeason ?? true,
+        allowEscapeKey: !endSeason ?? true,
         focusConfirm: false,
         showConfirmButton: false,
     });

@@ -14,6 +14,7 @@ export function market(){
             <th></th>
             <th>Nome</th>
             <th>Idade</th>
+            <th>Salário</th>
             <th>Equipe</th>
             <th>Próx.</th>
         </tr>
@@ -26,12 +27,15 @@ export function market(){
 
     for(let i = 0; i < drivers.length; i++){
         const driver = drivers[i];
+        if(driver.name == "") continue
+        if(driver.team == "") continue
         
         html += `
         <tr class="driver" id="${driver.name}">
             <td><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"></td>
             <td>${driver.name}</td>
             <td>${driver.age} anos</td>
+            <td>${driver.salary*1000}K</td>
             <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
                 ${driver.team} - ${driver.status}</td>
             `
@@ -46,6 +50,42 @@ export function market(){
             html += `
             <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
                 ${driver.team} - ${driver.status}
+            </td>`
+        }
+        else{
+            html += `<td></td>`
+        }
+
+        html += `</tr>`
+    }
+    html += `</table>
+    <br>
+    <table>
+        <tr>
+            <th></th>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Salário</th>
+            <th>Próx.</th>
+        </tr>`
+
+    for(let i = 0; i < drivers.length; i++){
+        const driver = drivers[i];
+        if(driver.name == "") continue
+        if(driver.team != "") continue
+        
+        html += `
+        <tr class="driver" id="${driver.name}">
+            <td><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"></td>
+            <td>${driver.name}</td>
+            <td>${driver.age} anos</td>
+            <td>${driver.salary*1000}K</td>
+            `
+            
+        if(driver.newContractRemainingYears >= 0 && driver.newTeam){
+            html += `
+            <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
+                ${driver.newTeam} - ${driver.newStatus}
             </td>`
         }
         else{

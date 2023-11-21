@@ -248,4 +248,15 @@ export const circuitsData = {
         corners: 10,
         crashMulti: 5,
     },
+    "Test":{
+        abbrev: "TEST",
+        circuit: "Test",
+        country: "Af",
+        baseLapTime: 1.0,
+        rainChance: 0,
+        laps: 1,
+        straights: 50,
+        corners: 50,
+        crashMulti: 10,
+    },
 }
