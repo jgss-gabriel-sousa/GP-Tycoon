@@ -501,5 +501,80 @@ export const driversData = {
         podiums: 0,
         poles: 0,
         contractRemainingYears: 0,
-    }
+    },
+    "Frederik Vesti": {
+        name: "Frederik Vesti",
+        age: 20,
+        country: "DK",
+    },
+    "Ayumu Iwasa": {
+        name: "Ayumu Iwasa",
+        age: 21,
+        country: "JP",
+    },
+    "Victor Martins": {
+        name: "Victor Martins",
+        age: 21,
+        country: "FR",
+    },
+    "Oliver Bearman": {
+        name: "Oliver Bearman",
+        age: 21,
+        country: "GB",
+    },
+    "Enzo Fittipaldi": {
+        name: "Enzo Fittipaldi",
+        age: 21,
+        country: "BR",
+    },
+    "Dennis Hauger": {
+        name: "Dennis Hauger",
+        age: 19,
+        country: "NO",
+    },
+    "Richard Verschoor": {
+        name: "Richard Verschoor",
+        age: 22,
+        country: "NL",
+    },
+    "Zane Maloney": {
+        name: "Zane Maloney",
+        age: 19,
+        country: "BB",
+    },
+    "Jehan Daruvala": {
+        name: "Jehan Daruvala",
+        age: 24,
+        country: "IN",
+    },
+    "Jüri Vips": {
+        name: "Jüri Vips",
+        age: 22,
+        country: "EE",
+    },
+    "Gabriel Bortoleto": {
+        name: "Gabriel Bortoleto",
+        age: 18,
+        country: "BR",
+    },
+    "Pepe Martí": {
+        name: "Pepe Martí",
+        age: 17,
+        country: "ES",
+    },
+    "Dino Beganovic": {
+        name: "Dino Beganovic",
+        age: 18,
+        country: "SE",
+    },
+    "Zak OSullivan": {
+        name: "Zak OSullivan",
+        age: 17,
+        country: "GB",
+    },
+    "Gabriele Minì": {
+        name: "Gabriele Minì",
+        age: 17,
+        country: "IT",
+    },
 }
