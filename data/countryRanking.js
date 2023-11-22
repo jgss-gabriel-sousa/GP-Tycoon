@@ -70,6 +70,8 @@ export const countryRanking = {
     'EG': 5, // Egito
     'NG': 5, // Nigéria
     'IL': 5, // Israel
+    'HR': 5, // Croácia
+    'SI': 5, // Eslovênia 
   
     // Tier 6 (Baixa probabilidade)
     'RO': 6, // Romênia
@@ -83,4 +85,10 @@ export const countryRanking = {
     'QA': 6, // Catar
     'KW': 6, // Kuwait
     'MA': 6, // Marrocos
+    'SK': 6, // Eslováquia 
+    'RS': 6, // Sérvia  
+    'LT': 6, // Lituânia   
+    'LV': 6, // Letônia    
+    'BG': 6, // Bulgária     
+    'LU': 6, // Luxemburgo      
   };
