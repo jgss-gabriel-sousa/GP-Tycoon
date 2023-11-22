@@ -28,7 +28,8 @@ nav {
 }
 
 body {
-    background-color: #1e1e1e;
+    background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
+    margin: 5px 20px;
 }
 
 ul{
