@@ -40,16 +40,22 @@ export function market(){
                 ${driver.team} - ${driver.status}</td>
             `
             
-        if(driver.contractRemainingYears == 0 && driver.newTeam != ""){
+        if(driver.contractRemainingYears == 0 && driver.newTeam && driver.newTeam != "Aposentadoria"){
             html += `
             <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
                 ${driver.newTeam} - ${driver.newStatus}
             </td>`
         }
-        else if(driver.contractRemainingYears > 0){
+        else if(driver.contractRemainingYears > 0 && driver.newTeam != "Aposentadoria"){
             html += `
             <td style="background-color: ${game.teams[driver.team].result_bg_color}; color: ${game.teams[driver.team].result_font_color}">
                 ${driver.team} - ${driver.status}
+            </td>`
+        }
+        else if(driver.newTeam == "Aposentadoria"){
+            html += `
+            <td>
+                Aposentadoria
             </td>`
         }
         else{
@@ -82,10 +88,16 @@ export function market(){
             <td>${driver.salary*1000}K</td>
             `
             
-        if(driver.newContractRemainingYears >= 0 && driver.newTeam){
+        if(driver.newContractRemainingYears >= 0 && driver.newTeam && driver.newTeam != "Aposentadoria"){
             html += `
             <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
                 ${driver.newTeam} - ${driver.newStatus}
+            </td>`
+        }
+        else if(driver.newTeam == "Aposentadoria"){
+            html += `
+            <td>
+                Aposentadoria
             </td>`
         }
         else{

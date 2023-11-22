@@ -82,8 +82,17 @@ export function viewDriver(name, returnToMarket){
                 <tr><th colspan="2">Próx. Contrato</th></tr>
                 <tr>
                     <td>Equipe:</td>
-                    <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
-                    ${driver.newTeam}</td>
+                    `
+                    if(driver.newTeam != "Aposentadoria"){
+                        html += `
+                        <td style="background-color: ${game.teams[driver.newTeam].result_bg_color}; color: ${game.teams[driver.newTeam].result_font_color}">
+                        ${driver.newTeam}</td>
+                        `
+                    }
+                    else
+                        html += `<td>Aposentadoria</td>`
+                
+                html += `
                 </tr>
                 <tr>
                     <td>Função:</td>

@@ -10,7 +10,7 @@ function genDriver(){
     do {
         const r = rand(0,100);
         let gender = "";
-        if(r < 90) gender = "male"
+        if(r < 95) gender = "male"
         else gender = "female"
 
         country = getRandomCountry();
@@ -25,6 +25,7 @@ function genDriver(){
     if(driver.age < 18) driver.age = 18;
     driver.speed = rollDice("5d8+60");
     driver.pace = rollDice("5d8+60");
+    driver.careerPeak = rollDice("3d6+18");
     driver.experience = 0;
     driver.titles = 0;
     driver.gps = 0;
@@ -33,7 +34,11 @@ function genDriver(){
     driver.poles = 0;
     driver.team = "";
     driver.status = "";
-    driver.contractRemainingYears = -1;
+    driver.contractRemainingYears = 0;
+
+    const ability = Math.pow((driver.speed*0.5 + driver.pace*0.5)/100, 2);
+    driver.salary = ((Math.pow(ability*1.1, 6)) + (Math.pow(10, driver.titles/10) * 0.025)) * (ability*2);
+    driver.salary = driver.salary.toFixed(2);
 
     game.drivers[name] = driver;
 }
@@ -49,9 +54,20 @@ export function startDriversStats(){
         const driver = game.drivers[d];
         
         driver.contractInterest = [];
-        if(driver.newTeam == undefined) driver.newTeam = "";
-        if(driver.newStatus == undefined) driver.newStatus = "";
-        if(driver.newContractRemainingYears == undefined) driver.newContractRemainingYears = -1;
+        if(!driver.newTeam) driver.newTeam = "";
+        if(!driver.newStatus) driver.newStatus = "";
+        if(!driver.newContractRemainingYears) driver.newContractRemainingYears = -1;
+        if(!driver.contractRemainingYears) driver.contractRemainingYears = 0;
+        if(!driver.experience) driver.experience = 0;
+        if(!driver.titles) driver.titles = 0;
+        if(!driver.gps) driver.gps = 0;
+        if(!driver.wins) driver.wins = 0;
+        if(!driver.podiums) driver.podiums = 0;
+        if(!driver.poles) driver.poles = 0;
+        if(!driver.team) driver.team = "";
+        if(!driver.status) driver.status = "";
+        if(!driver.speed) driver.speed = rollDice("5d8+60");
+        if(!driver.pace) driver.pace = rollDice("5d8+60");
 
         if(driver.contractRemainingYears > 0){
             if(driver.status == "1º Piloto")
@@ -78,8 +94,31 @@ export function startDriversStats(){
 
 function driverSkillUpdate(driver){
     if(driver.age > driver.careerPeak){
-        driver.speed = Math.round(driver.speed * 0.95);
+        let rate = (driver.careerPeak - driver.age) / 10;
+
+        driver.speed = Math.round(driver.speed * (1 - (rollDice("2d4+0") / (100 + rate))));
+        driver.pace = Math.round(driver.pace * (1 - (rollDice("2d4+0") / (100 + rate))));
+
+        console.log(driver.name+" Worsened");
     }
+    else if(driver.experience < 100){
+
+        const timeToCareerPeak = Math.min(2,((driver.careerPeak - driver.age) / 10));
+        const experience = (1 - (driver.experience / 100));
+        const ability = (driver.speed * driver.pace) / 10000;
+
+        let rate = Math.round((timeToCareerPeak * experience * ability)*100);
+
+        if(rand(0, 100) < rate){
+            console.log(driver.name+"("+rate+"%)"+" Improved");
+
+            driver.speed += rollDice("3d2+-3");
+            driver.pace += rollDice("3d2+-3");
+        }
+    }
+
+    if(driver.speed > 100) driver.speed = 100;
+    if(driver.pace > 100) driver.pace = 100;
 }
 
 export function YearUpdateDriversStats(){
@@ -100,7 +139,9 @@ export function YearUpdateDriversStats(){
             driver.status = driver.newStatus;
             driver.contractRemainingYears = driver.newContractRemainingYears;
 
-            console.log(driver.name);
+            if(driver.newTeam == "Aposentadoria"){
+                delete game.drivers[d];
+            }
 
             driver.newTeam = "";
             driver.newStatus = "";
@@ -112,6 +153,16 @@ export function YearUpdateDriversStats(){
         }
         driver.contractRemainingYears--;
 
+        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10){
+            driver.newTeam = "Aposentadoria";
+            driver.newContractRemainingYears = 1;
+        }
+
         driverSkillUpdate(driver);
+    }
+
+    
+    for(let i = Object.keys(game.drivers).length; i < 50; i++) {
+        genDriver();
     }
 }

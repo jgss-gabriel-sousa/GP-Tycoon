@@ -246,7 +246,7 @@ export function YearUpdateTeamsStats(){
             for(const d in game.drivers) {
                 const driver = game.drivers[d];
 
-                if(!driver.team){
+                if(!driver.team && driver.newTeam != "Aposentadoria"){
                     if(team.driver1 == ""){
                         driver.team = team.name;
                         driver.status = "1º Piloto";
