@@ -180,7 +180,7 @@ const namesData = {
 
     'IE_names_male': ['Jack', 'Sean', 'Conor', 'James', 'Daniel', 'Adam', 'Liam', 'Michael'],
     'IE_names_female': ['Emily', 'Sophie', 'Aoife', 'Emma', 'Amelia', 'Olivia', 'Grace', 'Mia'],
-    'IE_surnames': ['Murphy', `OBrien`, 'Kelly', 'Ryan', 'Doherty', 'Walsh', `OSullivan`, 'Byrne', 'Doyle', 'Gallagher'],
+    'IE_surnames': ['Murphy', `O'Brien`, 'Kelly', 'Ryan', 'Doherty', 'Walsh', `O'Sullivan`, 'Byrne', 'Doyle', 'Gallagher'],
 
     'DK_names_male': ['Liam', 'Noah', 'Oliver', 'Elias', 'Frederik', 'Emil', 'Lucas', 'Oscar'],
     'DK_names_female': ['Emma', 'Sofia', 'Isabella', 'Freja', 'Laura', 'Clara', 'Anna', 'Maja'],

@@ -105,6 +105,7 @@ export function blankSpaceRmv(string){
 export function genID(string){
     string = string.replace(/\s/g, "-");
     string = string.replace(/\./g, "-");
+    string = string.replace(/'/g, "-");
     string = accentsTidy(string);
     return string;
 }
