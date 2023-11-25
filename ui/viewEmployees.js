@@ -1,5 +1,11 @@
-import { game } from "../game.js";
+import { genTeamHTML } from "../app.js";
+import { CalcTeamDevPoints, game } from "../game.js";
 import { NumberF } from "../utils.js";
+
+function updateScreen(){
+    CalcTeamDevPoints(game.team);
+    genTeamHTML();
+}
 
 export function viewEmployees(teamName){
     let html = "";
@@ -97,6 +103,8 @@ function contractEmployees(){
         }else if(result.isDenied){
             viewEmployees(game.team);
         }
+        
+        updateScreen();
     });
 
     document.querySelector("#slider-contract-employees").addEventListener("input", () => {
@@ -129,9 +137,12 @@ function dismissEmployees(){
         if(result.isConfirmed){
             team.employees -= Number(document.querySelector("#slider-contract-employees").value);
             document.querySelector("#engineers-name > tbody > tr:nth-child(6) > td > button").innerHTML = team.employees;
+
         }else if(result.isDenied){
             viewEmployees(game.team);
-        }
+        }         
+        
+        updateScreen();
     });
 
     document.querySelector("#slider-contract-employees").addEventListener("input", () => {
@@ -161,6 +172,8 @@ function expandFactory(){
         }else if(result.isDenied){
             viewEmployees(game.team);
         }
+        
+        updateScreen();
     });
 }
 
@@ -193,5 +206,7 @@ function reduceFactory(){
         }else if(result.isDenied){
             viewEmployees(game.team);
         }
+        
+        updateScreen();
     });
 }
