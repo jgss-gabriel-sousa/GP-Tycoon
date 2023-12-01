@@ -4,8 +4,8 @@ import { genTeamHTML } from "../app.js";
 export function gameOptions(){
     const volumeValue = localStorage.getItem("gpTycoon-volume") ?? 0.25;
     const raceSpeedValue = localStorage.getItem("gpTycoon-race-sim-speed") ?? 100;
-    const visualRaceSim = localStorage.getItem("gpTycoon-visual-race-sim") ?? true;
-    const uiTeamColors = localStorage.getItem("gpTycoon-ui-team-colors") ?? true;
+    const visualRaceSim = localStorage.getItem("gpTycoon-visual-race-sim") ?? "true";
+    const uiTeamColors = localStorage.getItem("gpTycoon-ui-team-colors") ?? "true";
     
     let html = `
     <div id="game-options">
@@ -53,10 +53,12 @@ export function gameOptions(){
     });
     
     document.querySelector("#race-sim-speed input").addEventListener("input", () => {
-        document.querySelector("#race-sim-speed label").innerHTML = document.querySelector("#race-sim-speed input").value;
+        const speed = 525 - document.querySelector("#race-sim-speed input").value;
+        document.querySelector("#race-sim-speed label").innerHTML = speed;
     });
     document.querySelector("#race-sim-speed input").addEventListener("change", () => {
-        localStorage.setItem("gpTycoon-race-sim-speed", document.querySelector("#race-sim-speed input").value);
+        const speed = 525 - document.querySelector("#race-sim-speed input").value;
+        localStorage.setItem("gpTycoon-race-sim-speed", speed);
     });
 
     document.querySelector("#visual-race-sim input").addEventListener("change", () => {
