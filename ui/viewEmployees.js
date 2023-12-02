@@ -1,5 +1,6 @@
 import { genTeamHTML } from "../app.js";
-import { CalcTeamDevPoints, game } from "../game.js";
+import { game } from "../game.js";
+import { CalcTeamDevPoints } from "../teams.js";
 import { NumberF } from "../utils.js";
 
 function updateScreen(){

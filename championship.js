@@ -1,10 +1,11 @@
 import { genTeamHTML } from "./app.js";
 import { circuitsData } from "./data/circuits.js";
-import { game, UpdateAfterRace, YearUpdate, BeforeRaceUpdateTeamsStats } from "./game.js";
+import { game, YearUpdate } from "./game.js";
+import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "./teams.js";
 import { seasonOverviewUI } from "./ui.js";
 import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";
-import { accentsTidy, genID, rollDice } from "./utils.js";
+import { accentsTidy, genID, rand, rollDice } from "./utils.js";
 
 const SIMULATION_TICKS = 3;
 
@@ -355,7 +356,7 @@ export class Championship {
             if(tire == "S") tireDivider = 0.2;
             if(tire == "W") tireDivider = -0.2;
 
-            let lapTime = (base/(55+tireDivider)) + (Math.pow(driverF,1) / (base*Math.pow(1,3)*rainF));
+            let lapTime = (base/(55+tireDivider)) + (Math.pow(driverF,1) / (base*3*rainF));
 
             //TIRE CHANGE
             const lapsRemaining = (circuit.laps - Math.floor(raceDrivers[d].actualLap/SIMULATION_TICKS));
@@ -411,14 +412,7 @@ export class Championship {
                         changeTireTo("H");
                 }
             }
-
             
-            if(raceDrivers[d].name == "Max Verstappen"){
-
-               // console.log(lapsRemaining <= 15)
-                //console.log(raceDrivers[d].tire)
-            }
-
             const tireStrategy = raceDrivers[d].tireStrategy;
 
             if(this.race.condition == "sc" && tireLap > 10*SIMULATION_TICKS){
@@ -426,11 +420,6 @@ export class Championship {
             }
             if((lapsRemaining <= 15) && tireStrategy[0] != "W" && Array.from(tireStrategy).every(char => char === tireStrategy[0])){
                 changeTire();
-            }
-            else{
-                if(raceDrivers[d].name == "Max Verstappen"){
-                    ;//console.log(raceDrivers[d].tireStrategy.length)
-                }
             }
             if(tire == "H" && tireLap > 60*SIMULATION_TICKS)  changeTire();
             if(tire == "M" && tireLap > 40*SIMULATION_TICKS)  changeTire();
@@ -440,26 +429,32 @@ export class Championship {
             //
 
             if(d > 0){
+                /*
                 const diff = (raceDrivers[d].totalTime+lapTime) - raceDrivers[d-1].totalTime;
                 
-                /*
                 if(diff <= 0.025 && diff >= 0){
                     const defender = game.drivers[raceDrivers[d-1].name];
                     const attacker = game.drivers[raceDrivers[d].name];
-                    const teamDefender = game.drivers[raceDrivers[d-1].name].team;
-                    const teamAttacker = game.drivers[raceDrivers[d].name].team;
-                    const defenderCar = (game.teams[teamDefender].car.corners * game.teams[teamDefender].car.straights)/100;
-                    const attackerCar = (game.teams[teamAttacker].car.corners * game.teams[teamAttacker].car.straights)/100;
-                    
-                    const overtakeRoll = Math.floor(Math.random() * 100);
-                    let overtakeDC = Math.round(defender.speed+defenderCar - ((attackerCar + attacker.speed)/2)); 
-                    if(overtakeDC <= 0) overtakeDC = 1;
 
-                    if(overtakeRoll >= overtakeDC){
-                        lapTime = raceDrivers[d-1].lapTime-diff-0.0166;
+                    const overtakeRoll = rand(0, 1000);
+                    let overtakeDC = defender.speed - attacker.speed;
+                    
+                    if(overtakeDC < 0){
+                        overtakeDC = 500 + (Math.pow(overtakeDC, 1.5) * 20);
+                    }
+
+                    Math.round(overtakeDC);
+
+                    if(overtakeDC < 250) overtakeDC = 250;
+                    if(overtakeDC > 950) overtakeDC = 950;
+
+                    console.log(`${defender.name} ultrapassa ${attacker.name}`)
+
+                    if(overtakeRoll <= overtakeDC){
+                        lapTime = raceDrivers[d-1].lapTime-diff-0.01;
                     }
                     else{
-                        lapTime += 0.035;
+                        lapTime += 0.015;
                     }
                 }*/
             }
@@ -914,21 +909,22 @@ export class Championship {
                 const timeTable = Swal.getHtmlContainer().querySelector("#time-table");
                 const cars = Swal.getHtmlContainer().querySelector("#race-cars");
                 const podium = Swal.getHtmlContainer().querySelector("#podium");
-
+            
                 cars.innerHTML = this.carsHTML("start");
 
-                timerInterval = setInterval(() => {
+                const tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed")) ?? 500;
+
+                timerInterval = setInterval(e => {
                     timeTable.innerHTML = this.genRaceTableHTML();
                     this.carsHTML();
-                    
+
                     if(this.race.lap == circuitsData[raceName].laps){
                         clearInterval(timerInterval);
                         Swal.enableButtons();
                     }
-                }, Number(localStorage.getItem("gpTycoon-race-sim-speed")) ?? 500);
+                }, tickRate);
             },
         }
-        
 
         Swal.fire(qualifyUI).
         then(e => Swal.fire(raceUI)).
@@ -964,8 +960,6 @@ export class Championship {
 
             const finalResult = this.race.finalResult;
 
-            //console.log(this.race.log)
-
             game.drivers[grid[0].name].poles++;
             game.drivers[finalResult[0].name].wins++;
             game.drivers[finalResult[0].name].podiums++;
@@ -977,7 +971,7 @@ export class Championship {
             this.results[raceName] = this.race.positions;
             this.actualRound++;
 
-            UpdateAfterRace();
+            UpdateTeamAfterRace();
             genTeamHTML();
 
             this.race = {

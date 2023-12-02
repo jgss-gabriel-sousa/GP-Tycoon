@@ -1,6 +1,7 @@
 import { NumberF, accentsTidy } from "../utils.js";
 import { countryCodes } from "../data/countryCodes.js";
-import { game, CalcTeamDevPoints } from "../game.js";
+import { game } from "../game.js";
+import { CalcTeamDevPoints } from "../teams.js";
 import { genTeamHTML } from "../app.js";
 import { marketEng } from "./market.js";
 
@@ -138,6 +139,7 @@ function dismissEng(name){
             ;
         }
         
+        CalcTeamDevPoints(game.team);
         genTeamHTML();
     });
 }
@@ -227,8 +229,6 @@ function contractEng(name){
             team.financialReport["Fines"] += fine;
             team.cash -= fine;
 
-            console.log(game.teams[game.team])
-
             genTeamHTML();
             marketEng();
         }
@@ -236,6 +236,7 @@ function contractEng(name){
             viewEng(name,true);
         }
         
+        CalcTeamDevPoints(game.team);
         genTeamHTML();
     });
 
@@ -328,7 +329,6 @@ function changeEng(name){
                 if(newOccupation == "Chefe de Equipe"){
                     demoted = team.teamPrincipal;
                     team.teamPrincipal = promoted;
-                    console.log(promoted)
                     game.engineers[promoted].occupation = "Chefe de Equipe";
                 }
                 else{

@@ -1,4 +1,4 @@
-import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress } from "./utils.js"
+import { blankSpaceRmv, accentsTidy, NumberF } from "./utils.js"
 import { game } from "./game.js"
 import { circuitsData } from "./data/circuits.js";
 import { enginesData } from "./data/enginesData.js";
@@ -166,10 +166,10 @@ function genCarHTML(){
             </td>
         </tr>
         <tr>
-            <td>Torque:</td>
+            <td>Dirigibilidade:</td>
             <td>
                 <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(engine.torque)}%;"><span>${Math.round(engine.torque)}%</span></div>
+                    <div class="progress-bar" style="width:${Math.round(engine.drivability)}%;"><span>${Math.round(engine.drivability)}%</span></div>
                 </div>
             </td>
         </tr>
@@ -208,67 +208,40 @@ export function genEngHTML(){
                     <button class="btn-eng-name view-eng" value="${team.teamPrincipal}">
                         ${team.teamPrincipal}
                     </button>
+                </td>
+            </tr>`
+    }
+
+    const engIDS = ["technicalDirector","chiefDesigner","chiefAerodynamicist","chiefEngineering"];
+    const engIDSTexts = ["Diretor Técnico","Designer Chefe","Aerodinamicista Chefe","Engenheiro Chefe"];
+    for(const k in engIDS) {
+        const id = engIDS[k];
+
+        html += `
+        <tr>
+            <th>${engIDSTexts[k]}:</th>`
+
+        if(team.engineers[id] != ""){
+            html += `
+                <td>
+                    <button class="btn-eng-name view-eng" value="${team.engineers[id]}">
+                        ${team.engineers[id]}
+                    </button>
                 </td>`
+        }
+        else{
+            html += `
+                <td>
+                    <button class="market-eng">
+                        Contratar
+                    </button>
+                </td>`
+        }
+
+        html += "</tr>"
     }
 
     html += `
-            </tr>
-            <tr>
-                <th>Diretor Técnico:</th>`
-            
-    if(team.engineers.technicalDirector != ""){
-    html += `
-                <td>
-                    <button class="btn-eng-name view-eng" value="${team.engineers.technicalDirector}">
-                        ${team.engineers.technicalDirector}
-                    </button>
-                </td>`
-    }
-    
-    html += `
-            </tr>
-            <tr>
-                <th>Designer Chefe:</th>`
-            
-    if(team.engineers.chiefDesigner != ""){
-    html += `
-                <td>
-                    <button class="btn-eng-name view-eng" value="${team.engineers.chiefDesigner}">
-                        ${team.engineers.chiefDesigner}
-                    </button>
-                </td>`
-    }
-
-    html += `
-            </tr>
-            <tr>
-                <th>Aerodinamicista Chefe:</th>`
-            
-    if(team.engineers.chiefAerodynamicist != ""){
-    html += `
-                <td>
-                    <button class="btn-eng-name view-eng" value="${team.engineers.chiefAerodynamicist}">
-                        ${team.engineers.chiefAerodynamicist}
-                    </button>
-                </td>`
-    }
-    
-    html += `
-            </tr>
-            <tr>
-                <th>Engenheiro Chefe:</th>`
-            
-    if(team.engineers.chiefEngineering != ""){
-    html += `
-                <td>
-                    <button class="btn-eng-name view-eng" value="${team.engineers.chiefEngineering}">
-                        ${team.engineers.chiefEngineering}
-                    </button>
-                </td>`
-    }
-    
-    html += `
-            </tr>
             <tr>
                 <th>Empregados:</th>
                 <td>

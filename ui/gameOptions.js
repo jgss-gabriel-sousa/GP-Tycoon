@@ -66,7 +66,6 @@ export function gameOptions(){
     });
 
     document.querySelector("#ui-team-colors input").addEventListener("change", () => {
-        console.log(document.querySelector("#ui-team-colors input").checked)
         localStorage.setItem("gpTycoon-ui-team-colors", document.querySelector("#ui-team-colors input").checked);
         
         genTeamHTML();

@@ -58,6 +58,7 @@ export function startDriversStats(){
         if(!driver.newStatus) driver.newStatus = "";
         if(!driver.newContractRemainingYears) driver.newContractRemainingYears = -1;
         if(!driver.contractRemainingYears) driver.contractRemainingYears = 0;
+        if(!driver.years_in_f1) driver.years_in_f1 = 0;
         if(!driver.experience) driver.experience = 0;
         if(!driver.titles) driver.titles = 0;
         if(!driver.gps) driver.gps = 0;
@@ -78,8 +79,10 @@ export function startDriversStats(){
                 game.teams[driver.team].newTdriver = driver.name;
         }
 
-        if(driver.experience > 10) driver.experience = 10;
-        driver.experience = Math.round((driver.experience/10)*100);
+        if(driver.years_in_f1 > 10) driver.years_in_f1 = 10;
+        driver.experience = Math.round(driver.years_in_f1*10 + driver.gps/5 + driver.titles*10);
+        if(driver.experience > 100) driver.experience = 100;
+        delete driver.years_in_f1;
 
         driver.motivation = rollDice("5d20+30");
         if(driver.motivation > 100) driver.motivation = 100;
@@ -98,8 +101,6 @@ function driverSkillUpdate(driver){
 
         driver.speed = Math.round(driver.speed * (1 - (rollDice("2d4+0") / (100 + rate))));
         driver.pace = Math.round(driver.pace * (1 - (rollDice("2d4+0") / (100 + rate))));
-
-        console.log(driver.name+" Worsened");
     }
     else if(driver.experience < 100){
 
@@ -110,8 +111,6 @@ function driverSkillUpdate(driver){
         let rate = Math.round((timeToCareerPeak * experience * ability)*100);
 
         if(rand(0, 100) < rate){
-            console.log(driver.name+"("+rate+"%)"+" Improved");
-
             driver.speed += rollDice("3d2+-3");
             driver.pace += rollDice("3d2+-3");
         }
@@ -129,7 +128,6 @@ export function YearUpdateDriversStats(){
         if(driver.motivation > 100) driver.motivation = 100;
 
         if(driver.team) driver.experience += 10;
-        if(driver.titles > 1) driver.experience = 100;
         if(driver.experience > 100) driver.experience = 100;
 
         if(driver.newSalary) driver.salary = driver.newSalary;

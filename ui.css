@@ -1,3 +1,5 @@
+@import url("./styles/financialReport.css");
+
 #team-standings{
     border-collapse: collapse;
     border: 1px solid #a2a9b1;
@@ -264,37 +266,6 @@
 }
 #employees-actions div button:last-child {
     background-color: #e69298;
-}
-
-
-#financial-report table{
-    width: 100%;
-    border: 2px solid #222;
-    border-collapse: collapse;
-}
-#financial-report th{
-    background-color: #5c5c5c;
-    color: #f5f5f5;
-    border: 2px solid #222;
-    text-align: end;
-}
-#financial-report td{
-    text-align: end;
-    padding: 5px;
-    border: 1px solid #6b6b6b;
-    font-size: 14px;
-}
-#financial-report td:last-child{
-    text-align: center;
-    border-left: 2px solid #222;
-}
-#financial-report th:last-child{
-    min-width: 150px;
-    text-align: center;
-}
-#financial-report th{
-    padding: 5px;
-    font-size: 16px;
 }
 
 #select-team {

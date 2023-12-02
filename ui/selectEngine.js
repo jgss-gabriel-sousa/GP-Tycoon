@@ -11,7 +11,7 @@ export function selectEngine(endSeason){
         <tr>
             <th>Fabricante</th>
             <th>Potência</th>
-            <th>Torque</th>
+            <th>Dirigibilidade</th>
             <th>Confiabilidade</th>
             <th>Valor Base Anual</th>
             <th></th>
@@ -25,7 +25,7 @@ export function selectEngine(endSeason){
         <tr>
             <td>${e}</td>
             <td>${engine.power}</td>
-            <td>${engine.torque}</td>
+            <td>${engine.drivability}</td>
             <td>${engine.reliability}%</td>
             <td>${NumberF(engine.cost*1000,"ext",0)}</td>
             <td>${!engine.blackList.includes(game.team) ? `<button class="engine" value="${e}">Negociar</button>` : ""}</td>

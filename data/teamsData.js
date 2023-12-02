@@ -2,7 +2,7 @@ export const teamsData = {
     "Red Bull": {
         name: "Red Bull",
         country: "AT",
-        engine: "Red Bull",
+        engine: "Red Bull PowerTrains",
         engineContract: 0,
         bg_color: "#23326A",
         border_color: "#9E1336",
@@ -277,7 +277,7 @@ export const teamsData = {
         fansTrust: 100,
         driver1: "Lando Norris",
         driver2: "Oscar Piastri",
-        test_driver: "Álex Palou",
+        test_driver: "Pato O’Ward",
         car: {
             speed: 67,
             downforce: 70,
@@ -352,7 +352,7 @@ export const teamsData = {
     "AlphaTauri": {
         name: "AlphaTauri",
         country: "IT",
-        engine: "Red Bull",
+        engine: "Red Bull PowerTrains",
         engineContract: 3,
         bg_color: "#f1f3f4",
         border_color: "#00293f",

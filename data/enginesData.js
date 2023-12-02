@@ -1,20 +1,7 @@
-class Engine {
-    constructor(power, torque, efficiency, reliability, cost) {
-        this.power = power;
-        this.torque = torque;
-        this.efficiency = efficiency;
-        this.reliability = reliability;
-        this.cost = cost;
-        this.maxClients = 0;
-        this.maxClients = 0;
-        this.clientPowerReduction = reliability;
-    }
-}
-
 export const enginesData = {
     "Ferrari": {
-        power: 95,
-        torque: 80,
+        power: 100,
+        drivability: 90,
         reliability: 95,
         cost: 20000,
         blackList: ["Mercedes","Alpine","Red Bull"],
@@ -22,23 +9,23 @@ export const enginesData = {
     },
     "Renault": {
         power: 91,
-        torque: 75,
+        drivability: 75,
         reliability: 70,
         cost: 10000,
         blackList: ["Ferrari","Mercedes"],
         minContractLength: 2,
     },
-    "Red Bull": {
+    "Red Bull PowerTrains": {
         power: 100,
-        torque: 85,
+        drivability: 85,
         reliability: 90,
         cost: 15000,
         blackList: ["Ferrari","McLaren","Alpine","Mercedes"],
         minContractLength: 2,
     },
     "Mercedes": {
-        power: 90,
-        torque: 70,
+        power: 100,
+        drivability: 70,
         reliability: 80,
         cost: 20000,
         blackList: ["Ferrari","Red Bull","Alpine"],
@@ -46,7 +33,7 @@ export const enginesData = {
     },
     "Porsche": {
         power: 70,
-        torque: 60,
+        drivability: 60,
         reliability: 40,
         cost: 20000,
         blackList: ["Ferrari","Mercedes","Alpine"],
@@ -54,7 +41,7 @@ export const enginesData = {
     },
     "Honda": {
         power: 95,
-        torque: 80,
+        drivability: 80,
         reliability: 80,
         cost: 20000,
         blackList: ["Ferrari","Mercedes","Alpine","Red Bull"],
