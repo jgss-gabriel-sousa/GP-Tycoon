@@ -26,8 +26,8 @@ export function shuffleArr(array){
 export function NumberF(number,format,precision){    
     if(format == "ext"){
         let value = "";
-        const M = parseInt(number/1000000,10);
-        const K = parseInt((number-(M*1000000))/1000,10);
+        const M = Math.floor(number/1000000);
+        let K = Math.floor((number%1000000)/1000);
         
         if(M > 0 || M < 0){
             if(M == 1)
@@ -36,14 +36,11 @@ export function NumberF(number,format,precision){
                 value = M+" milhões ";
         }
 
-        if(M >= 0 && K > 0){
-            if(K != 0)
-                value += K+" mil";
-        }
-        else if(M <= 0 && K < 0){
-            if(K != 0)
-                value += -(K)+" mil"; 
-        }
+        if(M != 0)
+            K = Math.abs(K);
+
+        if(K != 0)
+            value += K+" mil";
         return value;
     }
     if(format == "ext-short"){
