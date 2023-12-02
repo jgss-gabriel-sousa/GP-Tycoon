@@ -465,7 +465,7 @@ export function genTeamHTML(){
 
     document.querySelector("#year").innerText = `${game.year}`;
     document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money_icon.png" alt="Money Icon"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
 
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
