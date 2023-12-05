@@ -19,9 +19,9 @@ export function gameOptions(){
             <input type="checkbox" ${visualRaceSim == "true" ? `checked="checked"` : ""}>
         </div>
         <div id="race-sim-speed">
-            <p>Duração da Simulação de Corrida:</p>
-            <input type="range" min="25" max="500" value="${raceSpeedValue}" step="25">
-            <label>${raceSpeedValue}</label>
+            <p>Velocidade da Simulação de Corrida:</p>
+            <input type="range" min="25" max="500" value="${525 - raceSpeedValue}" step="25">
+            <label>${Math.round(((525 - raceSpeedValue) / 500)*100)}%</label>
         </div>
 
         <div id="ui-team-colors">
@@ -45,6 +45,12 @@ export function gameOptions(){
     });
 
     
+    if(document.querySelector("#visual-race-sim input").checked == false)
+        document.querySelector("#race-sim-speed input").setAttribute("disabled", "");
+    else
+        document.querySelector("#race-sim-speed input").removeAttribute("disabled");
+    
+
     document.querySelector("#volume input").addEventListener("input", () => {
         document.querySelector("#volume label").innerHTML = Math.round(document.querySelector("#volume input").value*100)+"%";
     });
@@ -53,8 +59,8 @@ export function gameOptions(){
     });
     
     document.querySelector("#race-sim-speed input").addEventListener("input", () => {
-        const speed = 525 - document.querySelector("#race-sim-speed input").value;
-        document.querySelector("#race-sim-speed label").innerHTML = speed;
+        const speed = Math.round((document.querySelector("#race-sim-speed input").value / 500)*100);
+        document.querySelector("#race-sim-speed label").innerHTML = speed+"%";
     });
     document.querySelector("#race-sim-speed input").addEventListener("change", () => {
         const speed = 525 - document.querySelector("#race-sim-speed input").value;
@@ -63,6 +69,11 @@ export function gameOptions(){
 
     document.querySelector("#visual-race-sim input").addEventListener("change", () => {
         localStorage.setItem("gpTycoon-visual-race-sim", document.querySelector("#visual-race-sim input").checked);
+          
+        if(document.querySelector("#visual-race-sim input").checked == false)
+            document.querySelector("#race-sim-speed input").setAttribute("disabled", "");
+        else
+            document.querySelector("#race-sim-speed input").removeAttribute("disabled");
     });
 
     document.querySelector("#ui-team-colors input").addEventListener("change", () => {
