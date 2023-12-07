@@ -45,11 +45,11 @@ export class Championship {
                     driverChampion: "Max Verstappen",
                     driverCountry: "NL",
                     driverTeam: "Red Bull",
-                    driverEngine: "Red Bull",
+                    driverEngine: "Red Bull PowerTrains",
         
                     constructorChampion: "Red Bull",
                     constructorCountry: "AT",
-                    constructorEngine: "Red Bull",
+                    constructorEngine: "Red Bull PowerTrains",
                 }
             ];
             
@@ -729,9 +729,9 @@ export class Championship {
 
         if(status == "podium"){
             TimeTableHTML = `
-            <img class="podium-img" src="img/drivers/${finalResult[1].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
-            <img class="podium-img" src="img/drivers/${finalResult[0].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
-            <img class="podium-img" src="img/drivers/${finalResult[2].name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${game.drivers[finalResult[1].name].image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${game.drivers[finalResult[0].name].image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <img class="podium-img" src="img/drivers/${game.drivers[finalResult[2].name].image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <img class="podium-img" src="img/flags/${accentsTidy(game.drivers[finalResult[0].name].country)}.webp">
             `
         }
@@ -740,7 +740,7 @@ export class Championship {
     }
 
     carsHTML(status){
-        if(!(localStorage.getItem("gpTycoon-visual-race-sim") == "true" ?? true)){
+        if((localStorage.getItem("gpTycoon-visual-race-sim") == "false")){
             if(status == "start")
                 document.querySelector("#race-cars").style.display = "none";
             return;
@@ -912,7 +912,9 @@ export class Championship {
             
                 cars.innerHTML = this.carsHTML("start");
 
-                const tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed")) ?? 500;
+                let tickRate = 25;
+                if(localStorage.getItem("gpTycoon-race-sim-speed"))
+                    tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed"));
 
                 timerInterval = setInterval(e => {
                     timeTable.innerHTML = this.genRaceTableHTML();

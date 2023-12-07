@@ -25,7 +25,7 @@ export function gameOptions(){
         </div>
 
         <div id="ui-team-colors">
-            Interface com cores da equipe:
+            <p>Interface com cores da equipe:</p>
             <input type="checkbox" ${uiTeamColors == "true" ? `checked="checked"` : ""}>
         </div>
     </div>

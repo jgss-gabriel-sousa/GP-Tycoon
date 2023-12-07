@@ -21,6 +21,69 @@ export function getRandomCountry(){
     return countries[randomIndex];
 }
 
+export function getCountryEthnicity(countryName) {
+    const ethnicities = {
+        european: [
+            'IT', 'DE', 'GB', 'FR', 'AU', 'FI', 'CA', 'ES', 'NL',
+            'BE', 'AT', 'SE', 'IE', 'PT', 'DK', 'MC', 'NZ', 'GR',
+            'PL', 'HU', 'CH', 'EE', 'NO', 'RO', 'UA', 'LT', 'LV',
+            'BG', 'LU', 'BR', 'AR', 'US', 'RU', 'HR', 'SI', 'IL',
+            'RO', 'UA', 'RS', 'BG', 'SK', 'LT', 'LV', 'CZ', 'TR',
+        ],
+        indian: ['IN'],
+        asian: ['JP', 'KR', 'SG', 'ID', 'TH', 'CN'],
+        latin: ['BR', 'AR', 'MX', 'CL', 'CO', 'PE'],
+        arab: ['AE', 'EG', 'SA', 'QA', 'KW'],
+        african: ['ZA', 'NG'],
+    };
+
+    const countryEthnicities = [];
+
+    // Check the country and add the corresponding ethnicities to the array
+    Object.entries(ethnicities).forEach(([ethnicity, countries]) => {
+        if (countries.includes(countryName)) {
+            countryEthnicities.push(ethnicity);
+        }
+    });
+
+    if(countryEthnicities.length == 0) countryEthnicities.push("generic");
+
+    const ethnicityData = {
+        ethnicity: countryEthnicities[rand(0, countryEthnicities.length)],
+    }
+
+    if(ethnicityData.ethnicity == "european"){
+        ethnicityData["maleImgs"] = 19;
+        ethnicityData["femaleImgs"] = 4;
+    }
+    if(ethnicityData.ethnicity == "indian"){
+        ethnicityData["maleImgs"] = 5;
+        ethnicityData["femaleImgs"] = 4;
+    }
+    if(ethnicityData.ethnicity == "asian"){
+        ethnicityData["maleImgs"] = 7;
+        ethnicityData["femaleImgs"] = 4;
+    }
+    if(ethnicityData.ethnicity == "latin"){
+        ethnicityData["maleImgs"] = 11;
+        ethnicityData["femaleImgs"] = 4;
+    }
+    if(ethnicityData.ethnicity == "arab"){
+        ethnicityData["maleImgs"] = 4;
+        ethnicityData["femaleImgs"] = 4;
+    }
+    if(ethnicityData.ethnicity == "african"){
+        ethnicityData["maleImgs"] = 14;
+        ethnicityData["femaleImgs"] = 2;
+    }
+    if(ethnicityData.ethnicity == "generic"){
+        ethnicityData["maleImgs"] = 5;
+        ethnicityData["femaleImgs"] = 1;
+    }
+
+    return ethnicityData;
+}
+
 export const countryRanking = {
     // Tier 1 (Alta probabilidade)
     'IT': 1, // Itália

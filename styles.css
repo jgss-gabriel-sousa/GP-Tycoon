@@ -48,6 +48,7 @@ ul{
 li button{
     height: 100%;
     display: flex;
+    margin: 5px 5px;
 }
 
 button{
@@ -57,7 +58,6 @@ button{
 	padding: 5px;
 	margin: 3px;
 	transition: background-color 0.25s;
-    font-weight: bold;
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -100,7 +100,6 @@ p {
     margin-top: 5px;
     margin-bottom: 5px;
     font-size: 12px;
-    font-weight: bold;
 }
 
 nav img {
@@ -167,6 +166,7 @@ abbr {
 #team-menu-interface {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
 }
 #team-menu-interface > div {
     margin-bottom: 10px;
@@ -260,7 +260,7 @@ abbr {
 
 #info {
     border: 2px solid var(--border);
-    min-width: 200px;
+    min-width: 175px;
     height: max-content;
     box-shadow: 1px 1px #222;
     text-align: center;
@@ -372,6 +372,7 @@ abbr {
     border-collapse: collapse;
     font-size: 12px;
     margin: 5px 0px;
+    padding: 5px;
 }
 .bars-table td {
     padding: 0;
@@ -383,11 +384,15 @@ abbr {
 .bars-table td:nth-child(1) {
     padding-right: 2px;
     text-align: end;
-    font-weight: bold;
 }
 .bars-table td:nth-child(2) {
     padding: 0;
     border: 1px solid black;
+}
+
+#engineering > div {
+    width: 210px;
+    min-width: fit-content;
 }
 
 #engineering,
@@ -410,10 +415,9 @@ abbr {
     background-color: var(--border);
     color: var(--titles);
     text-align: end;
-    height: 35px;
+    height: 25px;
 }
 #engineering td {
-    font-weight: bold;
     width: 50%;
 }
 #engineers-name td:first-child {
@@ -502,6 +506,7 @@ abbr {
 }
 #development .total-investments {
     text-align: end;
+    padding: 0px 4px;
 }
 #investments td:nth-child(2) {
     min-width: 60px;
@@ -603,14 +608,27 @@ abbr {
 }
 
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    border-radius: 0;
     background: var(--border);
     cursor: pointer;
 }
 
+@media (max-width: 1400px) {
+    #team-menu-interface {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
 
 @media (max-width: 1000px) {
+    #team-menu > nav > ul {
+        display: flex;
+    }
     #drivers {
         flex-wrap: wrap;
         justify-content: center;

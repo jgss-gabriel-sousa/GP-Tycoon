@@ -1,15 +1,22 @@
-import { getRandomCountry } from "./data/countryRanking.js";
+import { getCountryEthnicity, getRandomCountry } from "./data/countryRanking.js";
 import { generateName } from "./data/nameData.js";
 import { game } from "./game.js"
 import { rand, rollDice } from "./utils.js"
 
+export function getSalary(driver){
+    const ability = Math.pow((driver.speed*0.5 + driver.pace*0.5)/100, 2);
+    let salary = ((Math.pow(ability*1.1, 6)) + (Math.pow(10, driver.titles/10) * 0.025)) * (ability*2);
+    salary = salary.toFixed(2);
+    return salary;
+}
+
 function genDriver(){
     let name = "";
     let country = "";
+    let gender = "";
 
     do {
         const r = rand(0,100);
-        let gender = "";
         if(r < 95) gender = "male"
         else gender = "female"
 
@@ -35,18 +42,24 @@ function genDriver(){
     driver.team = "";
     driver.status = "";
     driver.contractRemainingYears = 0;
+    //driver.image = `generic/${rand(0,9)}`;
 
-    const ability = Math.pow((driver.speed*0.5 + driver.pace*0.5)/100, 2);
-    driver.salary = ((Math.pow(ability*1.1, 6)) + (Math.pow(10, driver.titles/10) * 0.025)) * (ability*2);
-    driver.salary = driver.salary.toFixed(2);
+    const ethnicityData = getCountryEthnicity(country);
+
+    driver.image = `generic/${ethnicityData.ethnicity}/${gender}${rand(0, ethnicityData[gender+"Imgs"])}`;
+
+    driver.salary = getSalary(driver);
+
+    if(gender = "male") gender = "Male";
+    if(gender = "female") gender = "Female";
+    driver.gender = gender;
 
     game.drivers[name] = driver;
 }
 
-
 export function startDriversStats(){
 
-    for(let i = Object.keys(game.drivers).length; i < 50; i++) {
+    for(let i = Object.keys(game.drivers).length; i < 60; i++) {
         genDriver();
     }
 
@@ -54,6 +67,8 @@ export function startDriversStats(){
         const driver = game.drivers[d];
         
         driver.contractInterest = [];
+        if(!driver.gender) driver.gender = "M";
+        if(!driver.image) driver.image = driver.name;
         if(!driver.newTeam) driver.newTeam = "";
         if(!driver.newStatus) driver.newStatus = "";
         if(!driver.newContractRemainingYears) driver.newContractRemainingYears = -1;
@@ -89,9 +104,7 @@ export function startDriversStats(){
 
         if(!driver.careerPeak) driver.careerPeak = rollDice("3d6+18");
 
-        const ability = Math.pow((driver.speed*0.5 + driver.pace*0.5)/100, 2);
-        driver.salary = ((Math.pow(ability*1.1, 6)) + (Math.pow(10, driver.titles/10) * 0.025)) * (ability*2);
-        driver.salary = driver.salary.toFixed(2);
+        driver.salary = getSalary(driver);
     }
 };
 
@@ -131,6 +144,7 @@ export function YearUpdateDriversStats(){
         if(driver.experience > 100) driver.experience = 100;
 
         if(driver.newSalary) driver.salary = driver.newSalary;
+        else driver.salary = getSalary(driver);
 
         if(driver.newContractRemainingYears > 0){
             driver.team = driver.newTeam;

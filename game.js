@@ -10,7 +10,7 @@ import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
 import { selectEngine } from "./ui/selectEngine.js";
 import { generateName } from "./data/nameData.js";
 import { getRandomCountry } from "./data/countryRanking.js";
-import { CalcTeamDevPoints, YearUpdateTeamsStats } from "./teams.js";
+import { CalcTeamDevPoints, StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
 
 export const game = {
     activeScreen: "main-menu",
@@ -122,70 +122,6 @@ function StartEngStats(){
             eng[team.engineers.chiefEngineering].occupation = "Engenheiro Chefe";
             eng[team.engineers.chiefEngineering].team = team.name; 
         } 
-    }
-}
-
-function StartTeamsStats(){
-    for(const t in game.teams) {
-        const team = game.teams[t];
-        const car = team.car;
-        const engine = game.engines[team.engine];
-
-        team.new1driver = "";
-        team.new2driver = "";
-        team.newTdriver = "";
-
-        team.newEngine = "";
-
-        car.weight = (car.downforce + car.speed)/2;
-        car.aerodynamic = car.speed;
-        car.chassisReliability = car.reliability;
-
-        delete car.speed;
-        
-        car.corners = (((car.downforce + car.weight)/2)*engine.drivability)/100;
-        car.straights = (((car.aerodynamic + car.weight)/2)*engine.power)/100;
-        car.reliability = (car.chassisReliability * engine.reliability)/100;
-
-        team.newCar = {};
-        team.newCar.aerodynamic = 0;
-        team.newCar.downforce = 0;
-        team.newCar.weight = 0;
-        team.newCar.chassisReliability = 0;
-
-        team.aeroPts = 0;
-        team.engPts = 0;
-        team.brokeCostCap = false;
-        team.brokeCostCapPenalty = 0;
-        team.devFocusActualSeason = team.devFocusActualSeason ?? 50;
-        team.devFocusNextSeason = team.devFocusNextSeason ?? 50;
-
-        team.factories = Math.ceil(team.employees/250);
-
-        team.investments = team.investments ?? {};
-        team.investments.aerodynamics = team.investments.aerodynamics ?? 500;
-        team.investments.weight = team.investments.weight ?? 500;
-        team.investments.downforce = team.investments.downforce ?? 500;
-        team.investments.reliability = team.investments.reliability ?? 500;
-        team.totalInvestments = 0;
-
-        team.financialReport = {};
-        team.financialReport["Prize per Point"] = 0;
-        team.financialReport["Prize per Place"] = 0;
-        team.financialReport["1st Driver"] = 0;
-        team.financialReport["2nd Driver"] = 0;
-        team.financialReport["Test Driver"] = 0;
-        team.financialReport["Engineers"] = 0;
-        team.financialReport["Employees"] = 0;
-        team.financialReport["Development Investments"] = 0;
-        team.financialReport["Major Sponsor"] = 0;
-        team.financialReport["Sponsors"] = 0;
-        team.financialReport["Factory Sponsor"] = 0;
-        team.financialReport["Balance"] = 0;
-        team.financialReport["Engine"] = 0;
-        team.financialReport["Fines"] = 0;
-        
-        CalcTeamDevPoints(team.name);
     }
 }
 

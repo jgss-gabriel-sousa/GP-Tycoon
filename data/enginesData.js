@@ -8,7 +8,7 @@ export const enginesData = {
         minContractLength: 1,
     },
     "Renault": {
-        power: 91,
+        power: 95,
         drivability: 75,
         reliability: 70,
         cost: 10000,
@@ -31,17 +31,9 @@ export const enginesData = {
         blackList: ["Ferrari","Red Bull","Alpine"],
         minContractLength: 1,
     },
-    "Porsche": {
-        power: 70,
-        drivability: 60,
-        reliability: 40,
-        cost: 20000,
-        blackList: ["Ferrari","Mercedes","Alpine"],
-        minContractLength: 3,
-    },
     "Honda": {
-        power: 95,
-        drivability: 80,
+        power: 90,
+        drivability: 75,
         reliability: 80,
         cost: 20000,
         blackList: ["Ferrari","Mercedes","Alpine","Red Bull"],

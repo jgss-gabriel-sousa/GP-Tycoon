@@ -168,8 +168,12 @@ function expandFactory(){
     }).then((result) => {
         if(result.isConfirmed){
             team.cash -= team.factories*50000;
-            document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+            team.financialReport["Balance"] -= team.factories*50000;
+            team.financialReport["Constructions"] -= team.factories*50000;
             team.factories++;
+
+            document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+        
         }else if(result.isDenied){
             viewEmployees(game.team);
         }

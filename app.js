@@ -17,7 +17,7 @@ function genDriversHTML(){
     ];
 
     let i = 0;
-    driver.forEach(e => {
+    driver.forEach(d => {
         html += `
         <div class="driver-card bars-table" id="first-driver-card">`
             if(i == 0)
@@ -27,9 +27,9 @@ function genDriversHTML(){
             if(i == 2)
                 html += "<h1>Piloto de Testes</h1>"
         html += `
-            <img class="driver-card-portrait" src="img/drivers/${e.name}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
-            <button class="btn-driver-name view-driver" value="${e.name}">
-                <img class="country-flag" src="img/flags/${accentsTidy(e.country)}.webp"> ${e.name}
+            <img class="driver-card-portrait" src="img/drivers/${d.image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
+            <button class="btn-driver-name view-driver" value="${d.name}">
+                <img class="country-flag" src="img/flags/${accentsTidy(d.country)}.webp"> ${d.name}
             </button>
         `
         
@@ -39,7 +39,7 @@ function genDriversHTML(){
                     <td>Velocidade:</td>
                     <td>
                         <div class="progress-bar-background">
-                            <div class="progress-bar" style="width:${e.speed}%;"><span>${e.speed}%</span></div>
+                            <div class="progress-bar" style="width:${d.speed}%;"><span>${d.speed}%</span></div>
                         </div>
                     </td>
                 </tr>
@@ -47,7 +47,7 @@ function genDriversHTML(){
                     <td>Ritmo:</td>
                     <td>
                         <div class="progress-bar-background">
-                            <div class="progress-bar" style="width:${e.pace}%;"><span>${e.pace}%</span></div>
+                            <div class="progress-bar" style="width:${d.pace}%;"><span>${d.pace}%</span></div>
                         </div>
                     </td>
                 </tr>
@@ -55,13 +55,11 @@ function genDriversHTML(){
                     <td>Experiência:</td>
                     <td>
                         <div class="progress-bar-background">
-                            <div class="progress-bar" style="width:${e.experience}%;"><span>${e.experience}%</span></div>
+                            <div class="progress-bar" style="width:${d.experience}%;"><span>${d.experience}%</span></div>
                         </div>
                     </td>
                 </tr>
             </table>
-            <br>
-            <p>Salário: ${NumberF(e.salary * 1000000,"ext-short",0)} por Corrida</p>
         </div>
         `
         i++;
@@ -248,6 +246,14 @@ export function genEngHTML(){
                     <button class="btn-eng-name view-employees" value="${team.name}">
                         ${NumberF(team.employees,"",0)}
                     </button>
+                </td>
+            </tr>
+            <tr>
+                <th>Moral da Equipe:</th>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${Math.round(team.teamMorale)}%;"><span>${Math.round(team.teamMorale)}%</span></div>
+                    </div>
                 </td>
             </tr>
         </table>

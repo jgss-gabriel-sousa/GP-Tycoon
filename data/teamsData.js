@@ -17,8 +17,8 @@ export const teamsData = {
         driver2: "Sergio Pérez",
         test_driver: "Daniel Ricciardo",
         car: {
-            speed: 80,
-            downforce: 86,
+            speed: 90,
+            downforce: 100,
             reliability: 100,
         },
         teamPrincipal: "Christian Horner",

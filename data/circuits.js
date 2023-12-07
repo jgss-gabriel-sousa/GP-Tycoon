@@ -237,7 +237,7 @@ export const circuitsData = {
         straights: 50,
         corners: 50,
     },
-    "Indianapolis":{
+    "Indy":{
         abbrev: "INDY",
         circuit: "Indianapolis",
         country: "US",

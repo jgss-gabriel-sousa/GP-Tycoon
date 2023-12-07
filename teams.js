@@ -12,6 +12,7 @@ export function CalcTeamDevPoints(teamName){
     aeroPts += eng[team.engineers.chiefAerodynamicist].aero * 2;
     aeroPts /= 5;
     aeroPts *= ((team.employees/1000)+1)/2;
+    aeroPts *= team.teamMorale/100;
 
 
     let engPts = (eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2;
@@ -20,6 +21,7 @@ export function CalcTeamDevPoints(teamName){
     engPts += eng[team.engineers.chiefEngineering].eng * 2;
     engPts /= 5;
     engPts *= ((team.employees/1000)+1)/2;
+    engPts *= team.teamMorale/100;
 
     if(team.brokeCostCap){
         aeroPts -= aeroPts * team.brokeCostCapPenalty;
@@ -42,9 +44,175 @@ export function BeforeRaceUpdateTeamsStats(){
         car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
         
         team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
+    
+        contractDriver(team.name);
     }
 }
 
+
+function contractDriver(teamName){
+    const team = game.teams[teamName];
+    let looking = [];
+
+    if(team.new1driver == "") looking.push("1st Driver");
+    else if(team.new2driver == "") looking.push("2nd Driver");
+    else if(team.newTdriver == "") looking.push("Test Driver");
+
+    if(looking.length == 0) return;
+
+    if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100)) return;
+    
+    const remainingRounds = game.championship.tracks.length - game.championship.actualRound;
+    let financeFactor = ((team.financialReport["Balance"]*remainingRounds)+team.cash) / team.cash;
+    if(!financeFactor) financeFactor = 1;
+    if(financeFactor > 2) financeFactor = 2;
+    if(financeFactor < -0.5) financeFactor = -0.5;
+
+
+    let maxValue = Math.max(game.drivers[team.driver1].salary, game.drivers[team.driver2].salary, game.drivers[team.test_driver].salary);
+    maxValue += maxValue*financeFactor;
+
+    for (let loops = 0; loops < looking.length; loops++) {
+        const lookingFor = looking[loops];
+        const selectedDrivers = [];
+
+        for(const d in game.drivers) {
+            const driver = game.drivers[d];
+
+            if(driver.salary > maxValue) continue;
+            if(driver.newTeam != "" || driver.contractRemainingYears > 0) continue;
+
+            const predictedQuality = ((driver.speed+rand(0,30)-15) + (driver.pace+rand(0,30)-15))/2;
+            const costBenefit = (driver.salary/maxValue);
+            let rating = predictedQuality * costBenefit;
+
+            if(driver.team == teamName){
+                rating *= 1.1;
+            }
+            if(lookingFor == "1st Driver"){
+                rating *= (driver.experience+10)/100;
+            }
+            if(lookingFor == "Test Driver"){
+                rating /= Math.max((driver.salary/maxValue),6);
+            }
+
+            selectedDrivers.push({
+                name: driver.name,
+                baseRating: rating
+            });
+        }
+        selectedDrivers.sort((a,b) => b.baseRating - a.baseRating);
+
+        for(let i = 0; i < selectedDrivers.length; i++){
+            if(!selectedDrivers[i] == undefined) continue;
+
+            const driver = game.drivers[selectedDrivers[i].name];
+            
+            if(lookingFor == "1st Driver"){
+                driver.newTeam = team.name;
+                driver.newStatus = "1º Piloto";
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.new1driver = driver.name;
+                delete selectedDrivers[i];
+                break;
+            }
+            if(lookingFor == "2nd Driver"){
+                driver.newTeam = team.name;
+                driver.newStatus = "2º Piloto";
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.new2driver = driver.name;
+                delete selectedDrivers[i];
+                break;
+            }
+            if(lookingFor == "Test Driver"){
+
+                let chanceOfExpDriverReject;
+                if(driver.age <= driver.careerPeak)
+                    chanceOfExpDriverReject = Math.round((driver.experience/100)*100);
+                else
+                    chanceOfExpDriverReject = 10;
+
+                if(rand(0,100) < chanceOfExpDriverReject)
+                    continue;
+
+                driver.newTeam = team.name;
+                driver.newStatus = "Piloto de Testes";
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.newTdriver = driver.name;
+                delete selectedDrivers[i];
+                break;
+            }
+        }
+    }
+}
+
+export function StartTeamsStats(){
+    for(const t in game.teams) {
+        const team = game.teams[t];
+        const car = team.car;
+        const engine = game.engines[team.engine];
+
+        team.new1driver = "";
+        team.new2driver = "";
+        team.newTdriver = "";
+
+        team.newEngine = "";
+
+        car.weight = (car.downforce + car.speed)/2;
+        car.aerodynamic = car.speed;
+        car.chassisReliability = car.reliability;
+
+        delete car.speed;
+        
+        car.corners = (((car.downforce + car.weight)/2)*engine.drivability)/100;
+        car.straights = (((car.aerodynamic + car.weight)/2)*engine.power)/100;
+        car.reliability = (car.chassisReliability * engine.reliability)/100;
+
+        team.newCar = {};
+        team.newCar.aerodynamic = 0;
+        team.newCar.downforce = 0;
+        team.newCar.weight = 0;
+        team.newCar.chassisReliability = 0;
+        
+        team.teamMorale = 100;
+        team.aeroPts = 0;
+        team.engPts = 0;
+        team.brokeCostCap = false;
+        team.brokeCostCapPenalty = 0;
+        team.devFocusActualSeason = team.devFocusActualSeason ?? 50;
+        team.devFocusNextSeason = team.devFocusNextSeason ?? 50;
+
+        team.factories = Math.ceil(team.employees/250);
+
+        team.investments = team.investments ?? {};
+        team.investments.aerodynamics = team.investments.aerodynamics ?? 500;
+        team.investments.weight = team.investments.weight ?? 500;
+        team.investments.downforce = team.investments.downforce ?? 500;
+        team.investments.reliability = team.investments.reliability ?? 500;
+        team.totalInvestments = 0;
+
+        team.financialReport = {};
+        team.financialReport["Prize per Point"] = 0;
+        team.financialReport["Prize per Place"] = 0;
+        team.financialReport["Drivers"] = 0;
+        team.financialReport["Engineers"] = 0;
+        team.financialReport["Employees"] = 0;
+        team.financialReport["Development Investments"] = 0;
+        team.financialReport["Major Sponsor"] = 0;
+        team.financialReport["Sponsors"] = 0;
+        team.financialReport["Factory Sponsor"] = 0;
+        team.financialReport["Balance"] = 0;
+        team.financialReport["Engine"] = 0;
+        team.financialReport["Fines"] = 0;
+        team.financialReport["Constructions"] = 0;
+        team.financialReport["Fees"] = 0;
+        
+        CalcTeamDevPoints(team.name);
+    }
+}
 
 export function UpdateTeamAfterRace(){    
     game.championship.createStandings();
@@ -100,6 +268,8 @@ export function UpdateTeamAfterRace(){
                 break;
             }
         }
+        
+        const driversCost = (1000*game.drivers[team.driver1].salary) + (game.drivers[team.driver2].salary*1000) + (game.drivers[team.test_driver].salary*1000);
 
         setBalance("Prize per Point",   "profit",   teamPoints * 200);
         setBalance("Prize per Place",   "profit",   prizePerPlaceValue);
@@ -107,12 +277,12 @@ export function UpdateTeamAfterRace(){
         setBalance("Sponsors",          "profit",   team.sponsor_value * team.sponsors.length);
         setBalance("Factory Sponsor",   "profit",   team.factorySponsor_value);
 
-        setBalance("1st Driver",        "expense",  game.drivers[team.driver1].salary*1000);
-        setBalance("2nd Driver",        "expense",  game.drivers[team.driver2].salary*1000);
-        setBalance("Test Driver",       "expense",  game.drivers[team.test_driver].salary*1000);
+        setBalance("Drivers",           "expense",  driversCost);
         setBalance("Engineers",         "expense",  EngineersCost);
         setBalance("Employees",         "expense",  team.employees * 2.5);
         setBalance("Development Investments", "expense", team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
+        setBalance("Constructions",     "expense",  0);
+        setBalance("Fees",              "expense",  0);
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
@@ -272,9 +442,7 @@ export function YearUpdateTeamsStats(){
         team.financialReport = {};
         team.financialReport["Prize per Point"] = 0;
         team.financialReport["Prize per Place"] = 0;
-        team.financialReport["1st Driver"] = 0;
-        team.financialReport["2nd Driver"] = 0;
-        team.financialReport["Test Driver"] = 0;
+        team.financialReport["Drivers"] = 0;
         team.financialReport["Engineers"] = 0;
         team.financialReport["Employees"] = 0;
         team.financialReport["Development Investments"] = 0;
@@ -284,6 +452,8 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Balance"] = 0;
         team.financialReport["Engine"] = 0;
         team.financialReport["Fines"] = 0;
+        team.financialReport["Constructions"] = 0;
+        team.financialReport["Fees"] = 0;
         
         CalcTeamDevPoints(team.name);
 

@@ -11,7 +11,7 @@ export function viewFinancialReport(teamName){
         profits += team.financialReport[profitsList[p]];
     }
 
-    const expensesList = ["1st Driver","2nd Driver","Test Driver","Engineers","Employees","Development Investments","Engine","Fines"];
+    const expensesList = ["Drivers","Engineers","Employees","Development Investments","Engine","Fines","Constructions","Fees"];
     let expenses = 0;
     for(const p in expensesList) {
         expenses += team.financialReport[expensesList[p]];
@@ -53,16 +53,8 @@ export function viewFinancialReport(teamName){
                 <th colspan="2">Despesas</th>
             </tr>
             <tr>
-                <td>Salário 1º Piloto</td>
-                <td>${NumberF(-team.financialReport["1st Driver"] * 1000,"ext",0)}</td>
-            </tr>
-            <tr>
-                <td>Salário 2º Piloto</td>
-                <td>${NumberF(-team.financialReport["2nd Driver"] * 1000,"ext",0)}</td>
-            </tr>
-            <tr>
-                <td>Salário Piloto de Testes</td>
-                <td>${NumberF(-team.financialReport["Test Driver"] * 1000,"ext",0)}</td>
+                <td>Salário Pilotos</td>
+                <td>${NumberF(-team.financialReport["Drivers"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
                 <td>Salário Engenheiros</td>
@@ -85,6 +77,14 @@ export function viewFinancialReport(teamName){
                 <td>${NumberF(-team.financialReport["Fines"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
+                <td>Construções</td>
+                <td>${NumberF(-team.financialReport["Constructions"] * 1000,"ext",0)}</td>
+            </tr>
+            <tr>
+                <td>Juros</td>
+                <td>${NumberF(-team.financialReport["Fees"] * 1000,"ext",0)}</td>
+            </tr>
+            <tr>
                 <th></th>
                 <th>${NumberF(-expenses * 1000,"ext",0)}</th>
             </tr>
@@ -99,7 +99,7 @@ export function viewFinancialReport(teamName){
         <table id="balance">
             <tr>
                 <th>Balanço: </th>
-                <th>${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}</th>
+                <td>${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}</td>
             </tr>
         </table>
         
@@ -148,7 +148,7 @@ export function viewFinancialReport(teamName){
     new Chart(document.getElementById('expenses-chart'), {
         type: 'pie',
         data: {
-        labels: ["1st Driver","2nd Driver","Test Driver","Engineers","Employees","Development Investments","Engine","Fines"],
+        labels: ["Pilotos","Engenheiros","Empregados","Desenvolvimento","Contrato de Motores","Multas","Construções","Juros"],
         datasets: [{
             data: expensesChartData,
             borderWidth: 1

@@ -1,6 +1,5 @@
 import { game } from "./game.js"
 
-const tooltipUpdateRate = 750;
 const tooltipMaxWidth = 500;
 
 function createTooltip(id, content){
@@ -29,32 +28,62 @@ export function tooltips(){
     createTooltip("#aero-pts-value","");
     createTooltip("#eng-pts-value","");
 
-    setInterval(() => {
-        const team = game.teams[game.team];
-        const eng = game.engineers;
-        let teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2)/5;
-        let technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100)/5;
-        let chiefDesigner_pts = (eng[team.engineers.chiefDesigner].aero)/5;
-        const chiefAerodynamicist_pts = (eng[team.engineers.chiefAerodynamicist].aero * 2)/5;
-        const employees_pts = ((team.employees/1000)+1)/2;
-        document.querySelector("#aero-pts-value")._tippy.setContent(`
-            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
-            <p>Diretor Técnico: ${technicalDirector_pts}</p>
-            <p>Designer Chefe: ${chiefDesigner_pts}</p>
-            <p>Aerodinamicista Chefe: ${chiefAerodynamicist_pts}</p>
-            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefAerodynamicist_pts} * ${employees_pts*100}%</p>
-        `);
+    const team = game.teams[game.team];
+    const eng = game.engineers;
+    let teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2)/5;
+    let technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100)/5;
+    let chiefDesigner_pts = (eng[team.engineers.chiefDesigner].aero)/5;
+    const chiefAerodynamicist_pts = (eng[team.engineers.chiefAerodynamicist].aero * 2)/5;
+    const employees_pts = ((team.employees/1000)+1)/2;
+    document.querySelector("#aero-pts-value")._tippy.setContent(`
+        <table style="text-align: end;">
+            <tr>
+                <td>Chefe de Equipe:</td>
+                <td>${teamPrincipal_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Diretor Técnico:</td>
+                <td>${technicalDirector_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Designer Chefe:</td>
+                <td>${chiefDesigner_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Aerodinamicista Chefe:</td>
+                <td>${chiefAerodynamicist_pts.toFixed(1)}</td>
+            </tr>
+        </table>
+        <br>
+        <p>Qtd de Empregados: ${employees_pts*100}%</p>
+        <p>Moral da Equipe: ${team.teamMorale}%</p>
+    `);
 
-        teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
-        technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100)/5;
-        chiefDesigner_pts = (eng[team.engineers.chiefDesigner].eng)/5;
-        const chiefEngineering_pts = (eng[team.engineers.chiefEngineering].eng * 2)/5;
-        document.querySelector("#eng-pts-value")._tippy.setContent(`
-            <p>Chefe de Equipe: ${teamPrincipal_pts}</p>
-            <p>Diretor Técnico: ${technicalDirector_pts}</p>
-            <p>Designer Chefe: ${chiefDesigner_pts}</p>
-            <p>Engenheiro Chefe: ${chiefEngineering_pts}</p>
-            <p>Empregados: ${teamPrincipal_pts+technicalDirector_pts+chiefDesigner_pts+chiefEngineering_pts} * ${employees_pts*100}%</p>
-        `);
-    },tooltipUpdateRate);
+    teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
+    technicalDirector_pts = ((eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100)/5;
+    chiefDesigner_pts = (eng[team.engineers.chiefDesigner].eng)/5;
+    const chiefEngineering_pts = (eng[team.engineers.chiefEngineering].eng * 2)/5;
+    document.querySelector("#eng-pts-value")._tippy.setContent(`
+        <table style="text-align: end;">
+            <tr>
+                <td>Chefe de Equipe:</td>
+                <td>${teamPrincipal_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Diretor Técnico:</td>
+                <td>${technicalDirector_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Designer Chefe:</td>
+                <td>${chiefDesigner_pts.toFixed(1)}</td>
+            </tr>
+            <tr>
+                <td>Engenheiro Chefe:</td>
+                <td>${chiefEngineering_pts.toFixed(1)}</td>
+            </tr>
+        </table>
+        <br>
+        <p>Qtd de Empregados: ${employees_pts*100}%</p>
+        <p>Moral da Equipe: ${team.teamMorale}%</p>
+    `);
 }
