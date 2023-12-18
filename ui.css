@@ -410,3 +410,31 @@
 #balance th {
     padding: 2px;
 }
+
+#serial-key-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#serial-key-screen div {
+    display: flex;
+    align-items: baseline;
+    max-width: max-content;
+}
+#serial-key-screen div > input {
+    font-size: 14px; 
+    width: 365px;
+}
+#serial-key-screen a {
+    color: #373737;
+    text-decoration: underline;
+}
+#serial-key-screen a:hover {
+    filter: drop-shadow(2px 2px 5px #00000050);
+}
+#serial-key-screen p {
+    max-width: 800px;
+    line-height: 1.5;
+    margin: 10px;
+    font-size: 14px; 
+}

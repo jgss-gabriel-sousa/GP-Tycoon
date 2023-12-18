@@ -1,4 +1,4 @@
-import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand } from "./utils.js"
+import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./app.js"
 import { Championship } from "./championship.js";
@@ -38,7 +38,90 @@ function startGame(){
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
-} startGame();
+}
+
+async function checkGameKey(){
+    function onlineCheck(){
+        const savedKey = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
+
+        Swal.fire({
+            title: "Confirme sua cópia de GP Tycoon",
+            width: "75%",
+            html: `
+            <div id="serial-key-screen">
+                <div>
+                    <label for="swal2-input" class="swal2-input-label">Chave do Produto:</label>
+                    <input id="swal-input" class="swal2-input" type="text" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" value="${savedKey != undefined ? savedKey.key : ""}">
+                </div>
+                
+                <br>
+                
+                <button title="Entenda como funciona o registro"<" type="button" onclick="if(document.getElementById('spoiler') .style.display=='none') {document.getElementById('spoiler') .style.display=''}else{document.getElementById('spoiler') .style.display='none'}">Entenda como funciona</button>
+                <div id="spoiler" style="display:none">
+                    <p>A Chave do Produto é um registro que assegura a sua cópia e o acesso ao jogo. Ela é adquirida mediante um pagamento único, realizado através do PagSeguro, proporcionando segurança e diversas opções de pagamento. Após a confirmação da compra, você receberá a Chave de Produto por e-mail.</p>
+                </div>
+
+                <br>
+                <h4><a href="https://pag.ae/7-3Zj9hev" target="_blank">Adquira uma Chave de Produto</a></h4>
+            </div>    
+            `,
+            showCancelButton: false,
+            confirmButtonText: "Avançar",
+            showLoaderOnConfirm: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            preConfirm: async (login) => {
+                try {
+                    const key = document.getElementById("swal-input").value;
+                    const apiURL = `https://gp-tycoon-web-service.onrender.com/validate-key`;
+
+                    const response = await fetch(apiURL, {
+                        method: "POST",
+                        body: JSON.stringify({
+                            key: key,
+                        }),
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8"
+                        }
+                    });
+    
+                    if(!response.ok){
+                        return Swal.showValidationMessage(`Chave Inválida`);
+                    }
+
+                    return response.json();
+    
+                } catch (error) {
+                    Swal.showValidationMessage(`Request failed: ${error}`);
+                }
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if(result.isConfirmed){   
+                localStorage.setItem("gpTycoon-serial-key", JSON.stringify(result.value));
+                startGame();
+            }
+            else{
+                onlineCheck();
+            }
+        });
+    }
+
+    if(localStorage.getItem("gpTycoon-serial-key")){
+        const key = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
+        
+        if(hoursBetweenDates(Date.now(), key.lastTimeUsed) > 100){
+            onlineCheck();
+        }
+        else{
+            startGame();
+        }
+    }
+    else{
+        onlineCheck();
+    }
+
+}checkGameKey();
 
 function StartEngStats(){
     function genEng(){

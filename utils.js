@@ -126,3 +126,8 @@ export function setBarProgress(value, barElement){
     document.querySelector(barElement).style.width = value+"%";
     document.querySelector(barElement+" span").innerText = value+"%";
 }
+
+export function hoursBetweenDates(first, second){
+    const msBetweenDates = Math.abs(first - second);
+    return msBetweenDates / (60 * 60 * 1000); //minutes * seconds * ms
+}
