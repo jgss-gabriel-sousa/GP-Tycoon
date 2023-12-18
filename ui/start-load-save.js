@@ -3,21 +3,12 @@ import { genTeamHTML } from "../app.js";
 import { changeScreen } from "../screens.js"
 import { Championship } from "../championship.js";
 
-export function newGame(){    
-    let html = `
-    <select id="select-team">
-        <option value="Red Bull">Red Bull</option>
-        <option value="Mercedes">Mercedes</option>
-        <option value="Ferrari">Ferrari</option>
-        <option value="Aston Martin">Aston Martin</option>
-        <option value="Alpine">Alpine</option>
-        <option value="Haas">Haas</option>
-        <option value="McLaren">McLaren</option>
-        <option value="Alfa Romeo">Alfa Romeo</option>
-        <option value="AlphaTauri">AlphaTauri</option>
-        <option value="Williams">Williams</option>
-    </select>
-    `;
+export function newGame(){     
+    let html = `<select id="select-team">`;
+    game.championship.teams.forEach(e => {
+        html += `<option value="${e}">${e}</option>`;
+    });
+    html += "</select>";
 
     Swal.fire({
         title: "Novo Jogo",
@@ -61,7 +52,6 @@ export function loadGame(){
     </div>
     `;
 
-
     Swal.fire({
         title: "Carregar Jogo",
         html: html,
@@ -74,13 +64,13 @@ export function loadGame(){
         if(result.isConfirmed && savedGames[document.querySelector("#select-team").value]){
             const newGame = savedGames[document.querySelector("#select-team").value];
 
-            game.team= newGame.team,
-            game.year= newGame.year,
-            game.championship= new Championship(newGame.championship),
-            game.drivers= newGame.drivers,
-            game.teams= newGame.teams,
-            game.engines= newGame.engines,
-            game.engineers=newGame.engineers,
+            game.team = newGame.team,
+            game.year = newGame.year,
+            game.championship = new Championship(newGame.championship),
+            game.drivers = newGame.drivers,
+            game.teams = newGame.teams,
+            game.engines = newGame.engines,
+            game.engineers = newGame.engineers,
 
             changeScreen("team-menu");
             genTeamHTML();
@@ -118,16 +108,12 @@ export async function saveGame(){
             Swal.fire(`Jogo salvo com sucesso`);
         }
     }
-    
     localStorage.setItem("gpTycoon-savegame-"+game.gameName, JSON.stringify(game));
 }
 
-function deleteGame(gameName, savedGames){    
-    let html = `Deletar ${savedGames[gameName].gameName}?`;
-
+function deleteGame(gameName, savedGames){
     Swal.fire({
-        title: "Novo Jogo",
-        html: html,
+        title: `Deletar ${savedGames[gameName].gameName}?`,
         showCloseButton: true,
         focusConfirm: false,
         showConfirmButton: false,

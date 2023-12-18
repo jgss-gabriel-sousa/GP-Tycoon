@@ -19,6 +19,8 @@
     --bg: #f0f0f0;
     --text: #000000;
     --border: #000000;
+    height: 100%;
+    overflow: hidden;
 }
 
 nav {
@@ -30,6 +32,7 @@ nav {
 body {
     background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
     margin: 5px 20px;
+    height: 100%;
 }
 
 ul{
