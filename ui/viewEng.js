@@ -2,7 +2,7 @@ import { NumberF, accentsTidy } from "../utils.js";
 import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../game.js";
 import { CalcTeamDevPoints } from "../teams.js";
-import { genTeamHTML } from "../app.js";
+import { genTeamHTML } from "../main.js";
 import { marketEng } from "./market.js";
 
 export function viewEng(name, returnToMarket){

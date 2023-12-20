@@ -1,4 +1,4 @@
-import { genTeamHTML } from "./app.js";
+import { genTeamHTML } from "./main.js";
 import { circuitsData } from "./data/circuits.js";
 import { game, YearUpdate } from "./game.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "./teams.js";

@@ -1,6 +1,6 @@
 import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
-import { genTeamHTML } from "./app.js"
+import { genTeamHTML } from "./main.js"
 import { Championship } from "./championship.js";
 import { driversData } from "./data/driversData.js";
 import { teamsData } from "./data/teamsData.js";

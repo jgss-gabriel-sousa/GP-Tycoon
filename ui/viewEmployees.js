@@ -1,4 +1,4 @@
-import { genTeamHTML } from "../app.js";
+import { genTeamHTML } from "../main.js";
 import { game } from "../game.js";
 import { CalcTeamDevPoints } from "../teams.js";
 import { NumberF } from "../utils.js";

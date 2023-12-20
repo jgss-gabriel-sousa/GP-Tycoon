@@ -1,5 +1,5 @@
 import { game } from "../game.js";
-import { genTeamHTML } from "../app.js";
+import { genTeamHTML } from "../main.js";
 import { changeScreen } from "../screens.js"
 import { Championship } from "../championship.js";
 
