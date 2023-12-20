@@ -418,12 +418,16 @@
 }
 #serial-key-screen div {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     max-width: max-content;
 }
 #serial-key-screen div > input {
-    font-size: 14px; 
+    font-size: 13.5px; 
     width: 365px;
+    margin: 0.5em 0.5em;
+}
+#serial-key-screen > div:nth-child(1) > label {
+    margin: 0.5em 0.5em;
 }
 #serial-key-screen a {
     color: #373737;

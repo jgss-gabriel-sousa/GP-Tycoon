@@ -41,8 +41,33 @@ function startGame(){
 }
 
 async function checkGameKey(){
-    function onlineCheck(){
-        const savedKey = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
+
+    async function onlineCheck(key){
+        const apiURL = `https://gp-tycoon-web-service.onrender.com/validate-key`;
+
+        const response = await fetch(apiURL, {
+            method: "POST",
+            body: JSON.stringify({
+                key: key,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
+
+        return response;
+    }
+
+    function checkScreen(){
+        let savedKey = {};
+        try {
+            if(localStorage.getItem("gpTycoon-serial-key"))
+                savedKey = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
+        } catch(e){}
+        
+        if(!savedKey.key)
+            savedKey.key = "";
+
 
         Swal.fire({
             title: "Confirme sua cópia de GP Tycoon",
@@ -51,7 +76,7 @@ async function checkGameKey(){
             <div id="serial-key-screen">
                 <div>
                     <label for="swal2-input" class="swal2-input-label">Chave do Produto:</label>
-                    <input id="swal-input" class="swal2-input" type="text" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" value="${savedKey != undefined ? savedKey.key : ""}">
+                    <input id="swal-input" class="swal2-input" type="text" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX" value="${savedKey.key}">
                 </div>
                 
                 <br>
@@ -73,23 +98,13 @@ async function checkGameKey(){
             preConfirm: async (login) => {
                 try {
                     const key = document.getElementById("swal-input").value;
-                    const apiURL = `https://gp-tycoon-web-service.onrender.com/validate-key`;
-
-                    const response = await fetch(apiURL, {
-                        method: "POST",
-                        body: JSON.stringify({
-                            key: key,
-                        }),
-                        headers: {
-                            "Content-type": "application/json; charset=UTF-8"
-                        }
-                    });
-    
+                    const response = await onlineCheck(key);
+                    
                     if(!response.ok){
-                        return Swal.showValidationMessage(`Chave Inválida`);
+                        return Swal.showValidationMessage("Chave Inválida");
                     }
 
-                    return response.json();
+                    return await response.json();
     
                 } catch (error) {
                     Swal.showValidationMessage(`Request failed: ${error}`);
@@ -102,23 +117,50 @@ async function checkGameKey(){
                 startGame();
             }
             else{
-                onlineCheck();
+                checkScreen();
             }
         });
     }
+    
+    async function hiddenCheck(key){
+        const response = await onlineCheck(key.key);
+
+        if(!response.ok){
+            Swal.fire({
+                icon: "error",
+                title: "Erro",
+                text: "Falha na Verificação da Chave de Produto",
+            }).then(() => {
+                checkScreen();
+            });
+        }
+        else{
+            console.log("Key checked online");
+
+            localStorage.setItem("gpTycoon-serial-key", JSON.stringify(await response.json()));
+            startGame();
+        }
+    }
 
     if(localStorage.getItem("gpTycoon-serial-key")){
-        const key = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
-        
-        if(hoursBetweenDates(Date.now(), key.lastTimeUsed) > 100){
-            onlineCheck();
+        let key;
+        try {
+            key = JSON.parse(localStorage.getItem("gpTycoon-serial-key"));
+        } catch(e){}
+
+        if(!key){
+            checkScreen();
+        }
+        else if(!key.key || !key.lastTimeUsed || hoursBetweenDates(Date.now(), key.lastTimeUsed) > rand(6,24)){
+            console.log("Online check needed");
+            await hiddenCheck(key);
         }
         else{
             startGame();
         }
     }
     else{
-        onlineCheck();
+        checkScreen();
     }
 
 }checkGameKey();
