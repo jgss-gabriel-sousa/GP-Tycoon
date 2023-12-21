@@ -192,3 +192,8 @@
 .tire-wet {
     border: 1px solid blue;
 }
+
+.retired {
+    opacity: 0.75;
+    filter: sepia(0.5);
+}

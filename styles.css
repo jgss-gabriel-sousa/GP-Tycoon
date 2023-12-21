@@ -33,6 +33,7 @@ body {
     background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
     margin: 5px 20px;
     height: 100%;
+    padding-right: 0 !important;
 }
 
 ul{

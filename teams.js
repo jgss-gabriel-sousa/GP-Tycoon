@@ -214,7 +214,7 @@ export function StartTeamsStats(){
     }
 }
 
-export function UpdateTeamAfterRace(){    
+export function UpdateTeamAfterRace(){
     game.championship.createStandings();
 
     let sumOfTeamsPows = 0;
@@ -224,14 +224,7 @@ export function UpdateTeamAfterRace(){
 
     game.contractsFailed = [];
 
-    for(const t in game.teams) {
-        const team = game.teams[t];
-        const eng = game.engineers;
-
-        const actualRace = game.championship.tracks[game.championship.actualRound-2];
-        const raceResult = game.championship.results[actualRace];
-
-        // BALANCE ###########################################################
+    function calcBalance(team, eng, raceResult){
         let balance = 0;
         let teamPoints = 0;
 
@@ -286,11 +279,9 @@ export function UpdateTeamAfterRace(){
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
+    }
 
-        //#####################################################
-
-        CalcTeamDevPoints(team.name);
-
+    function calcTeamUpgrades(team){
         function calcUpgradeNew(aeroOrEng, investment){
             const rand = (2+(Math.random() + 1))/3;
             let up = (aeroOrEng/100)*(90*(investment/(investment+30))-80)*(team.devFocusNextSeason/100)*(23/game.championship.tracks.length);
@@ -333,6 +324,18 @@ export function UpdateTeamAfterRace(){
         }
         limitPropertiesToRange(team.newCar);
         limitPropertiesToRange(team.car);
+    }
+
+    for(const t in game.teams) {
+        const team = game.teams[t];
+        const eng = game.engineers;
+
+        const actualRace = game.championship.tracks[game.championship.actualRound-2];
+        const raceResult = game.championship.results[actualRace];
+
+        calcBalance(team, eng, raceResult);
+        CalcTeamDevPoints(team.name);
+        calcTeamUpgrades(team);
     }
 }
 

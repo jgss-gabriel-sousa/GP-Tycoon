@@ -740,26 +740,26 @@ export class Championship {
     }
 
     carsHTML(status){
-        if((localStorage.getItem("gpTycoon-visual-race-sim") == "false")){
-            if(status == "start")
+        const isVisualRaceSimDisabled = localStorage.getItem("gpTycoon-visual-race-sim") == "false";
+
+        if(isVisualRaceSimDisabled){
+            if(status == "start"){
                 document.querySelector("#race-cars").style.display = "none";
+            }
             return;
         }
 
         const finalResult = this.race.finalResult;
         const grid = this.race.grid;
-
-        let TimeTableHTML;
+        const raceCarsContainer = document.querySelector("#race-cars");
+        const raceStatusImage = document.querySelector("#race-status");
 
         if(status == "start"){
-            TimeTableHTML = "";
+            let TimeTableHTML = `<img id="race-status">`;
 
-            TimeTableHTML += `
-                <img id="race-status">
-            `
-
-            let i = 0;
             grid.forEach(e => {
+                const team = game.drivers[e.name].team;
+                const bgColor = game.teams[team].result_bg_color || "#ffffff";
                 let nameCode = e.name.split(" ");
 
                 if(nameCode[1].length >= 3){
@@ -772,10 +772,11 @@ export class Championship {
                 nameCode = accentsTidy(nameCode).toUpperCase();
 
                 TimeTableHTML += `
-                <div id="car-race-${genID(e.name)}">
-                    <p>${nameCode}</p>
-                    <img class="car-icon" src="img/car/${game.drivers[e.name].team}.bmp" onerror="this.onerror=null;this.src='img/car.png'; this.style='background-color:${game.teams[game.drivers[e.name].team].result_bg_color}'">
-                </div>
+                    <div id="car-race-${genID(e.name)}">
+                        <p>${nameCode}</p>
+                        <img class="car-icon" src="img/car/${team}.bmp" 
+                            onerror="this.onerror=null;this.src='img/car.png'; this.style='background-color:${bgColor}'">
+                    </div>
                 `;
             });
 
@@ -793,21 +794,10 @@ export class Championship {
 
                 if(i != finalResult.length){
                     const max = document.querySelector("#race-cars").offsetHeight - 155;
-                    const maxDiff = document.querySelector("#race-cars").offsetWidth - 36;
                     const totalLaps = circuitsData[this.tracks[this.actualRound - 1]].laps;
                     
                     const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                     const lapMove = max * ((this.race.lap / totalLaps));
-                    let leftDiff = (i*15) + Math.pow(diff*2,1.1);
-/*
-                    if(leftDiff > maxDiff){
-                        leftDiff = maxDiff;
-                        el.childNodes[3].style.display = "none";
-                    }
-                    else{
-                        el.childNodes[3].style.display = "block";
-                    }
-*/
                     el.style.left = `${(max - (max - (lapMove) + diff)) + 40}px`;
                     el.style.top = `${25 + (i*20)}px`;
                     el.style.zIndex = `${(i*10) + this.race.lap}`;
@@ -823,17 +813,33 @@ export class Championship {
                     elP.classList = "";
                     elP.classList.add(tire);
                 }
+                else{
+                    const racingDrivers = [];
+                    const allDrivers = [];
+
+                    for(let i = 0; i < finalResult.length; i++){
+                        racingDrivers.push(finalResult[i].name);
+                    }
+                    for(let i = 0; i < grid.length; i++){
+                        allDrivers.push(grid[i].name);
+                    }
+                    const retiredPilots = allDrivers.filter(valor => !racingDrivers.includes(valor));
+
+                    for(let i = 0; i < retiredPilots.length; i++){
+                        if(!document.querySelector(`#car-race-${genID(retiredPilots[i])}`).classList.contains("retired")){
+                            document.querySelector(`#car-race-${genID(retiredPilots[i])}`).classList.add("retired");
+                        }
+                    }
+                }
             });
 
-            const el = document.querySelector("#race-status");
             const raceStatus = this.race.condition;
+            raceStatusImage.style.display = "block";
 
-            el.style.display = "block";
-
-            if(raceStatus == "vsc") el.src = "img/vsc_flag.webp";
-            else if(raceStatus == "sc")  el.src = "img/sc_flag.webp";
-            else if(raceStatus == "" && this.race.safetyCarLaps >= -5)   el.src = "img/green_flag.webp";
-            else el.style.display = "none";
+            if (raceStatus === "vsc") raceStatusImage.src = "img/vsc_flag.webp";
+            else if (raceStatus === "sc") raceStatusImage.src = "img/sc_flag.webp";
+            else if (raceStatus === "" && this.race.safetyCarLaps >= -5) raceStatusImage.src = "img/green_flag.webp";
+            else raceStatusImage.style.display = "none";
         }
     }
 
