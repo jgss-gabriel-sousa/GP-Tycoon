@@ -15,7 +15,6 @@ function createTooltip(id, content){
 
 export function tooltips(){
     createTooltip("#btn-save-game", "Salvar Jogo");
-    createTooltip("#btn-save-game", "Salvar Jogo");
     createTooltip("#btn-options", "Opções do Jogo");
     createTooltip("#btn-standings", "Classificação de Pilotos");
     createTooltip("#btn-team-standings", "Classificação de Construtores");
