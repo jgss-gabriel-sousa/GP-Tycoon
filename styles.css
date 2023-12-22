@@ -624,7 +624,7 @@ abbr {
     cursor: pointer;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1300px) {
     #team-menu-interface {
         align-items: flex-start;
         flex-wrap: wrap;
