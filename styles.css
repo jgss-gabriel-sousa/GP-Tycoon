@@ -52,7 +52,6 @@ ul{
 li button{
     height: 100%;
     display: flex;
-    margin: 5px 5px;
 }
 
 button{
@@ -166,6 +165,10 @@ abbr {
     display: flex;
     flex-direction: column;
     display: none;
+}
+#team-menu > nav > ul > li {
+    min-width: 10px;
+    max-width: 50px;
 }
 #team-menu-interface {
     display: flex;
