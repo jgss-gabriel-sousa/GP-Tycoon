@@ -798,6 +798,10 @@ export class Championship {
                     
                     const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                     const lapMove = max * ((this.race.lap / totalLaps));
+
+                    if(!el.classList.contains("car-transition") && localStorage.getItem("gpTycoon-race-sim-speed") >= 150)
+                        el.classList.add("car-transition");
+
                     el.style.left = `${(max - (max - (lapMove) + diff)) + 40}px`;
                     el.style.top = `${25 + (i*20)}px`;
                     el.style.zIndex = `${(i*10) + this.race.lap}`;
@@ -918,9 +922,11 @@ export class Championship {
             
                 cars.innerHTML = this.carsHTML("start");
 
-                let tickRate = 25;
+                let tickRate = 100;
                 if(localStorage.getItem("gpTycoon-race-sim-speed"))
                     tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed"));
+                if(localStorage.getItem("gpTycoon-visual-race-sim"))
+                    tickRate /= 4;
 
                 timerInterval = setInterval(e => {
                     timeTable.innerHTML = this.genRaceTableHTML();

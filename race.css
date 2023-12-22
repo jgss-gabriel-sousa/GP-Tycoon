@@ -154,6 +154,9 @@
 .car-icon {
     rotate: 90deg;
 }
+.car-transition {
+    transition: left 0.5s ease, top 0.5s , z-index 0.5s ease;
+}
 #race-cars p {
     font-size: 10px;
     margin-right: 5px;
