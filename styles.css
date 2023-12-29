@@ -195,7 +195,7 @@ abbr {
     background-color: #ff3434;
     padding: 2px;
     margin-left: 5px;
-    width: 10px;
+    min-width: 10px;
     border-radius: 100%;
 }
 .no-news {

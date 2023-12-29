@@ -131,7 +131,8 @@ function dismissEng(name){
             eng.team = "";
             
             const team = game.teams[game.team];
-            team.financialReport["Fines"] += fine;
+            team.financialReport["Fines"] += -fine;
+            team.financialReport["Balance"] -= fine;
             team.cash -= fine;
 
         }

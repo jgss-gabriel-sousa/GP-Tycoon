@@ -471,17 +471,18 @@
 #news-content {
     width: 60%;
     border: 1px solid #333;
-    padding: 5px;
     margin: 0 10px;
 }
 #headlines {
     overflow-y: scroll;
     padding: 0 10px;
     height: 400px;
+    min-width: 40%;
 }
 #news-content p {
     font-size: 12px;
     text-align: start;
+    margin: 5px;
 }
 .not-viewed-news {
     color: #0000EE;

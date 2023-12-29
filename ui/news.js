@@ -7,10 +7,7 @@ import { viewEng } from "./viewEng.js"
 export function newsUI(){
     const news = game.news;
 
-    let html = `
-    <div id="news-container">
-        <div id="headlines">
-    `
+    let html = `<div id="news-container"><div id="headlines">`;
     
     for(let i = 0; i < news.length; i++){
         html += `<li value="${i}" `;
@@ -20,9 +17,6 @@ export function newsUI(){
         }
         html += `>${news[i].headline}</li>`;
     }
-/*
-    news.sort((a, b) => a.year.localeCompare(b.year));
-    news.sort((a, b) => a.date.localeCompare(b.date));*/
 
     html += `
         </div>
@@ -30,7 +24,7 @@ export function newsUI(){
     </div>`
 
     Swal.fire({
-        title: "Racing News",
+        title: "Notícias",
         html: html,
         width: "90%",
         showCloseButton: true,

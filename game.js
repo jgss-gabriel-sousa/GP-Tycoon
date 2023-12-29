@@ -39,13 +39,6 @@ function startGame(){
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
-
-    game.news.unshift({
-        headline: "Bem vindo",
-        date: game.championship.actualRound-1,
-        year: game.year,
-        content: `É com grande alegria que damos as boas-vindas ao nosso time! Estamos empolgados em contar com alguém tão talentoso como você para assumir o novo cargo. Sua experiência e habilidades serão valiosas para o crescimento e sucesso da nossa equipe.`,
-    });
 }
 
 async function checkGameKey(){

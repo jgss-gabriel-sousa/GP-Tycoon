@@ -23,6 +23,13 @@ export function newGame(){
         if(result.isConfirmed){
             game.team = document.querySelector("#select-team").value;
 
+            game.news.unshift({
+                headline: "Novidade na "+game.team,
+                date: game.championship.actualRound-1,
+                year: game.year,
+                content: `A ${game.team} surpreende com a nomeação de um novo líder para sua direção, apesar de ser desconhecido é considerado uma grande promessa no gerenciamneto, será ele capaz de fazer história?!`,
+            });
+
             changeScreen("team-menu");
             genTeamHTML();
         }

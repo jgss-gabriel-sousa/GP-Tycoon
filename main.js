@@ -485,6 +485,9 @@ export function genTeamHTML(){
     reputationHTML += "</div>"
     document.querySelector("#reputation").innerHTML = reputationHTML;
 
+    while(game.news.length > 99){
+        game.news.pop();
+    }
     let newNews = 0;
     game.news.forEach(e => {
         if(!e.viewed)

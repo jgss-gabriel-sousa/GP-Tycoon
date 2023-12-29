@@ -177,7 +177,7 @@ function contractDriver(teamName){
                     headline: "Nova Contratação na "+team.name,
                     date: game.championship.actualRound-1,
                     year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
                 });
 
                 delete selectedDrivers[i];
@@ -194,7 +194,7 @@ function contractDriver(teamName){
                     headline: "Nova Contratação na "+team.name,
                     date: game.championship.actualRound-1,
                     year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
                 });
 
                 delete selectedDrivers[i];
@@ -221,7 +221,7 @@ function contractDriver(teamName){
                     headline: "Nova Contratação na "+team.name,
                     date: game.championship.actualRound-1,
                     year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
                 });
 
                 delete selectedDrivers[i];
