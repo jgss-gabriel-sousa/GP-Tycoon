@@ -4,9 +4,11 @@ import { viewDriver } from "./ui/viewDriver.js"
 import { viewEng } from "./ui/viewEng.js"
 import { viewEmployees } from "./ui/viewEmployees.js";
 import { viewFinancialReport } from "./ui/viewFinancialReport.js";
+import { viewFinancialBalance } from "./ui/viewFinancialBalance.js";
 import { newGame, loadGame, saveGame } from "./ui/start-load-save.js";
 import { selectEngine } from "./ui/selectEngine.js";
 import { market, marketEng } from "./ui/market.js";
+import { newsUI } from "./ui/news.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();
@@ -22,6 +24,10 @@ document.querySelector("#btn-standings").addEventListener("click", () => {
 
 document.querySelector("#btn-team-standings").addEventListener("click", () => {
     teamRankingUI();
+});
+
+document.querySelector("#btn-news").addEventListener("click", () => {
+    newsUI();
 });
 
 document.querySelector("#btn-historic").addEventListener("click", () => {

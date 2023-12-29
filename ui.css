@@ -1,4 +1,5 @@
 @import url("./styles/financialReport.css");
+@import url("./styles/financialBalance.css");
 
 #team-standings{
     border-collapse: collapse;
@@ -407,8 +408,14 @@
     font-size: 16px;
 }
 
-#balance th {
+#balance-financial-report {
     padding: 2px;
+    font-size: 18px;
+}
+#balance-financial-report:hover {
+    text-shadow: 1px 1px 5px #81818182;
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
 }
 
 #serial-key-screen {
@@ -441,4 +448,17 @@
     line-height: 1.5;
     margin: 10px;
     font-size: 14px; 
+}
+
+#news-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 400px;
+}
+#news-container div {
+    width: 45%;
+}
+#news-content {
+    border: #333;
 }

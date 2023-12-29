@@ -112,8 +112,8 @@ export function viewDriver(name, returnToMarket){
 
             html += `
             </table>
-            </div>    
-            `;
+        </div>    
+        `;
     }
     else if(driver.contractRemainingYears <= 0){        
         html += `
@@ -152,16 +152,10 @@ export function viewDriver(name, returnToMarket){
                 A negociação falhou, tente novamente depois</td></tr>`
         }
 
-        html +=`
-        </table>
-        </div>    
-        `;
+        html += `</table></div>`;
     }
     else{
-        html += `
-        </table>
-        </div>  
-        `
+        html += `</table></div>`;
     }
     
     Swal.fire({

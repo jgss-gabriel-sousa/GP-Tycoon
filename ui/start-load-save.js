@@ -4,9 +4,12 @@ import { changeScreen } from "../screens.js"
 import { Championship } from "../championship.js";
 
 export function newGame(){     
+    const teams = game.championship.teams;
+    teams.sort();
+
     let html = `<select id="select-team">`;
-    game.championship.teams.forEach(e => {
-        html += `<option value="${e}">${e}</option>`;
+    teams.forEach(t => {
+        html += `<option value="${t}">${t}</option>`;
     });
     html += "</select>";
 

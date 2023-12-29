@@ -11,6 +11,7 @@
     <script src="./lib/sweetalert2.min.js"></script>
 
     <link rel="stylesheet" href="./lib/sweetalert2.min.css">
+    <link rel="stylesheet" href="./lib/line-icons/lineicons.css">
 
     <script src="./lib/popper.min.js"></script>
     <script src="./lib/tippy-bundle.umd.min.js"></script>
@@ -26,20 +27,24 @@
     </header>
     <main>
         <div id="team-menu">
-            <nav>
-                <ul>
-                    <li><button id="btn-save-game"><img src="./img/ui/save.png"></button></li>
-                    <li><button id="btn-options"><img src="./img/ui/settings.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-standings"><img src="./img/ui/ranking.png"></button></li>
-                    <li><button id="btn-team-standings"><img src="./img/ui/team-ranking.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-market"><img class="market" src="./img/ui/market.png"></button></li>
-                    <li><button id="btn-market-eng"><img class="market-eng" src="./img/ui/market-eng.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-historic"><img src="./img/ui/past.png"></button></li>
-                </ul>
-            </nav>
+            <div id="button-list">
+                <button id="btn-save-game"><img src="./img/ui/save.png"> Salvar Jogo</button>
+                <button id="btn-options"><img src="./img/ui/settings.png"> Opções</button>
+                <br>
+                <p>Classificação</p>
+                <button id="btn-standings"><img src="./img/ui/ranking.png"> Pilotos</button>
+                <button id="btn-team-standings"><img src="./img/ui/team-ranking.png"> Equipes</button>
+                <br>
+                <p>Mercado</p>
+                <button id="btn-market" class="market"><img src="./img/ui/market.png"> Pilotos</button>
+                <button id="btn-market-eng"  class="market-eng"><img src="./img/ui/market-eng.png"> Engenheiros</button>
+                <br>
+                <button id="btn-news"><img src="./img/ui/news.png">Notícias</button>
+                <button id="btn-rules"><img src="./img/ui/document.png">Regras</button>
+                <br>
+                <button id="btn-search"><img src="./img/ui/search.png">Pesquisar</button>
+                <button id="btn-historic"><img src="./img/ui/past.png">Histórico</button>
+            </div>
             <div id="team-menu-interface">
                 <div id="info">
                     <h1 id="year">2023</h1>
@@ -49,6 +54,7 @@
                             <h1 id="name"></h1>
                         </div>
                         <div id="money" class="view-financial-report"></div>
+                        <div id="reputation"></div>
                     </div>
                     <div id="next-race">
                         <h1>Próxima Corrida</h1>
@@ -75,7 +81,7 @@
             <img src="./icon.webp" alt="Logo">
             <button id="start-game">Novo Jogo</button>
             <button id="load-game">Carregar Jogo</button>
-            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - v0.10.1</small>
+            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - v0.11</small>
         </div>
 
         <div id="players-menu"></div>

@@ -39,4 +39,12 @@ export const enginesData = {
         blackList: ["Ferrari","Mercedes","Alpine","Red Bull"],
         minContractLength: 3,
     },
+    "Testes FIA": {
+        power: 10,
+        drivability: 10,
+        reliability: 10,
+        cost: 0,
+        blackList: [],
+        minContractLength: 1,
+    },
 }

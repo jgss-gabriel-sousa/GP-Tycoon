@@ -1,5 +1,6 @@
 import { game } from "../game.js";
 import { NumberF } from "../utils.js";
+import { viewFinancialBalance } from "./viewFinancialBalance.js";
 
 export function viewFinancialReport(teamName){
     let html = "";
@@ -96,13 +97,10 @@ export function viewFinancialReport(teamName){
             <canvas id="profit-chart"></canvas>
         </div>
 
-        <table id="balance">
-            <tr>
-                <th>Balanço: </th>
-                <td>${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}</td>
-            </tr>
-        </table>
-        
+        <p id="balance-financial-report">
+            Balanço: ${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}
+        </p>
+
         <div class="chart-container">
             <canvas id="expenses-chart"></canvas>
         </div>
@@ -116,6 +114,10 @@ export function viewFinancialReport(teamName){
         showCloseButton: true,
         focusConfirm: false,
         showConfirmButton: false,
+    });
+
+    document.querySelector("#balance-financial-report").addEventListener("click", () => {
+        viewFinancialBalance(game.team, true);
     });
 
     const profitChartData = [];

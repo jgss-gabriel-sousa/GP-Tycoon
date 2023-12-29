@@ -154,4 +154,4 @@ export const countryRanking = {
     'LV': 6, // Letônia    
     'BG': 6, // Bulgária     
     'LU': 6, // Luxemburgo      
-  };
+};

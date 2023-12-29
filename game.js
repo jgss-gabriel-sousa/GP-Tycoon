@@ -23,6 +23,7 @@ export const game = {
     engines: {},
     engineers: {},
     contractsFailed: [],
+    news: [],
 }
 
 function startGame(){

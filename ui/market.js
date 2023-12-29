@@ -22,6 +22,13 @@ export function market(){
 
     const drivers = Object.values(game.drivers);
 
+    for(let i = 0; i < drivers.length; i++){
+        if(drivers[i].condition != "racing"){
+            console.log(drivers[i].name)
+            delete drivers[i];
+        }
+    }
+
     drivers.sort((a, b) => a.status.localeCompare(b.status));
     drivers.sort((a, b) => a.team.localeCompare(b.team));
 

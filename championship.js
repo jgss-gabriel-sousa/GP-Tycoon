@@ -29,8 +29,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Test"]
+            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            this.tracks = ["Bahrein","Arábia Saudita","Austrália"];
             
             this.results = {};
             this.standings = [];
@@ -768,6 +768,7 @@ export class Championship {
                 else{
                     nameCode = nameCode[1] + nameCode[2];
                 }
+                nameCode = nameCode.replace(/['’]/g, '');
                 nameCode = nameCode.substring(0,3);
                 nameCode = accentsTidy(nameCode).toUpperCase();
 

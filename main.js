@@ -18,8 +18,23 @@ function genDriversHTML(){
 
     let i = 0;
     driver.forEach(d => {
+
+        let careerStage;
+        if(d.age < d.careerPeak-1 && d.experience < 5){
+            careerStage = "Estreante";
+        }
+        else if(d.age < d.careerPeak-1){
+            careerStage = "Em Ascensão";
+        }
+        else if(d.age > d.careerPeak-1 && d.age < d.careerPeak+2){
+            careerStage = "Ápice";
+        }
+        else{
+            careerStage = "Veterano";
+        }
+
         html += `
-        <div class="driver-card bars-table" id="first-driver-card">`
+        <div class="driver-card" id="first-driver-card">`
             if(i == 0)
                 html += "<h1>1º Piloto</h1>"
             if(i == 1)
@@ -34,7 +49,7 @@ function genDriversHTML(){
         `
         
         html += `
-            <table>
+            <table class="bars-table">
                 <tr>
                     <td>Velocidade:</td>
                     <td>
@@ -59,9 +74,20 @@ function genDriversHTML(){
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>Condição: </td>
+                    <td class="no-border">
+                        ${careerStage}
+                    </td>
+                </tr>
             </table>
-        </div>
-        `
+            `
+        
+        if(d.contractRemainingYears == 0){
+            html += `<p>Contrato encerrando</p>`
+        }
+
+        html += `</div>`
         i++;
     });
     
@@ -390,7 +416,7 @@ export function genDevelopmentHTML(){
                 <td id="investment-reliability">${NumberF(team.investments.reliability *1000,"ext-short",0)}</td>
             </tr>
             <tr>
-                <th class="total-investments">Total da Próxima Corrida: </th>
+                <td class="total-investments">Total da Próxima Corrida: </td>
                 <th id="race-total-investment">${NumberF((team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability) *1000,"ext-short",0)}</th>
             </tr>
             <tr>
@@ -444,7 +470,20 @@ export function genTeamHTML(){
 
     document.querySelector("#year").innerText = `${game.year}`;
     document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money_icon.png" alt="Money Icon"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money.png"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    
+    let reputationHTML = "<div>"
+    let remainingStars = teams[game.team].reputation;
+    for(let i = 0; i < 5; i++) {
+        if(remainingStars-- > 0){
+            reputationHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+        }
+        else{
+            reputationHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+        }
+    }
+    reputationHTML += "</div>"
+    document.querySelector("#reputation").innerHTML = reputationHTML;
 
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];

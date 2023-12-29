@@ -84,6 +84,7 @@ export function startDriversStats(){
         if(!driver.status) driver.status = "";
         if(!driver.speed) driver.speed = rollDice("5d8+60");
         if(!driver.pace) driver.pace = rollDice("5d8+60");
+        if(!driver.condition) driver.condition = "racing";
 
         if(driver.contractRemainingYears > 0){
             if(driver.status == "1º Piloto")
@@ -102,7 +103,7 @@ export function startDriversStats(){
         driver.motivation = rollDice("5d20+30");
         if(driver.motivation > 100) driver.motivation = 100;
 
-        if(!driver.careerPeak) driver.careerPeak = rollDice("3d6+18");
+        if(!driver.careerPeak) driver.careerPeak = rollDice("3d6+20");
 
         driver.salary = getSalary(driver);
     }
@@ -152,7 +153,7 @@ export function YearUpdateDriversStats(){
             driver.contractRemainingYears = driver.newContractRemainingYears;
 
             if(driver.newTeam == "Aposentadoria"){
-                delete game.drivers[d];
+                game.drivers[d].condition = "retired";
             }
 
             driver.newTeam = "";

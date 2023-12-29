@@ -25,23 +25,37 @@ export function shuffleArr(array){
 
 export function NumberF(number,format,precision){    
     if(format == "ext"){
+        if (number === 0) {
+            return "-";
+        }
+
+        let negative = false;
+        if (number < 0) {
+            negative = true;
+            number = Math.abs(number);
+        }
+
         let value = "";
         const M = Math.floor(number/1000000);
         let K = Math.floor((number%1000000)/1000);
         
-        if(M > 0 || M < 0){
-            if(M == 1)
-                value = M+" milhão ";
-            else
-                value = M+" milhões ";
+        if (M !== 0) {
+            if (Math.abs(M) === 1) {
+                value = M + " milhão ";
+            } else {
+                value = M + " milhões ";
+            }
         }
 
-        if(M != 0)
+        if(M != 0){
             K = Math.abs(K);
+        }
 
-        if(K != 0)
+        if(K != 0){
             value += K+" mil";
-        return value;
+        }
+        
+        return negative == true ? "-"+value : value;
     }
     if(format == "ext-short"){
         let value = "";
@@ -50,7 +64,7 @@ export function NumberF(number,format,precision){
         const KK = Math.round((number-(M*1000000))/100000,10);
 
         if(M > 0 || M <= 0){
-            value = M+"M";
+            value = M+"M ";
         }
         if(M > 0 && K > 0){
             if(K != 0)

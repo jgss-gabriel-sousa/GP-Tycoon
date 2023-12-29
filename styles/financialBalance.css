@@ -1,47 +1,48 @@
-#financial-report {
+#financial-balance {
     display: flex;
+    align-items: baseline;
+    flex-direction: column;
+}
+
+#financial-balance div {
+    display: flex;
+    flex-direction: row;
     align-items: baseline;
 }
 
-#financial-report table{
+#financial-balance table{
     width: 100%;
     margin: 1em;
     border: 2px solid #222;
     border-collapse: collapse;
 }
-#financial-report th{
+#financial-balance th{
     background-color: #5c5c5c;
     color: #f5f5f5;
     border: 2px solid #222;
     text-align: end;
 }
-#financial-report td{
+#financial-balance td{
     text-align: end;
     padding: 5px;
     border: 1px solid #6b6b6b;
     font-size: 12px;
 }
-#financial-report td:last-child{
+#financial-balance td:last-child{
     text-align: center;
     border-left: 2px solid #222;
 }
-#financial-report th:last-child{
+#financial-balance th:last-child{
     min-width: 150px;
     text-align: center;
 }
-#financial-report th{
+#financial-balance th{
     padding: 5px;
     font-size: 14px;
 }
 
-#financial-report-balance {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#financial-report-balance .chart-container {
-    width: 200px;
+#financial-balance .chart-container {
+    width: 400px;
     height: 200px;
     margin: 1em;
 }

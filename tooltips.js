@@ -14,13 +14,15 @@ function createTooltip(id, content){
 }
 
 export function tooltips(){
+    /*
     createTooltip("#btn-save-game", "Salvar Jogo");
     createTooltip("#btn-options", "Opções do Jogo");
     createTooltip("#btn-standings", "Classificação de Pilotos");
     createTooltip("#btn-team-standings", "Classificação de Construtores");
     createTooltip("#btn-market", "Mercado de Pilotos");
     createTooltip("#btn-market-eng", "Mercado de Engenheiros");
-    createTooltip("#btn-historic", "Histórico de Campeões");
+    createTooltip("#btn-news", "Notícias");
+    createTooltip("#btn-historic", "Histórico de Campeões");*/
 
     createTooltip("#dev-pts > div:nth-child(1) > h2:nth-child(2)", "Pontos de Desenvolvimento de Aerodinâmica");
     createTooltip("#dev-pts > div:nth-child(2) > h2:nth-child(2)", "Pontos de Desenvolvimento de Engenharia");
