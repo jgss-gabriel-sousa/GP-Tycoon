@@ -141,25 +141,22 @@ function contractDriver(teamName){
         }
         selectedDrivers.sort((a,b) => b.baseRating - a.baseRating);
 
-        if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100)){
-
-            let p = []; //Lista de "prováveis" pilotos
-            while (p.length < 3) {
-                const valor = Math.floor(Math.random() * 6);
-                if (!p.includes(valor)) {
-                    p.push(valor);
-                }
+        let p = []; //Lista de "prováveis" pilotos
+        while (p.length < 3) {
+            const valor = Math.floor(Math.random() * 6);
+            if (!p.includes(valor)) {
+                p.push(valor);
             }
-
-            game.news.push({
-                headline: team.name+" está analisando o mercado",
-                date: game.championship.actualRound-1,
-                year: game.year,
-                content: `Nossas fontes indicam que a equipe ${team.name} está analisando o mercado em busca de um novo ${lookingFor}, os nomes mais cotados são ${selectedDrivers[p[0]]}, ${selectedDrivers[p[1]]} e ${selectedDrivers[p[2]]}`,
-            });
-
-            return;
         }
+        game.news.push({
+            headline: team.name+" está analisando o mercado",
+            date: game.championship.actualRound-1,
+            year: game.year,
+            content: `Fontes indicam que a equipe ${team.name} está analisando o mercado em busca de um novo ${lookingFor}, os nomes mais cotados são ${selectedDrivers[p[0]].name}, ${selectedDrivers[p[1]].name} e ${selectedDrivers[p[2]].name}.`,
+        });
+
+        if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100))
+            return;
 
         for(let i = 0; i < selectedDrivers.length; i++){
             if(!selectedDrivers[i] == undefined) continue;

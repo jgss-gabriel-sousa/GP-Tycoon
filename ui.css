@@ -455,10 +455,28 @@
     flex-direction: row;
     justify-content: center;
     min-height: 400px;
+    justify-content: space-evenly;
 }
-#news-container div {
-    width: 45%;
+#news-container li {
+    font-size: 12px;
+    text-align: start;
+    list-style-type: square;
+}
+#news-container li:hover {
+    background-color: #FFDF9F;
+    cursor: pointer;
+    text-decoration: underline;
 }
 #news-content {
-    border: #333;
+    width: 60%;
+    border: 1px solid #333;
+    padding: 5px;
+    margin: 0 10px;
+}
+#news-content p {
+    font-size: 12px;
+    text-align: start;
+}
+.not-viewed-news {
+    color: #0000EE;
 }

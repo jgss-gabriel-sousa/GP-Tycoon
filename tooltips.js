@@ -24,6 +24,9 @@ export function tooltips(){
     createTooltip("#btn-news", "Notícias");
     createTooltip("#btn-historic", "Histórico de Campeões");*/
 
+    createTooltip("#money", "Finanças");
+    createTooltip("#reputation", "Reputação");
+
     createTooltip("#dev-pts > div:nth-child(1) > h2:nth-child(2)", "Pontos de Desenvolvimento de Aerodinâmica");
     createTooltip("#dev-pts > div:nth-child(2) > h2:nth-child(2)", "Pontos de Desenvolvimento de Engenharia");
     createTooltip("#aero-pts-value","");

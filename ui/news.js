@@ -13,7 +13,12 @@ export function newsUI(){
     `
     
     for(let i = 0; i < news.length; i++){
-        html += `<p>${news[i].headline}</p>`;
+        html += `<li value="${i}" `;
+
+        if(!news[i].viewed){
+            html += `class="not-viewed-news"`;
+        }
+        html += `>${news[i].headline}</li>`;
     }
 /*
     news.sort((a, b) => a.year.localeCompare(b.year));
@@ -32,5 +37,15 @@ export function newsUI(){
         allowOutsideClick: true,
         focusConfirm: false,
         showConfirmButton: false,
+    });
+
+    document.querySelectorAll("#headlines li").forEach(el => {
+        el.addEventListener("click", e => {
+            const element = document.querySelector("#news-content");
+            element.innerHTML = `<p>${news[el.value].content}</p>`;
+            news[el.value].viewed = true;
+
+            document.querySelector(`#headlines > li:nth-child(${el.value+1})`).classList.remove("not-viewed-news")
+        });
     });
 }
