@@ -37,6 +37,8 @@ export function newsUI(){
         allowOutsideClick: true,
         focusConfirm: false,
         showConfirmButton: false,
+    }).then(e => {
+        genTeamHTML();
     });
 
     document.querySelectorAll("#headlines li").forEach(el => {

@@ -191,6 +191,17 @@ abbr {
     margin: 4px;
     width: 18px;
 }
+#btn-news span {
+    background-color: #ff3434;
+    padding: 2px;
+    margin-left: 5px;
+    width: 10px;
+    border-radius: 100%;
+}
+.no-news {
+    opacity: 0;
+}
+
 #team-menu-interface {
     width: 100%;
     display: flex;

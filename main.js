@@ -485,6 +485,21 @@ export function genTeamHTML(){
     reputationHTML += "</div>"
     document.querySelector("#reputation").innerHTML = reputationHTML;
 
+    let newNews = 0;
+    game.news.forEach(e => {
+        if(!e.viewed)
+            newNews++;
+    });
+    document.querySelector("#btn-news span").innerHTML = newNews;
+
+    if(newNews == 0){
+        document.querySelector("#btn-news span").classList.add("no-news");
+    }
+    else{
+        document.querySelector("#btn-news span").classList.remove("no-news");
+    }
+
+
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
         let trackStyle;
