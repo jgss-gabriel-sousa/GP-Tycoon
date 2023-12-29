@@ -141,6 +141,7 @@ function contractDriver(teamName){
         }
         selectedDrivers.sort((a,b) => b.baseRating - a.baseRating);
 
+        /*
         let p = []; //Lista de "prováveis" pilotos
         while (p.length < 3) {
             const valor = Math.floor(Math.random() * 6);
@@ -148,12 +149,14 @@ function contractDriver(teamName){
                 p.push(valor);
             }
         }
-        game.news.push({
+        
+        game.news.unshift({
             headline: team.name+" está analisando o mercado",
             date: game.championship.actualRound-1,
             year: game.year,
             content: `Fontes indicam que a equipe ${team.name} está analisando o mercado em busca de um novo ${lookingFor}, os nomes mais cotados são ${selectedDrivers[p[0]].name}, ${selectedDrivers[p[1]].name} e ${selectedDrivers[p[2]].name}.`,
         });
+        */
 
         if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100))
             return;
@@ -169,6 +172,14 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = rollDice("1d4+0");
                 driver.newSalary = driver.salary;
                 team.new1driver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                });
+
                 delete selectedDrivers[i];
                 break;
             }
@@ -178,6 +189,14 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = rollDice("1d4+0");
                 driver.newSalary = driver.salary;
                 team.new2driver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                });
+
                 delete selectedDrivers[i];
                 break;
             }
@@ -197,6 +216,14 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = rollDice("1d4+0");
                 driver.newSalary = driver.salary;
                 team.newTdriver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} Anos.`,
+                });
+
                 delete selectedDrivers[i];
                 break;
             }
@@ -512,7 +539,7 @@ export function YearUpdateTeamsStats(){
             team.brokeCostCapPenalty = (team.totalInvestments / game.championship.budgetCap) - 1;
             team.brokeCostCapPenalty = team.brokeCostCapPenalty > 0.95 ? 0.95 : team.brokeCostCapPenalty;
             
-            game.news.push({
+            game.news.unshift({
                 headline: team.name+" estourou o Teto de Gastos",
                 date: game.championship.actualRound-1,
                 year: game.year,

@@ -455,6 +455,7 @@
     flex-direction: row;
     justify-content: center;
     min-height: 400px;
+    height: 50%;
     justify-content: space-evenly;
 }
 #news-container li {
@@ -472,6 +473,11 @@
     border: 1px solid #333;
     padding: 5px;
     margin: 0 10px;
+}
+#headlines {
+    overflow-y: scroll;
+    padding: 0 10px;
+    height: 400px;
 }
 #news-content p {
     font-size: 12px;
