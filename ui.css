@@ -203,6 +203,7 @@
     flex-direction: row;
     justify-content: space-around;
     min-height: 300px;
+    height: 100%;
 }
 #historic-tables div{
     display: flex;
@@ -219,6 +220,7 @@
     width: 100%;
     border-collapse: collapse;
     color: #000;
+    white-space: nowrap;
 }
 #historic-tables th {
     border: 1px solid #424548;
@@ -486,4 +488,20 @@
 }
 .not-viewed-news {
     color: #0000EE;
+}
+
+#select-db {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#select-db div {
+    margin: 20px;
+}
+#select-db select {
+    min-width: 100px;
+    padding: 5px;
+}
+#select-db input {
+    margin: 10px;
 }

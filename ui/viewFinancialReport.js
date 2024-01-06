@@ -1,5 +1,5 @@
-import { game } from "../game.js";
-import { NumberF } from "../utils.js";
+import { game } from "../scripts/game.js";
+import { NumberF } from "../scripts/utils.js";
 import { viewFinancialBalance } from "./viewFinancialBalance.js";
 
 export function viewFinancialReport(teamName){

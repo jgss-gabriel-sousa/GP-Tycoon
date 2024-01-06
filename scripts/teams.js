@@ -1,5 +1,5 @@
 import { game } from "./game.js";
-import { selectEngine } from "./ui/selectEngine.js";
+import { selectEngine } from "../ui/selectEngine.js";
 import { rand, rollDice } from "./utils.js";
 
 export function CalcTeamDevPoints(teamName){
@@ -35,41 +35,15 @@ export function CalcTeamDevPoints(teamName){
 function CalcTeamMorale(teamName){
     const eng = game.engineers;
     const team = game.teams[teamName];
-
-    const baseMorale = ((eng[team.teamPrincipal].adm*4) + (eng[team.engineers.technicalDirector].adm*2))/6;
+    let morale = team.teamMorale;
+    const baseMorale = parseFloat((((eng[team.teamPrincipal].adm*4) + (eng[team.engineers.technicalDirector].adm*2))/6).toFixed(2));
+    let moraleGain = baseMorale / (Math.max(team.employees/5, 100));
     
     if(team.teamMorale == undefined){
-        team.teamMorale = Math.floor(baseMorale);
+        morale = baseMorale;
     }
 
-    let moraleGain = baseMorale / team.employees;
-    const oldMorale = team.teamMorale;
-
-
-    let aeroPts = (eng[team.teamPrincipal].adm + eng[team.teamPrincipal].aero)/2;
-    aeroPts += (eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].aero)/100;
-    aeroPts += eng[team.engineers.chiefDesigner].aero;
-    aeroPts += eng[team.engineers.chiefAerodynamicist].aero * 2;
-    aeroPts /= 5;
-    aeroPts *= ((team.employees/1000)+1)/2;
-    aeroPts *= team.teamMorale/100;
-
-
-    let engPts = (eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2;
-    engPts += (eng[team.engineers.technicalDirector].adm * eng[team.engineers.technicalDirector].eng)/100;
-    engPts += eng[team.engineers.chiefDesigner].eng;
-    engPts += eng[team.engineers.chiefEngineering].eng * 2;
-    engPts /= 5;
-    engPts *= ((team.employees/1000)+1)/2;
-    engPts *= team.teamMorale/100;
-
-    if(team.brokeCostCap){
-        aeroPts -= aeroPts * team.brokeCostCapPenalty;
-        engPts -= engPts * team.brokeCostCapPenalty;
-    }
-
-    team.aeroPts = Math.round(aeroPts);
-    team.engPts = Math.round(engPts);
+    team.teamMorale = morale;
 }
 
 
@@ -99,6 +73,7 @@ function contractDriver(teamName){
     else if(team.newTdriver == "") looking.push("Piloto de Testes");
 
     if(looking.length == 0) return;
+    if(team.name == game.team) return;
     
     const remainingRounds = game.championship.tracks.length - game.championship.actualRound;
     let financeFactor = ((team.financialReport["Balance"]*remainingRounds)+team.cash) / team.cash;
@@ -108,6 +83,156 @@ function contractDriver(teamName){
 
 
     let maxValue = Math.max(game.drivers[team.driver1].salary, game.drivers[team.driver2].salary, game.drivers[team.test_driver].salary);
+    maxValue += maxValue*financeFactor;
+
+    for (let loops = 0; loops < looking.length; loops++) {
+        const lookingFor = looking[loops];
+        const selectedDrivers = [];
+
+        for(const d in game.drivers) {
+            const driver = game.drivers[d];
+
+            if(driver.salary > maxValue) continue;
+            if(driver.newTeam != "" || driver.contractRemainingYears > 0) continue;
+
+            const predictedQuality = ((driver.speed+rand(0,30)-15) + (driver.pace+rand(0,30)-15))/2;
+            const costBenefit = (driver.salary/maxValue);
+            let rating = predictedQuality * costBenefit;
+
+            if(driver.team == teamName){
+                rating *= 1.1;
+            }
+            if(lookingFor == "1º Piloto"){
+                rating *= (driver.experience+10)/100;
+            }
+            if(lookingFor == "Piloto de Testes"){
+                rating /= Math.max((driver.salary/maxValue),6);
+            }
+
+            selectedDrivers.push({
+                name: driver.name,
+                baseRating: rating
+            });
+        }
+        selectedDrivers.sort((a,b) => b.baseRating - a.baseRating);
+
+        /*
+        let p = []; //Lista de "prováveis" pilotos
+        while (p.length < 3) {
+            const valor = Math.floor(Math.random() * 6);
+            if (!p.includes(valor)) {
+                p.push(valor);
+            }
+        }
+        
+        game.news.unshift({
+            headline: team.name+" está analisando o mercado",
+            date: game.championship.actualRound-1,
+            year: game.year,
+            content: `Fontes indicam que a equipe ${team.name} está analisando o mercado em busca de um novo ${lookingFor}, os nomes mais cotados são ${selectedDrivers[p[0]].name}, ${selectedDrivers[p[1]].name} e ${selectedDrivers[p[2]].name}.`,
+        });
+        */
+
+        if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100))
+            return;
+
+        for(let i = 0; i < selectedDrivers.length; i++){
+            if(!selectedDrivers[i] == undefined) continue;
+
+            const driver = game.drivers[selectedDrivers[i].name];
+            
+            if(lookingFor == "1º Piloto"){
+                driver.newTeam = team.name;
+                driver.newStatus = lookingFor;
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.new1driver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
+                });
+
+                delete selectedDrivers[i];
+                break;
+            }
+            if(lookingFor == "2º Piloto"){
+                driver.newTeam = team.name;
+                driver.newStatus = lookingFor;
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.new2driver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
+                });
+
+                delete selectedDrivers[i];
+                break;
+            }
+            if(lookingFor == "Piloto de Testes"){
+
+                let chanceOfExpDriverReject;
+                if(driver.age <= driver.careerPeak)
+                    chanceOfExpDriverReject = Math.round((driver.experience/100)*100);
+                else
+                    chanceOfExpDriverReject = 10;
+
+                if(rand(0,100) < chanceOfExpDriverReject)
+                    continue;
+
+                driver.newTeam = team.name;
+                driver.newStatus = lookingFor;
+                driver.newContractRemainingYears = rollDice("1d4+0");
+                driver.newSalary = driver.salary;
+                team.newTdriver = driver.name;
+                
+                game.news.unshift({
+                    headline: "Nova Contratação na "+team.name,
+                    date: game.championship.actualRound-1,
+                    year: game.year,
+                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
+                });
+
+                delete selectedDrivers[i];
+                break;
+            }
+        }
+    }
+}
+
+
+function contractEng(teamName){
+    const team = game.teams[teamName];
+    let looking = [];
+
+    if(team.teamPrincipal == "")                        looking.push("Chefe de Equipe");
+    else if(team.engineers.technicalDirector == "")     looking.push("Diretor Técnico");
+    else if(team.engineers.chiefDesigner == "")         looking.push("Designer Chefe");
+    else if(team.engineers.chiefAerodynamicist == "")   looking.push("Aerodinamicista Chefe");
+    else if(team.engineers.chiefEngineering == "")      looking.push("Engenheiro Chefe");
+
+    if(looking.length == 0) return;
+    if(team.name == game.team) return;
+    
+    let financeFactor = ((team.financialReport["Balance"])+team.cash) / team.cash;
+    if(!financeFactor) financeFactor = 1;
+    if(financeFactor > 2) financeFactor = 2;
+    if(financeFactor < -0.5) financeFactor = -0.5;
+
+
+    let maxValue = Math.max(
+        game.engineers[team.teamPrincipal].salary, 
+        game.engineers[team.engineers.technicalDirector].salary, 
+        game.engineers[team.engineers.chiefDesigner].salary,
+        game.engineers[team.engineers.chiefAerodynamicist].salary,
+        game.engineers[team.engineers.chiefEngineering].salary
+    );
     maxValue += maxValue*financeFactor;
 
     for (let loops = 0; loops < looking.length; loops++) {
@@ -297,8 +422,8 @@ export function StartTeamsStats(){
             year: {value:[],legend:[]},
         };
         
-        CalcTeamDevPoints(team.name);
         CalcTeamMorale(team.name);
+        CalcTeamDevPoints(team.name);
     }
 }
 
@@ -423,6 +548,7 @@ export function UpdateTeamAfterRace(){
         const raceResult = game.championship.results[actualRace];
 
         const balance = calcBalance(team, eng, raceResult);
+        CalcTeamMorale(team.name);
         CalcTeamDevPoints(team.name);
         calcTeamUpgrades(team);
 

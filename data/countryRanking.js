@@ -1,4 +1,4 @@
-import { rand } from "../utils.js";
+import { rand } from "../scripts/utils.js";
 
 function getCountriesByTier(tier){
     return Object.entries(countryRanking)

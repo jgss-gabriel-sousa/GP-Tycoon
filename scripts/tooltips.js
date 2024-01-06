@@ -50,7 +50,7 @@ export function tooltips(){
         </table>
         <br>
         <p>Qtd de Empregados: ${employees_pts*100}%</p>
-        <p>Moral da Equipe: ${team.teamMorale}%</p>
+        <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 
     teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
@@ -78,6 +78,6 @@ export function tooltips(){
         </table>
         <br>
         <p>Qtd de Empregados: ${employees_pts*100}%</p>
-        <p>Moral da Equipe: ${team.teamMorale}%</p>
+        <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 }

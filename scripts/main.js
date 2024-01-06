@@ -1,7 +1,7 @@
 import { blankSpaceRmv, accentsTidy, NumberF } from "./utils.js"
 import { game } from "./game.js"
-import { circuitsData } from "./data/circuits.js";
-import { enginesData } from "./data/enginesData.js";
+import { circuitsData } from "../data/circuits.js";
+import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "./ui.js";
 import { tooltips } from "./tooltips.js";
 
@@ -13,12 +13,11 @@ function genDriversHTML(){
     const driver = [
         game.drivers[team.driver1],
         game.drivers[team.driver2], 
-        game.drivers[team.test_driver]
+        game.drivers[team.test_driver],
     ];
 
     let i = 0;
     driver.forEach(d => {
-
         let careerStage;
         if(d.age < d.careerPeak-1 && d.experience < 5){
             careerStage = "Estreante";
@@ -67,6 +66,14 @@ function genDriversHTML(){
                     </td>
                 </tr>
                 <tr>
+                    <td>Constância:</td>
+                    <td>
+                        <div class="progress-bar-background">
+                            <div class="progress-bar" style="width:${d.constancy}%;"><span>${d.constancy}%</span></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td>Experiência:</td>
                     <td>
                         <div class="progress-bar-background">
@@ -83,7 +90,7 @@ function genDriversHTML(){
             </table>
             `
         
-        if(d.contractRemainingYears == 0){
+        if(d.contractRemainingYears == 0 && d.newTeam == ""){
             html += `<p>Contrato encerrando</p>`
         }
 
@@ -234,6 +241,14 @@ export function genEngHTML(){
                     </button>
                 </td>
             </tr>`
+    }
+    else{
+        html += `
+            <td>
+                <button class="market-eng">
+                    Contratar
+                </button>
+            </td>`
     }
 
     const engIDS = ["technicalDirector","chiefDesigner","chiefAerodynamicist","chiefEngineering"];

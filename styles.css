@@ -33,6 +33,7 @@ body {
     background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
     height: 100%;
     padding-right: 0 !important;
+    overflow: overlay;
 }
 
 ul{
@@ -212,7 +213,6 @@ abbr {
 #drivers-car-section {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
     align-items: center;
     justify-content: space-between;
 }
@@ -466,6 +466,9 @@ abbr {
 #engineers-name td:first-child {
     text-align: end;
 }
+#engineers-name button {
+    margin: 0;
+}
 #new-car {
     width: 100%;
     margin-bottom: 10px;
@@ -531,7 +534,6 @@ abbr {
 }
 
 #development {
-    margin-left: 10px;
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
@@ -664,7 +666,7 @@ abbr {
     cursor: pointer;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
     h1, h2, td, th, .btn-driver-name, #new-car th, .btn-eng-name, .bars-table td:nth-child(2), #new-car > tbody > tr:nth-child(7) > td:nth-child(2) {
         font-size: 10px;
     }
@@ -690,7 +692,7 @@ abbr {
         width: 80px;
     }
     button {
-        padding: 0;
+        padding: 2px;
     }
     #btn-play {
         padding: 10px 1em;

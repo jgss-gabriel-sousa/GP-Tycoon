@@ -1,9 +1,11 @@
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
-import { changeScreen } from "../screens.js"
-import { Championship } from "../championship.js";
+import { game, startGame } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
+import { changeScreen } from "../scripts/screens.js"
+import { Championship } from "../scripts/championship.js";
 
-export function newGame(){     
+function newGame(){
+    startGame();
+
     const teams = game.championship.teams;
     teams.sort();
 
@@ -32,6 +34,112 @@ export function newGame(){
 
             changeScreen("team-menu");
             genTeamHTML();
+        }
+    });
+}
+
+export async function selectDatabase(){
+    let DBs;
+    let inputDB;
+    
+    function loadFile(file){
+        fetch("./db/"+file)
+        .then(res => res.json())
+        .then(DB => {
+            DBs[DB.DB_NAME] = DB;
+            genHTML();
+            document.querySelector("#select-db > div:nth-child(1) > select").value = DB.DB_NAME;
+        })
+        .catch(e => console.error(e));
+    };
+
+    function getDBsStatic(){
+        return false;
+    }
+
+    async function getDBsOnline(){
+        try {
+            //const apiURL = `https://gp-tycoon-web-service.onrender.com/get-dbs`;
+            const apiURL = `.`;
+            const response = await fetch(apiURL, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+    
+            DBs = await response.json();
+        } catch (error) {
+            DBs = {
+                "F1 2015": {
+                    DB_Name: "Teste"
+                }
+            };
+        }
+    }
+
+    if(getDBsStatic() == false){
+        await getDBsOnline();
+    }
+
+    function setDB(DBname){
+        const db = DBs[DBname];
+
+        console.log(db)
+
+        game.championship.teams = db.championship.teams;
+        game.teams = db.teams;
+        game.drivers = db.drivers;
+    }
+
+    function genHTML(){
+        let html = `
+        <div>
+            Lista de DBs:
+            <select>`;
+    
+        for(const dbName in DBs) {
+            const DB = DBs[dbName];
+            html += `<option value="${dbName}">${dbName}</option>`;
+        }
+    
+        html += `
+            </select>
+        </div>
+        <div>
+            Carregar Arquivo de DB:
+            <input type="file" accept=".GPdb"/>
+        </div>`;
+
+        if(document.getElementById("select-db")){
+            document.getElementById("select-db").innerHTML = html;
+        }
+
+        html = `<div id="select-db">${html}</div>`
+        return html;
+    }
+
+
+    Swal.fire({
+        title: "Selecione a Base de Dados",
+        html: genHTML(),
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText: "Ok",
+    }).then((result) => {
+        if(result.isConfirmed){
+
+            setDB(document.querySelector("#select-db > div:nth-child(1) > select").value);
+            newGame();
+        }
+    });
+
+    const fileSelector = document.querySelector("#select-db > div:nth-child(2) > input");
+    fileSelector.addEventListener("change", e => {
+        const fileList = e.target.files;
+
+        if(fileList.length != 0){
+            loadFile(e.target.files[0].name);
         }
     });
 }

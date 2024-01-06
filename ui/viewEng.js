@@ -1,8 +1,8 @@
-import { NumberF, accentsTidy } from "../utils.js";
+import { NumberF, accentsTidy } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
-import { game } from "../game.js";
-import { CalcTeamDevPoints } from "../teams.js";
-import { genTeamHTML } from "../main.js";
+import { game } from "../scripts/game.js";
+import { CalcTeamDevPoints } from "../scripts/teams.js";
+import { genTeamHTML } from "../scripts/main.js";
 import { marketEng } from "./market.js";
 
 export function viewEng(name, returnToMarket){
@@ -134,7 +134,6 @@ function dismissEng(name){
             team.financialReport["Fines"] += -fine;
             team.financialReport["Balance"] -= fine;
             team.cash -= fine;
-
         }
         else if(result.isDenied){
             ;

@@ -1,6 +1,6 @@
-import { NumberF, accentsTidy } from "../utils.js";
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { NumberF, accentsTidy } from "../scripts/utils.js";
+import { game } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 
@@ -22,20 +22,19 @@ export function market(){
 
     const drivers = Object.values(game.drivers);
 
-    for(let i = 0; i < drivers.length; i++){
-        if(drivers[i].condition != "racing"){
-            console.log(drivers[i].name)
-            delete drivers[i];
-        }
-    }
-
     drivers.sort((a, b) => a.status.localeCompare(b.status));
     drivers.sort((a, b) => a.team.localeCompare(b.team));
 
+    console.log(drivers)
     for(let i = 0; i < drivers.length; i++){
         const driver = drivers[i];
+
         if(driver.name == "") continue
         if(driver.team == "") continue
+        if(driver.condition != "racing"){
+            console.log(driver)
+            continue
+        }
         
         html += `
         <tr class="driver" id="${driver.name}">

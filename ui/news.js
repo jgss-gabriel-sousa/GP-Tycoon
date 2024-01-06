@@ -1,6 +1,6 @@
-import { NumberF, accentsTidy } from "../utils.js";
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { NumberF, accentsTidy } from "../scripts/utils.js";
+import { game } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 

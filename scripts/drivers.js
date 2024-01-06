@@ -1,5 +1,5 @@
-import { getCountryEthnicity, getRandomCountry } from "./data/countryRanking.js";
-import { generateName } from "./data/nameData.js";
+import { getCountryEthnicity, getRandomCountry } from "../data/countryRanking.js";
+import { generateName } from "../data/nameData.js";
 import { game } from "./game.js"
 import { rand, rollDice } from "./utils.js"
 
@@ -82,9 +82,14 @@ export function startDriversStats(){
         if(!driver.poles) driver.poles = 0;
         if(!driver.team) driver.team = "";
         if(!driver.status) driver.status = "";
-        if(!driver.speed) driver.speed = rollDice("5d8+60");
-        if(!driver.pace) driver.pace = rollDice("5d8+60");
+        if(!driver.speed) driver.speed = rollDice("10d10+30");
+        if(!driver.pace) driver.pace = rollDice("10d10+30");
+        if(!driver.constancy) driver.constancy = rollDice("10d10+30");
         if(!driver.condition) driver.condition = "racing";
+
+        if(driver.speed > 100) driver.speed = 100;
+        if(driver.pace > 100) driver.pace = 100;
+        if(driver.constancy > 100) driver.constancy = 100;
 
         if(driver.contractRemainingYears > 0){
             if(driver.status == "1º Piloto")
@@ -117,7 +122,6 @@ function driverSkillUpdate(driver){
         driver.pace = Math.round(driver.pace * (1 - (rollDice("2d4+0") / (100 + rate))));
     }
     else if(driver.experience < 100){
-
         const timeToCareerPeak = Math.min(2,((driver.careerPeak - driver.age) / 10));
         const experience = (1 - (driver.experience / 100));
         const ability = (driver.speed * driver.pace) / 10000;
@@ -174,7 +178,6 @@ export function YearUpdateDriversStats(){
         driverSkillUpdate(driver);
     }
 
-    
     for(let i = Object.keys(game.drivers).length; i < 50; i++) {
         genDriver();
     }

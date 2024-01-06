@@ -1,5 +1,5 @@
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { game } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
 
 export function gameOptions(){
     const volumeValue = localStorage.getItem("gpTycoon-volume") ?? 0.25;

@@ -1,7 +1,7 @@
-import { genTeamHTML } from "../main.js";
-import { game } from "../game.js";
-import { CalcTeamDevPoints } from "../teams.js";
-import { NumberF } from "../utils.js";
+import { genTeamHTML } from "../scripts/main.js";
+import { game } from "../scripts/game.js";
+import { CalcTeamDevPoints } from "../scripts/teams.js";
+import { NumberF } from "../scripts/utils.js";
 
 function updateScreen(){
     CalcTeamDevPoints(game.team);

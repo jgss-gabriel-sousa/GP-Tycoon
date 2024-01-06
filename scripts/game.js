@@ -2,14 +2,14 @@ import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand, ho
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./main.js"
 import { Championship } from "./championship.js";
-import { driversData } from "./data/driversData.js";
-import { teamsData } from "./data/teamsData.js";
-import { enginesData } from "./data/enginesData.js";
-import { engineersData } from "./data/engineersData.js";
+import { driversData } from "../data/driversData.js";
+import { teamsData } from "../data/teamsData.js";
+import { enginesData } from "../data/enginesData.js";
+import { engineersData } from "../data/engineersData.js";
 import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
-import { selectEngine } from "./ui/selectEngine.js";
-import { generateName } from "./data/nameData.js";
-import { getRandomCountry } from "./data/countryRanking.js";
+import { selectEngine } from "../ui/selectEngine.js";
+import { generateName } from "../data/nameData.js";
+import { getRandomCountry } from "../data/countryRanking.js";
 import { CalcTeamDevPoints, StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
 
 export const game = {
@@ -26,9 +26,7 @@ export const game = {
     news: [],
 }
 
-function startGame(){
-    changeScreen("main-menu");
-
+export function startGame(){
     if(!localStorage.getItem("gpTycoon-ui-team-colors"))
         localStorage.setItem("gpTycoon-ui-team-colors","true");
 
@@ -115,7 +113,7 @@ async function checkGameKey(){
         }).then((result) => {
             if(result.isConfirmed){   
                 localStorage.setItem("gpTycoon-serial-key", JSON.stringify(result.value));
-                startGame();
+                changeScreen("main-menu");
             }
             else{
                 checkScreen();
@@ -139,7 +137,7 @@ async function checkGameKey(){
             console.log("Key checked online");
 
             localStorage.setItem("gpTycoon-serial-key", JSON.stringify(await response.json()));
-            startGame();
+            changeScreen("main-menu");
         }
     }
 
@@ -157,7 +155,7 @@ async function checkGameKey(){
             await hiddenCheck(key);
         }
         else{
-            startGame();
+            changeScreen("main-menu");
         }
     }
     else{

@@ -1,8 +1,9 @@
-import { accentsTidy, NumberF } from "../utils.js";
+import { accentsTidy, NumberF } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
-import { game } from "../game.js";
+import { game } from "../scripts/game.js";
 import { market } from "./market.js";
-import { getSalary } from "../drivers.js";
+import { getSalary } from "../scripts/drivers.js";
+import { genTeamHTML } from "../scripts/main.js";
 
 export function viewDriver(name, returnToMarket){
     let html = "";
@@ -251,9 +252,11 @@ function negotiate(driverName, returnToMarket){
                             market();
                     });
                 }
+                
+                genTeamHTML();
             }
-
-        }else if(result.isDenied){
+        }
+        else if(result.isDenied){
             viewDriver(driver.name, returnToMarket)
         }
     });

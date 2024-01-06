@@ -1,10 +1,10 @@
 import { genTeamHTML } from "./main.js";
-import { circuitsData } from "./data/circuits.js";
+import { circuitsData } from "../data/circuits.js";
 import { game, YearUpdate } from "./game.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "./teams.js";
 import { seasonOverviewUI } from "./ui.js";
-import { driversData } from "./data/driversData.js";
-import { teamsData } from "./data/teamsData.js";
+import { driversData } from "../data/driversData.js";
+import { teamsData } from "../data/teamsData.js";
 import { accentsTidy, genID, rand, rollDice } from "./utils.js";
 
 const SIMULATION_TICKS = 3;
@@ -29,8 +29,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Bahrein","Arábia Saudita","Austrália"];
+            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            this.tracks = ["Bahrein","Arábia Saudita","Austrália"];
             
             this.results = {};
             this.standings = [];
@@ -205,7 +205,16 @@ export class Championship {
             const circuitCorners = circuitsData[raceName].corners/100;
             const circuitStraights = circuitsData[raceName].straights/100;
             const randomF = 1 + (Math.random() * 1.5 - 0.75);
-            const driverF = (1 - game.drivers[driverName].speed/100) * (1 + (Math.random() * 1 - 0.75));
+
+            let speed = game.drivers[driverName].speed/100;
+            let constancyVar = game.drivers[driverName].constancy;
+            constancyVar = rand(0, (100 - constancyVar)*1.25) - (100 - constancyVar);
+            constancyVar /= 100;
+            constancyVar += 1;
+
+            speed *= constancyVar;
+
+            const driverF = (1 - speed) * (1 + (Math.random() * 1 - 0.75));
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners ;
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights ;
 
