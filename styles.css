@@ -164,6 +164,7 @@ abbr {
     color: var(--text);
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     display: none;
 }
 #button-list p {
@@ -222,11 +223,13 @@ abbr {
     display: flex;
     border: 2px solid var(--border);
     height: 100%;
+    width: 100%;
 }
 .driver-card {
     background-color: var(--bg);
     border-right: 2px solid var(--border);
     text-align: center;
+    width: 100%;
 }
 .driver-card:last-child{
     border-right: 0;
@@ -392,10 +395,14 @@ abbr {
     border: 2px solid var(--border);
     text-align: center;
     display: flex;
+    width: 100%;
 }
 #car > div{
     background-color: var(--bg);
-    border: 1px solid var(--border);
+    width: 100%;
+}
+#car > div:nth-child(n+2){
+    border-left: 2px solid var(--border);
 }
 #car > div > table {
     border-spacing: 0px;
@@ -412,7 +419,7 @@ abbr {
     border-spacing: 0;
     border-collapse: collapse;
     font-size: 12px;
-    margin: 5px 0px;
+    margin-top: 5px;
 }
 .bars-table td {
     padding: 0;
@@ -441,7 +448,6 @@ abbr {
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
-    height: fit-content;
 }
 #engineering table,
 #development table {
@@ -456,11 +462,9 @@ abbr {
     color: var(--titles);
     text-align: end;
     height: 20px;
-    font-size: 10px;
     padding: 0px 2px;
 }
 #development th {
-    font-size: 12px;
     padding: 4px 0px;
 }
 #engineers-name td:first-child {
@@ -507,7 +511,6 @@ abbr {
 #dev-pts div {
     display: flex;
     flex-direction: column;
-    padding: 5px;
     width: 50%;
 }
 #dev-pts > div:first-child {
@@ -519,7 +522,7 @@ abbr {
     color: var(--text);
 }
 #dev-pts h2 {
-    padding: 5px;
+    padding: 5px 0;
 }
 #dev-focus td,
 #dev-focus td {
@@ -548,10 +551,10 @@ abbr {
 }
 #development th {
     text-align: center;
+    font-size: 12px;
 }
 #development .total-investments {
     text-align: end;
-    font-size: 12px;
 }
 #development td:nth-child(1) {
     padding: 4px 2px;
@@ -700,6 +703,7 @@ abbr {
     }
     #engineering th, #development th {
         width: 50px;
+        font-size: 10px;
     }
     #team-logo {
         width: 75px;

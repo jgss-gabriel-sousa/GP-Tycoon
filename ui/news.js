@@ -7,7 +7,10 @@ import { viewEng } from "./viewEng.js"
 export function newsUI(){
     const news = game.news;
 
-    let html = `<div id="news-container"><div id="headlines">`;
+    let html = ` 
+        <div id="news-container">
+            <button><i class="lni lni-trash-can"></i></button>    
+            <div id="headlines">`;
     
     for(let i = 0; i < news.length; i++){
         html += `<li value="${i}" `;
@@ -41,7 +44,12 @@ export function newsUI(){
             element.innerHTML = `<p>${news[el.value].content}</p>`;
             news[el.value].viewed = true;
 
-            document.querySelector(`#headlines > li:nth-child(${el.value+1})`).classList.remove("not-viewed-news")
+            document.querySelector(`#headlines > li:nth-child(${el.value+1})`).classList.remove("not-viewed-news");
         });
+    });
+
+    document.querySelector("#news-container > button").addEventListener("click", e => {
+        game.news = [];
+        newsUI();
     });
 }

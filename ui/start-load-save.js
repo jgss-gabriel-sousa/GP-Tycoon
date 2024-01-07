@@ -83,6 +83,10 @@ export async function selectDatabase(){
     }
 
     function setDB(DBname){
+        if(DBname == "2023 (Padrão)"){
+            return;
+        }
+
         const db = DBs[DBname];
 
         console.log(db)
@@ -96,7 +100,9 @@ export async function selectDatabase(){
         let html = `
         <div>
             Lista de DBs:
-            <select>`;
+            <select>
+                <option value="2023 (Padrão)">2023 (Padrão)</option>
+            `;
     
         for(const dbName in DBs) {
             const DB = DBs[dbName];

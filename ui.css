@@ -486,6 +486,15 @@
     text-align: start;
     margin: 5px;
 }
+#news-container > button {
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+    position: absolute;
+    left: 1em;
+    top: 2em;
+    padding: 0;
+}
 .not-viewed-news {
     color: #0000EE;
 }
