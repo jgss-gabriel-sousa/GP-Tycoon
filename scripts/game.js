@@ -11,6 +11,7 @@ import { selectEngine } from "../ui/selectEngine.js";
 import { generateName } from "../data/nameData.js";
 import { getRandomCountry } from "../data/countryRanking.js";
 import { CalcTeamDevPoints, StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
+import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
 
 export const game = {
     activeScreen: "main-menu",
@@ -164,91 +165,6 @@ async function checkGameKey(){
 
 }checkGameKey();
 
-function StartEngStats(){
-    function genEng(){
-        let name = "";
-        let country = "";
-
-        do {
-            const r = rand(0,100);
-            let gender = "";
-            if(r < 90) gender = "male"
-            else gender = "female"
-
-            country = getRandomCountry();
-            name = generateName(country, gender);
-
-        } while(game.engineers.hasOwnProperty(name));
-
-        let eng = {};
-        eng.name = name;
-        eng.country = country
-        eng.age = rollDice("6d8+20");
-        eng.aero = rollDice("5d8+60");
-        eng.adm = rollDice("5d8+60");
-        eng.eng = rollDice("5d8+60");
-        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 10)));
-        eng.team = "";
-        eng.occupation = "";
-
-        game.engineers[name] = eng;
-    }
-    
-    for(let i = Object.keys(game.engineers).length; i <= 70; i++) {
-        genEng();
-    }
-
-    for(const e in game.engineers) {
-        const eng = game.engineers[e];
-
-        eng.name = e;
-        eng.salary = Math.round(20 + (Math.pow(1+((eng.aero/100) * (eng.adm/100) * (eng.eng/100)), 10)));
-        eng.team = "";
-        eng.occupation = "";
-    }
-
-    for(const t in game.teams) {
-        const team = game.teams[t];
-        const eng = game.engineers;
-
-        function tryGet(name){
-            if(!eng[name]){
-                return "";
-            }
-            else{
-                return eng[name].name;
-            }
-        }
-
-        team.teamPrincipal = tryGet(team.teamPrincipal);
-        team.engineers.technicalDirector = tryGet(team.engineers.technicalDirector);
-        team.engineers.chiefAerodynamicist = tryGet(team.engineers.chiefAerodynamicist);
-        team.engineers.chiefDesigner = tryGet(team.engineers.chiefDesigner);
-        team.engineers.chiefEngineering = tryGet(team.engineers.chiefEngineering);
-
-        if(team.teamPrincipal != "") {
-            eng[team.teamPrincipal].occupation = "Chefe de Equipe";   
-            eng[team.teamPrincipal].team = team.name;   
-        }
-        if(team.engineers.technicalDirector != ""){
-            eng[team.engineers.technicalDirector].occupation = "Diretor Técnico";
-            eng[team.engineers.technicalDirector].team = team.name; 
-        } 
-        if(team.engineers.chiefAerodynamicist != ""){
-            eng[team.engineers.chiefAerodynamicist].occupation = "Aerodinamicista Chefe";
-            eng[team.engineers.chiefAerodynamicist].team = team.name; 
-        } 
-        if(team.engineers.chiefDesigner != ""){
-            eng[team.engineers.chiefDesigner].occupation = "Designer Chefe";
-            eng[team.engineers.chiefDesigner].team = team.name; 
-        } 
-        if(team.engineers.chiefEngineering != ""){
-            eng[team.engineers.chiefEngineering].occupation = "Engenheiro Chefe";
-            eng[team.engineers.chiefEngineering].team = team.name; 
-        } 
-    }
-}
-
 export function YearUpdate(){
     const driverName = game.championship.standings[0][0];
     const driver = game.drivers[driverName];
@@ -276,6 +192,7 @@ export function YearUpdate(){
     game.championship.teamStandings = [];
 
     YearUpdateDriversStats();
+    YearUpdateEngStats();
     YearUpdateTeamsStats();
     genTeamHTML();
 }

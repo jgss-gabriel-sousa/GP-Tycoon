@@ -4,6 +4,7 @@ import { game } from "../scripts/game.js";
 import { CalcTeamDevPoints } from "../scripts/teams.js";
 import { genTeamHTML } from "../scripts/main.js";
 import { marketEng } from "./market.js";
+import { createTooltip } from "../scripts/tooltips.js";
 
 export function viewEng(name, returnToMarket){
     let html = "";
@@ -32,6 +33,13 @@ export function viewEng(name, returnToMarket){
                 <table id="view-driver-infos">
                     <th colspan="2">Dados Pessoais</th>
                     <tr>
+                        <td colspan="2" style="text-align: center">${eng.gender}</td>
+                    </tr>
+                    <tr>
+                        <td>Personalidade:</td>
+                        <td class="persona-${eng.personality}">${eng.personality}</td>
+                    </tr>
+                    <tr>
                         <td>País:</td>
                         <td>
                             <img class="country-flag" src="img/flags/${accentsTidy(eng.country)}.webp">
@@ -42,10 +50,22 @@ export function viewEng(name, returnToMarket){
                         <td>Idade:</td>
                         <td>${eng.age} anos</td>
                     </tr>
-                    <tr>
-                        <td>Função:</td>
-                        <td>${eng.occupation}</td>
-                    </tr>
+                    `
+
+                    if(eng.occupation){
+                        html += `
+                        <tr>
+                            <td>Função:</td>
+                            <td>${eng.occupation}</td>
+                        </tr>
+                        <tr>
+                            <td>Equipe:</td>
+                            <td>${eng.team}</td>
+                        </tr>
+                        `
+                    }
+
+                    html += `
                     <tr>
                         <td>Salário:</td>
                         <td>${eng.salary} Mil por Corrida</td>
@@ -84,6 +104,23 @@ export function viewEng(name, returnToMarket){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(r => {
+
+        const personalities = [
+            "Perfeccionista", "Inovador", "Líder Nato", "Colaborador",
+            "Ambicioso", "Estrategista", "Comprometido", "Comunicativo",
+            "Analítico", "Versátil", "Adaptável", "Resiliente",
+            "Metódico", "Independente", "Diplomático", "Otimista", "Eficiente"
+        ];
+        for (let i = 0; i < personalities.length; i++) {
+            const personality = personalities[i];
+            
+            if(document.querySelector(".persona-"+personality)._tippy){
+                document.querySelector(".persona-"+personality)._tippy.destroy();
+                console.log("destroy")
+            }
+        }
+
+
         if(returnToMarket)
             marketEng();
     });
@@ -102,7 +139,23 @@ export function viewEng(name, returnToMarket){
     document.querySelector("#change-eng").addEventListener("click", () => {
         changeEng(name);
     });
+    
+    const personalities = [
+        "Perfeccionista", "Inovador", "Líder Nato", "Colaborador",
+        "Ambicioso", "Estrategista", "Comprometido", "Comunicativo",
+        "Analítico", "Versátil", "Adaptável", "Resiliente",
+        "Metódico", "Independente", "Diplomático", "Otimista", "Eficiente"
+    ];
+    for (let i = 0; i < personalities.length; i++) {
+        const personality = personalities[i];
+        
+        if(document.querySelector(".persona-"+personality)){
+            createTooltip(".persona-"+personality, personality+" é uma personalidade!!");
+        }
+    }
 }
+
+
 
 function dismissEng(name){
     const eng = game.engineers[name];
@@ -227,6 +280,7 @@ function contractEng(name){
             
             game.engineers[eng.name].team = game.team;
             team.financialReport["Fines"] += fine;
+            team.financialReport["Balance"] -= fine;
             team.cash -= fine;
 
             genTeamHTML();

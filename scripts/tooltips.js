@@ -2,13 +2,13 @@ import { game } from "./game.js"
 
 const tooltipMaxWidth = 500;
 
-function createTooltip(id, content){
+export function createTooltip(id, content){
     if(!document.querySelector(id)._tippy){
         tippy(id, {
             maxWidth: tooltipMaxWidth,
             theme: 'material',
             content: content,
-            allowHTML: true
+            allowHTML: true,
         });
     }
 }
