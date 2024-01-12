@@ -623,6 +623,10 @@ export function YearUpdateTeamsStats(){
         car.weight = team.newCar.weight;
         car.chassisReliability = team.newCar.chassisReliability;
 
+        car.corners = Math.round((((car.downforce + car.weight)/2)*engine.drivability)/100);
+        car.straights = Math.round((((car.aerodynamic + car.weight)/2)*engine.power)/100);
+        car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
+
         team.newCar.aerodynamic = 0;
         team.newCar.downforce = 0;
         team.newCar.weight = 0;
