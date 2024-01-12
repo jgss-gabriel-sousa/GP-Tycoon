@@ -421,6 +421,8 @@ export function StartTeamsStats(){
             accumulated: {value:[],legend:[]},
             year: {value:[],legend:[]},
         };
+
+        team.lastResults = {};
         
         CalcTeamMorale(team.name);
         CalcTeamDevPoints(team.name);
@@ -575,7 +577,7 @@ export function YearUpdateTeamsStats(){
     for(const t in game.teams) {
         const team = game.teams[t];
         const car = team.car;
-        const engine = game.engines[team.engine];
+        let engine = game.engines[team.engine];
 
         team.driver1 = team.new1driver;
         team.driver2 = team.new2driver;
@@ -622,10 +624,6 @@ export function YearUpdateTeamsStats(){
         car.downforce = team.newCar.downforce;
         car.weight = team.newCar.weight;
         car.chassisReliability = team.newCar.chassisReliability;
-
-        car.corners = Math.round((((car.downforce + car.weight)/2)*engine.drivability)/100);
-        car.straights = Math.round((((car.aerodynamic + car.weight)/2)*engine.power)/100);
-        car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
 
         team.newCar.aerodynamic = 0;
         team.newCar.downforce = 0;
@@ -681,6 +679,11 @@ export function YearUpdateTeamsStats(){
             }
         }
 
+        engine = game.engines[team.engine];
+        car.corners = Math.round((((car.downforce + car.weight)/2)*engine.drivability)/100);
+        car.straights = Math.round((((car.aerodynamic + car.weight)/2)*engine.power)/100);
+        car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
+
         if(team.balanceHistoric.year.value.length >= 5){
             team.balanceHistoric.year.value.shift();
             team.balanceHistoric.year.legend.shift();
@@ -713,5 +716,98 @@ export function YearUpdateTeamsStats(){
 
         game.championship.drivers.push(team.driver1);
         game.championship.drivers.push(team.driver2);
+
+        let endResult; 
+        let endPos; 
+        for(let i = 0; i < game.championship.teamStandings.length; i++) {
+            const t = game.championship.teamStandings[i];
+
+            if(t[0] == team.name){
+                endResult = t;
+                endPos = i+1;
+            }
+        }
+        if(endResult){
+            team.lastResults[game.year] = {
+                position: endPos,
+                pts: endResult[1],
+                wins: endResult[2],
+                podiums: endResult[3],
+                bestFinish: endResult[4],
+            };
+        }
+    }
+
+    calcTeamsReputation();
+}
+
+function calcTeamsReputation(){
+    let teamsPerformance = {};
+
+    for(const t in game.teams){
+        const team = game.teams[t];
+
+        for(const year in team.lastResults){
+            if(parseInt(year) < game.year-2) continue;
+
+            if(!teamsPerformance[year])
+                teamsPerformance[year] = {maxPts:0};
+
+            let pts = team.lastResults[year].pts;
+
+            teamsPerformance[year][team.name] = pts;
+
+            if(pts > teamsPerformance[year].maxPts)
+                teamsPerformance[year].maxPts = pts;
+        }
+    }
+
+    for(const y in teamsPerformance){
+        for(const t in teamsPerformance[y]){
+            if(t == "maxPts")
+                continue;
+
+            teamsPerformance[y][t] = teamsPerformance[y][t] / teamsPerformance[y].maxPts;
+        }
+
+        delete teamsPerformance[y].maxPts;
+    }
+
+    const performance = {};
+    for(const y in teamsPerformance){
+        for(const t in teamsPerformance[y]){
+            let modif = 3;
+
+            if(y == game.year-1) modif = 2;
+            if(y == game.year-2) modif = 1;
+
+            if(!performance[t])
+                performance[t] = 0;
+
+            performance[t] += teamsPerformance[y][t] * modif;
+        }
+    }
+    for(const t in performance){
+        performance[t] /= 6;
+    }
+
+    console.log(performance);
+
+    for(let t in performance){
+        performance[t] = Math.round((performance[t]*4)+1);
+    }
+
+    /*
+    */
+
+    console.log(performance);
+
+
+
+    for(const t in game.teams){
+        const team = game.teams[t];
+
+        team.reputation = performance[team.name];
+        //team.reputation = ((performance*3)+fans+tradition)/5;
     }
 }

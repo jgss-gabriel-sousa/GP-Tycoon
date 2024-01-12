@@ -2,9 +2,12 @@ export const teamsData = {
     "Red Bull": {
         name: "Red Bull",
         country: "AT",
+        history: {
+            titles: 6,
+            fans: 22.4, //(in Millions) Insta Followers * 2
+        },
         engine: "Red Bull PowerTrains",
         engineContract: 0,
-        reputation: 5,
         bg_color: "#23326A",
         border_color: "#9E1336",
         font_color: "#FABB23",
@@ -45,9 +48,12 @@ export const teamsData = {
     "Mercedes": {
         name: "Mercedes",
         country: "DE",
+        history: {
+            titles: 8,
+            fans: 24.4, //(in Millions) Insta Followers * 2
+        },
         engine: "Mercedes",
         engineContract: -1,
-        reputation: 5,
         bg_color: "#C8CCCE",
         border_color: "#00A79B",
         font_color: "#000",
@@ -92,7 +98,10 @@ export const teamsData = {
         country: "IT",
         engine: "Ferrari",
         engineContract: -1,
-        reputation: 4,
+        history: {
+            titles: 16,
+            fans: 25.6, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#A6051A",
         border_color: "#111",
         font_color: "#FFEB00",
@@ -137,7 +146,10 @@ export const teamsData = {
         country: "GB",
         engine: "Mercedes",
         engineContract: 3,
-        reputation: 2,
+        history: {
+            titles: 0,
+            fans: 8, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#00352f",
         border_color: "#00594f",
         font_color: "#fff",
@@ -182,7 +194,10 @@ export const teamsData = {
         country: "FR",
         engine: "Renault",
         engineContract: -1,
-        reputation: 2,
+        history: {
+            titles: 2,
+            fans: 6.4, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#005094",
         border_color: "#fd4bc7",
         font_color: "#fff",
@@ -227,7 +242,10 @@ export const teamsData = {
         country: "US",
         engine: "Ferrari",
         engineContract: 3,
-        reputation: 1,
+        history: {
+            titles: 0,
+            fans: 5.4, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#efefef",
         border_color: "#000",
         font_color: "#000",
@@ -272,7 +290,10 @@ export const teamsData = {
         country: "GB",
         engine: "Mercedes",
         engineContract: 3,
-        reputation: 3,
+        history: {
+            titles: 8,
+            fans: 23.4, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#ff8000",
         border_color: "#59ADF5",
         font_color: "#111",
@@ -317,7 +338,10 @@ export const teamsData = {
         country: "CH",
         engine: "Ferrari",
         engineContract: 3,
-        reputation: 1,
+        history: {
+            titles: 0,
+            fans: 4.4, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#981e32",
         border_color: "#002039",
         font_color: "#f9f9f8",
@@ -362,7 +386,10 @@ export const teamsData = {
         country: "IT",
         engine: "Red Bull PowerTrains",
         engineContract: 3,
-        reputation: 2,
+        history: {
+            titles: 0,
+            fans: 6, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#f1f3f4",
         border_color: "#00293f",
         font_color: "#000",
@@ -407,7 +434,10 @@ export const teamsData = {
         country: "GB",
         engine: "Mercedes",
         engineContract: 3,
-        reputation: 1,
+        history: {
+            titles: 9,
+            fans: 5.4, //(in Millions) Insta Followers * 2
+        },
         bg_color: "#040046",
         border_color: "#00a3e0",
         font_color: "#d5d5d5",

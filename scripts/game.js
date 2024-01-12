@@ -184,15 +184,15 @@ export function YearUpdate(){
 
     game.drivers[driverName].titles++;
 
-    game.year++;
+    YearUpdateDriversStats();
+    YearUpdateEngStats();
+    YearUpdateTeamsStats();
 
+    game.year++;
     game.championship.actualRound = 1;
     game.championship.standings = [];
     game.championship.results = {};
     game.championship.teamStandings = [];
 
-    YearUpdateDriversStats();
-    YearUpdateEngStats();
-    YearUpdateTeamsStats();
     genTeamHTML();
 }

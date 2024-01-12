@@ -44,13 +44,6 @@ export function gameOptions(){
         confirmButtonText: "Ok",
     });
 
-    
-    if(document.querySelector("#visual-race-sim input").checked == false)
-        document.querySelector("#race-sim-speed input").setAttribute("disabled", "");
-    else
-        document.querySelector("#race-sim-speed input").removeAttribute("disabled");
-    
-
     document.querySelector("#volume input").addEventListener("input", () => {
         document.querySelector("#volume label").innerHTML = Math.round(document.querySelector("#volume input").value*100)+"%";
     });
@@ -69,11 +62,6 @@ export function gameOptions(){
 
     document.querySelector("#visual-race-sim input").addEventListener("change", () => {
         localStorage.setItem("gpTycoon-visual-race-sim", document.querySelector("#visual-race-sim input").checked);
-          
-        if(document.querySelector("#visual-race-sim input").checked == false)
-            document.querySelector("#race-sim-speed input").setAttribute("disabled", "");
-        else
-            document.querySelector("#race-sim-speed input").removeAttribute("disabled");
     });
 
     document.querySelector("#ui-team-colors input").addEventListener("change", () => {

@@ -39,13 +39,14 @@ function newGame(){
 }
 
 export async function selectDatabase(){
-    let DBs;
+    let DBs = {};
     let inputDB;
     
     function loadFile(file){
         fetch("./db/"+file)
         .then(res => res.json())
         .then(DB => {
+            console.log(DBs)
             DBs[DB.DB_NAME] = DB;
             genHTML();
             document.querySelector("#select-db > div:nth-child(1) > select").value = DB.DB_NAME;
@@ -53,14 +54,19 @@ export async function selectDatabase(){
         .catch(e => console.error(e));
     };
 
-    function getDBsStatic(){
-        return false;
-    }
+    function getDBsSaved(){
+        const dbs = JSON.parse(localStorage.getItem("gpTycoon-game-databases"));
+
+        for(const key in dbs){
+            DBs[key] = dbs[key];
+        }
+
+    }getDBsSaved();
 
     async function getDBsOnline(){
         try {
-            //const apiURL = `https://gp-tycoon-web-service.onrender.com/get-dbs`;
-            const apiURL = `.`;
+            const apiURL = `https://gp-tycoon-web-service.onrender.com/get-dbs`;
+            let OnlineDBs;
             const response = await fetch(apiURL, {
                 method: "GET",
                 headers: {
@@ -68,18 +74,16 @@ export async function selectDatabase(){
                 }
             });
     
-            DBs = await response.json();
-        } catch (error) {
-            DBs = {
-                "F1 2015": {
-                    DB_Name: "Teste"
-                }
-            };
-        }
-    }
+            OnlineDBs = await response.json();
 
-    if(getDBsStatic() == false){
-        await getDBsOnline();
+            if(OnlineDBs){
+                for(const key in OnlineDBs){
+                    DBs[key] = OnlineDBs[key];
+                }
+            }
+        } catch (error) {
+            ;
+        }
     }
 
     function setDB(DBname){
@@ -88,8 +92,6 @@ export async function selectDatabase(){
         }
 
         const db = DBs[DBname];
-
-        console.log(db)
 
         game.championship.teams = db.championship.teams;
         game.teams = db.teams;
@@ -111,6 +113,7 @@ export async function selectDatabase(){
     
         html += `
             </select>
+            <button id="download-dbs"><i class="lni lni-download"></i></button>
         </div>
         <div>
             Carregar Arquivo de DB:
@@ -133,8 +136,11 @@ export async function selectDatabase(){
         focusConfirm: false,
         confirmButtonText: "Ok",
     }).then((result) => {
-        if(result.isConfirmed){
+        
+        if(DBs)
+            localStorage.setItem("gpTycoon-game-databases", JSON.stringify(DBs));
 
+        if(result.isConfirmed){
             setDB(document.querySelector("#select-db > div:nth-child(1) > select").value);
             newGame();
         }
@@ -147,6 +153,11 @@ export async function selectDatabase(){
         if(fileList.length != 0){
             loadFile(e.target.files[0].name);
         }
+    });
+
+    const downloadDBs = document.querySelector("#download-dbs");
+    downloadDBs.addEventListener("click", e => {
+        getDBsOnline();
     });
 }
 
