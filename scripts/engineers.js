@@ -5,6 +5,12 @@ import { rand, rollDice } from "./utils.js";
 
 export function YearUpdateEngStats(){
     console.log(game.engineers)
+
+    for(const e in game.engineers) {
+        const eng = game.engineers[e];
+
+        eng.age++;
+    }
 }
 
 export function StartEngStats(){

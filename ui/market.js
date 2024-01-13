@@ -25,14 +25,12 @@ export function market(){
     drivers.sort((a, b) => a.status.localeCompare(b.status));
     drivers.sort((a, b) => a.team.localeCompare(b.team));
 
-    console.log(drivers)
     for(let i = 0; i < drivers.length; i++){
         const driver = drivers[i];
 
         if(driver.name == "") continue
         if(driver.team == "") continue
         if(driver.condition != "racing"){
-            console.log(driver)
             continue
         }
         

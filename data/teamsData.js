@@ -4,8 +4,22 @@ export const teamsData = {
         country: "AT",
         history: {
             titles: 6,
-            fans: 22.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 1,
+                    pts: 759,
+                },
+                2021: {
+                    position: 2,
+                    pts: 586,
+                },
+                2020: {
+                    position: 2,
+                    pts: 319,
+                },
+            }
         },
+        fans: 22.4, //(in Millions) Insta Followers * 2
         engine: "Red Bull PowerTrains",
         engineContract: 0,
         bg_color: "#23326A",
@@ -50,8 +64,22 @@ export const teamsData = {
         country: "DE",
         history: {
             titles: 8,
-            fans: 24.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 3,
+                    pts: 515,
+                },
+                2021: {
+                    position: 1,
+                    pts: 614,
+                },
+                2020: {
+                    position: 1,
+                    pts: 573,
+                },
+            }
         },
+        fans: 24.4,
         engine: "Mercedes",
         engineContract: -1,
         bg_color: "#C8CCCE",
@@ -96,12 +124,26 @@ export const teamsData = {
     "Ferrari": {
         name: "Ferrari",
         country: "IT",
-        engine: "Ferrari",
-        engineContract: -1,
         history: {
             titles: 16,
-            fans: 25.6, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 2,
+                    pts: 554,
+                },
+                2021: {
+                    position: 3,
+                    pts: 324,
+                },
+                2020: {
+                    position: 6,
+                    pts: 131,
+                },
+            }
         },
+        fans: 25.6,
+        engine: "Ferrari",
+        engineContract: -1,
         bg_color: "#A6051A",
         border_color: "#111",
         font_color: "#FFEB00",
@@ -144,12 +186,26 @@ export const teamsData = {
     "Aston Martin": {
         name: "Aston Martin",
         country: "GB",
-        engine: "Mercedes",
-        engineContract: 3,
         history: {
             titles: 0,
-            fans: 8, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 7,
+                    pts: 55,
+                },
+                2021: {
+                    position: 7,
+                    pts: 77,
+                },
+                2020: {
+                    position: 4,
+                    pts: 195,
+                },
+            }
         },
+        fans: 8,
+        engine: "Mercedes",
+        engineContract: 3,
         bg_color: "#00352f",
         border_color: "#00594f",
         font_color: "#fff",
@@ -192,12 +248,26 @@ export const teamsData = {
     "Alpine": {
         name: "Alpine",
         country: "FR",
-        engine: "Renault",
-        engineContract: -1,
         history: {
             titles: 2,
-            fans: 6.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 4,
+                    pts: 173,
+                },
+                2021: {
+                    position: 5,
+                    pts: 155,
+                },
+                2020: {
+                    position: 5,
+                    pts: 181,
+                },
+            }
         },
+        fans: 6.4,
+        engine: "Renault",
+        engineContract: -1,
         bg_color: "#005094",
         border_color: "#fd4bc7",
         font_color: "#fff",
@@ -240,12 +310,26 @@ export const teamsData = {
     "Haas": {
         name: "Haas",
         country: "US",
-        engine: "Ferrari",
-        engineContract: 3,
         history: {
             titles: 0,
-            fans: 5.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 8,
+                    pts: 37,
+                },
+                2021: {
+                    position: 10,
+                    pts: 0,
+                },
+                2020: {
+                    position: 9,
+                    pts: 3,
+                },
+            }
         },
+        fans: 5.4,
+        engine: "Ferrari",
+        engineContract: 3,
         bg_color: "#efefef",
         border_color: "#000",
         font_color: "#000",
@@ -288,12 +372,26 @@ export const teamsData = {
     "McLaren": {
         name: "McLaren",
         country: "GB",
-        engine: "Mercedes",
-        engineContract: 3,
         history: {
             titles: 8,
-            fans: 23.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 5,
+                    pts: 159,
+                },
+                2021: {
+                    position: 4,
+                    pts: 275,
+                },
+                2020: {
+                    position: 3,
+                    pts: 202,
+                },
+            }
         },
+        fans: 23.4,
+        engine: "Mercedes",
+        engineContract: 3,
         bg_color: "#ff8000",
         border_color: "#59ADF5",
         font_color: "#111",
@@ -336,12 +434,26 @@ export const teamsData = {
     "Alfa Romeo": {
         name: "Alfa Romeo",
         country: "CH",
-        engine: "Ferrari",
-        engineContract: 3,
         history: {
             titles: 0,
-            fans: 4.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 6,
+                    pts: 55,
+                },
+                2021: {
+                    position: 9,
+                    pts: 13,
+                },
+                2020: {
+                    position: 8,
+                    pts: 8,
+                },
+            }
         },
+        fans: 4.4,
+        engine: "Ferrari",
+        engineContract: 3,
         bg_color: "#981e32",
         border_color: "#002039",
         font_color: "#f9f9f8",
@@ -384,12 +496,26 @@ export const teamsData = {
     "AlphaTauri": {
         name: "AlphaTauri",
         country: "IT",
-        engine: "Red Bull PowerTrains",
-        engineContract: 3,
         history: {
             titles: 0,
-            fans: 6, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 9,
+                    pts: 35,
+                },
+                2021: {
+                    position: 6,
+                    pts: 142,
+                },
+                2020: {
+                    position: 7,
+                    pts: 107,
+                },
+            }
         },
+        fans: 6,
+        engine: "Red Bull PowerTrains",
+        engineContract: 3,
         bg_color: "#f1f3f4",
         border_color: "#00293f",
         font_color: "#000",
@@ -432,12 +558,26 @@ export const teamsData = {
     "Williams": {
         name: "Williams",
         country: "GB",
-        engine: "Mercedes",
-        engineContract: 3,
         history: {
             titles: 9,
-            fans: 5.4, //(in Millions) Insta Followers * 2
+            lastResults: {
+                2022: {
+                    position: 10,
+                    pts: 8,
+                },
+                2021: {
+                    position: 8,
+                    pts: 23,
+                },
+                2020: {
+                    position: 10,
+                    pts: 0,
+                },
+            }
         },
+        fans: 5.4,
+        engine: "Mercedes",
+        engineContract: 3,
         bg_color: "#040046",
         border_color: "#00a3e0",
         font_color: "#d5d5d5",

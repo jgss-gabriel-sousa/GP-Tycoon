@@ -29,7 +29,7 @@ function newGame(){
                 headline: "Novidade na "+game.team,
                 date: game.championship.actualRound-1,
                 year: game.year,
-                content: `A ${game.team} surpreende com a nomeação de um novo líder para sua direção, apesar de ser desconhecido é considerado uma grande promessa no gerenciamneto, será ele capaz de fazer história?!`,
+                content: `A ${game.team} surpreende com a nomeação de um novo líder para sua direção, apesar de ser desconhecido é considerado uma grande promessa no gerenciamento, será ele capaz de fazer história?!`,
             });
 
             changeScreen("team-menu");

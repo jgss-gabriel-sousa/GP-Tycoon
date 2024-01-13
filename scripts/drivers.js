@@ -58,11 +58,6 @@ function genDriver(){
 }
 
 export function startDriversStats(){
-
-    for(let i = Object.keys(game.drivers).length; i < 60; i++) {
-        genDriver();
-    }
-
     for(const d in game.drivers){
         const driver = game.drivers[d];
         
@@ -111,6 +106,15 @@ export function startDriversStats(){
         if(!driver.careerPeak) driver.careerPeak = rollDice("3d6+20");
 
         driver.salary = getSalary(driver);
+    }
+
+    let activeDrivers = 0;
+    for(const d in game.drivers){
+        if(game.drivers[d].condition == "racing")
+            activeDrivers++;
+    }
+    for(let i = activeDrivers; i < 60; i++) {
+        genDriver();
     }
 };
 
