@@ -30,9 +30,11 @@ function genDriver(){
     driver.country = country
     driver.age = rollDice("8d4+0");
     if(driver.age < 18) driver.age = 18;
-    driver.speed = rollDice("5d8+60");
-    driver.pace = rollDice("5d8+60");
-    driver.careerPeak = rollDice("3d6+18");
+    driver.speed = rollDice("10d10+30");
+    driver.pace = rollDice("10d10+30");
+    driver.constancy = rollDice("10d10+30");
+    driver.careerPeak = rollDice("3d6+20");
+    driver.motivation = rollDice("5d20+30");
     driver.experience = 0;
     driver.titles = 0;
     driver.gps = 0;
@@ -41,8 +43,14 @@ function genDriver(){
     driver.poles = 0;
     driver.team = "";
     driver.status = "";
+    driver.condition = "racing";
     driver.contractRemainingYears = 0;
     //driver.image = `generic/${rand(0,9)}`;
+
+    if(driver.speed > 100) driver.speed = 100;
+    if(driver.pace > 100) driver.pace = 100;
+    if(driver.constancy > 100) driver.constancy = 100;
+    if(driver.motivation > 100) driver.motivation = 100;
 
     const ethnicityData = getCountryEthnicity(country);
 
@@ -182,7 +190,12 @@ export function YearUpdateDriversStats(){
         driverSkillUpdate(driver);
     }
 
-    for(let i = Object.keys(game.drivers).length; i < 50; i++) {
+    let activeDrivers = 0;
+    for(const d in game.drivers){
+        if(game.drivers[d].condition == "racing")
+            activeDrivers++;
+    }
+    for(let i = activeDrivers; i < 60; i++) {
         genDriver();
     }
 }

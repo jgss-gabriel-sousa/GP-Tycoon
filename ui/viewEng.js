@@ -113,13 +113,7 @@ export function viewEng(name, returnToMarket){
         ];
         for (let i = 0; i < personalities.length; i++) {
             const personality = personalities[i];
-            
-            if(document.querySelector(".persona-"+personality)._tippy){
-                document.querySelector(".persona-"+personality)._tippy.destroy();
-                console.log("destroy")
-            }
         }
-
 
         if(returnToMarket)
             marketEng();

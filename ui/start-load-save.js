@@ -46,7 +46,6 @@ export async function selectDatabase(){
         fetch("./db/"+file)
         .then(res => res.json())
         .then(DB => {
-            console.log(DBs)
             DBs[DB.DB_NAME] = DB;
             genHTML();
             document.querySelector("#select-db > div:nth-child(1) > select").value = DB.DB_NAME;
@@ -96,6 +95,9 @@ export async function selectDatabase(){
         game.championship.teams = db.championship.teams;
         game.teams = db.teams;
         game.drivers = db.drivers;
+        
+        console.log(db)
+        console.log(game)
     }
 
     function genHTML(){

@@ -6,11 +6,11 @@
     "teams": {
         "Red Bull": {
             "name": "Red Bull",
-            "country": "AT",
+            "country": "US",
             "engine": "Red Bull PowerTrains",
             "engineContract": 0,
             "reputation": 5,
-            "bg_color": "#23326A",
+            "bg_color": "#000000",
             "border_color": "#9E1336",
             "font_color": "#FABB23",
             "titles_color": "#efefef",

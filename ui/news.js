@@ -60,19 +60,20 @@ export function newsUI(){
 
     document.querySelector("#news-container > button").addEventListener("click", e => {
         game.news = [];
-        newsUI();
+        document.querySelector(".swal2-close").click();
     });
 }
 
 
 export function publishNews(type, args){
+    try {
     const news = {
         "Decrease Reputation": {
             headline: `${args[0]} caiu de patamar`,
             image: "performance-issues",
             contents: [
                 `Infelizmente, a reputação da ${args[0]} sofreu uma queda, agora avaliada como ${args[1]}, indicando desafios recentes enfrentados pela equipe.`,
-                `Análises recentes apontam uma diminuição na reputação da ${args[0]} , refletindo desafios e obstáculos que afetaram a imagem da equipe, resultando em avaliações como ${args[1]}.`,
+                `Análises recentes apontam uma diminuição na reputação da ${args[0]}, refletindo desafios e obstáculos que afetaram a imagem da equipe, resultando em avaliações como ${args[1]}.`,
                 `A ${args[0]} enfrenta um período desafiador, refletindo-se na redução de sua reputação, agora avaliada como ${args[1]}.`,
                 `A reputação da ${args[0]} sofreu uma diminuição, com análises atuais apontando que a equipe enfrentou dificuldades, resultando em ser avaliada como ${args[1]}.`,
             ]
@@ -91,18 +92,22 @@ export function publishNews(type, args){
             headline: `Nova Contratação na ${args[0]}`,
             contents: [
                 `A ${args[0]} definiu ${args[1]} como ${args[2]} em um contrato de ${args[3]} ${args[3] == 1 ? "Ano" : "Anos"}.`,
+                `A ${args[0]} estabeleceu ${args[1]} como ${args[2]} em um acordo de ${args[3]} ${args[3] == 1 ? "Ano" : "Anos"}.`,
+                `Sob um acordo de ${args[3]} ${args[3] == 1 ? "Ano" : "Anos"}, a ${args[0]} determinou ${args[1]} como ${args[2]}.`,
+                `Sob as condições de um contrato de ${args[3]} ${args[3] == 1 ? "Ano" : "Anos"}, a ${args[0]} contratou ${args[1]} como ${args[2]}.`,
             ],
             div: 
             `
             <div id="news-driver-hire">
                 <div id="news-driver-hire-breaking">
-                    <h1>BREAKING</h1>
-                    <img src="./img/drivers/${game.drivers[args[1]].image}.webp">
-                    <h1>${args[1].toUpperCase()}</h1>
+                    <h1 style="background-color: ${game.teams[args[0]].bg_color}; color: ${game.teams[args[0]].font_color}">BREAKING</h1>
+                    <img src="img/drivers/${game.drivers[args[1]].image}.webp">
+                    <h1 style="background-color: ${game.teams[args[0]].bg_color}; color: ${game.teams[args[0]].font_color}">${args[1].toUpperCase()}</h1>
+                    <h2 style="background-color: ${game.teams[args[0]].bg_color}; color: ${game.teams[args[0]].font_color}">ASSINA COM A ${args[0].toUpperCase()}</h2>
                 </div>
                 <i class="lni lni-angle-double-right"></i>
                 <div>
-                    <img src="./img/teams/${args[0]}.png">
+                    <img style="background-color: ${game.teams[args[0]].bg_color};" src="./img/teams/${args[0]}.png">
                 </div>
             </div>`
         },
@@ -123,4 +128,8 @@ export function publishNews(type, args){
     }
 
     game.news.unshift(newNews);
+
+    } catch (error) {
+        
+    }
 }
