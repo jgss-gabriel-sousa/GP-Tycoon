@@ -577,3 +577,20 @@
     padding: 10px;
     max-width: 200px;
 }
+
+#other-series-standings {
+    display: flex; 
+    flex-direction: row;
+    max-width: 100%;
+    overflow: overlay;
+}
+#other-series-standings div {
+    margin: 5px;
+}
+#other-series-standings td {
+    font-size: 10px;
+}
+#other-series-standings h1 {
+    background-color: #333;
+    font-size: 14px;
+}

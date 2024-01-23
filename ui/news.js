@@ -50,7 +50,8 @@ export function newsUI(){
             if(news[el.value].div)
                 html += news[el.value].div;
 
-            html += `<p>${news[el.value].content}</p>`;
+            if(news[el.value].content)
+                html += `<p>${news[el.value].content}</p>`;
 
             element.innerHTML = html;
             news[el.value].viewed = true;
@@ -72,7 +73,10 @@ export function publishNews(type, args){
 
     news.date = game.championship.actualRound-1;
     news.year = game.year;
-    news.content = news.content[rand(0, news.content.length)];
+    
+    if(news.content){
+        news.content = news.content[rand(0, news.content.length)];
+    }
 
     if(news.image){
         news.image = `/img/ui/news/${news.image}.webp`;

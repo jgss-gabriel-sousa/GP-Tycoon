@@ -53,14 +53,48 @@ export function getNewsSchema(type, args){
     }
 
     if(type == "F2 Results"){
-        let divHTML;
+        const f2 = args[0];
+        const f3 = args[1];
+
+        let html = ` <div id="other-series-standings">`
+
+
+        args.forEach(c => {
+            html += `
+            <div>
+                <h1>${c.name}</h1>
+
+                <table id="team-standings">
+                    <tr>
+                        <th>Pos</th>
+                        <th>Piloto</th>
+                        <th>Academia</th>
+                    </tr>`;
+
+            let pos = 1;
+            c.ranking.forEach(e => {
+                html += `
+                <tr>
+                    <td>${pos++}º</td>
+                    <td>${e[0]}</td>`
+                
+                if(game.drivers[e[0]].team){
+                    html += `<td>${game.drivers[e[0]].team}</td>`
+                }
+                else{
+                    html += `<td></td>`
+                }
+
+                html +=  `
+                </tr>`;
+            });
+            html += `</table></div>`;
+        });
 
         return {
-            headline: `Resultados da Temporada de Fórmula 2`,
-            content: [
-                ``,
-            ],
-            div: divHTML,
+            headline: `Resultados de outras categorias`,
+            content: [],
+            div: html,
         }
     }
 }

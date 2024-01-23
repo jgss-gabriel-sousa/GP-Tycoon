@@ -38,8 +38,8 @@ export const teamsData = {
         test_driver: "Daniel Ricciardo",
         driversAcademy: [
             "Ayumu Iwasa","Arvid Lindblad","Isack Hadjar",
-            "Enzo Fittipaldi","Zane Maloney","Sebastián Montoya",
-            "Souta Arao","Jak Crawford","Dennis Hauger"
+            "Dennis Hauger","Enzo Deligny","Pepe Martí",
+            "Tim Tramnitz","Kacper Sztuka","Oliver Goethe"
         ],
         car: {
             speed: 90,
@@ -103,7 +103,10 @@ export const teamsData = {
         driver1: "Lewis Hamilton",
         driver2: "George Russell",
         test_driver: "Mick Schumacher",
-        driversAcademy: [],
+        driversAcademy: [
+            "Andrea Kimi Antonelli","Frederik Vesti","Doriane Pin",
+            "Paul Aron"
+        ],
         car: {
             speed: 57,
             downforce: 85,
@@ -168,7 +171,11 @@ export const teamsData = {
         driver1: "Charles Leclerc",
         driver2: "Carlos Sainz Jr.",
         test_driver: "Antonio Giovinazzi",
-        driversAcademy: [],
+        driversAcademy: [
+            "Dino Beganovic","Maya Weug","James Wharton",
+            "Arthur Leclerc","Oliver Bearman","Rafael Câmara",
+            "Tuukka Taponen","Aurelia Nobels"
+        ],
         car: {
             speed: 76,
             downforce: 82,
@@ -432,7 +439,10 @@ export const teamsData = {
         driver1: "Lando Norris",
         driver2: "Oscar Piastri",
         test_driver: "Pato O’Ward",
-        driversAcademy: [],
+        driversAcademy: [
+            "Ugo Ugochukwu","Ryō Hirakawa","Gabriel Bortoleto",
+            "Bianca Bustamante","Álex Palou"
+        ],
         car: {
             speed: 67,
             downforce: 70,
@@ -497,7 +507,9 @@ export const teamsData = {
         driver1: "Valtteri Bottas",
         driver2: "Zhou Guanyu",
         test_driver: "Théo Pourchaire",
-        driversAcademy: [],
+        driversAcademy: [
+            "Marcus Amand","Léna Bühler"
+        ],
         car: {
             speed: 55,
             downforce: 45,
@@ -562,7 +574,10 @@ export const teamsData = {
         driver1: "Yuki Tsunoda",
         driver2: "Nyck de Vries",
         test_driver: "Liam Lawson",
-        driversAcademy: [],
+        driversAcademy: [
+            "Enzo Fittipaldi","Zane Maloney","Sebastián Montoya",
+            "Souta Arao","Jak Crawford"
+        ],
         car: {
             speed: 30,
             downforce: 45,
@@ -626,8 +641,11 @@ export const teamsData = {
         fansTrust: 100,
         driver1: "Alexander Albon",
         driver2: "Logan Sargeant",
-        test_driver: "Jamie Chadwick",
-        driversAcademy: [],
+        test_driver: "Zak O'Sullivan",
+        driversAcademy: [
+            "Jamie Chadwick","Franco Colapinto","Luke Browning",
+            "Oleksandr Bondarev","Lia Block","Oliver Gray"
+        ],
         car: {
             speed: 65,
             downforce: 45,

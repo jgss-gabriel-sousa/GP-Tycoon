@@ -1,7 +1,10 @@
+import { publishNews } from "../ui/news.js";
 import { game } from "./game.js";
 import { rand } from "./utils.js";
 
 export function simulateOthersSeries(){
+    game.othersSeries = {}
+
     for(const d in game.drivers){
         const driver = game.drivers[d];
         
@@ -29,8 +32,22 @@ export function simulateOthersSeries(){
             ranking.push([driverName, result]);
         }
         
-        ranking.sort((a, b) => b.points - a.points);
-
-        console.log(ranking)
+        ranking = ranking.sort((a, b) => b[1] - a[1]);
+        championship.ranking = ranking;
     }
+
+    console.log(game.othersSeries)
+    
+    publishNews(
+        "F2 Results", 
+        [
+            game.othersSeries["IndyCar"],
+            game.othersSeries["Fórmula 2"],
+            game.othersSeries["Fórmula 3"],
+            game.othersSeries["WEC"],
+            game.othersSeries["F1 Academy"],
+            game.othersSeries["FRECA"],
+            game.othersSeries["Fórmula 4"],
+        ]
+    );
 }

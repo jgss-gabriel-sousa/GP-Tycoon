@@ -151,6 +151,7 @@ function contractDriver(teamName){
                 driver.newStatus = lookingFor;
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
+                driver.currentSeries = "";
                 team.new1driver = driver.name;
                 publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
                 
@@ -162,6 +163,7 @@ function contractDriver(teamName){
                 driver.newStatus = lookingFor;
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
+                driver.currentSeries = "";
                 team.new2driver = driver.name;
                 publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
 
@@ -182,6 +184,9 @@ function contractDriver(teamName){
                 driver.newStatus = lookingFor;
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
+                if(rand(0,100) < 50) 
+                    driver.currentSeries = "";
+                
                 team.newTdriver = driver.name;
                 publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
 
