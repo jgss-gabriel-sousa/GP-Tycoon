@@ -5,14 +5,11 @@ export function rand(min, max){
 }
 
 export function rollDice(formula) {
-    // Extrai o número de dados, faces dos dados e bônus da fórmula de dados
     const [numDice, numFaces, bonus] = formula.split(/[d\+]/).map(Number);
   
-    // Gera um número aleatório para cada dado e soma-os
     const rollTotal = Array.from({ length: numDice }, () => Math.floor(Math.random() * numFaces) + 1)
                          .reduce((sum, val) => sum + val, 0);
   
-    // Retorna o resultado da rolagem, com o bônus adicionado
     return rollTotal + bonus;
 }
 
@@ -21,6 +18,20 @@ export function shuffleArr(array){
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+export function roundToMultiple(number, multiple) {
+    if (multiple === 0) {
+        return number;
+    }
+
+    const quotient = Math.floor(number / multiple);
+    const remainder = number % multiple;
+    const differenceToNextMultiple = multiple - remainder;
+
+    const rounding = (remainder < differenceToNextMultiple) ? -remainder : differenceToNextMultiple;
+
+    return number + rounding;
 }
 
 export function NumberF(number,format,precision){    

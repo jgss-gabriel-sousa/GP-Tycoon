@@ -16,6 +16,7 @@
     <script src="./lib/popper.min.js"></script>
     <script src="./lib/tippy-bundle.umd.min.js"></script>
     <script src="./lib/chart.js"></script>
+    <script src="./lib/iconify/iconify-icon.min.js"></script>
 
     <script src="./scripts/main.js" type="module" defer></script>
     <script src="./scripts/events.js" type="module" defer></script>
@@ -59,7 +60,7 @@
                     <div id="next-race">
                         <h1>Próxima Corrida</h1>
                         <div id="next-race-name"></div>
-                        <button id="btn-play">Continuar</button>
+                        <button id="btn-play"><span>Continuar</span></button>
                     </div>
 
                 </div>
@@ -78,9 +79,13 @@
 
         <div id="main-menu">
             <h1>GP Tycoon</h1>
+            <!--
             <img src="./icon.webp" alt="Logo">
-            <button id="start-game">Novo Jogo</button>
-            <button id="load-game">Carregar Jogo</button>
+            -->
+            <div class="wrap">
+                <button id="start-game" class="main-menu-btn"><span>Novo Jogo</span></button>
+                <button id="load-game" class="main-menu-btn"><span>Carregar Jogo</span></button>
+            </div>
             <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - v0.11</small>
         </div>
 

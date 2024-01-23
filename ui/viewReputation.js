@@ -7,30 +7,34 @@ export function viewReputation(teamName){
 
     let reputationHTML = "<div><h3>Reputação<h3>"
     let remainingStars = team.reputation;
-    for(let i = 0; i < 5; i++) {
-        if(remainingStars-- > 0){
-            reputationHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            reputationHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            reputationHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+            reputationHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
-    if(team.reputation == 5)    reputationHTML += "<p>Dominante<p>"
-    if(team.reputation == 4)    reputationHTML += "<p>Poderosa<p>"
-    if(team.reputation == 3)    reputationHTML += "<p>Competitiva<p>"
-    if(team.reputation == 2)    reputationHTML += "<p>Emergente<p>"
-    if(team.reputation == 1)    reputationHTML += "<p>Fim do Pelotão<p>"
-
-    reputationHTML += "</div>"
+    
+    reputationHTML += `
+        <p>Equipe ${team.reputationTitle}</p>
+    </div>
+    `
 
     let performanceHTML = "<div><h4>Performance<h4>"
     remainingStars = team.performance;
-    for(let i = 0; i < 5; i++) {
-        if(remainingStars-- > 0){
-            performanceHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            performanceHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            performanceHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            performanceHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+            performanceHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
     performanceHTML += `<p>${game.year-1} - ${team.history.lastResults[game.year-1].pts} pts = ${team.history.lastResults[game.year-1].position}º</p>`
@@ -38,14 +42,51 @@ export function viewReputation(teamName){
     performanceHTML += `<p>${game.year-3} - ${team.history.lastResults[game.year-3].pts} pts = ${team.history.lastResults[game.year-3].position}º</p>`
     performanceHTML += "</div>"
 
-    let fansHTML = "<div><h4>Fans<h4>"
-    remainingStars = team.fansReputation;
-    for(let i = 0; i < 5; i++) {
-        if(remainingStars-- > 0){
-            fansHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+    let developmentHTML = "<div><h4>Capacidade de Desenvolvimento<h4>"
+    remainingStars = team.developmentReputation;
+    console.log(team.developmentReputation)
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            developmentHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            developmentHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            fansHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+            developmentHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
+        }
+    }
+    developmentHTML += `<p>${team.aeroPts} Aero</p>`
+    developmentHTML += `<p>${team.engPts} Eng</p>`
+    developmentHTML += "</div>"
+
+    let politicsHTML = "<div><h4>Força Política<h4>"
+    remainingStars = team.politicalReputation;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            politicsHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            politicsHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
+        }
+        else{
+            politicsHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
+        }
+    }
+    politicsHTML += `<p>${team.politicalForce}/10</p>`
+    politicsHTML += "</div>"
+
+    let fansHTML = "<div><h4>Fans<h4>"
+    remainingStars = team.fansReputation;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            fansHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            fansHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
+        }
+        else{
+            fansHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
     fansHTML += `<p>${NumberF(team.fans * 1000000,"ext-short",0)}</p>`
@@ -53,12 +94,15 @@ export function viewReputation(teamName){
 
     let traditionHTML = "<div><h4>Tradição<h4>"
     remainingStars = team.tradition;
-    for(let i = 0; i < 5; i++) {
-        if(remainingStars-- > 0){
-            traditionHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars > 1){
+            traditionHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            traditionHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            traditionHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+            traditionHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
     traditionHTML += `<p>${team.history.titles} Títulos</p>`
@@ -68,6 +112,8 @@ export function viewReputation(teamName){
     ${reputationHTML}
     <div id="view-reputation">
         ${performanceHTML}
+        ${developmentHTML}
+        ${politicsHTML}
         ${fansHTML}
         ${traditionHTML}
     </div>
@@ -77,6 +123,7 @@ export function viewReputation(teamName){
     Swal.fire({
         title: `${teamName}`,
         html: html,
+        width: "75%",
         showCloseButton: true,
         focusConfirm: false,
         showConfirmButton: false,

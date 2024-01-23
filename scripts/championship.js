@@ -6,6 +6,7 @@ import { seasonOverviewUI } from "./ui.js";
 import { driversData } from "../data/driversData.js";
 import { teamsData } from "../data/teamsData.js";
 import { accentsTidy, genID, rand, rollDice } from "./utils.js";
+import { simulateOthersSeries } from "./othersSeries.js";
 
 const SIMULATION_TICKS = 3;
 
@@ -860,6 +861,7 @@ export class Championship {
     RunRaceSimulation(){
         if(this.actualRound > this.tracks.length){
             seasonOverviewUI("end");
+            simulateOthersSeries();
             return;
         }
 

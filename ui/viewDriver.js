@@ -4,8 +4,9 @@ import { game } from "../scripts/game.js";
 import { market } from "./market.js";
 import { getSalary } from "../scripts/drivers.js";
 import { genTeamHTML } from "../scripts/main.js";
+import { publishNews } from "./news.js";
 
-export function viewDriver(name, returnToMarket){
+export function viewDriver(name, returnToMarket, scrollPos){
     let html = "";
     const driver = game.drivers[name];
 
@@ -24,7 +25,18 @@ export function viewDriver(name, returnToMarket){
                 <tr>
                     <td>Idade:</td>
                     <td>${driver.age} anos</td>
-                </tr>
+                </tr>`
+                
+                if(driver.currentSeries){
+                    html += `  
+                    <tr>
+                        <td>Série Atual:</td>
+                        <td>${driver.currentSeries}</td>
+                    </tr>
+                    `
+                }
+
+                html += `
                 <tr><td><span>&shy;</span></td></tr>
                 <tr>
                     <td>Títulos:</td>
@@ -146,11 +158,11 @@ export function viewDriver(name, returnToMarket){
         }
         if(game.contractsFailed.includes(driver.name)){
             html +=`
-            <tr><td colspan="2" style="
-            text-align: center;
-            color: darkred;
-            ">
-                A negociação falhou, tente novamente depois</td></tr>`
+            <tr>
+                <td colspan="2" style="
+                text-align: center;
+                color: darkred;">
+                Uma negociação falhou recentemente, tente novamente depois</td></tr>`
         }
 
         html += `</table></div>`;
@@ -168,7 +180,7 @@ export function viewDriver(name, returnToMarket){
         showConfirmButton: false,
     }).then(r => {
         if(returnToMarket)
-            market();
+            market(scrollPos);
     });
 
     if(document.querySelector("#negotiate"))
@@ -204,6 +216,12 @@ function negotiate(driverName, returnToMarket){
                 ${team.new1driver == "" ? "<option>1º Piloto</option>" : ""}
                 ${team.new2driver == "" ? "<option>2º Piloto</option>" : ""}
                 ${team.newTdriver == "" ? "<option>Piloto de Testes</option>" : ""}
+            `
+            if(driver.experience == 0 && driver.age < 25 && team.driversAcademy.length < 10){
+                html += `<option>Piloto da Academia</option>`;
+            }
+            
+            html += `
             </select>
             
             <br>
@@ -238,10 +256,13 @@ function negotiate(driverName, returnToMarket){
                     if(driver.newStatus == "1º Piloto") team.new1driver = driver.name;
                     if(driver.newStatus == "2º Piloto") team.new2driver = driver.name;
                     if(driver.newStatus == "Piloto de Testes") team.newTdriver = driver.name;
+                    if(driver.newStatus == "Piloto da Academia") team.driversAcademy.push(driver.name);
+
+                    publishNews("New Driver Hire", [game.team, driver.name, driver.newStatus, driver.newContractRemainingYears]);
 
                     Swal.fire("Contrato Assinado").then(e => {
                         if(returnToMarket)
-                            market();
+                            market(scrollPos);
                     });
                 }
                 else{
@@ -249,7 +270,7 @@ function negotiate(driverName, returnToMarket){
                         game.contractsFailed.push(driver.name);
 
                         if(returnToMarket)
-                            market();
+                            market(scrollPos);
                     });
                 }
                 
@@ -284,6 +305,7 @@ function negotiate(driverName, returnToMarket){
 
 function approbationCalc(driverName){
     const driver = game.drivers[driverName];
+    const team = game.teams[game.team];
     let chance;
 
     if(!document.querySelector("select").innerText){
@@ -293,17 +315,21 @@ function approbationCalc(driverName){
 
     const duration = Number(document.querySelector("#slider-duration").value);
     const salary = Number(document.querySelector("#slider-salary").value)/1000;
+    const status = document.querySelector("select").value;
     chance = 70;
     chance *= (duration * 0.5) / ((driver.experience+10)/100);
     chance *= Math.pow(salary / getSalary(driver),2);
 
-    if(document.querySelector("select").value == "Piloto de Testes" && driver.age <= driver.careerPeak)
-        chance *= ((duration * 0.5) / (driver.experience * 5)) * 50;
+    if(status == "Piloto da Academia" && driver.age <= driver.careerPeak)
+        chance *= ((duration * 0.5) / ((6-team.reputation) * 500)) * 50;
 
-    if(document.querySelector("select").value == "2º Piloto" && driver.age <= driver.careerPeak && driver.titles > 0)
-        chance *= ((salary * 0.5) / (driver.experience * 5)) * 50;
+    if(status == "Piloto de Testes" && driver.age <= driver.careerPeak)
+        chance *= ((duration * 0.5) / ((driver.experience+10) * 5)) * 50;
 
-    if((salary / driver.salary) < 1){
+    if(status == "2º Piloto" && driver.age <= driver.careerPeak && driver.titles > 0)
+        chance *= ((salary * 0.5) / ((driver.experience+10) * 5)) * 50;
+
+    if(status != "Piloto da Academia" && (salary / driver.salary) < 1){
         chance *=  Math.pow(salary / driver.salary,8);
     }
 

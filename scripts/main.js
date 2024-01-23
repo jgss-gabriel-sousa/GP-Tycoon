@@ -12,8 +12,7 @@ function genDriversHTML(){
     const team = game.teams[game.team];
     const driver = [
         game.drivers[team.driver1],
-        game.drivers[team.driver2], 
-        game.drivers[team.test_driver],
+        game.drivers[team.driver2],
     ];
 
     let i = 0;
@@ -33,7 +32,7 @@ function genDriversHTML(){
         }
 
         html += `
-        <div class="driver-card" id="first-driver-card">`
+        <div class="driver-card">`
             if(i == 0)
                 html += "<h1>1º Piloto</h1>"
             if(i == 1)
@@ -97,6 +96,82 @@ function genDriversHTML(){
         html += `</div>`
         i++;
     });
+
+    const testDriver = game.drivers[team.test_driver];
+    const ability = Math.round((testDriver.speed + testDriver.pace)/2);
+    let careerStage;
+        if(testDriver.age < testDriver.careerPeak-1 && testDriver.experience < 5){
+            careerStage = "Novato";
+        }
+        else if(testDriver.age < testDriver.careerPeak-1){
+            careerStage = "Em Ascensão";
+        }
+        else if(testDriver.age > testDriver.careerPeak-1 && testDriver.age < testDriver.careerPeak+2){
+            careerStage = "Ápice";
+        }
+        else{
+            careerStage = "Veterano";
+        }
+
+    html += `
+    <div class="driver-card">
+    <div id="test-driver">
+        <h1>Piloto de Testes</h1>
+        <button class="btn-driver-name view-driver" value="${testDriver.name}">
+                <img class="country-flag" src="img/flags/${accentsTidy(testDriver.country)}.webp"> ${testDriver.name}
+        </button>
+        <table class="bars-table">
+            <tr>
+                <td>Hab. Média:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${ability}%;"><span>${ability}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Constância:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${testDriver.constancy}%;"><span>${testDriver.constancy}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Experiência:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${testDriver.experience}%;"><span>${testDriver.experience}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Condição: </td>
+                <td class="no-border">
+                    ${careerStage}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="academy-drivers">
+        <h1>Academia de Pilotos</h1>
+    `
+    
+    team.driversAcademy.forEach(d => {
+        const driver = game.drivers[d];
+
+        html += `
+        <button class="btn-driver-name view-driver" value="${driver.name}">
+                <img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"> ${driver.name}
+        </button>
+        `
+    });
+    
+
+    html += `
+    </div>
+    </div>
+    `
     
     el.innerHTML = html;
 };
@@ -489,12 +564,15 @@ export function genTeamHTML(){
     
     let reputationHTML = "<div>"
     let remainingStars = teams[game.team].reputation;
-    for(let i = 0; i < 5; i++) {
-        if(remainingStars-- > 0){
-            reputationHTML += `<span><i class="lni lni-star-fill"></i></span>`;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            reputationHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            reputationHTML += `<span><i class="lni lni-star-empty"></i></span>`;
+            reputationHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
     reputationHTML += "</div>"

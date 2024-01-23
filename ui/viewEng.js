@@ -6,7 +6,7 @@ import { genTeamHTML } from "../scripts/main.js";
 import { marketEng } from "./market.js";
 import { createTooltip } from "../scripts/tooltips.js";
 
-export function viewEng(name, returnToMarket){
+export function viewEng(name, returnToMarket, scrollPos){
     let html = "";
     const eng = game.engineers[name];
     const team = game.teams[game.team];
@@ -116,7 +116,7 @@ export function viewEng(name, returnToMarket){
         }
 
         if(returnToMarket)
-            marketEng();
+            marketEng(scrollPos);
     });
 
     if(eng.team == game.team){
@@ -278,7 +278,7 @@ function contractEng(name){
             team.cash -= fine;
 
             genTeamHTML();
-            marketEng();
+            marketEng(scrollPos);
         }
         if(result.isDenied){
             viewEng(name,true);

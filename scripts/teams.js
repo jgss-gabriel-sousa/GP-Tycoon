@@ -1,6 +1,6 @@
 import { game } from "./game.js";
 import { selectEngine } from "../ui/selectEngine.js";
-import { rand, rollDice } from "./utils.js";
+import { rand, rollDice, roundToMultiple } from "./utils.js";
 import { publishNews } from "../ui/news.js";
 
 export function CalcTeamDevPoints(teamName){
@@ -61,6 +61,7 @@ export function BeforeRaceUpdateTeamsStats(){
         team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
     
         contractDriver(team.name);
+        contractEng(team.name);
     }
 }
 
@@ -144,7 +145,6 @@ function contractDriver(teamName){
             
             let contractYears = rollDice("1d4+0");
 
-            publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
 
             if(lookingFor == "1º Piloto"){
                 driver.newTeam = team.name;
@@ -152,6 +152,7 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
                 team.new1driver = driver.name;
+                publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
                 
                 delete selectedDrivers[i];
                 break;
@@ -162,6 +163,7 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
                 team.new2driver = driver.name;
+                publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
 
                 delete selectedDrivers[i];
                 break;
@@ -181,6 +183,7 @@ function contractDriver(teamName){
                 driver.newContractRemainingYears = contractYears;
                 driver.newSalary = driver.salary;
                 team.newTdriver = driver.name;
+                publishNews("New Driver Hire", [team.name, driver.name, lookingFor, contractYears]);
 
                 delete selectedDrivers[i];
                 break;
@@ -208,7 +211,6 @@ function contractEng(teamName){
     if(financeFactor > 2) financeFactor = 2;
     if(financeFactor < -0.5) financeFactor = -0.5;
 
-
     let maxValue = Math.max(
         game.engineers[team.teamPrincipal].salary, 
         game.engineers[team.engineers.technicalDirector].salary, 
@@ -216,125 +218,69 @@ function contractEng(teamName){
         game.engineers[team.engineers.chiefAerodynamicist].salary,
         game.engineers[team.engineers.chiefEngineering].salary
     );
-    maxValue += maxValue*financeFactor;
+    maxValue += maxValue * financeFactor;
 
     for (let loops = 0; loops < looking.length; loops++) {
         const lookingFor = looking[loops];
-        const selectedDrivers = [];
+        const selectedEngs = [];
 
-        for(const d in game.drivers) {
-            const driver = game.drivers[d];
+        for(const d in game.engineers) {
+            const eng = game.engineers[d];
 
-            if(driver.salary > maxValue) continue;
-            if(driver.newTeam != "" || driver.contractRemainingYears > 0) continue;
+            if(eng.salary > maxValue) continue;
+            if(eng.team) continue;
+            if(eng.name == "") continue;
 
-            const predictedQuality = ((driver.speed+rand(0,30)-15) + (driver.pace+rand(0,30)-15))/2;
-            const costBenefit = (driver.salary/maxValue);
+            const predictedQuality = (eng.adm + eng.aero + eng.adm + rand(0,100))/4;
+            const costBenefit = (eng.salary / maxValue);
             let rating = predictedQuality * costBenefit;
 
-            if(driver.team == teamName){
-                rating *= 1.1;
+            if(lookingFor == "Chefe de Equipe" || lookingFor == "Diretor Técnico"){
+                rating *= (eng.adm/100)+1;
             }
-            if(lookingFor == "1º Piloto"){
-                rating *= (driver.experience+10)/100;
+            if(lookingFor == "Designer Chefe"){
+                rating *= (eng.eng/100)+1;
+                rating *= (eng.aero/100)+1;
             }
-            if(lookingFor == "Piloto de Testes"){
-                rating /= Math.max((driver.salary/maxValue),6);
+            if(lookingFor == "Aerodinamicista Chefe"){
+                rating *= (eng.aero/100)+1;
+            }
+            if(lookingFor == "Engenheiro Chefe"){
+                rating *= (eng.eng/100)+1;
             }
 
-            selectedDrivers.push({
-                name: driver.name,
+            selectedEngs.push({
+                name: eng.name,
                 baseRating: rating
             });
         }
-        selectedDrivers.sort((a,b) => b.baseRating - a.baseRating);
+        selectedEngs.sort((a,b) => b.baseRating - a.baseRating);
 
-        /*
-        let p = []; //Lista de "prováveis" pilotos
-        while (p.length < 3) {
-            const valor = Math.floor(Math.random() * 6);
-            if (!p.includes(valor)) {
-                p.push(valor);
-            }
-        }
-        
-        game.news.unshift({
-            headline: team.name+" está analisando o mercado",
-            date: game.championship.actualRound-1,
-            year: game.year,
-            content: `Fontes indicam que a equipe ${team.name} está analisando o mercado em busca de um novo ${lookingFor}, os nomes mais cotados são ${selectedDrivers[p[0]].name}, ${selectedDrivers[p[1]].name} e ${selectedDrivers[p[2]].name}.`,
-        });
-        */
+        for(let i = 0; i < selectedEngs.length; i++){
+            if(!selectedEngs[i]) continue;
 
-        if(rand(25,100) > ((game.championship.actualRound/game.championship.tracks.length)*100))
-            return;
-
-        for(let i = 0; i < selectedDrivers.length; i++){
-            if(!selectedDrivers[i] == undefined) continue;
-
-            const driver = game.drivers[selectedDrivers[i].name];
+            const eng = game.engineers[selectedEngs[i].name];
             
-            if(lookingFor == "1º Piloto"){
-                driver.newTeam = team.name;
-                driver.newStatus = lookingFor;
-                driver.newContractRemainingYears = rollDice("1d4+0");
-                driver.newSalary = driver.salary;
-                team.new1driver = driver.name;
-                
-                game.news.unshift({
-                    headline: "Nova Contratação na "+team.name,
-                    date: game.championship.actualRound-1,
-                    year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
-                });
-
-                delete selectedDrivers[i];
-                break;
+            eng.team = team.name;
+            eng.occupation = lookingFor;
+            if(lookingFor == "Chefe de Equipe"){
+                team.teamPrincipal = eng.name;
             }
-            if(lookingFor == "2º Piloto"){
-                driver.newTeam = team.name;
-                driver.newStatus = lookingFor;
-                driver.newContractRemainingYears = rollDice("1d4+0");
-                driver.newSalary = driver.salary;
-                team.new2driver = driver.name;
-                
-                game.news.unshift({
-                    headline: "Nova Contratação na "+team.name,
-                    date: game.championship.actualRound-1,
-                    year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
-                });
-
-                delete selectedDrivers[i];
-                break;
+            if(lookingFor == "Diretor Técnico"){
+                team.engineers.technicalDirector = eng.name;
             }
-            if(lookingFor == "Piloto de Testes"){
-
-                let chanceOfExpDriverReject;
-                if(driver.age <= driver.careerPeak)
-                    chanceOfExpDriverReject = Math.round((driver.experience/100)*100);
-                else
-                    chanceOfExpDriverReject = 10;
-
-                if(rand(0,100) < chanceOfExpDriverReject)
-                    continue;
-
-                driver.newTeam = team.name;
-                driver.newStatus = lookingFor;
-                driver.newContractRemainingYears = rollDice("1d4+0");
-                driver.newSalary = driver.salary;
-                team.newTdriver = driver.name;
-                
-                game.news.unshift({
-                    headline: "Nova Contratação na "+team.name,
-                    date: game.championship.actualRound-1,
-                    year: game.year,
-                    content: `A ${team.name} definiu ${driver.name} como ${lookingFor} em um contrato de ${driver.newContractRemainingYears} ${driver.newContractRemainingYears == 1 ? "Ano" : "Anos"}.`,
-                });
-
-                delete selectedDrivers[i];
-                break;
+            if(lookingFor == "Designer Chefe"){
+                team.engineers.chiefDesigner = eng.name;
             }
+            if(lookingFor == "Aerodinamicista Chefe"){
+                team.engineers.chiefAerodynamicist = eng.name;
+            }
+            if(lookingFor == "Engenheiro Chefe"){
+                team.engineers.chiefEngineering = eng.name;
+            }
+
+            delete selectedEngs[i];
+            break;
         }
     }
 }
@@ -759,9 +705,9 @@ function calcTeamsReputation(){
     const performance = {};
     for(const y in teamsPerformance){
         for(const t in teamsPerformance[y]){
-            let modif = 3;
+            let modif = 4;
 
-            if(y == game.year-1) modif = 3;
+            if(y == game.year-1) modif = 4;
             if(y == game.year-2) modif = 2;
             if(y == game.year-3) modif = 1;
 
@@ -772,7 +718,7 @@ function calcTeamsReputation(){
         }
     }
     for(const t in performance){
-        performance[t] /= 6;
+        performance[t] /= 7;
     }
     let maxPerformance;
     for(const t in performance){
@@ -781,7 +727,7 @@ function calcTeamsReputation(){
     }
     for(const t in game.teams){
         performance[t] = performance[t] / maxPerformance;
-        performance[t] = Math.round((performance[t]*4)+1);
+        performance[t] = roundToMultiple((performance[t]*5), 0.5);
     }
 
     const fans = {};
@@ -794,7 +740,37 @@ function calcTeamsReputation(){
     }
     for(const t in game.teams){
         fans[t] = game.teams[t].fans / maxFans;
-        fans[t] = Math.round((fans[t]*4)+1);
+        fans[t] = roundToMultiple((fans[t]*5), 0.5);
+    }
+
+    const political = {};
+    let maxPolitical;
+    for(const t in game.teams){
+        const team = game.teams[t];
+
+        if(team.politicalForce > maxPolitical || !maxPolitical)
+            maxPolitical = team.politicalForce;
+    }
+    for(const t in game.teams){
+        political[t] = game.teams[t].politicalForce / maxPolitical;
+        political[t] = roundToMultiple((political[t]*5), 0.5);
+    }
+
+    const dev = {};
+    let maxDev;
+    for(const t in game.teams){
+        const team = game.teams[t];
+
+        let devCap = (team.aeroPts + team.engPts)/2;
+
+        if(devCap > maxDev || !maxDev)
+            maxDev = devCap;
+    }
+    for(const t in game.teams){
+        const team = game.teams[t];
+        let devCap = (team.aeroPts + team.engPts)/2;
+        dev[t] = devCap / maxDev;
+        dev[t] = roundToMultiple((dev[t]*5), 0.5);
     }
 
     const tradition = {};
@@ -807,7 +783,7 @@ function calcTeamsReputation(){
     }
     for(const t in game.teams){
         tradition[t] = game.teams[t].history.titles / maxTitles;
-        tradition[t] = Math.round((tradition[t]*4)+1);
+        tradition[t] = roundToMultiple((tradition[t]*5), 0.5);
     }
 
     let championshipReputation = 0;
@@ -815,10 +791,12 @@ function calcTeamsReputation(){
         const team = game.teams[t];
 
         const oldReputation = team.reputation;
-        team.reputation = Math.round(((performance[team.name]*3) + fans[team.name] + tradition[team.name]) / 5);
+        team.reputation = roundToMultiple(((performance[team.name]*4) + (dev[team.name]*2) + (political[team.name]*2) + fans[team.name] + tradition[team.name]) / 10, 0.5);
         team.performance = performance[team.name];
         team.fansReputation = fans[team.name];
         team.tradition = tradition[team.name];
+        team.developmentReputation = dev[team.name];
+        team.politicalReputation = political[team.name];
 
         if(game.championship.teams.includes(team.name))
             championshipReputation += team.reputation;
@@ -828,13 +806,21 @@ function calcTeamsReputation(){
         
         let repName;
         if(team.reputation == 5)    repName = "Dominante";
-        if(team.reputation == 4)    repName = "Poderosa";
-        if(team.reputation == 3)    repName = "Competitiva";
-        if(team.reputation == 2)    repName = "Emergente";
-        if(team.reputation == 1)    repName = "Fim do Pelotão";
+        if(team.reputation == 4.5)  repName = "Poderosa";
+        if(team.reputation == 4)    repName = "Respeitável";
+        if(team.reputation == 3.5)  repName = "Competitiva";
+        if(team.reputation == 3)    repName = "Emergente";
+        if(team.reputation == 2.5)  repName = "Razóavel";
+        if(team.reputation == 2)    repName = "Mediana";
+        if(team.reputation == 1.5)  repName = "Limitada";
+        if(team.reputation == 1)    repName = "Enfraquecida";
+        if(team.reputation == 0.5)  repName = "Fundo de Grid";
+        if(team.reputation == 0)    repName = "Nanica";
 
-        if(oldReputation < team.reputation)     publishNews("Increase Reputation", [team.name, repName]);
-        if(oldReputation > team.reputation)     publishNews("Decrease Reputation", [team.name, repName]);
+        team.reputationTitle = repName;
+
+        if(oldReputation < team.reputation)     publishNews("Increase Reputation", [team.name, team.reputationTitle, team.reputation]);
+        if(oldReputation > team.reputation)     publishNews("Decrease Reputation", [team.name, team.reputationTitle, team.reputation]);
     }
     championshipReputation = Math.round(championshipReputation/game.championship.teams.length);
 }

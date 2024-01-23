@@ -209,6 +209,7 @@
     display: flex;
     flex-direction: column;
     width: 45%;
+    overflow-x: overlay;
 }
 #historic-tables h1 {
     background-color: transparent;
@@ -541,6 +542,7 @@
 #news-driver-hire-breaking h2 {
     font-weight: lighter;
     font-family: 'Montserrat';
+    font-size: 12px;
 }
 #news-driver-hire-breaking img {
     width: 100%;
@@ -573,4 +575,5 @@
 }
 #view-reputation div {
     padding: 10px;
+    max-width: 200px;
 }

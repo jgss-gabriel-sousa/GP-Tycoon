@@ -12,6 +12,7 @@ import { generateName } from "../data/nameData.js";
 import { getRandomCountry } from "../data/countryRanking.js";
 import { CalcTeamDevPoints, StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
 import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
+import { simulateOthersSeries } from "./othersSeries.js";
 
 export const game = {
     activeScreen: "main-menu",
@@ -19,6 +20,7 @@ export const game = {
     team: "Red Bull",
     year: 2023,
     championship: new Championship(),
+    othersSeries: {},
     drivers: {},
     teams: {},
     engines: {},
