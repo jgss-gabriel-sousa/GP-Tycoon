@@ -148,7 +148,7 @@ export function viewDriver(name, returnToMarket, scrollPos){
                 <td>-</td>
             </tr>`
             
-        if((!game.teams[game.team].new1driver || !game.teams[game.team].new2driver || !game.teams[game.team].newTdriver) && !game.contractsFailed.includes(driver.name)){
+        if((!game.teams[game.team].new1driver || !game.teams[game.team].new2driver || !game.teams[game.team].newTdriver || (game.teams[game.team].driversAcademy.length < 10 && driver.experience == 0)) && !game.contractsFailed.includes(driver.name)){
             html +=`
             <tr>
                 <td colspan="2" style="text-align: center;">
@@ -166,6 +166,14 @@ export function viewDriver(name, returnToMarket, scrollPos){
         }
 
         html += `</table></div>`;
+    }
+    else if(driver.status == "Piloto da Academia" && driver.team == game.team && driver.newStatus == "" || driver.newStatus == "Piloto da Academia"){
+        html +=`
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <button id="negotiate">Negociar</button>
+            </td>
+        </tr>`
     }
     else{
         html += `</table></div>`;
@@ -217,7 +225,7 @@ function negotiate(driverName, returnToMarket){
                 ${team.new2driver == "" ? "<option>2º Piloto</option>" : ""}
                 ${team.newTdriver == "" ? "<option>Piloto de Testes</option>" : ""}
             `
-            if(driver.experience == 0 && driver.age < 25 && team.driversAcademy.length < 10){
+            if(team.driversAcademy.length < 10){
                 html += `<option>Piloto da Academia</option>`;
             }
             
@@ -256,9 +264,8 @@ function negotiate(driverName, returnToMarket){
                     if(driver.newStatus == "1º Piloto") team.new1driver = driver.name;
                     if(driver.newStatus == "2º Piloto") team.new2driver = driver.name;
                     if(driver.newStatus == "Piloto de Testes") team.newTdriver = driver.name;
-                    if(driver.newStatus == "Piloto da Academia") team.driversAcademy.push(driver.name);
 
-                    publishNews("New Driver Hire", [game.team, driver.name, driver.newStatus, driver.newContractRemainingYears]);
+                    publishNews("Breaking Driver Hire", [game.team, driver.name, driver.newStatus, driver.newContractRemainingYears]);
 
                     Swal.fire("Contrato Assinado").then(e => {
                         if(returnToMarket)

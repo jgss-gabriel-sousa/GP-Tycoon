@@ -448,6 +448,7 @@ export const driversData = {
     "Victor Martins": {
         name: "Victor Martins",
         team: "Alpine",
+        status: "Piloto da Academia",
         currentSeries: "Fórmula 2",
         age: 21,
         country: "FR",

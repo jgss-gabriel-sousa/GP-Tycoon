@@ -27,7 +27,7 @@ export function getNewsSchema(type, args){
         }
     }
 
-    if(type == "New Driver Hire"){
+    if(type == "Breaking Driver Hire"){
         return {
             headline: `Nova Contratação na ${args[0]}`,
             content: [
@@ -49,6 +49,42 @@ export function getNewsSchema(type, args){
                     <img style="background-color: ${game.teams[args[0]].bg_color};" src="./img/teams/${args[0]}.png">
                 </div>
             </div>`
+        }
+    }
+
+    if(type == "Hire"){
+        const status = args[0];
+        const team = args[1];
+        const hired = args[2];
+
+        return {
+            headline: `Novo ${status} na ${team}`,
+            content: [
+                `A ${team} acaba de anunciar que definiu ${hired} como ${status}.`,
+            ],
+        }
+    }
+
+    if(type == "Driver Retirement"){
+        const driver = args[0];
+
+        return {
+            headline: `Aposentadoria de ${driver.name}`,
+            div: `
+            <div>
+                <h1></h1>
+            </div>`
+        }
+    }
+
+    if(type == "Driver Last Season"){
+        const driver = args[0];
+
+        return {
+            headline: `${driver.name} anuncia sua aposentadoria`,
+            content: [
+                ``,
+            ]
         }
     }
 
@@ -93,7 +129,6 @@ export function getNewsSchema(type, args){
 
         return {
             headline: `Resultados de outras categorias`,
-            content: [],
             div: html,
         }
     }

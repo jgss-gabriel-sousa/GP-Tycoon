@@ -207,13 +207,10 @@ export class Championship {
             const circuitStraights = circuitsData[raceName].straights/100;
             const randomF = 1 + (Math.random() * 1.5 - 0.75);
 
-            let speed = game.drivers[driverName].speed/100;
-            let constancyVar = game.drivers[driverName].constancy;
-            constancyVar = rand(0, (100 - constancyVar)*1.25) - (100 - constancyVar);
-            constancyVar /= 100;
-            constancyVar += 1;
-
-            speed *= constancyVar;
+            let speed = game.drivers[driverName].speed;
+            let constancyVar = rand(0, 100-game.drivers[driverName].constancy);
+            speed -= constancyVar;
+            speed /= 100;
 
             const driverF = (1 - speed) * (1 + (Math.random() * 1 - 0.75));
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners ;
@@ -352,7 +349,12 @@ export class Championship {
 
             const randomF = 1;// + (Math.random() * (1*(1/rainF)) - 0.5*(1/rainF));
             
-            const driverF = (1 - game.drivers[driverName].pace/100) * randomF;
+            let pace = game.drivers[driverName].pace;
+            let constancyVar = rand(0, 100-game.drivers[driverName].constancy);
+            pace -= constancyVar;
+            pace /= 100;
+
+            const driverF = (1 - pace) * randomF;
 
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners * rainF;
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights * rainF;

@@ -37,7 +37,7 @@ export function viewEng(name, returnToMarket, scrollPos){
                     </tr>
                     <tr>
                         <td>Personalidade:</td>
-                        <td class="persona-${eng.personality}">${eng.personality}</td>
+                        <td class="persona-${accentsTidy(eng.personality)}">${eng.personality}</td>
                     </tr>
                     <tr>
                         <td>País:</td>
@@ -104,17 +104,6 @@ export function viewEng(name, returnToMarket, scrollPos){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(r => {
-
-        const personalities = [
-            "Perfeccionista", "Inovador", "Líder Nato", "Colaborador",
-            "Ambicioso", "Estrategista", "Comprometido", "Comunicativo",
-            "Analítico", "Versátil", "Adaptável", "Resiliente",
-            "Metódico", "Independente", "Diplomático", "Otimista", "Eficiente"
-        ];
-        for (let i = 0; i < personalities.length; i++) {
-            const personality = personalities[i];
-        }
-
         if(returnToMarket)
             marketEng(scrollPos);
     });
@@ -133,22 +122,7 @@ export function viewEng(name, returnToMarket, scrollPos){
     document.querySelector("#change-eng").addEventListener("click", () => {
         changeEng(name);
     });
-    
-    const personalities = [
-        "Perfeccionista", "Inovador", "Líder Nato", "Colaborador",
-        "Ambicioso", "Estrategista", "Comprometido", "Comunicativo",
-        "Analítico", "Versátil", "Adaptável", "Resiliente",
-        "Metódico", "Independente", "Diplomático", "Otimista", "Eficiente"
-    ];
-    for (let i = 0; i < personalities.length; i++) {
-        const personality = personalities[i];
-        
-        if(document.querySelector(".persona-"+personality)){
-            createTooltip(".persona-"+personality, personality+" é uma personalidade!!");
-        }
-    }
 }
-
 
 
 function dismissEng(name){
@@ -261,11 +235,11 @@ function contractEng(name){
             }
             if(document.querySelector("#select-function").value == "chiefDesigner"){
                 game.teams[game.team].engineers.chiefDesigner = eng.name;
-                game.engineers[eng.name].occupation = "Aerodinamicista Chefe";
+                game.engineers[eng.name].occupation = "Designer Chefe";
             }
             if(document.querySelector("#select-function").value == "chiefAerodynamicist"){
                 game.teams[game.team].engineers.chiefAerodynamicist = eng.name;
-                game.engineers[eng.name].occupation = "Designer Chefe";
+                game.engineers[eng.name].occupation = "Aerodinamicista Chefe";
             }
             if(document.querySelector("#select-function").value == "chiefEngineering"){
                 game.teams[game.team].engineers.chiefEngineering = eng.name;
@@ -276,9 +250,6 @@ function contractEng(name){
             team.financialReport["Fines"] += fine;
             team.financialReport["Balance"] -= fine;
             team.cash -= fine;
-
-            genTeamHTML();
-            marketEng(scrollPos);
         }
         if(result.isDenied){
             viewEng(name,true);
@@ -287,8 +258,6 @@ function contractEng(name){
         CalcTeamDevPoints(game.team);
         genTeamHTML();
     });
-
-
 }
 
 function changeEng(name){

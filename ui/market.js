@@ -112,7 +112,41 @@ export function market(scroll){
 
         html += `</tr>`
     }
-    html += `</table></div>`
+    html += `</table>`
+    html += `<br>`
+    html += `
+        Academias de Pilotos    
+        <table>    
+            <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Idade</th>
+            </tr>
+            `
+            
+    let actualTeam;
+    for(let i = 0; i < drivers.length; i++){
+        const driver = drivers[i];
+        if(driver.status != "Piloto da Academia") continue
+        
+        if(actualTeam == null || actualTeam != driver.team){
+            actualTeam = driver.team; 
+            html += `
+            <tr style="background-color: ${game.teams[actualTeam].result_bg_color}; color: ${game.teams[actualTeam].result_font_color}">
+                <td colspan="4">Academia da ${actualTeam}</td>
+            </tr>`
+        }
+
+        html += `
+        <tr class="driver" id="${driver.name}">
+            <td><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"></td>
+            <td>${driver.name}</td>
+            <td>${driver.age} anos</td>
+        </tr>
+        `
+    }
+    html += `</table>`
+    html += `</div>`
     
     Swal.fire({
         title: `Mercado de Pilotos`,

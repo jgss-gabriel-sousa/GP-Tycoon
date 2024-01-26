@@ -150,6 +150,7 @@
 #view-driver td:first-child {
     text-align: end;
     font-weight: bold;
+    white-space: nowrap;
 }
 #view-driver-contract td{
     font-size: 14px;

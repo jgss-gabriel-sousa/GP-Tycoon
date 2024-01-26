@@ -183,8 +183,8 @@ export const teamsData = {
         },
         teamPrincipal: "Frédéric Vasseur",
         engineers: {
-            technicalDirector: "",
-            chiefDesigner: "Enrico Cardile",
+            technicalDirector: "Enrico Cardile",
+            chiefDesigner: "Fabio Montecchi",
             chiefAerodynamicist: "David Sanchez",
             chiefEngineering: "Enrico Gualtieri",
         },
@@ -517,8 +517,8 @@ export const teamsData = {
         },
         teamPrincipal: "Andreas Seidl",
         engineers: {
-            technicalDirector: "Alessandro Alunni Bravi",
-            chiefDesigner: "Jan Monchaux",
+            technicalDirector: "Jan Monchaux",
+            chiefDesigner: "",
             chiefAerodynamicist: "Franck Sanchez",
             chiefEngineering: "Ruth Buscombe",
         },
