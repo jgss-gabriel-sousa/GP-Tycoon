@@ -1,4 +1,5 @@
 export function generateName(country, gender){
+    gender = gender.toLowerCase();
     const keyPrefix = `${country}_names_${gender}`;
     const names = namesData[keyPrefix];
     const surnames = namesData[`${country}_surnames`];

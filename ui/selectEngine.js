@@ -1,6 +1,6 @@
-import { NumberF } from "../utils.js";
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { NumberF } from "../scripts/utils.js";
+import { game } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
 
 export function selectEngine(endSeason){
     let html = "";

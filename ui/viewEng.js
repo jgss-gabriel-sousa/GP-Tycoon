@@ -1,11 +1,12 @@
-import { NumberF, accentsTidy } from "../utils.js";
+import { NumberF, accentsTidy } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
-import { game } from "../game.js";
-import { CalcTeamDevPoints } from "../teams.js";
-import { genTeamHTML } from "../main.js";
+import { game } from "../scripts/game.js";
+import { CalcTeamDevPoints } from "../scripts/teams.js";
+import { genTeamHTML } from "../scripts/main.js";
 import { marketEng } from "./market.js";
+import { createTooltip } from "../scripts/tooltips.js";
 
-export function viewEng(name, returnToMarket){
+export function viewEng(name, returnToMarket, scrollPos){
     let html = "";
     const eng = game.engineers[name];
     const team = game.teams[game.team];
@@ -32,6 +33,13 @@ export function viewEng(name, returnToMarket){
                 <table id="view-driver-infos">
                     <th colspan="2">Dados Pessoais</th>
                     <tr>
+                        <td colspan="2" style="text-align: center">${eng.gender}</td>
+                    </tr>
+                    <tr>
+                        <td>Personalidade:</td>
+                        <td class="persona-${accentsTidy(eng.personality)}">${eng.personality}</td>
+                    </tr>
+                    <tr>
                         <td>País:</td>
                         <td>
                             <img class="country-flag" src="img/flags/${accentsTidy(eng.country)}.webp">
@@ -42,10 +50,22 @@ export function viewEng(name, returnToMarket){
                         <td>Idade:</td>
                         <td>${eng.age} anos</td>
                     </tr>
-                    <tr>
-                        <td>Função:</td>
-                        <td>${eng.occupation}</td>
-                    </tr>
+                    `
+
+                    if(eng.occupation){
+                        html += `
+                        <tr>
+                            <td>Função:</td>
+                            <td>${eng.occupation}</td>
+                        </tr>
+                        <tr>
+                            <td>Equipe:</td>
+                            <td>${eng.team}</td>
+                        </tr>
+                        `
+                    }
+
+                    html += `
                     <tr>
                         <td>Salário:</td>
                         <td>${eng.salary} Mil por Corrida</td>
@@ -85,7 +105,7 @@ export function viewEng(name, returnToMarket){
         showConfirmButton: false,
     }).then(r => {
         if(returnToMarket)
-            marketEng();
+            marketEng(scrollPos);
     });
 
     if(eng.team == game.team){
@@ -103,6 +123,7 @@ export function viewEng(name, returnToMarket){
         changeEng(name);
     });
 }
+
 
 function dismissEng(name){
     const eng = game.engineers[name];
@@ -131,9 +152,9 @@ function dismissEng(name){
             eng.team = "";
             
             const team = game.teams[game.team];
-            team.financialReport["Fines"] += fine;
+            team.financialReport["Fines"] += -fine;
+            team.financialReport["Balance"] -= fine;
             team.cash -= fine;
-
         }
         else if(result.isDenied){
             ;
@@ -214,11 +235,11 @@ function contractEng(name){
             }
             if(document.querySelector("#select-function").value == "chiefDesigner"){
                 game.teams[game.team].engineers.chiefDesigner = eng.name;
-                game.engineers[eng.name].occupation = "Aerodinamicista Chefe";
+                game.engineers[eng.name].occupation = "Designer Chefe";
             }
             if(document.querySelector("#select-function").value == "chiefAerodynamicist"){
                 game.teams[game.team].engineers.chiefAerodynamicist = eng.name;
-                game.engineers[eng.name].occupation = "Designer Chefe";
+                game.engineers[eng.name].occupation = "Aerodinamicista Chefe";
             }
             if(document.querySelector("#select-function").value == "chiefEngineering"){
                 game.teams[game.team].engineers.chiefEngineering = eng.name;
@@ -227,10 +248,8 @@ function contractEng(name){
             
             game.engineers[eng.name].team = game.team;
             team.financialReport["Fines"] += fine;
+            team.financialReport["Balance"] -= fine;
             team.cash -= fine;
-
-            genTeamHTML();
-            marketEng();
         }
         if(result.isDenied){
             viewEng(name,true);
@@ -239,8 +258,6 @@ function contractEng(name){
         CalcTeamDevPoints(game.team);
         genTeamHTML();
     });
-
-
 }
 
 function changeEng(name){

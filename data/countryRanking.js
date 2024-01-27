@@ -1,4 +1,4 @@
-import { rand } from "../utils.js";
+import { rand } from "../scripts/utils.js";
 
 function getCountriesByTier(tier){
     return Object.entries(countryRanking)
@@ -154,4 +154,4 @@ export const countryRanking = {
     'LV': 6, // Letônia    
     'BG': 6, // Bulgária     
     'LU': 6, // Luxemburgo      
-  };
+};

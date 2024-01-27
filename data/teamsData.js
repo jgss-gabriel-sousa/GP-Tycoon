@@ -2,6 +2,26 @@ export const teamsData = {
     "Red Bull": {
         name: "Red Bull",
         country: "AT",
+        history: {
+            titles: 6,
+            wins: 92,
+            lastResults: {
+                2022: {
+                    position: 1,
+                    pts: 759,
+                },
+                2021: {
+                    position: 2,
+                    pts: 586,
+                },
+                2020: {
+                    position: 2,
+                    pts: 319,
+                },
+            }
+        },
+        fans: 22.4, //(in Millions) Insta Followers * 2
+        politicalForce: 7.7,
         engine: "Red Bull PowerTrains",
         engineContract: 0,
         bg_color: "#23326A",
@@ -16,6 +36,11 @@ export const teamsData = {
         driver1: "Max Verstappen",
         driver2: "Sergio Pérez",
         test_driver: "Daniel Ricciardo",
+        driversAcademy: [
+            "Ayumu Iwasa","Arvid Lindblad","Isack Hadjar",
+            "Dennis Hauger","Enzo Deligny","Pepe Martí",
+            "Tim Tramnitz","Kacper Sztuka","Oliver Goethe"
+        ],
         car: {
             speed: 90,
             downforce: 100,
@@ -44,6 +69,26 @@ export const teamsData = {
     "Mercedes": {
         name: "Mercedes",
         country: "DE",
+        history: {
+            titles: 8,
+            wins: 125,
+            lastResults: {
+                2022: {
+                    position: 3,
+                    pts: 515,
+                },
+                2021: {
+                    position: 1,
+                    pts: 614,
+                },
+                2020: {
+                    position: 1,
+                    pts: 573,
+                },
+            }
+        },
+        fans: 24.4,
+        politicalForce: 8.8,
         engine: "Mercedes",
         engineContract: -1,
         bg_color: "#C8CCCE",
@@ -58,6 +103,10 @@ export const teamsData = {
         driver1: "Lewis Hamilton",
         driver2: "George Russell",
         test_driver: "Mick Schumacher",
+        driversAcademy: [
+            "Andrea Kimi Antonelli","Frederik Vesti","Doriane Pin",
+            "Paul Aron"
+        ],
         car: {
             speed: 57,
             downforce: 85,
@@ -88,6 +137,26 @@ export const teamsData = {
     "Ferrari": {
         name: "Ferrari",
         country: "IT",
+        history: {
+            titles: 16,
+            wins: 242,
+            lastResults: {
+                2022: {
+                    position: 2,
+                    pts: 554,
+                },
+                2021: {
+                    position: 3,
+                    pts: 324,
+                },
+                2020: {
+                    position: 6,
+                    pts: 131,
+                },
+            }
+        },
+        fans: 25.6,
+        politicalForce: 9.5,
         engine: "Ferrari",
         engineContract: -1,
         bg_color: "#A6051A",
@@ -102,6 +171,11 @@ export const teamsData = {
         driver1: "Charles Leclerc",
         driver2: "Carlos Sainz Jr.",
         test_driver: "Antonio Giovinazzi",
+        driversAcademy: [
+            "Dino Beganovic","Maya Weug","James Wharton",
+            "Arthur Leclerc","Oliver Bearman","Rafael Câmara",
+            "Tuukka Taponen","Aurelia Nobels"
+        ],
         car: {
             speed: 76,
             downforce: 82,
@@ -109,8 +183,8 @@ export const teamsData = {
         },
         teamPrincipal: "Frédéric Vasseur",
         engineers: {
-            technicalDirector: "",
-            chiefDesigner: "Enrico Cardile",
+            technicalDirector: "Enrico Cardile",
+            chiefDesigner: "Fabio Montecchi",
             chiefAerodynamicist: "David Sanchez",
             chiefEngineering: "Enrico Gualtieri",
         },
@@ -132,6 +206,26 @@ export const teamsData = {
     "Aston Martin": {
         name: "Aston Martin",
         country: "GB",
+        history: {
+            titles: 0,
+            wins: 1,
+            lastResults: {
+                2022: {
+                    position: 7,
+                    pts: 55,
+                },
+                2021: {
+                    position: 7,
+                    pts: 77,
+                },
+                2020: {
+                    position: 4,
+                    pts: 195,
+                },
+            }
+        },
+        fans: 8,
+        politicalForce: 6.2,
         engine: "Mercedes",
         engineContract: 3,
         bg_color: "#00352f",
@@ -146,6 +240,7 @@ export const teamsData = {
         driver1: "Fernando Alonso",
         driver2: "Lance Stroll",
         test_driver: "Felipe Drugovich",
+        driversAcademy: [],
         car: {
             speed: 63,
             downforce: 83,
@@ -176,6 +271,26 @@ export const teamsData = {
     "Alpine": {
         name: "Alpine",
         country: "FR",
+        history: {
+            titles: 2,
+            wins: 36,
+            lastResults: {
+                2022: {
+                    position: 4,
+                    pts: 173,
+                },
+                2021: {
+                    position: 5,
+                    pts: 155,
+                },
+                2020: {
+                    position: 5,
+                    pts: 181,
+                },
+            }
+        },
+        fans: 6.4,
+        politicalForce: 5.5,
         engine: "Renault",
         engineContract: -1,
         bg_color: "#005094",
@@ -190,6 +305,11 @@ export const teamsData = {
         driver1: "Pierre Gasly",
         driver2: "Esteban Ocon",
         test_driver: "Jack Doohan",
+        driversAcademy: [
+            "Victor Martins","Abbi Pulling","Sophia Flörsch",
+            "Gabriele Minì","Kush Maini","Nicola Lacorte",
+            "Nikola Tsolov","Aiden Neate"
+        ],
         car: {
             speed: 40,
             downforce: 80,
@@ -220,6 +340,26 @@ export const teamsData = {
     "Haas": {
         name: "Haas",
         country: "US",
+        history: {
+            titles: 0,
+            wins: 0,
+            lastResults: {
+                2022: {
+                    position: 8,
+                    pts: 37,
+                },
+                2021: {
+                    position: 10,
+                    pts: 0,
+                },
+                2020: {
+                    position: 9,
+                    pts: 3,
+                },
+            }
+        },
+        fans: 5.4,
+        politicalForce: 4.3,
         engine: "Ferrari",
         engineContract: 3,
         bg_color: "#efefef",
@@ -234,6 +374,7 @@ export const teamsData = {
         driver1: "Kevin Magnussen",
         driver2: "Nico Hülkenberg",
         test_driver: "Pietro Fittipaldi",
+        driversAcademy: [],
         car: {
             speed: 55,
             downforce: 50,
@@ -264,6 +405,26 @@ export const teamsData = {
     "McLaren": {
         name: "McLaren",
         country: "GB",
+        history: {
+            titles: 8,
+            wins: 183,
+            lastResults: {
+                2022: {
+                    position: 5,
+                    pts: 159,
+                },
+                2021: {
+                    position: 4,
+                    pts: 275,
+                },
+                2020: {
+                    position: 3,
+                    pts: 202,
+                },
+            }
+        },
+        fans: 23.4,
+        politicalForce: 7.2,
         engine: "Mercedes",
         engineContract: 3,
         bg_color: "#ff8000",
@@ -278,6 +439,10 @@ export const teamsData = {
         driver1: "Lando Norris",
         driver2: "Oscar Piastri",
         test_driver: "Pato O’Ward",
+        driversAcademy: [
+            "Ugo Ugochukwu","Ryō Hirakawa","Gabriel Bortoleto",
+            "Bianca Bustamante","Álex Palou"
+        ],
         car: {
             speed: 67,
             downforce: 70,
@@ -308,6 +473,26 @@ export const teamsData = {
     "Alfa Romeo": {
         name: "Alfa Romeo",
         country: "CH",
+        history: {
+            titles: 0,
+            wins: 1,
+            lastResults: {
+                2022: {
+                    position: 6,
+                    pts: 55,
+                },
+                2021: {
+                    position: 9,
+                    pts: 13,
+                },
+                2020: {
+                    position: 8,
+                    pts: 8,
+                },
+            }
+        },
+        fans: 4.4,
+        politicalForce: 6.5,
         engine: "Ferrari",
         engineContract: 3,
         bg_color: "#981e32",
@@ -322,6 +507,9 @@ export const teamsData = {
         driver1: "Valtteri Bottas",
         driver2: "Zhou Guanyu",
         test_driver: "Théo Pourchaire",
+        driversAcademy: [
+            "Marcus Amand","Léna Bühler"
+        ],
         car: {
             speed: 55,
             downforce: 45,
@@ -329,8 +517,8 @@ export const teamsData = {
         },
         teamPrincipal: "Andreas Seidl",
         engineers: {
-            technicalDirector: "Alessandro Alunni Bravi",
-            chiefDesigner: "Jan Monchaux",
+            technicalDirector: "Jan Monchaux",
+            chiefDesigner: "",
             chiefAerodynamicist: "Franck Sanchez",
             chiefEngineering: "Ruth Buscombe",
         },
@@ -352,6 +540,26 @@ export const teamsData = {
     "AlphaTauri": {
         name: "AlphaTauri",
         country: "IT",
+        history: {
+            titles: 0,
+            wins: 2,
+            lastResults: {
+                2022: {
+                    position: 9,
+                    pts: 35,
+                },
+                2021: {
+                    position: 6,
+                    pts: 142,
+                },
+                2020: {
+                    position: 7,
+                    pts: 107,
+                },
+            }
+        },
+        fans: 6,
+        politicalForce: 5.8,
         engine: "Red Bull PowerTrains",
         engineContract: 3,
         bg_color: "#f1f3f4",
@@ -366,6 +574,10 @@ export const teamsData = {
         driver1: "Yuki Tsunoda",
         driver2: "Nyck de Vries",
         test_driver: "Liam Lawson",
+        driversAcademy: [
+            "Enzo Fittipaldi","Zane Maloney","Sebastián Montoya",
+            "Souta Arao","Jak Crawford"
+        ],
         car: {
             speed: 30,
             downforce: 45,
@@ -396,6 +608,26 @@ export const teamsData = {
     "Williams": {
         name: "Williams",
         country: "GB",
+        history: {
+            titles: 9,
+            wins: 114,
+            lastResults: {
+                2022: {
+                    position: 10,
+                    pts: 8,
+                },
+                2021: {
+                    position: 8,
+                    pts: 23,
+                },
+                2020: {
+                    position: 10,
+                    pts: 0,
+                },
+            }
+        },
+        fans: 5.4,
+        politicalForce: 4.0,
         engine: "Mercedes",
         engineContract: 3,
         bg_color: "#040046",
@@ -409,7 +641,11 @@ export const teamsData = {
         fansTrust: 100,
         driver1: "Alexander Albon",
         driver2: "Logan Sargeant",
-        test_driver: "Jamie Chadwick",
+        test_driver: "Zak O'Sullivan",
+        driversAcademy: [
+            "Jamie Chadwick","Franco Colapinto","Luke Browning",
+            "Oleksandr Bondarev","Lia Block","Oliver Gray"
+        ],
         car: {
             speed: 65,
             downforce: 45,

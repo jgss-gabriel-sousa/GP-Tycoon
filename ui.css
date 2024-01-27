@@ -1,4 +1,5 @@
 @import url("./styles/financialReport.css");
+@import url("./styles/financialBalance.css");
 
 #team-standings{
     border-collapse: collapse;
@@ -149,6 +150,7 @@
 #view-driver td:first-child {
     text-align: end;
     font-weight: bold;
+    white-space: nowrap;
 }
 #view-driver-contract td{
     font-size: 14px;
@@ -202,11 +204,13 @@
     flex-direction: row;
     justify-content: space-around;
     min-height: 300px;
+    height: 100%;
 }
 #historic-tables div{
     display: flex;
     flex-direction: column;
     width: 45%;
+    overflow-x: overlay;
 }
 #historic-tables h1 {
     background-color: transparent;
@@ -218,6 +222,7 @@
     width: 100%;
     border-collapse: collapse;
     color: #000;
+    white-space: nowrap;
 }
 #historic-tables th {
     border: 1px solid #424548;
@@ -407,8 +412,14 @@
     font-size: 16px;
 }
 
-#balance th {
+#balance-financial-report {
     padding: 2px;
+    font-size: 18px;
+}
+#balance-financial-report:hover {
+    text-shadow: 1px 1px 5px #81818182;
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
 }
 
 #serial-key-screen {
@@ -441,4 +452,146 @@
     line-height: 1.5;
     margin: 10px;
     font-size: 14px; 
+}
+
+#news-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    min-height: 400px;
+    height: 50%;
+    justify-content: space-evenly;
+}
+#news-container li {
+    font-size: 12px;
+    text-align: start;
+    list-style-type: square;
+}
+#news-container li:hover {
+    background-color: #FFDF9F;
+    cursor: pointer;
+    text-decoration: underline;
+}
+#news-content {  
+    width: 60%;
+    display: flex;
+    margin: 0 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+#headlines {
+    overflow-y: overlay;
+    padding: 0 10px;
+    height: 400px;
+    min-width: 30%;
+}
+#news-content img:first-child {
+    height: 40%;
+    max-width: 40%;
+}
+#news-content p {
+    font-size: 12px;
+    text-align: start;
+    margin: 5px;
+    padding: 10px;
+    line-height: 1.5;
+    background-color: #f0f0f0;
+    border-radius: 0.25em;
+    width: 95%;
+    color: #505050;
+}
+#news-container > button {
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+    position: absolute;
+    left: 1em;
+    top: 2em;
+    padding: 0;
+}
+.not-viewed-news {
+    color: #0000EE;
+}
+#news-driver-hire {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#news-driver-hire div:first-child {
+    margin: 0 10px;
+    max-width: 30vh;
+}
+#news-driver-hire i {
+    font-size: 52px;
+    margin-left: 20px;
+}
+#news-driver-hire img:last-child {
+    background-color: #50505027;
+    padding: 0.75em;
+    border-radius: 1em;
+}
+
+#news-driver-hire-breaking {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+#news-driver-hire-breaking h1 {
+    font-family: 'f1';
+}
+#news-driver-hire-breaking h2 {
+    font-weight: lighter;
+    font-family: 'Montserrat';
+    font-size: 12px;
+}
+#news-driver-hire-breaking img {
+    width: 100%;
+}
+
+#select-db {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#select-db div {
+    margin: 20px;
+}
+#select-db select {
+    min-width: 100px;
+    padding: 5px;
+}
+#select-db input {
+    margin: 10px;
+}
+
+#view-reputation {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+#view-reputation h4 {
+    font-size: 16px;
+    margin: 10px 0px;
+}
+#view-reputation div {
+    padding: 10px;
+    max-width: 200px;
+}
+
+#other-series-standings {
+    display: flex; 
+    flex-direction: row;
+    max-width: 100%;
+    overflow: overlay;
+}
+#other-series-standings div {
+    margin: 5px;
+}
+#other-series-standings td {
+    font-size: 10px;
+}
+#other-series-standings h1 {
+    background-color: #333;
+    font-size: 14px;
 }

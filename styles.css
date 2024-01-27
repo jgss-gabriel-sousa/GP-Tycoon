@@ -31,9 +31,14 @@ nav {
 
 body {
     background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
-    margin: 5px 20px;
     height: 100%;
     padding-right: 0 !important;
+    overflow: overlay;
+    margin: 0;
+    background-image: url("./img/ui/background.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
 }
 
 ul{
@@ -69,6 +74,7 @@ button{
 }
 button:hover{
 	background-color: #ddd;
+    font-weight: bold;
     cursor: pointer;
     filter: drop-shadow(0px 0px 2px black);
 }
@@ -83,7 +89,7 @@ a:hover {
 }
 
 h1 {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     font-family: F1;
     background-color: var(--border);
@@ -102,7 +108,8 @@ h2 {
 p {
     margin-top: 5px;
     margin-bottom: 5px;
-    font-size: 12px;
+    font-size: 12px;  
+    font-weight: normal;
 }
 
 nav img {
@@ -128,74 +135,146 @@ abbr {
 }
 
 #main-menu {
+    padding-top: 20px;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     display: none;
 }
 #main-menu img{
+    display: none;
     height: 200px;
     filter: drop-shadow(-2px 1px 0px #ffffff94);
+}
+#main-menu div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
 }
 #main-menu h1 {
     font-size: 48px;
     background-color: transparent;
-    color: #ff3434;
+    color: #ffffff;
     text-shadow: 1px 1px black;
-    margin-top: 50px;
+    text-align: center;
 }
-#main-menu button {
-    font-family: "F1";
-    padding: 1em;
-    font-size: 16px;
-    width: 200px;
-    margin-bottom: 20px;
+@media (min-width: 600px) {
+    #main-menu div {
+        width: 50%;
+        float: left;
+    }
 }
-#main-menu button:hover {
-    transform: scale(1.05,1.05);
+.main-menu-btn {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 60px;
+    max-width: 250px;
+    margin: 0 1em;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: transparent;
+}
+
+.main-menu-btn,
+.main-menu-btn *:before,
+.main-menu-btn *:after {
+    transition: 0.5s ease-in-out;
+}
+
+.main-menu-btn {
+    color: #ffff;
+}
+.main-menu-btn:hover {
+    color: #000;
+    background-color: #ddd;
+    transform: scale(1.1, 1.1);
 }
 #main-menu small {
     color: #e5e5e5;
+    background-color: #222;
+    border-radius: 0.25em;
+    box-shadow: 1px 1px 5px #111;
+    padding: 2px 4px;
     position: absolute;
-    top: 90%;
+    top: 95%;
 }
 
 #team-menu {
     color: var(--text);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: flex-start;
     display: none;
 }
-#team-menu > nav > ul > li {
-    min-width: 10px;
-    max-width: 50px;
+#button-list p {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 10px;
 }
+#button-list button {
+    background-color: transparent;
+    color: white;
+    border: 0;
+    display: flex;
+    width: 95%;
+    font-size: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    text-align: start;
+}
+#button-list button:hover {
+    background-color: #e5e5e531;
+}
+#button-list button img {
+    filter: invert(100%);
+    margin: 4px;
+    width: 18px;
+}
+#btn-news span {
+    background-color: #ff3434;
+    padding: 2px;
+    margin-left: 5px;
+    min-width: 1.5em;
+    border-radius: 100%;
+    text-align: center;
+}
+.no-news {
+    opacity: 0;
+}
+
 #team-menu-interface {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-}
-#team-menu-interface > div {
-    margin-bottom: 10px;
+    justify-content: space-between;
 }
 
 #drivers-car-section {
     display: flex;
     flex-direction: column;
-    margin-left: 10px;
     align-items: center;
+    justify-content: space-between;
 }
 
 #drivers {
     margin-bottom: 10px;
     display: flex;
     border: 2px solid var(--border);
+    height: 100%;
+    width: 100%;
 }
 .driver-card {
     background-color: var(--bg);
     border-right: 2px solid var(--border);
     text-align: center;
-    width: 210px;
+    width: 100%;
 }
 .driver-card:last-child{
     border-right: 0;
@@ -253,6 +332,9 @@ abbr {
     background-color: var(--border);
     color: var(--titles);
 	border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .btn-driver-name:hover {
     background-color: var(--border);
@@ -265,10 +347,38 @@ abbr {
     margin-bottom: 0 !important;
 }
 
+#test-driver .btn-driver-name,
+#academy-drivers .btn-driver-name {
+    background-color: transparent;
+    color: var(--text);
+    font-size: 12px;
+    width: 95%;
+    padding: 0;
+    justify-content: flex-start;
+}
+
+#test-driver, #academy-drivers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#test-driver h1, #academy-drivers h1 {
+    width: 95%;
+}
+
+#test-driver .btn-driver-name:hover,
+#academy-drivers .btn-driver-name:hover {
+    filter: 0;
+    text-shadow: 0;
+    background-color: var(--border);
+    color: var(--titles);
+}
+
 #info {
+    display: flex;
+    flex-direction: column;
     border: 2px solid var(--border);
-    min-width: 175px;
-    height: max-content;
     box-shadow: 1px 1px #222;
     text-align: center;
     background-color: var(--bg);
@@ -287,27 +397,26 @@ abbr {
     margin-right: 5px;
 }
 
+#team div:hover:nth-child(n+2) {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+}
+#team div:nth-child(n+2) {
+    text-align: center;
+    padding: 5px;
+}
+#team div:nth-child(n+2) img {
+    align-self: center;
+    padding-right: 5px;
+    vertical-align: middle;
+}
 #team-logo {
     padding: 2px;
 }
 
 #coach {
     align-self: flex-start;
-}
-
-#money {
-    text-align: center;
-    padding: 10px;
-}
-#money:hover {
-    font-weight: bold;
-    cursor: pointer;
-    transform: scale(1.1, 1.1);
-}
-#money-icon {
-    align-self: center;
-    padding-right: 5px;
-    vertical-align: middle;
 }
 
 #next-race {
@@ -326,9 +435,23 @@ abbr {
 #next-race-name .country-flag{
     margin-right: 5px;
 }
+#next-race-name img{
+    filter: drop-shadow(0px 0px 4px black);
+}
 
-#btn-play{
-    padding: 10px 2em;
+#btn-play{    
+    padding: 0.2em 0.5em;
+    display: block;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-family: "f1";
+    font-weight: bold;
+    border: 2px solid #333;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: all .35s;
 }
 
 #players {
@@ -359,56 +482,59 @@ abbr {
     border: 2px solid var(--border);
     text-align: center;
     display: flex;
-}
-#car table{
-    padding: 5px;
+    width: 100%;
 }
 #car > div{
     background-color: var(--bg);
-    border: 1px solid var(--border);
-    width: 210px;
+    width: 100%;
+}
+#car > div:nth-child(n+2){
+    border-left: 2px solid var(--border);
+}
+#car > div > table {
+    border-spacing: 0px;
+    margin: 5px 0px;
 }
 #engine h2{
     margin: 5px;
+    font-size: 12px;
 }
 
-.bars-table table {
+.bars-table {
     display: flex;
     justify-content: center;
     border-spacing: 0;
     border-collapse: collapse;
     font-size: 12px;
-    margin: 5px 0px;
-    padding: 5px;
+    margin-top: 5px;
 }
 .bars-table td {
     padding: 0;
     text-align: start;
 }
-.bars-table .progress-bar-background {
-    border: 0;
-}
 .bars-table td:nth-child(1) {
+    padding: 0 5px;
     padding-right: 2px;
     text-align: end;
 }
 .bars-table td:nth-child(2) {
-    padding: 0;
-    border: 1px solid black;
+    font-size: 12px;
+    padding: 0 5px;
+    padding-left: 2px;
+}
+.no-border {
+    border: 0 !important;
 }
 
 #engineering > div {
-    width: 210px;
     min-width: fit-content;
 }
 
 #engineering,
 #development {
-    margin-left: 10px;
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
-    height: fit-content;
 }
 #engineering table,
 #development table {
@@ -422,13 +548,17 @@ abbr {
     background-color: var(--border);
     color: var(--titles);
     text-align: end;
-    height: 25px;
+    height: 20px;
+    padding: 0px 2px;
 }
-#engineering td {
-    width: 50%;
+#development th {
+    padding: 4px 0px;
 }
 #engineers-name td:first-child {
     text-align: end;
+}
+#engineers-name button {
+    margin: 0;
 }
 #new-car {
     width: 100%;
@@ -441,7 +571,7 @@ abbr {
     padding: 5px 0px;
 }
 #new-car tr:nth-child(2) > td {
-    padding-top: 10px;
+    padding-top: 5px;
 }
 #new-car td{
     padding: 0px;
@@ -449,6 +579,9 @@ abbr {
 #new-car td:first-child{
     text-align: end;
     padding-right: 5px;
+}
+#new-car > tbody > tr:nth-child(7) > td:nth-child(2) {
+    max-width: 100px;
 }
 
 #dev-pts td:first-child {
@@ -465,7 +598,6 @@ abbr {
 #dev-pts div {
     display: flex;
     flex-direction: column;
-    padding: 5px;
     width: 50%;
 }
 #dev-pts > div:first-child {
@@ -477,7 +609,7 @@ abbr {
     color: var(--text);
 }
 #dev-pts h2 {
-    padding: 5px;
+    padding: 5px 0;
 }
 #dev-focus td,
 #dev-focus td {
@@ -492,7 +624,6 @@ abbr {
 }
 
 #development {
-    margin-left: 10px;
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
@@ -502,21 +633,18 @@ abbr {
     width: 100%;
     padding: 5px;
 }
-#development td {
-    padding: 5px;
-}
 #development td:nth-child(2) {
     min-width: 40px;
 }
 #development th {
     text-align: center;
+    font-size: 12px;
 }
 #development .total-investments {
     text-align: end;
-    padding: 0px 4px;
 }
-#investments td:nth-child(2) {
-    min-width: 60px;
+#development td:nth-child(1) {
+    padding: 4px 2px;
 }
 
 .btn-eng-name {
@@ -527,10 +655,11 @@ abbr {
     cursor: pointer;
     box-shadow: 0px 0px transparent;
     border: 1px solid transparent;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     color: var(--text);
 	border-radius: 0;
+    max-width: 100px;
 }
 .btn-eng-name:hover {
     background-color: var(--border);
@@ -541,11 +670,14 @@ abbr {
 }
 
 .progress-bar-background {
-    width: 100px;
-    height: 15px;
+    width: 80px;
+    height: 18px;
     border: 1px solid black;
     background-color: #f0f0f0;
     justify-content: center;
+}
+#engineers-name > tbody > tr:nth-child(7) > td > div {
+    width: 98%;
 }
 
 .progress-bar {
@@ -562,7 +694,7 @@ abbr {
 
 .progress-bar span {
     display: flex;
-    padding: 0px 50px;
+    padding: 0px 40px;
     justify-content: center;
 }
 
@@ -598,7 +730,7 @@ abbr {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    margin: 5px;
+    width: 100px;
 }
 
 .slider:hover {
@@ -624,17 +756,81 @@ abbr {
     cursor: pointer;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
+    h1, h2, td, th, .btn-driver-name, #new-car th, .btn-eng-name,
+    .bars-table td:nth-child(2), #new-car > tbody > tr:nth-child(7) > td:nth-child(2),
+    #engineers-name > tbody > tr:nth-child(2) > td > button {
+        font-size: 10px;
+    }
+    p {
+        font-size: 8px;
+    }
     #team-menu-interface {
-        align-items: flex-start;
         flex-wrap: wrap;
-        justify-content: center;
+    }
+    #team-menu-interface {
+        flex-wrap: wrap;
+    }
+    .progress-bar {
+        font-size: 10px;
+    }
+    .progress-bar-background {
+        width: 40px;
+    }
+    .progress-bar span {
+        padding: 0px 20px;
+    }
+    .slider {
+        width: 80px;
+    }
+    button {
+        padding: 2px;
+    }
+    #btn-play {
+        padding: 10px 1em;
+        font-size: 10px;
+    }
+    #engineering th, #development th {
+        width: 50px;
+        font-size: 10px;
+    }
+    #team-logo {
+        width: 75px;
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
+    body, :root {
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+    button {
+        padding: 5px;
+    }
+    #button-list, #team-menu{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #button-list p {
+        font-size: 0;
+    }
     #team-menu > nav > ul {
         display: flex;
+    }
+    #info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-bottom: 10px;
+        justify-content: space-around;
+    }
+    #info h1 {
+        padding: 5px;
+    }
+    #next-race {
+        justify-content: space-between;
     }
     #drivers {
         flex-wrap: wrap;
@@ -644,6 +840,19 @@ abbr {
         align-items: flex-start;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    #test-driver, #academy-drivers {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #test-driver h1, #academy-drivers h1 {
+        width: 98%;
+    }
+    #test-driver .btn-driver-name,
+    #academy-drivers .btn-driver-name {
+        font-size: 10px;
+        width: max-content;
+        padding: 5px;
     }
     #car,
     #drivers{
@@ -655,6 +864,11 @@ abbr {
         width: auto;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    #car{
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-bottom: 15px;
     }
     #car h1,
     #engineering h1{

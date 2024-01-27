@@ -1,6 +1,4 @@
 export const engineersData = {
-    "":{aero:0,eng:0,adm:0,salary:0},
-
     //TEAM DIRECTORS
     "Christian Horner":     {aero: 75,    eng: 80,    adm: 100,     country: "GB",  age:49},
     "Toto Wolff":           {aero: 70,    eng: 85,    adm: 100,     country: "AT",  age:51},
@@ -10,7 +8,7 @@ export const engineersData = {
     "Günther Steiner":      {aero: 85,    eng: 95,    adm: 90,      country: "IT",  age:58},
     "Andrea Stella":        {aero: 75,    eng: 85,    adm: 80,      country: "IT",  age:52},
     "Andreas Seidl":        {aero: 80,    eng: 85,    adm: 80,      country: "DE",  age:47},
-    "Franz Tost":           {aero: 75,    eng: 95,    adm: 100,      country: "AT",  age:67},
+    "Franz Tost":           {aero: 75,    eng: 95,    adm: 100,     country: "AT",  age:67},
     "James Vowles":         {aero: 85,    eng: 90,    adm: 85,      country: "GB",  age:43},
 
     //RED BULL
@@ -27,6 +25,7 @@ export const engineersData = {
 
     //FERRARI
     "Enrico Cardile":       {aero: 95,     eng: 95,      adm: 80,     country: "IT",  age:48},
+    "Fabio Montecchi":      {aero: 85,     eng: 95,      adm: 80,     country: "IT",  age:55},
     "David Sanchez":        {aero: 90,     eng: 85,      adm: 70,     country: "FR",  age:55},
     "Enrico Gualtieri":     {aero: 80,     eng: 95,      adm: 70,     country: "IT",  age:48},
 
@@ -37,16 +36,16 @@ export const engineersData = {
     "Luca Furbatto":        {aero: 85,    eng: 85,   adm: 75,     country: "IT",  age:50},
 
     //ALPINE
-    "Matt Harman":          {aero: 80,    eng: 85,    adm: 75,      country: "GB",  age:55},
-    "Pat Fry":              {aero: 80,    eng: 90,    adm: 80,      country: "GB",  age:59},
-    "Dirk de Beer":         {aero: 90,    eng: 85,    adm: 70,      country: "ZA",  age:59},
-    "Ciaron Pilbeam":       {aero: 80,    eng: 90,    adm: 75,      country: "GB",  age:55},
+    "Matt Harman":          {aero: 80,    eng: 85,    adm: 75,    country: "GB",  age:55},
+    "Pat Fry":              {aero: 80,    eng: 90,    adm: 80,    country: "GB",  age:59},
+    "Dirk de Beer":         {aero: 90,    eng: 85,    adm: 70,    country: "ZA",  age:59},
+    "Ciaron Pilbeam":       {aero: 80,    eng: 90,    adm: 75,    country: "GB",  age:55},
 
     //HAAS
-    "Simone Resta":         {aero: 80,    eng: 90,    adm: 85,      country: "IT",  age:52},
-    "Rob Taylor":           {aero: 85,    eng: 85,    adm: 70,      country: "GB",  age:64},
-    "Arron Melvin":         {aero: 90,    eng: 75,    adm: 70,      country: "US",  age:52},
-    "Ben Agathangelou":     {aero: 75,    eng: 90,    adm: 75,      country: "GB",  age:47},
+    "Simone Resta":         {aero: 80,    eng: 90,    adm: 85,    country: "IT",  age:52},
+    "Rob Taylor":           {aero: 85,    eng: 85,    adm: 70,    country: "GB",  age:64},
+    "Arron Melvin":         {aero: 90,    eng: 75,    adm: 70,    country: "US",  age:52},
+    "Ben Agathangelou":     {aero: 75,    eng: 90,    adm: 75,    country: "GB",  age:47},
 
     //MCLAREN
     "James Key":            {aero: 80,    eng: 90,   adm: 90,     country: "GB",  age:51},
@@ -54,16 +53,15 @@ export const engineersData = {
     "Neil Houldey":         {aero: 85,    eng: 90,   adm: 80,     country: "GB",  age:55},
 
     //ALFA ROMEO
-    "Alessandro Alunni Bravi": {aero: 75,    eng: 75,   adm: 100,     country: "IT",  age:48},
     "Jan Monchaux":         {aero: 90,    eng: 80,   adm: 75,     country: "FR",  age:45},
     "Franck Sanchez":       {aero: 90,    eng: 85,   adm: 70,     country: "CH",  age:55},
-    "Ruth Buscombe":        {aero: 80,    eng: 90,   adm: 75,     country: "GB",  age:33},
+    "Ruth Buscombe":        {aero: 80,    eng: 90,   adm: 75,     country: "GB",  age:33, gender:"F"},
 
     //ALPHATAURI
     "Jody Egginton":        {aero: 75,    eng: 90,   adm: 75,     country: "GB",  age:49},
     "Paolo Marabini":       {aero: 85,    eng: 95,   adm: 80,     country: "IT",  age:49},
     "Peter Machin":         {aero: 95,    eng: 90,   adm: 75,     country: "GB",  age:55},
-    "Trygve Rangen":        {aero: 80,    eng: 100,   adm: 75,     country: "IT",  age:50},
+    "Trygve Rangen":        {aero: 80,    eng: 100,   adm: 75,    country: "IT",  age:50},
 
     //WILLIAMS
     "Sven Smeets":          {aero: 65,    eng: 80,   adm: 85,     country: "BE",  age:51},
@@ -74,4 +72,10 @@ export const engineersData = {
     //FREE AGENTS
     "Rob Marshall":         {aero: 75,    eng: 85,   adm: 80,     country: "GB",  age:55},
     "Matt Morris":          {aero: 70,    eng: 80,   adm: 75,     country: "GB",  age:49},
+    "Laurent Mekies":       {aero: 85,    eng: 95,   adm: 90,     country: "FR",  age:45},
+    "Rob Smedley":          {aero: 60,    eng: 75,   adm: 80,     country: "GB",  age:50},
+    "Gilles Simon":         {aero: 50,    eng: 85,   adm: 80,     country: "FR",  age:65},
+    "Christoph Zimmermann": {aero: 50,    eng: 90,   adm: 75,     country: "CH",  age:55},
+    "Alessandro Alunni Bravi": {aero: 25, eng: 25,   adm: 100,    country: "IT",  age:48},
+    "Mattia Binotto":       {aero: 75,    eng: 100,  adm: 70,     country: "IT",  age:53},
 }

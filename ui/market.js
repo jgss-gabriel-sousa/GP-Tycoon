@@ -1,11 +1,12 @@
-import { NumberF, accentsTidy } from "../utils.js";
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { NumberF, accentsTidy } from "../scripts/utils.js";
+import { game } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 
-export function market(){
+export function market(scroll){
     let html = "";
+    let scrollPos;
 
     html += `
     <div id="market">
@@ -27,8 +28,13 @@ export function market(){
 
     for(let i = 0; i < drivers.length; i++){
         const driver = drivers[i];
+
         if(driver.name == "") continue
         if(driver.team == "") continue
+        if(driver.status == "Piloto da Academia") continue
+        if(driver.condition != "racing"){
+            continue
+        }
         
         html += `
         <tr class="driver" id="${driver.name}">
@@ -106,7 +112,41 @@ export function market(){
 
         html += `</tr>`
     }
-    html += `</table></div>`
+    html += `</table>`
+    html += `<br>`
+    html += `
+        Academias de Pilotos    
+        <table>    
+            <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Idade</th>
+            </tr>
+            `
+            
+    let actualTeam;
+    for(let i = 0; i < drivers.length; i++){
+        const driver = drivers[i];
+        if(driver.status != "Piloto da Academia") continue
+        
+        if(actualTeam == null || actualTeam != driver.team){
+            actualTeam = driver.team; 
+            html += `
+            <tr style="background-color: ${game.teams[actualTeam].result_bg_color}; color: ${game.teams[actualTeam].result_font_color}">
+                <td colspan="4">Academia da ${actualTeam}</td>
+            </tr>`
+        }
+
+        html += `
+        <tr class="driver" id="${driver.name}">
+            <td><img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"></td>
+            <td>${driver.name}</td>
+            <td>${driver.age} anos</td>
+        </tr>
+        `
+    }
+    html += `</table>`
+    html += `</div>`
     
     Swal.fire({
         title: `Mercado de Pilotos`,
@@ -122,13 +162,22 @@ export function market(){
         const el = document.querySelectorAll(".driver")[i];
 
         el.addEventListener("click", () => {
-            viewDriver(el.id, true);
+            viewDriver(el.id, true, scrollPos);
         });
     }
+    
+    if(scroll){
+        document.querySelector("#market").scroll(0,scroll);
+    }
+
+    document.querySelector("#market").addEventListener("scroll", e => {
+        scrollPos = document.querySelector("#market").scrollTop;
+    });
 }
 
-export function marketEng(){
+export function marketEng(scroll){
     let html = "";
+    let scrollPos;
 
     html += `
     <div id="market-eng">
@@ -143,6 +192,7 @@ export function marketEng(){
     
     const engineers = Object.values(game.engineers);
 
+    engineers.sort((a, b) => b.salary - a.salary);
     engineers.sort((a, b) => a.team.localeCompare(b.team));
 
     for(let i = 0; i < engineers.length; i++){
@@ -197,7 +247,15 @@ export function marketEng(){
         const el = document.querySelectorAll(".driver")[i];
 
         el.addEventListener("click", () => {
-            viewEng(el.id, true);
+            viewEng(el.id, true, scrollPos);
         });
     }
+
+    if(scroll){
+        document.querySelector("#market-eng").scroll(0,scroll);
+    }
+
+    document.querySelector("#market-eng").addEventListener("scroll", e => {
+        scrollPos = document.querySelector("#market-eng").scrollTop;
+    });
 }

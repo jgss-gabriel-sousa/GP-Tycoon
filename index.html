@@ -11,13 +11,15 @@
     <script src="./lib/sweetalert2.min.js"></script>
 
     <link rel="stylesheet" href="./lib/sweetalert2.min.css">
+    <link rel="stylesheet" href="./lib/line-icons/lineicons.css">
 
     <script src="./lib/popper.min.js"></script>
     <script src="./lib/tippy-bundle.umd.min.js"></script>
     <script src="./lib/chart.js"></script>
+    <script src="./lib/iconify/iconify-icon.min.js"></script>
 
-    <script src="main.js" type="module" defer></script>
-    <script src="events.js" type="module" defer></script>
+    <script src="./scripts/main.js" type="module" defer></script>
+    <script src="./scripts/events.js" type="module" defer></script>
     
     <title>Grand Prix Tycoon</title>
 </head>
@@ -26,20 +28,28 @@
     </header>
     <main>
         <div id="team-menu">
-            <nav>
-                <ul>
-                    <li><button id="btn-save-game"><img src="./img/ui/save.png"></button></li>
-                    <li><button id="btn-options"><img src="./img/ui/settings.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-standings"><img src="./img/ui/ranking.png"></button></li>
-                    <li><button id="btn-team-standings"><img src="./img/ui/team-ranking.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-market"><img class="market" src="./img/ui/market.png"></button></li>
-                    <li><button id="btn-market-eng"><img class="market-eng" src="./img/ui/market-eng.png"></button></li>
-                    <li><br></li>
-                    <li><button id="btn-historic"><img src="./img/ui/past.png"></button></li>
-                </ul>
-            </nav>
+            <div id="button-list">
+                <button id="btn-save-game"><img src="./img/ui/save.png"> Salvar Jogo</button>
+                <button id="btn-options"><img src="./img/ui/settings.png"> Opções</button>
+                <br>
+                <p>Classificação</p>
+                <button id="btn-standings"><img src="./img/ui/ranking.png"> Pilotos</button>
+                <button id="btn-team-standings"><img src="./img/ui/team-ranking.png"> Equipes</button>
+                <br>
+                <p>Mercado</p>
+                <button id="btn-market" class="market"><img src="./img/ui/market.png"> Pilotos</button>
+                <button id="btn-market-eng"  class="market-eng"><img src="./img/ui/market-eng.png"> Engenheiros</button>
+                <br>
+                <button id="btn-news"><img src="./img/ui/news.png">Notícias <span></span></button>
+                <button id="btn-sponsors"><img src="./img/ui/money2.png">Patrocinadores</button>
+                <button id="btn-bank"><img src="./img/ui/loan.png">Banco</button>
+                <button id="btn-advertising"><img src="./img/ui/advertising.png">Marketing</button>
+                <button id="btn-agreements"><img src="./img/ui/deal.png">Acordos</button>
+                <button id="btn-rules"><img src="./img/ui/meeting.png">Cúpula de Equipes</button>
+                <br>
+                <button id="btn-search"><img src="./img/ui/search.png">Pesquisar</button>
+                <button id="btn-historic"><img src="./img/ui/past.png">Histórico</button>
+            </div>
             <div id="team-menu-interface">
                 <div id="info">
                     <h1 id="year">2023</h1>
@@ -49,11 +59,12 @@
                             <h1 id="name"></h1>
                         </div>
                         <div id="money" class="view-financial-report"></div>
+                        <div id="reputation"></div>
                     </div>
                     <div id="next-race">
                         <h1>Próxima Corrida</h1>
                         <div id="next-race-name"></div>
-                        <button id="btn-play">Continuar</button>
+                        <button id="btn-play"><span>Continuar</span></button>
                     </div>
 
                 </div>
@@ -72,10 +83,14 @@
 
         <div id="main-menu">
             <h1>GP Tycoon</h1>
+            <!--
             <img src="./icon.webp" alt="Logo">
-            <button id="start-game">Novo Jogo</button>
-            <button id="load-game">Carregar Jogo</button>
-            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - v0.10.1</small>
+            -->
+            <div class="wrap">
+                <button id="start-game" class="main-menu-btn"><span>Novo Jogo</span></button>
+                <button id="load-game" class="main-menu-btn"><span>Carregar Jogo</span></button>
+            </div>
+            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - v0.11</small>
         </div>
 
         <div id="players-menu"></div>

@@ -2,25 +2,20 @@ import { game } from "./game.js"
 
 const tooltipMaxWidth = 500;
 
-function createTooltip(id, content){
+export function createTooltip(id, content){
     if(!document.querySelector(id)._tippy){
         tippy(id, {
             maxWidth: tooltipMaxWidth,
             theme: 'material',
             content: content,
-            allowHTML: true
+            allowHTML: true,
         });
     }
 }
 
 export function tooltips(){
-    createTooltip("#btn-save-game", "Salvar Jogo");
-    createTooltip("#btn-options", "Opções do Jogo");
-    createTooltip("#btn-standings", "Classificação de Pilotos");
-    createTooltip("#btn-team-standings", "Classificação de Construtores");
-    createTooltip("#btn-market", "Mercado de Pilotos");
-    createTooltip("#btn-market-eng", "Mercado de Engenheiros");
-    createTooltip("#btn-historic", "Histórico de Campeões");
+    createTooltip("#money", "Finanças");
+    createTooltip("#reputation", "Reputação");
 
     createTooltip("#dev-pts > div:nth-child(1) > h2:nth-child(2)", "Pontos de Desenvolvimento de Aerodinâmica");
     createTooltip("#dev-pts > div:nth-child(2) > h2:nth-child(2)", "Pontos de Desenvolvimento de Engenharia");
@@ -55,7 +50,7 @@ export function tooltips(){
         </table>
         <br>
         <p>Qtd de Empregados: ${employees_pts*100}%</p>
-        <p>Moral da Equipe: ${team.teamMorale}%</p>
+        <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 
     teamPrincipal_pts = ((eng[team.teamPrincipal].adm + eng[team.teamPrincipal].eng)/2)/5;
@@ -83,6 +78,6 @@ export function tooltips(){
         </table>
         <br>
         <p>Qtd de Empregados: ${employees_pts*100}%</p>
-        <p>Moral da Equipe: ${team.teamMorale}%</p>
+        <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 }

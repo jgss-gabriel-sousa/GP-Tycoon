@@ -1,12 +1,17 @@
-import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
-import { changeScreen } from "../screens.js"
-import { Championship } from "../championship.js";
+import { game, startGame } from "../scripts/game.js";
+import { genTeamHTML } from "../scripts/main.js";
+import { changeScreen } from "../scripts/screens.js"
+import { Championship } from "../scripts/championship.js";
 
-export function newGame(){     
+function newGame(){
+    startGame();
+
+    const teams = game.championship.teams;
+    teams.sort();
+
     let html = `<select id="select-team">`;
-    game.championship.teams.forEach(e => {
-        html += `<option value="${e}">${e}</option>`;
+    teams.forEach(t => {
+        html += `<option value="${t}">${t}</option>`;
     });
     html += "</select>";
 
@@ -20,9 +25,141 @@ export function newGame(){
         if(result.isConfirmed){
             game.team = document.querySelector("#select-team").value;
 
+            game.news.unshift({
+                headline: "Novidade na "+game.team,
+                date: game.championship.actualRound-1,
+                year: game.year,
+                content: `A ${game.team} surpreende com a nomeação de um novo líder para sua direção, apesar de ser desconhecido é considerado uma grande promessa no gerenciamento, será ele capaz de fazer história?!`,
+            });
+
             changeScreen("team-menu");
             genTeamHTML();
         }
+    });
+}
+
+export async function selectDatabase(){
+    let DBs = {};
+    let inputDB;
+    
+    function loadFile(file){
+        fetch("./db/"+file)
+        .then(res => res.json())
+        .then(DB => {
+            DBs[DB.DB_NAME] = DB;
+            genHTML();
+            document.querySelector("#select-db > div:nth-child(1) > select").value = DB.DB_NAME;
+        })
+        .catch(e => console.error(e));
+    };
+
+    function getDBsSaved(){
+        const dbs = JSON.parse(localStorage.getItem("gpTycoon-game-databases"));
+
+        for(const key in dbs){
+            DBs[key] = dbs[key];
+        }
+
+    }getDBsSaved();
+
+    async function getDBsOnline(){
+        try {
+            const apiURL = `https://gp-tycoon-web-service.onrender.com/get-dbs`;
+            let OnlineDBs;
+            const response = await fetch(apiURL, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+    
+            OnlineDBs = await response.json();
+
+            if(OnlineDBs){
+                for(const key in OnlineDBs){
+                    DBs[key] = OnlineDBs[key];
+                }
+            }
+        } catch (error) {
+            ;
+        }
+    }
+
+    function setDB(DBname){
+        if(DBname == "2023 (Padrão)"){
+            return;
+        }
+
+        const db = DBs[DBname];
+
+        game.championship.teams = db.championship.teams;
+        game.teams = db.teams;
+        game.drivers = db.drivers;
+        
+        console.log(db)
+        console.log(game)
+    }
+
+    function genHTML(){
+        let html = `
+        <div>
+            Lista de DBs:
+            <select>
+                <option value="2023 (Padrão)">2023 (Padrão)</option>
+            `;
+    
+        for(const dbName in DBs) {
+            const DB = DBs[dbName];
+            html += `<option value="${dbName}">${dbName}</option>`;
+        }
+    
+        html += `
+            </select>
+            <button id="download-dbs"><i class="lni lni-download"></i></button>
+        </div>
+        <div>
+            Carregar Arquivo de DB:
+            <input type="file" accept=".GPdb"/>
+        </div>`;
+
+        if(document.getElementById("select-db")){
+            document.getElementById("select-db").innerHTML = html;
+        }
+
+        html = `<div id="select-db">${html}</div>`
+        return html;
+    }
+
+
+    Swal.fire({
+        title: "Selecione a Base de Dados",
+        html: genHTML(),
+        showCloseButton: true,
+        focusConfirm: false,
+        confirmButtonText: "Ok",
+    }).then((result) => {
+        
+        if(DBs)
+            localStorage.setItem("gpTycoon-game-databases", JSON.stringify(DBs));
+
+        if(result.isConfirmed){
+            setDB(document.querySelector("#select-db > div:nth-child(1) > select").value);
+            newGame();
+        }
+    });
+
+    const fileSelector = document.querySelector("#select-db > div:nth-child(2) > input");
+    fileSelector.addEventListener("change", e => {
+        const fileList = e.target.files;
+
+        if(fileList.length != 0){
+            loadFile(e.target.files[0].name);
+        }
+    });
+
+    const downloadDBs = document.querySelector("#download-dbs");
+    downloadDBs.addEventListener("click", e => {
+        getDBsOnline();
     });
 }
 

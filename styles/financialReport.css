@@ -39,7 +39,8 @@
     align-items: center;
     justify-content: center;
 }
-.chart-container {
+
+#financial-report-balance .chart-container {
     width: 200px;
     height: 200px;
     margin: 1em;

@@ -1,5 +1,6 @@
-import { game } from "../game.js";
-import { NumberF } from "../utils.js";
+import { game } from "../scripts/game.js";
+import { NumberF } from "../scripts/utils.js";
+import { viewFinancialBalance } from "./viewFinancialBalance.js";
 
 export function viewFinancialReport(teamName){
     let html = "";
@@ -11,7 +12,7 @@ export function viewFinancialReport(teamName){
         profits += team.financialReport[profitsList[p]];
     }
 
-    const expensesList = ["Drivers","Engineers","Employees","Development Investments","Engine","Fines","Constructions","Fees"];
+    const expensesList = ["Drivers","Drivers Academy","Engineers","Employees","Development Investments","Engine","Fines","Constructions","Fees"];
     let expenses = 0;
     for(const p in expensesList) {
         expenses += team.financialReport[expensesList[p]];
@@ -57,6 +58,10 @@ export function viewFinancialReport(teamName){
                 <td>${NumberF(-team.financialReport["Drivers"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
+                <td>Salário Academia de Pilotos</td>
+                <td>${NumberF(-team.financialReport["Drivers Academy"] * 1000,"ext",0)}</td>
+            </tr>
+            <tr>
                 <td>Salário Engenheiros</td>
                 <td>${NumberF(-team.financialReport["Engineers"] * 1000,"ext",1)}</td>
             </tr>
@@ -96,13 +101,10 @@ export function viewFinancialReport(teamName){
             <canvas id="profit-chart"></canvas>
         </div>
 
-        <table id="balance">
-            <tr>
-                <th>Balanço: </th>
-                <td>${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}</td>
-            </tr>
-        </table>
-        
+        <p id="balance-financial-report">
+            Balanço: ${NumberF(team.financialReport["Balance"] * 1000,"ext",0)}
+        </p>
+
         <div class="chart-container">
             <canvas id="expenses-chart"></canvas>
         </div>
@@ -116,6 +118,10 @@ export function viewFinancialReport(teamName){
         showCloseButton: true,
         focusConfirm: false,
         showConfirmButton: false,
+    });
+
+    document.querySelector("#balance-financial-report").addEventListener("click", () => {
+        viewFinancialBalance(game.team, true);
     });
 
     const profitChartData = [];
@@ -148,7 +154,7 @@ export function viewFinancialReport(teamName){
     new Chart(document.getElementById('expenses-chart'), {
         type: 'pie',
         data: {
-        labels: ["Pilotos","Engenheiros","Empregados","Desenvolvimento","Contrato de Motores","Multas","Construções","Juros"],
+        labels: ["Pilotos","Salário Academia de Pilotos","Engenheiros","Empregados","Desenvolvimento","Contrato de Motores","Multas","Construções","Juros"],
         datasets: [{
             data: expensesChartData,
             borderWidth: 1

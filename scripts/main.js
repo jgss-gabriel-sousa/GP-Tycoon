@@ -1,7 +1,7 @@
 import { blankSpaceRmv, accentsTidy, NumberF } from "./utils.js"
 import { game } from "./game.js"
-import { circuitsData } from "./data/circuits.js";
-import { enginesData } from "./data/enginesData.js";
+import { circuitsData } from "../data/circuits.js";
+import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "./ui.js";
 import { tooltips } from "./tooltips.js";
 
@@ -12,14 +12,27 @@ function genDriversHTML(){
     const team = game.teams[game.team];
     const driver = [
         game.drivers[team.driver1],
-        game.drivers[team.driver2], 
-        game.drivers[team.test_driver]
+        game.drivers[team.driver2],
     ];
 
     let i = 0;
     driver.forEach(d => {
+        let careerStage;
+        if(d.age < d.careerPeak-1 && d.experience < 5){
+            careerStage = "Estreante";
+        }
+        else if(d.age < d.careerPeak-1){
+            careerStage = "Em Ascensão";
+        }
+        else if(d.age > d.careerPeak-1 && d.age < d.careerPeak+2){
+            careerStage = "Ápice";
+        }
+        else{
+            careerStage = "Veterano";
+        }
+
         html += `
-        <div class="driver-card bars-table" id="first-driver-card">`
+        <div class="driver-card">`
             if(i == 0)
                 html += "<h1>1º Piloto</h1>"
             if(i == 1)
@@ -34,7 +47,7 @@ function genDriversHTML(){
         `
         
         html += `
-            <table>
+            <table class="bars-table">
                 <tr>
                     <td>Velocidade:</td>
                     <td>
@@ -52,6 +65,14 @@ function genDriversHTML(){
                     </td>
                 </tr>
                 <tr>
+                    <td>Constância:</td>
+                    <td>
+                        <div class="progress-bar-background">
+                            <div class="progress-bar" style="width:${d.constancy}%;"><span>${d.constancy}%</span></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
                     <td>Experiência:</td>
                     <td>
                         <div class="progress-bar-background">
@@ -59,11 +80,98 @@ function genDriversHTML(){
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>Condição: </td>
+                    <td class="no-border">
+                        ${careerStage}
+                    </td>
+                </tr>
             </table>
-        </div>
-        `
+            `
+        
+        if(d.contractRemainingYears == 0 && d.newTeam == ""){
+            html += `<p>Contrato encerrando</p>`
+        }
+
+        html += `</div>`
         i++;
     });
+
+    const testDriver = game.drivers[team.test_driver];
+    const ability = Math.round((testDriver.speed + testDriver.pace)/2);
+    let careerStage;
+        if(testDriver.age < testDriver.careerPeak-1 && testDriver.experience < 5){
+            careerStage = "Novato";
+        }
+        else if(testDriver.age < testDriver.careerPeak-1){
+            careerStage = "Em Ascensão";
+        }
+        else if(testDriver.age > testDriver.careerPeak-1 && testDriver.age < testDriver.careerPeak+2){
+            careerStage = "Ápice";
+        }
+        else{
+            careerStage = "Veterano";
+        }
+
+    html += `
+    <div class="driver-card">
+    <div id="test-driver">
+        <h1>Piloto de Testes</h1>
+        <button class="btn-driver-name view-driver" value="${testDriver.name}">
+                <img class="country-flag" src="img/flags/${accentsTidy(testDriver.country)}.webp"> ${testDriver.name}
+        </button>
+        <table class="bars-table">
+            <tr>
+                <td>Hab. Média:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${ability}%;"><span>${ability}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Constância:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${testDriver.constancy}%;"><span>${testDriver.constancy}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Experiência:</td>
+                <td>
+                    <div class="progress-bar-background">
+                        <div class="progress-bar" style="width:${testDriver.experience}%;"><span>${testDriver.experience}%</span></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Condição: </td>
+                <td class="no-border">
+                    ${careerStage}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="academy-drivers">
+        <h1>Academia de Pilotos</h1>
+    `
+    
+    team.driversAcademy.forEach(d => {
+        const driver = game.drivers[d];
+
+        html += `
+        <button class="btn-driver-name view-driver" value="${driver.name}">
+                <img class="country-flag" src="img/flags/${accentsTidy(driver.country)}.webp"> ${driver.name}
+        </button>
+        `
+    });
+    
+
+    html += `
+    </div>
+    </div>
+    `
     
     el.innerHTML = html;
 };
@@ -208,6 +316,14 @@ export function genEngHTML(){
                     </button>
                 </td>
             </tr>`
+    }
+    else{
+        html += `
+            <td>
+                <button class="market-eng">
+                    Contratar
+                </button>
+            </td>`
     }
 
     const engIDS = ["technicalDirector","chiefDesigner","chiefAerodynamicist","chiefEngineering"];
@@ -390,7 +506,7 @@ export function genDevelopmentHTML(){
                 <td id="investment-reliability">${NumberF(team.investments.reliability *1000,"ext-short",0)}</td>
             </tr>
             <tr>
-                <th class="total-investments">Total da Próxima Corrida: </th>
+                <td class="total-investments">Total da Próxima Corrida: </td>
                 <th id="race-total-investment">${NumberF((team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability) *1000,"ext-short",0)}</th>
             </tr>
             <tr>
@@ -444,7 +560,41 @@ export function genTeamHTML(){
 
     document.querySelector("#year").innerText = `${game.year}`;
     document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money_icon.png" alt="Money Icon"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money.png"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    
+    let reputationHTML = "<div>"
+    let remainingStars = teams[game.team].reputation;
+    for(let i = 0; i < 5; i++, remainingStars -= 1) {
+        if(remainingStars > 0 && remainingStars >= 1){
+            reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(remainingStars == 0.5){
+            reputationHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
+        }
+        else{
+            reputationHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
+        }
+    }
+    reputationHTML += "</div>"
+    document.querySelector("#reputation").innerHTML = reputationHTML;
+
+    while(game.news.length > 99){
+        game.news.pop();
+    }
+    let newNews = 0;
+    game.news.forEach(e => {
+        if(!e.viewed)
+            newNews++;
+    });
+    document.querySelector("#btn-news span").innerHTML = newNews;
+
+    if(newNews == 0){
+        document.querySelector("#btn-news span").classList.add("no-news");
+    }
+    else{
+        document.querySelector("#btn-news span").classList.remove("no-news");
+    }
+
 
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
@@ -456,6 +606,7 @@ export function genTeamHTML(){
 
         document.querySelector("#next-race-name").innerHTML = `
         <h2><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[nextRace].country)}.webp">GP ${nextRace}</h2>
+        <img src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
         <h2>${circuitsData[nextRace].circuit}</h2><small>${trackStyle}</small>`;
     }
     else{

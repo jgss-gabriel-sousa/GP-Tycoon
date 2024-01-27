@@ -1,11 +1,12 @@
 import { genTeamHTML } from "./main.js";
-import { circuitsData } from "./data/circuits.js";
+import { circuitsData } from "../data/circuits.js";
 import { game, YearUpdate } from "./game.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "./teams.js";
 import { seasonOverviewUI } from "./ui.js";
-import { driversData } from "./data/driversData.js";
-import { teamsData } from "./data/teamsData.js";
+import { driversData } from "../data/driversData.js";
+import { teamsData } from "../data/teamsData.js";
 import { accentsTidy, genID, rand, rollDice } from "./utils.js";
+import { simulateOthersSeries } from "./othersSeries.js";
 
 const SIMULATION_TICKS = 3;
 
@@ -29,8 +30,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            //this.tracks = ["Test"]
+            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            this.tracks = ["Bahrein"];
             
             this.results = {};
             this.standings = [];
@@ -205,7 +206,13 @@ export class Championship {
             const circuitCorners = circuitsData[raceName].corners/100;
             const circuitStraights = circuitsData[raceName].straights/100;
             const randomF = 1 + (Math.random() * 1.5 - 0.75);
-            const driverF = (1 - game.drivers[driverName].speed/100) * (1 + (Math.random() * 1 - 0.75));
+
+            let speed = game.drivers[driverName].speed;
+            let constancyVar = rand(0, 100-game.drivers[driverName].constancy);
+            speed -= constancyVar;
+            speed /= 100;
+
+            const driverF = (1 - speed) * (1 + (Math.random() * 1 - 0.75));
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners ;
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights ;
 
@@ -342,7 +349,12 @@ export class Championship {
 
             const randomF = 1;// + (Math.random() * (1*(1/rainF)) - 0.5*(1/rainF));
             
-            const driverF = (1 - game.drivers[driverName].pace/100) * randomF;
+            let pace = game.drivers[driverName].pace;
+            let constancyVar = rand(0, 100-game.drivers[driverName].constancy);
+            pace -= constancyVar;
+            pace /= 100;
+
+            const driverF = (1 - pace) * randomF;
 
             const cornersF = (1 - (car.corners/100)) * randomF * circuitCorners * rainF;
             const straightF = (1 - (car.straights/100)) * randomF * circuitStraights * rainF;
@@ -768,6 +780,7 @@ export class Championship {
                 else{
                     nameCode = nameCode[1] + nameCode[2];
                 }
+                nameCode = nameCode.replace(/['’]/g, '');
                 nameCode = nameCode.substring(0,3);
                 nameCode = accentsTidy(nameCode).toUpperCase();
 
@@ -850,6 +863,7 @@ export class Championship {
     RunRaceSimulation(){
         if(this.actualRound > this.tracks.length){
             seasonOverviewUI("end");
+            simulateOthersSeries();
             return;
         }
 
