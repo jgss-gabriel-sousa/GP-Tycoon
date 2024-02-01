@@ -225,7 +225,7 @@ function negotiate(driverName, returnToMarket){
                 ${team.new2driver == "" ? "<option>2º Piloto</option>" : ""}
                 ${team.newTdriver == "" ? "<option>Piloto de Testes</option>" : ""}
             `
-            if(team.driversAcademy.length < 10){
+            if(team.driversAcademy.length < 10 && driver.experience == 0){
                 html += `<option>Piloto da Academia</option>`;
             }
             
