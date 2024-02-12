@@ -308,7 +308,7 @@ export const driversData = {
         name: "Liam Lawson",
         team: "AlphaTauri",
         status: "Piloto de Testes",
-        currentSeries: "Super Formula",
+        currentSeries: "Super Fórmula",
         age: 20,
         country: "NZ",
         speed: 85,
@@ -595,7 +595,7 @@ export const driversData = {
     },
     "Stoffel Vandoorne": {
         name: "Stoffel Vandoorne",
-        currentSeries: "Formula E",
+        currentSeries: "Fórmula E",
         age: 30,
         speed: 87,
         pace: 86,
