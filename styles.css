@@ -254,6 +254,10 @@ abbr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    overflow: overlay;
+}
+#team-menu-interface > div {
+    margin: 0 5px;
 }
 
 #drivers-car-section {
@@ -765,12 +769,6 @@ abbr {
     p {
         font-size: 8px;
     }
-    #team-menu-interface {
-        flex-wrap: wrap;
-    }
-    #team-menu-interface {
-        flex-wrap: wrap;
-    }
     .progress-bar {
         font-size: 10px;
     }
@@ -785,6 +783,7 @@ abbr {
     }
     button {
         padding: 2px;
+        font-size: 10px;
     }
     #btn-play {
         padding: 10px 1em;
