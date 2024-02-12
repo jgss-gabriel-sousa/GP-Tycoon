@@ -13,13 +13,20 @@ export function newsUI(){
             <button><i class="lni lni-trash-can"></i></button>    
             <div id="headlines">`;
     
+    let yearDivider;
     for(let i = 0; i < news.length; i++){
+        if(news[i].year != game.year && news[i].year != yearDivider){
+            html += `<br><p>${news[i].year}</p>`
+            yearDivider = news[i].year;
+        }
+        
         html += `<li value="${i}" `;
 
         if(!news[i].viewed){
             html += `class="not-viewed-news"`;
         }
         html += `>${news[i].headline}</li>`;
+
     }
 
     html += `
