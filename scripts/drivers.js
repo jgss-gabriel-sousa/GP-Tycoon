@@ -183,7 +183,7 @@ export function YearUpdateDriversStats(){
             driver.status = driver.newStatus;
             driver.contractRemainingYears = driver.newContractRemainingYears;
 
-            if(driver.newTeam == "Aposentadoria"){
+            if(driver.newTeam == "Aposentadoria" && game.drivers[d].condition != "retired"){
                 game.drivers[d].condition = "retired";
                 publishNews("Driver Retirement", [driver]);
             }
@@ -201,7 +201,7 @@ export function YearUpdateDriversStats(){
         }
         driver.contractRemainingYears--;
 
-        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10){
+        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10 && driver.condition != "retired"){
             driver.newTeam = "Aposentadoria";
             driver.newContractRemainingYears = 1;
             publishNews("Driver Last Season", [driver]);
