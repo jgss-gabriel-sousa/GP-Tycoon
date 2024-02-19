@@ -606,7 +606,7 @@ export function genTeamHTML(){
 
         document.querySelector("#next-race-name").innerHTML = `
         <h2><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[nextRace].country)}.webp">GP ${nextRace}</h2>
-        <img src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
+        <img id="next-race-track-img" src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
         <h2>${circuitsData[nextRace].circuit}</h2><small>${trackStyle}</small>`;
     }
     else{

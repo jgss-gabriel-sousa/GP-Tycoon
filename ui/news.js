@@ -27,6 +27,9 @@ export function newsUI(){
         }
         html += `>${news[i].headline}</li>`;
 
+        if(news[i].year != game.year && news[i].year != yearDivider){
+            html += `<hr>`
+        }
     }
 
     html += `

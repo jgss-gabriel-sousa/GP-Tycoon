@@ -153,31 +153,54 @@ abbr {
     justify-content: space-between;
 }
 #main-menu h1 {
-    font-size: 48px;
+    font-size: 36px;
     background-color: transparent;
     color: #ffffff;
     text-shadow: 1px 1px black;
     text-align: center;
 }
-@media (min-width: 600px) {
-    #main-menu div {
-        width: 50%;
-        float: left;
-    }
-}
+
 .main-menu-btn {
     position: relative;
     display: block;
     overflow: hidden;
     width: 100%;
-    height: 60px;
-    max-width: 250px;
+    width: 15em;
     margin: 0 1em;
+    padding: 1em 0.5em;
     text-transform: uppercase;
     border: 1px solid #fff;
     font-size: 18px;
     letter-spacing: 2px;
     background-color: transparent;
+}
+@media (max-width: 720px) {
+    #main-menu h1 {
+        font-size: 32px;
+    }
+    .main-menu-btn {
+        font-size: 14px;
+        width: 50%;
+    }
+}
+@media (max-height: 650px) {
+    #main-menu h1 {
+        font-size: 28px;
+    }
+    .main-menu-btn {
+        font-size: 14px;
+    }
+}
+@media (max-height: 480px) {
+    #main-menu {
+        padding: 5px;
+    }
+    #main-menu div {
+        margin-top: 5px;
+    }
+    .main-menu-btn {
+        font-size: 10px;
+    }
 }
 
 .main-menu-btn,
@@ -386,6 +409,7 @@ abbr {
     box-shadow: 1px 1px #222;
     text-align: center;
     background-color: var(--bg);
+    white-space: nowrap;
 }
 #info h1{
     padding: 5px 0px 5px 0px;
@@ -439,7 +463,7 @@ abbr {
 #next-race-name .country-flag{
     margin-right: 5px;
 }
-#next-race-name img{
+#next-race-track-img{
     filter: drop-shadow(0px 0px 4px black);
 }
 
@@ -534,8 +558,7 @@ abbr {
     min-width: fit-content;
 }
 
-#engineering,
-#development {
+#engineering {
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
@@ -629,9 +652,12 @@ abbr {
 
 #development {
     text-align: center;
+    white-space: nowrap;
+    background-color: var(--border);
+}
+#development div {
     border: 2px solid var(--border);
     background-color: var(--bg);
-    width: auto;
 }
 #development table {
     width: 100%;
@@ -760,6 +786,28 @@ abbr {
     cursor: pointer;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-track-piece  {
+	background-color: #d6dee1;
+	-webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	background-color: #666;
+	-webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	background-color: #666;
+	-webkit-border-radius: 6px;
+}
+
 @media (max-width: 1200px) {
     h1, h2, td, th, .btn-driver-name, #new-car th, .btn-eng-name,
     .bars-table td:nth-child(2), #new-car > tbody > tr:nth-child(7) > td:nth-child(2),
@@ -800,17 +848,10 @@ abbr {
 
 @media (max-width: 800px) {
     body, :root {
-        overflow: auto;
         padding-bottom: 10px;
     }
     button {
         padding: 5px;
-    }
-    #button-list, #team-menu{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
     }
     #button-list p {
         font-size: 0;
@@ -832,13 +873,10 @@ abbr {
         justify-content: space-between;
     }
     #drivers {
-        flex-wrap: wrap;
         justify-content: center;
     }
     #team-menu-interface {
         align-items: flex-start;
-        flex-wrap: wrap;
-        justify-content: center;
     }
     #test-driver, #academy-drivers {
         flex-direction: row;

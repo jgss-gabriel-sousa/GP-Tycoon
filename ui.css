@@ -198,19 +198,17 @@
     font-size: 20px;
 }
 
-
 #historic-tables {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     min-height: 300px;
     height: 100%;
+    overflow: overlay;
 }
 #historic-tables div{
     display: flex;
     flex-direction: column;
-    width: 45%;
-    overflow-x: overlay;
+    margin: 0 5px;
 }
 #historic-tables h1 {
     background-color: transparent;
@@ -461,6 +459,8 @@
     min-height: 400px;
     height: 50%;
     justify-content: space-evenly;
+    overflow-x: overlay;
+    min-width: 600px;
 }
 #news-container li {
     font-size: 12px;
