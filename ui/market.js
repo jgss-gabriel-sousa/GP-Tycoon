@@ -178,9 +178,38 @@ export function market(scroll){
 export function marketEng(scroll){
     let html = "";
     let scrollPos;
+    
+    const engineers = Object.values(game.engineers);
+
+    engineers.sort((a, b) => b.salary - a.salary);
+    engineers.sort((a, b) => a.team.localeCompare(b.team));
 
     html += `
     <div id="market-eng">
+    <h2>Livres de Contrato</h2>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>Salário</th>
+        </tr>`
+        
+    for(let i = 0; i < engineers.length; i++){
+        const eng = engineers[i];
+        if(eng.name == "") continue
+        if(eng.team != "") continue
+        
+        html += `
+        <tr class="driver" id="${eng.name}">
+            <td>${eng.name}</td>
+            <td>${eng.age} anos</td>
+            <td>${eng.salary}K</td>
+        </tr>`
+    }
+    html += `</table><br>`
+
+    html += `
+    <h2>Com Contrato</h2>
     <table>
         <tr>
             <th>Nome</th>
@@ -189,12 +218,6 @@ export function marketEng(scroll){
             <th>Função</th>
         </tr>
     `
-    
-    const engineers = Object.values(game.engineers);
-
-    engineers.sort((a, b) => b.salary - a.salary);
-    engineers.sort((a, b) => a.team.localeCompare(b.team));
-
     for(let i = 0; i < engineers.length; i++){
         const eng = engineers[i];
         if(eng.name == "") continue
@@ -208,27 +231,6 @@ export function marketEng(scroll){
             <td style="background-color: ${game.teams[eng.team].result_bg_color}; color: ${game.teams[eng.team].result_font_color}">
                 ${eng.team} - ${eng.occupation}
             </td>
-        </tr>`
-    }
-    html += `</table>
-    <br>
-    <table>
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Salário</th>
-        </tr>`
-
-    for(let i = 0; i < engineers.length; i++){
-        const eng = engineers[i];
-        if(eng.name == "") continue
-        if(eng.team != "") continue
-        
-        html += `
-        <tr class="driver" id="${eng.name}">
-            <td>${eng.name}</td>
-            <td>${eng.age} anos</td>
-            <td>${eng.salary}K</td>
         </tr>`
     }
     html += `</table></div>`

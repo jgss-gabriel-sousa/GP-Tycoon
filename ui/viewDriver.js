@@ -86,12 +86,19 @@ export function viewDriver(name, returnToMarket, scrollPos){
                 if(driver.contractRemainingYears >= 0 && driver.team != ""){
                     html += `
                     <tr>
-                        <td>Duração:</td>
-                        <td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>
-                    </tr>`
+                        <td>Duração:</td>`
+                    
+                        if(driver.contractRemainingYears == 0){
+                            html += `<td>Até o fim deste ano</td>`
+                        }
+                        else{
+                            html += `<td>Até o fim de ${game.year + driver.contractRemainingYears} (${driver.contractRemainingYears} ${driver.contractRemainingYears > 1 ? "Anos" : "Ano"})</td>`
+                        }
+                    
+                    html += `</tr>`
                 }
                     
-    if(driver.contractRemainingYears == 0 && driver.newTeam){
+    if((driver.contractRemainingYears == 0 && driver.newTeam) || driver.newContractRemainingYears > 0){
             html+=`
                 <tr><th colspan="2">Próx. Contrato</th></tr>
                 <tr>
@@ -119,7 +126,7 @@ export function viewDriver(name, returnToMarket, scrollPos){
                     </tr>
                     <tr>
                         <td>Duração:</td>
-                        <td>Até o fim de ${game.year + driver.newContractRemainingYears} (${driver.newContractRemainingYears})</td>
+                        <td>Até o fim de ${game.year + driver.newContractRemainingYears} (${driver.newContractRemainingYears} ${driver.newContractRemainingYears > 1 ? "Anos" : "Ano"})</td>
                     </tr>`
                 } 
 
@@ -128,7 +135,7 @@ export function viewDriver(name, returnToMarket, scrollPos){
         </div>    
         `;
     }
-    else if(driver.contractRemainingYears <= 0){        
+    else if(driver.contractRemainingYears <= 0){
         html += `
             <tr><th colspan="2">Próx. Contrato</th></tr>
             <tr>
@@ -225,7 +232,7 @@ function negotiate(driverName, returnToMarket){
                 ${team.new2driver == "" ? "<option>2º Piloto</option>" : ""}
                 ${team.newTdriver == "" ? "<option>Piloto de Testes</option>" : ""}
             `
-            if(team.driversAcademy.length < 10 && driver.experience == 0){
+            if(team.driversAcademy.length < 10 && driver.experience == 0 && (driver.status == "Piloto da Academia" && driver.contractRemainingYears == 0)){
                 html += `<option>Piloto da Academia</option>`;
             }
             

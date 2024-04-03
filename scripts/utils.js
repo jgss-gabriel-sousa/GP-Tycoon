@@ -70,11 +70,17 @@ export function NumberF(number,format,precision){
     }
     if(format == "ext-short"){
         let value = "";
+        const T = parseInt(number / 1000000000000, 10);
+        const B = parseInt((number - T * 1000000000000) / 1000000000, 10);
         const M = parseInt(number/1000000,10);
         const K = Math.round((number-(M*1000000))/1000,10);
         const KK = Math.round((number-(M*1000000))/100000,10);
 
-        if(M > 0 || M <= 0){
+        /*
+        if(M >= 1000 || M <= 1000){
+            value = B+"Bi "
+        }
+        else*/ if(M > 0 || M <= 0){
             value = M+"M ";
         }
         if(M > 0 && K > 0){
@@ -89,8 +95,12 @@ export function NumberF(number,format,precision){
             value = K+"K";
         }
         else if(M < 0 && K < 0){
-            if(K != 0)
-                value += -(K)+"K"; 
+            if(K != 0 && M < 1000)
+                value += -(K)+"K";
+            /*
+            else if(K != 0 && M > 1000)
+                value += -(M)+"M";
+        */
         }
 
         return value;
