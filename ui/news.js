@@ -15,21 +15,24 @@ export function newsUI(){
     
     let yearDivider;
     for(let i = 0; i < news.length; i++){
+        
+        let divider = "";
         if(news[i].year != game.year && news[i].year != yearDivider){
-            html += `<br><p>${news[i].year}</p>`
+            /*
+            html += `<p>${news[i].year}</p>`
+            yearDivider = news[i].year;
+            */
+            
+            divider = `style="margin-top: 2em;"`;
             yearDivider = news[i].year;
         }
         
-        html += `<li value="${i}" `;
+        html += `<li ${divider} value="${i}" `;
 
         if(!news[i].viewed){
             html += `class="not-viewed-news"`;
         }
         html += `>${news[i].headline}</li>`;
-
-        if(news[i].year != game.year && news[i].year != yearDivider){
-            html += `<hr>`
-        }
     }
 
     html += `
@@ -49,7 +52,8 @@ export function newsUI(){
         genTeamHTML();
     });
 
-    document.querySelectorAll("#headlines li").forEach(el => {
+
+    document.querySelectorAll("#headlines > li").forEach(el => {
         el.addEventListener("click", e => {
             const element = document.querySelector("#news-content");
             let html = "";
@@ -65,6 +69,8 @@ export function newsUI(){
 
             element.innerHTML = html;
             news[el.value].viewed = true;
+
+            //console.log(`#headlines > li:nth-child(${el.value})`)
 
             document.querySelector(`#headlines > li:nth-child(${el.value+1})`).classList.remove("not-viewed-news");
         });
