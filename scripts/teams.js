@@ -34,7 +34,7 @@ export function CalcTeamDevPoints(teamName){
     team.engPts = Math.round(engPts);
 }
 
-function CalcTeamMorale(teamName){
+export function CalcTeamMorale(teamName){
     const eng = game.engineers;
     const team = game.teams[teamName];
     const baseMorale = parseFloat((((eng[team.teamPrincipal].adm*4) + (eng[team.engineers.technicalDirector].adm*2))/6).toFixed(2));
@@ -651,7 +651,7 @@ export function YearUpdateTeamsStats(){
             team.balanceHistoric.year.legend.shift();
         }
         team.balanceHistoric.year.value.push(team.financialReport["Balance"]);
-        team.balanceHistoric.year.legend.push(`${game.year-1}`);
+        team.balanceHistoric.year.legend.push(`${game.year}`);
 
         team.totalInvestments = 0;
 
