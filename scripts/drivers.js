@@ -178,7 +178,9 @@ export function YearUpdateDriversStats(){
                 game.teams[driver.team].driversAcademy = game.teams[driver.team].driversAcademy.filter(e => e !== driver.name);
             }
             if(driver.newStatus == "Piloto da Academia"){
-                game.teams[driver.team].driversAcademy.push(driver.name);
+                if(!game.teams[driver.team].driversAcademy.includes(driver.name)){
+                    game.teams[driver.team].driversAcademy.push(driver.name);
+                }
             }
             driver.status = driver.newStatus;
             driver.contractRemainingYears = driver.newContractRemainingYears;
