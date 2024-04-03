@@ -1,13 +1,14 @@
-@import url("race.css");
-@import url("ui.css");
+@import url("./race.css");
+@import url("./ui.css");
+@import url("./main-menu.css");
 
 @font-face {
     font-family: Montserrat;
-    src: url("./font/Montserrat.ttf");
+    src: url("../font/Montserrat.ttf");
 }
 @font-face {
     font-family: F1;
-    src: url("./font/Formula1-Bold_web_0.ttf");
+    src: url("../font/Formula1-Bold_web_0.ttf");
 }
 
 * {
@@ -35,7 +36,7 @@ body {
     padding-right: 0 !important;
     overflow: overlay;
     margin: 0;
-    background-image: url("./img/ui/background.webp");
+    background-image: url("../img/ui/background.webp");
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
@@ -88,6 +89,19 @@ a:hover {
     cursor: pointer;
 }
 
+input[type=file] {
+    color: black;
+    padding: 5px;
+}
+input[type=file]::file-selector-button {
+    color: black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
 h1 {
     font-size: 14px;
     font-weight: bold;
@@ -132,99 +146,6 @@ abbr {
     height: 25px;
     width: 25px;
     background-color: #eee;
-}
-
-#main-menu {
-    padding-top: 20px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: none;
-}
-#main-menu img{
-    display: none;
-    height: 200px;
-    filter: drop-shadow(-2px 1px 0px #ffffff94);
-}
-#main-menu div{
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-    justify-content: space-between;
-}
-#main-menu h1 {
-    font-size: 36px;
-    background-color: transparent;
-    color: #ffffff;
-    text-shadow: 1px 1px black;
-    text-align: center;
-}
-
-.main-menu-btn {
-    position: relative;
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    width: 15em;
-    margin: 0 1em;
-    padding: 1em 0.5em;
-    text-transform: uppercase;
-    border: 1px solid #fff;
-    font-size: 18px;
-    letter-spacing: 2px;
-    background-color: transparent;
-}
-@media (max-width: 720px) {
-    #main-menu h1 {
-        font-size: 32px;
-    }
-    .main-menu-btn {
-        font-size: 14px;
-        width: 50%;
-    }
-}
-@media (max-height: 650px) {
-    #main-menu h1 {
-        font-size: 28px;
-    }
-    .main-menu-btn {
-        font-size: 14px;
-    }
-}
-@media (max-height: 480px) {
-    #main-menu {
-        padding: 5px;
-    }
-    #main-menu div {
-        margin-top: 5px;
-    }
-    .main-menu-btn {
-        font-size: 10px;
-    }
-}
-
-.main-menu-btn,
-.main-menu-btn *:before,
-.main-menu-btn *:after {
-    transition: 0.5s ease-in-out;
-}
-
-.main-menu-btn {
-    color: #ffff;
-}
-.main-menu-btn:hover {
-    color: #000;
-    background-color: #ddd;
-    transform: scale(1.1, 1.1);
-}
-#main-menu small {
-    color: #e5e5e5;
-    background-color: #222;
-    border-radius: 0.25em;
-    box-shadow: 1px 1px 5px #111;
-    padding: 2px 4px;
-    position: absolute;
-    top: 95%;
 }
 
 #team-menu {
@@ -274,10 +195,12 @@ abbr {
 
 #team-menu-interface {
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     overflow: overlay;
+    align-items: flex-start;
 }
 #team-menu-interface > div {
     margin: 0 5px;
@@ -382,6 +305,7 @@ abbr {
     width: 95%;
     padding: 0;
     justify-content: flex-start;
+    text-align: start;
 }
 
 #test-driver, #academy-drivers {
@@ -418,21 +342,24 @@ abbr {
     align-items: center;
     justify-content: center;
 }
-#info h1:first-child{
-    margin-bottom: 5px;
-}
 #info .country-flag{
     margin-right: 5px;
 }
+#info h2{
+    white-space: wrap;
+}
 
-#team div:hover:nth-child(n+2) {
-    font-weight: bold;
-    cursor: pointer;
-    transform: scale(1.1, 1.1);
+#team p {
+    margin: 0;
 }
 #team div:nth-child(n+2) {
     text-align: center;
     padding: 5px;
+}
+#team div:hover:nth-child(n+2) {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
 }
 #team div:nth-child(n+2) img {
     align-self: center;
@@ -440,7 +367,7 @@ abbr {
     vertical-align: middle;
 }
 #team-logo {
-    padding: 2px;
+    margin: 5px;
 }
 
 #coach {
@@ -534,7 +461,7 @@ abbr {
     border-spacing: 0;
     border-collapse: collapse;
     font-size: 12px;
-    margin-top: 5px;
+    margin: 5px 0;
 }
 .bars-table td {
     padding: 0;
@@ -579,7 +506,7 @@ abbr {
     padding: 0px 2px;
 }
 #development th {
-    padding: 4px 0px;
+    padding: 4px;
 }
 #engineers-name td:first-child {
     text-align: end;

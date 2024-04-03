@@ -1,5 +1,5 @@
-@import url("./styles/financialReport.css");
-@import url("./styles/financialBalance.css");
+@import url("./financialReport.css");
+@import url("./financialBalance.css");
 
 #team-standings{
     border-collapse: collapse;
@@ -203,7 +203,9 @@
     flex-direction: row;
     min-height: 300px;
     height: 100%;
+    max-height: 60vh;
     overflow: overlay;
+    justify-content: space-around;
 }
 #historic-tables div{
     display: flex;
@@ -249,6 +251,17 @@
     text-align: end;
     padding: 5px;
 }
+#view-employees-infos{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: start;
+    font-size: 14px;
+}
+#view-employees-infos td:first-child{
+    text-align: end;
+    padding: 5px;
+}
 
 #employees-actions {
     display: flex;
@@ -264,7 +277,8 @@
 }
 
 #employees-actions div button {
-    margin: 10px;
+    margin: 5px;
+    width: 100px;
     background-color: #a49ee6;
 }
 #employees-actions div button:last-child {
@@ -564,6 +578,10 @@
 #select-db input {
     margin: 10px;
 }
+#select-db button {
+    font-size: 12px;
+    padding: 0.5em;
+}
 
 #view-reputation {
     display: flex;
@@ -594,4 +612,148 @@
 #other-series-standings h1 {
     background-color: #333;
     font-size: 14px;
+}
+
+#buttons-raceSim {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    width: max-content;
+}
+#buttons-raceSim button{
+    margin: 5px;
+    font-size: 28px;
+    padding: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+#play-anthem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 40px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    font-size: 28px;
+    padding: 0;
+    margin: 0;
+    background: white;
+    height: auto;
+}
+
+#bank-container {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    min-height: 50vh;
+}
+#bank-container p {
+    font-size: 14px;
+}
+#bank-container > div {
+    width: 50%;
+}
+#bank-container h2 {
+    margin-bottom: 2em;
+    font-size: 16px;
+}
+#bank-container input {
+    width: 50%;
+}
+#bank-container > div:first-child {
+    border-right: 1px solid #5c5c5c;
+}
+#bank-container > div:nth-child(2) {
+    border-left: 1px solid #5c5c5c;
+}
+#bank-container button {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #7066e0;
+    color: #fff;
+    font-size: 1em;
+    margin: 0.3125em;
+    padding: 0.625em 1.1em;
+    transition: box-shadow .1s;
+    box-shadow: 0 0 0 3px rgba(0,0,0,0);
+    font-weight: 500;
+}
+#bank-container button:hover {
+    font-weight: bold;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+
+#sponsors-container {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    min-height: 50vh;
+}
+#sponsors-container h2 {
+    margin-bottom: 0.5em;
+    font-size: 16px;
+}
+#sponsors-container > div {
+    width: 30%;
+    margin: 2px;
+}
+
+#sponsors-list {    
+    padding: 10px;
+}
+
+#major-sponsor{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 0.5px solid #505050;
+}
+#major-sponsor > h1{
+    font-size: 14px;
+    padding: 5px 0;
+    width: 100%;
+}
+#major-sponsor h2{
+    font-size: 14px;
+}
+#major-sponsor > img{
+    max-height: 64px;
+    max-width: 64px;
+    min-width: 64px;
+    min-height: 64px;
+}
+
+#others-sponsors{
+    display: flex;
+    flex-direction: row;
+}
+#others-sponsors > div{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding-right: 5px;
+    border: 0.5px solid #505050;
+}
+#others-sponsors > div:last-child{
+    padding-right: 0;
+}
+#others-sponsors > div h1{
+    font-size: 12px;
+}
+#others-sponsors > div > img{
+    max-height: 64px;
+    max-width: 64px;
+    min-width: 64px;
+    min-height: 64px;
 }
