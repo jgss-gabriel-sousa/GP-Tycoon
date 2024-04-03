@@ -354,7 +354,7 @@ export function StartTeamsStats(){
         team.financialReport["Engine"] = 0;
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
-        team.financialReport["Fees"] = 0;
+        team.financialReport["Loan Payment"] = 0;
 
         team.balanceHistoric = {
             raw: {value:[],legend:[]},
@@ -437,7 +437,8 @@ export function UpdateTeamAfterRace(){
         setBalance("Employees",         "expense",  team.employees * 2.5);
         setBalance("Development Investments", "expense", team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
         setBalance("Constructions",     "expense",  0);
-        setBalance("Fees",              "expense",  0);
+        setBalance("Loan Payment",      "expense",  team.bank.installmentsValue);
+        setBalance("Loan Interest",     "expense",  0);
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
@@ -660,7 +661,7 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Engine"] = 0;
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
-        team.financialReport["Fees"] = 0;
+        team.financialReport["Loan Payment"] = 0;
 
         team.balanceHistoric.raw = {value:[],legend:[]};
         team.balanceHistoric.accumulated = {value:[],legend:[]};

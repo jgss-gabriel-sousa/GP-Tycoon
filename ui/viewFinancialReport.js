@@ -12,7 +12,7 @@ export function viewFinancialReport(teamName){
         profits += team.financialReport[profitsList[p]];
     }
 
-    const expensesList = ["Drivers","Drivers Academy","Engineers","Employees","Development Investments","Engine","Fines","Constructions","Fees"];
+    const expensesList = ["Drivers","Drivers Academy","Engineers","Employees","Development Investments","Engine","Fines","Constructions","Loan Payment"];
     let expenses = 0;
     for(const p in expensesList) {
         expenses += team.financialReport[expensesList[p]];
@@ -86,8 +86,8 @@ export function viewFinancialReport(teamName){
                 <td>${NumberF(-team.financialReport["Constructions"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
-                <td>Juros</td>
-                <td>${NumberF(-team.financialReport["Fees"] * 1000,"ext",0)}</td>
+                <td>Pagamento do Empréstimo</td>
+                <td>${NumberF(-team.financialReport["Loan Payment"] * 1000,"ext",0)}</td>
             </tr>
             <tr>
                 <th></th>
