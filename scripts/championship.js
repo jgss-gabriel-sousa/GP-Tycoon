@@ -796,12 +796,26 @@ export class Championship {
             return TimeTableHTML;
         }
         else{
-            grid.forEach(e => {
-                const el = document.querySelector(`#car-race-${genID(e.name)}`);
-                
+            const driversList = [];
+
+            finalResult.forEach(d => {
+                if(!driversList.includes(d.name)){
+                    driversList.push(d.name);
+                }
+            });
+            grid.forEach(d => {
+                if(!driversList.includes(d.name)){
+                    driversList.push(d.name);
+                }
+            });
+
+            driversList.forEach(e => {
+                const driverName = e;
+                const el = document.querySelector(`#car-race-${genID(driverName)}`);
+
                 let i = 0;
                 for(; i < finalResult.length; i++){
-                    if(finalResult[i].name == e.name)
+                    if(finalResult[i].name == driverName)
                         break;
                 }
 
@@ -826,7 +840,7 @@ export class Championship {
                     if(finalResult[i].tire == "S") tire = "tire-soft";
                     if(finalResult[i].tire == "W") tire = "tire-wet";
 
-                    const elP = document.querySelector(`#car-race-${genID(e.name)} > p`);
+                    const elP = document.querySelector(`#car-race-${genID(driverName)} > p`);
                     elP.classList = "";
                     elP.classList.add(tire);
                 }
