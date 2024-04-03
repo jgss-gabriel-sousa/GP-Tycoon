@@ -752,7 +752,7 @@ export class Championship {
     }
 
     carsHTML(status){
-        const isVisualRaceSimDisabled = localStorage.getItem("gpTycoon-visual-race-sim") == "false";
+        const isVisualRaceSimDisabled = !game.settings["visual-race-simulation"];
 
         if(isVisualRaceSimDisabled){
             if(status == "start"){
@@ -826,7 +826,7 @@ export class Championship {
                     const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                     const lapMove = max * ((this.race.lap / totalLaps));
 
-                    if(!el.classList.contains("car-transition") && localStorage.getItem("gpTycoon-race-sim-speed") >= 150)
+                    if(!el.classList.contains("car-transition") && game.settings["race-simulation-speed"] >= 150)
                         el.classList.add("car-transition");
 
                     el.style.left = `${(max - (max - (lapMove) + diff)) + 40}px`;
@@ -924,7 +924,7 @@ export class Championship {
                         timeTable.innerHTML = TimeTableHTML;
                         Swal.enableButtons();
                     }
-                }, (Number(localStorage.getItem("gpTycoon-race-sim-speed"))/2) ?? 250);
+                }, game.settings["race-simulation-speed"]);
             },
         }
 
@@ -950,10 +950,9 @@ export class Championship {
             
                 cars.innerHTML = this.carsHTML("start");
 
-                let tickRate = 100;
-                if(localStorage.getItem("gpTycoon-race-sim-speed"))
-                    tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed"));
-                if(localStorage.getItem("gpTycoon-visual-race-sim"))
+                let tickRate = game.settings["race-simulation-speed"];
+                
+                if(!game.settings["visual-race-simulation"])
                     tickRate /= 4;
 
                 timerInterval = setInterval(e => {

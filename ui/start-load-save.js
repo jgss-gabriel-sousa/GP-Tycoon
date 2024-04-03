@@ -1,10 +1,11 @@
-import { game, startGame } from "../scripts/game.js";
+import { game, startNewGame } from "../scripts/game.js";
 import { genTeamHTML } from "../scripts/main.js";
 import { changeScreen } from "../scripts/screens.js"
 import { Championship } from "../scripts/championship.js";
+import { createTooltip } from "../scripts/tooltips.js";
 
 function newGame(){
-    startGame();
+    startNewGame();
 
     const teams = game.championship.teams;
     teams.sort();
@@ -116,8 +117,10 @@ export async function selectDatabase(){
         html += `
             </select>
             <button id="download-dbs"><i class="lni lni-download"></i></button>
+            <button id="upload-dbs" value="0"><i class="lni lni-upload"></i></button>
         </div>
-        <div>
+        <div id="load-db-file" style="display:none;">
+            <p>Os arquivos de DB proporcionam novos conteúdos e modificações produzidos pela comunidade.</p><br>
             Carregar Arquivo de DB:
             <input type="file" accept=".GPdb"/>
         </div>`;
@@ -157,13 +160,27 @@ export async function selectDatabase(){
         }
     });
 
+    createTooltip("#download-dbs", "Download de DBs Oficiais");
     const downloadDBs = document.querySelector("#download-dbs");
     downloadDBs.addEventListener("click", e => {
         getDBsOnline();
     });
+
+    createTooltip("#upload-dbs", "Carregar arquivo de DB");
+    const uploadDBFile = document.querySelector("#upload-dbs");
+    uploadDBFile.addEventListener("click", e => {
+        if(uploadDBFile.value == "1"){
+            document.querySelector("#load-db-file").style = "display: none;";
+            uploadDBFile.value = "0";
+        }
+        else{
+            document.querySelector("#load-db-file").style = "display: block;";
+            uploadDBFile.value = "1";
+        }
+    });
 }
 
-export function loadGame(){
+export function loadGameScreen(){
     const savedGames = {};
     let firstKey = "";
 
@@ -204,10 +221,13 @@ export function loadGame(){
             game.team = newGame.team,
             game.year = newGame.year,
             game.championship = new Championship(newGame.championship),
+            game.othersSeries = newGame.othersSeries,
             game.drivers = newGame.drivers,
             game.teams = newGame.teams,
             game.engines = newGame.engines,
             game.engineers = newGame.engineers,
+            game.contractsFailed = newGame.contractsFailed,
+            game.news = newGame.news,
 
             changeScreen("team-menu");
             genTeamHTML();
@@ -262,6 +282,6 @@ function deleteGame(gameName, savedGames){
         if(result.isDenied){
             localStorage.removeItem(gameName);
         }
-        loadGame();
+        loadGameScreen();
     });
 }

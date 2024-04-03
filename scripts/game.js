@@ -1,4 +1,4 @@
-import { blankSpaceRmv, accentsTidy, NumberF, setBarProgress, rollDice, rand, hoursBetweenDates } from "./utils.js"
+import { rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./main.js"
 import { Championship } from "./championship.js";
@@ -7,14 +7,12 @@ import { teamsData } from "../data/teamsData.js";
 import { enginesData } from "../data/enginesData.js";
 import { engineersData } from "../data/engineersData.js";
 import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
-import { selectEngine } from "../ui/selectEngine.js";
-import { generateName } from "../data/nameData.js";
-import { getRandomCountry } from "../data/countryRanking.js";
-import { CalcTeamDevPoints, StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
+import { StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
 import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
-import { simulateOthersSeries } from "./othersSeries.js";
+import { SoundStart } from "./audio.js";
 
 export const game = {
+    settings: {},
     activeScreen: "main-menu",
     uiTeamColors: true,
     team: "Red Bull",
@@ -29,10 +27,15 @@ export const game = {
     news: [],
 }
 
-export function startGame(){
-    if(!localStorage.getItem("gpTycoon-ui-team-colors"))
-        localStorage.setItem("gpTycoon-ui-team-colors","true");
+function gameBootstrap(){
+    checkGameKey();
+    changeScreen("main-menu");
+    game.settings = loadGameSettings();
+    SoundStart();
 
+} gameBootstrap();
+
+export function startNewGame(){
     game.drivers = driversData;
     game.teams = teamsData;
     game.engines = enginesData;
@@ -41,6 +44,30 @@ export function startGame(){
     StartTeamsStats();
     startDriversStats();
 }
+
+
+function loadGameSettings(){
+    let settings;
+    try {
+        settings = JSON.parse(localStorage.getItem("gp-tycoon-settings"));
+    } catch (error) {
+        ;
+    }
+    
+    //Default Values
+    if(!settings){
+        settings = {};
+        settings["ui-team-colors"] = true;
+        settings["visual-race-simulation"] = true;
+        settings["race-simulation-speed"] = 100;
+        settings["volume"] = 0.25;
+
+        localStorage.setItem("gp-tycoon-settings", JSON.stringify(settings));
+    }
+
+    return settings;
+}
+
 
 async function checkGameKey(){
 
@@ -165,7 +192,7 @@ async function checkGameKey(){
         checkScreen();
     }
 
-}checkGameKey();
+}
 
 export function YearUpdate(){
     const driverName = game.championship.standings[0][0];

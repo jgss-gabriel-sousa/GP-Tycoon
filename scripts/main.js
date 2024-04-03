@@ -543,7 +543,7 @@ export function genTeamHTML(){
 
     const teams = game.teams;
 
-    if(localStorage.getItem("gpTycoon-ui-team-colors") == "true" ?? true){
+    if(game.settings["ui-team-colors"]){
         document.querySelector(":root").style.setProperty("--bg", teams[game.team].bg_color);
         document.querySelector(":root").style.setProperty("--border", teams[game.team].border_color);
         document.querySelector(":root").style.setProperty("--text", teams[game.team].font_color);

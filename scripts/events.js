@@ -5,7 +5,7 @@ import { viewEng } from "../ui/viewEng.js"
 import { viewEmployees } from "../ui/viewEmployees.js";
 import { viewFinancialReport } from "../ui/viewFinancialReport.js";
 import { viewFinancialBalance } from "../ui/viewFinancialBalance.js";
-import { selectDatabase, loadGame, saveGame } from "../ui/start-load-save.js";
+import { selectDatabase, loadGameScreen, saveGame } from "../ui/start-load-save.js";
 import { selectEngine } from "../ui/selectEngine.js";
 import { market, marketEng } from "../ui/market.js";
 import { newsUI } from "../ui/news.js";
@@ -52,7 +52,7 @@ document.querySelector("#start-game").addEventListener("click", () => {
     selectDatabase();
 });
 document.querySelector("#load-game").addEventListener("click", () => {
-    loadGame();
+    loadGameScreen();
 });
 document.querySelector("#btn-save-game").addEventListener("click", () => {
     saveGame();
@@ -94,4 +94,5 @@ window.onclick = e => {
 
 window.addEventListener("beforeunload", e => {
     e.returnValue = "\o/";
+    localStorage.setItem("gp-tycoon-settings", JSON.stringify(game.settings));
 });
