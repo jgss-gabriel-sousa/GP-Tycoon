@@ -44,7 +44,6 @@ export function viewReputation(teamName){
 
     let developmentHTML = "<div><h4>Capacidade de Desenvolvimento<h4>"
     remainingStars = team.developmentReputation;
-    console.log(team.developmentReputation)
     for(let i = 0; i < 5; i++, remainingStars -= 1) {
         if(remainingStars > 0 && remainingStars >= 1){
             developmentHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
@@ -76,21 +75,21 @@ export function viewReputation(teamName){
     politicsHTML += `<p>${team.politicalForce}/10</p>`
     politicsHTML += "</div>"
 
-    let fansHTML = "<div><h4>Fans<h4>"
-    remainingStars = team.fansReputation;
+    let supportersHTML = "<div><h4>Fans<h4>"
+    remainingStars = team.supportersReputation;
     for(let i = 0; i < 5; i++, remainingStars -= 1) {
         if(remainingStars > 0 && remainingStars >= 1){
-            fansHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+            supportersHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
         }
         else if(remainingStars == 0.5){
-            fansHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
+            supportersHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
         }
         else{
-            fansHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
+            supportersHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
         }
     }
-    fansHTML += `<p>${NumberF(team.fans * 1000000,"ext-short",0)}</p>`
-    fansHTML += "</div>"
+    supportersHTML += `<p>${NumberF(team.supporters * 1000000,"ext-short",0)}</p>`
+    supportersHTML += "</div>"
 
     let traditionHTML = "<div><h4>Tradição<h4>"
     remainingStars = team.tradition;
@@ -114,7 +113,7 @@ export function viewReputation(teamName){
         ${performanceHTML}
         ${developmentHTML}
         ${politicsHTML}
-        ${fansHTML}
+        ${supportersHTML}
         ${traditionHTML}
     </div>
     `;

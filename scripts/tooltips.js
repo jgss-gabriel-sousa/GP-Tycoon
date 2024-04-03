@@ -15,8 +15,9 @@ export function createTooltip(id, content){
 
 export function tooltips(){
     createTooltip("#money", "Finanças");
+    createTooltip("#supporters", "Fans");
     createTooltip("#reputation", "Reputação");
-
+    
     createTooltip("#dev-pts > div:nth-child(1) > h2:nth-child(2)", "Pontos de Desenvolvimento de Aerodinâmica");
     createTooltip("#dev-pts > div:nth-child(2) > h2:nth-child(2)", "Pontos de Desenvolvimento de Engenharia");
     createTooltip("#aero-pts-value","");
