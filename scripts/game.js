@@ -28,7 +28,7 @@ export const game = {
 }
 
 function gameBootstrap(){
-    checkGameKey();
+    //checkGameKey();
     changeScreen("main-menu");
     game.settings = loadGameSettings();
     SoundStart();
