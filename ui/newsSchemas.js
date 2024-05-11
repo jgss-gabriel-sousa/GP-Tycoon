@@ -88,14 +88,14 @@ export function getNewsSchema(type, args){
         }
     }
 
-    if(type == "F2 Results"){
-        const f2 = args[0];
-        const f3 = args[1];
-
+    if(type == "Other Series Results"){
         let html = ` <div id="other-series-standings">`
 
+        const championships = args[0];
 
-        args.forEach(c => {
+        for(const championship in championships){
+            const c = championships[championship];
+            
             html += `
             <div>
                 <h1>${c.name}</h1>
@@ -125,7 +125,7 @@ export function getNewsSchema(type, args){
                 </tr>`;
             });
             html += `</table></div>`;
-        });
+        }
 
         return {
             headline: `Resultados de outras categorias`,

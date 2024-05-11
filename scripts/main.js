@@ -543,7 +543,7 @@ export function genTeamHTML(){
 
     const teams = game.teams;
 
-    if(localStorage.getItem("gpTycoon-ui-team-colors") == "true" ?? true){
+    if(game.settings["ui-team-colors"]){
         document.querySelector(":root").style.setProperty("--bg", teams[game.team].bg_color);
         document.querySelector(":root").style.setProperty("--border", teams[game.team].border_color);
         document.querySelector(":root").style.setProperty("--text", teams[game.team].font_color);
@@ -560,7 +560,8 @@ export function genTeamHTML(){
 
     document.querySelector("#year").innerText = `${game.year}`;
     document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/ui/money.png"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(teams[game.team].supporters * 1000000,"ext-short",0)}</p>`;
     
     let reputationHTML = "<div>"
     let remainingStars = teams[game.team].reputation;
@@ -606,7 +607,7 @@ export function genTeamHTML(){
 
         document.querySelector("#next-race-name").innerHTML = `
         <h2><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[nextRace].country)}.webp">GP ${nextRace}</h2>
-        <img src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
+        <img id="next-race-track-img" src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
         <h2>${circuitsData[nextRace].circuit}</h2><small>${trackStyle}</small>`;
     }
     else{

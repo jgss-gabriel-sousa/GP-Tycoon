@@ -40,7 +40,6 @@ function genDriver(){
     driver.pace = rollDice("10d10+30");
     driver.constancy = rollDice("10d10+30");
     driver.careerPeak = rollDice("3d6+20");
-    driver.motivation = rollDice("5d20+30");
     driver.experience = 0;
     driver.titles = 0;
     driver.gps = 0;
@@ -56,7 +55,6 @@ function genDriver(){
     if(driver.speed > 100) driver.speed = 100;
     if(driver.pace > 100) driver.pace = 100;
     if(driver.constancy > 100) driver.constancy = 100;
-    if(driver.motivation > 100) driver.motivation = 100;
 
     const ethnicityData = getCountryEthnicity(country);
 
@@ -91,9 +89,17 @@ export function startDriversStats(){
         if(!driver.poles) driver.poles = 0;
         if(!driver.team) driver.team = "";
         if(!driver.status) driver.status = "";
-        if(!driver.speed) driver.speed = rollDice("10d10+30");
-        if(!driver.pace) driver.pace = rollDice("10d10+30");
-        if(!driver.constancy) driver.constancy = rollDice("10d10+30");
+
+        let ageReducer = 0;
+        if(driver.age < 18){
+            ageReducer = Math.round(1.5 * (18 - driver.age))
+        }
+        if(driver.age > driver.careerPeak){
+            ageReducer = Math.round(1.5 * (18 - driver.age))
+        }
+        if(!driver.speed) driver.speed = rollDice("10d10+30")-ageReducer;
+        if(!driver.pace) driver.pace = rollDice("10d10+30")-ageReducer;
+        if(!driver.constancy) driver.constancy = rollDice("10d10+30")-ageReducer;
         if(!driver.condition) driver.condition = "racing";
 
         if(driver.speed > 100) driver.speed = 100;
@@ -113,9 +119,6 @@ export function startDriversStats(){
         driver.experience = Math.round(driver.years_in_f1*10 + driver.gps/5 + driver.titles*10);
         if(driver.experience > 100) driver.experience = 100;
         delete driver.years_in_f1;
-
-        driver.motivation = rollDice("5d20+30");
-        if(driver.motivation > 100) driver.motivation = 100;
 
         if(!driver.careerPeak) driver.careerPeak = rollDice("3d6+20");
 
@@ -161,10 +164,9 @@ export function YearUpdateDriversStats(){
     for(const d in game.drivers){
         const driver = game.drivers[d];
         driver.age++;
-        driver.motivation = rollDice("5d20+30");
-        if(driver.motivation > 100) driver.motivation = 100;
 
-        if(driver.team) driver.experience += 10;
+        if(driver.status == "1º Piloto" || driver.status == "2º Piloto") driver.experience += 10;
+        if(driver.status == "Piloto de Testes") driver.experience += 5;
         if(driver.experience > 100) driver.experience = 100;
 
         if(driver.newSalary) driver.salary = driver.newSalary;
@@ -176,12 +178,14 @@ export function YearUpdateDriversStats(){
                 game.teams[driver.team].driversAcademy = game.teams[driver.team].driversAcademy.filter(e => e !== driver.name);
             }
             if(driver.newStatus == "Piloto da Academia"){
-                game.teams[driver.team].driversAcademy.push(driver.name);
+                if(!game.teams[driver.team].driversAcademy.includes(driver.name)){
+                    game.teams[driver.team].driversAcademy.push(driver.name);
+                }
             }
             driver.status = driver.newStatus;
             driver.contractRemainingYears = driver.newContractRemainingYears;
 
-            if(driver.newTeam == "Aposentadoria"){
+            if(driver.newTeam == "Aposentadoria" && game.drivers[d].condition != "retired"){
                 game.drivers[d].condition = "retired";
                 publishNews("Driver Retirement", [driver]);
             }
@@ -199,7 +203,7 @@ export function YearUpdateDriversStats(){
         }
         driver.contractRemainingYears--;
 
-        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10){
+        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10 && driver.condition != "retired"){
             driver.newTeam = "Aposentadoria";
             driver.newContractRemainingYears = 1;
             publishNews("Driver Last Season", [driver]);

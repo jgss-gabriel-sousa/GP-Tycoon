@@ -5,7 +5,7 @@
 
 #financial-report table{
     width: 100%;
-    margin: 1em;
+    margin: 0 1em;
     border: 2px solid #222;
     border-collapse: collapse;
 }
@@ -43,5 +43,5 @@
 #financial-report-balance .chart-container {
     width: 200px;
     height: 200px;
-    margin: 1em;
+    margin: 1em 1em 0;
 }

@@ -30,8 +30,8 @@ export class Championship {
         }
         else{
             this.teams = ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Alfa Romeo","Alpine","Haas","Williams","McLaren"];
-            //this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
-            this.tracks = ["Bahrein"];
+            this.tracks = ["Bahrein","Arábia Saudita","Austrália","Azerbaijão","Miami","Emília-Romanha","Mônaco","Espanha","Canadá","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Singapura","Japão","Catar","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Abu Dhabi"];
+            //this.tracks = ["Bahrein"];
             
             this.results = {};
             this.standings = [];
@@ -752,7 +752,7 @@ export class Championship {
     }
 
     carsHTML(status){
-        const isVisualRaceSimDisabled = localStorage.getItem("gpTycoon-visual-race-sim") == "false";
+        const isVisualRaceSimDisabled = !game.settings["visual-race-simulation"];
 
         if(isVisualRaceSimDisabled){
             if(status == "start"){
@@ -796,12 +796,26 @@ export class Championship {
             return TimeTableHTML;
         }
         else{
-            grid.forEach(e => {
-                const el = document.querySelector(`#car-race-${genID(e.name)}`);
-                
+            const driversList = [];
+
+            finalResult.forEach(d => {
+                if(!driversList.includes(d.name)){
+                    driversList.push(d.name);
+                }
+            });
+            grid.forEach(d => {
+                if(!driversList.includes(d.name)){
+                    driversList.push(d.name);
+                }
+            });
+
+            driversList.forEach(e => {
+                const driverName = e;
+                const el = document.querySelector(`#car-race-${genID(driverName)}`);
+
                 let i = 0;
                 for(; i < finalResult.length; i++){
-                    if(finalResult[i].name == e.name)
+                    if(finalResult[i].name == driverName)
                         break;
                 }
 
@@ -812,7 +826,7 @@ export class Championship {
                     const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                     const lapMove = max * ((this.race.lap / totalLaps));
 
-                    if(!el.classList.contains("car-transition") && localStorage.getItem("gpTycoon-race-sim-speed") >= 150)
+                    if(!el.classList.contains("car-transition") && game.settings["race-simulation-speed"] >= 150)
                         el.classList.add("car-transition");
 
                     el.style.left = `${(max - (max - (lapMove) + diff)) + 40}px`;
@@ -826,7 +840,7 @@ export class Championship {
                     if(finalResult[i].tire == "S") tire = "tire-soft";
                     if(finalResult[i].tire == "W") tire = "tire-wet";
 
-                    const elP = document.querySelector(`#car-race-${genID(e.name)} > p`);
+                    const elP = document.querySelector(`#car-race-${genID(driverName)} > p`);
                     elP.classList = "";
                     elP.classList.add(tire);
                 }
@@ -910,7 +924,7 @@ export class Championship {
                         timeTable.innerHTML = TimeTableHTML;
                         Swal.enableButtons();
                     }
-                }, (Number(localStorage.getItem("gpTycoon-race-sim-speed"))/2) ?? 250);
+                }, game.settings["race-simulation-speed"]);
             },
         }
 
@@ -936,10 +950,9 @@ export class Championship {
             
                 cars.innerHTML = this.carsHTML("start");
 
-                let tickRate = 100;
-                if(localStorage.getItem("gpTycoon-race-sim-speed"))
-                    tickRate = Number(localStorage.getItem("gpTycoon-race-sim-speed"));
-                if(localStorage.getItem("gpTycoon-visual-race-sim"))
+                let tickRate = game.settings["race-simulation-speed"];
+                
+                if(!game.settings["visual-race-simulation"])
                     tickRate /= 4;
 
                 timerInterval = setInterval(e => {

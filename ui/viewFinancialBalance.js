@@ -15,8 +15,6 @@ export function viewFinancialBalance(teamName, returnToFinancialReport){
             <div class="chart-container">
                 <canvas id="chart-accumulated"></canvas>
             </div>
-        </div>
-        <div>
             <div class="chart-container">
                 <canvas id="chart-year"></canvas>
             </div>

@@ -34,7 +34,7 @@ export function CalcTeamDevPoints(teamName){
     team.engPts = Math.round(engPts);
 }
 
-function CalcTeamMorale(teamName){
+export function CalcTeamMorale(teamName){
     const eng = game.engineers;
     const team = game.teams[teamName];
     const baseMorale = parseFloat((((eng[team.teamPrincipal].adm*4) + (eng[team.engineers.technicalDirector].adm*2))/6).toFixed(2));
@@ -332,6 +332,15 @@ export function StartTeamsStats(){
 
         team.factories = Math.ceil(team.employees/250);
 
+        team.bank = {};
+        team.bank.loanValue = 0;
+        team.bank.loanInterestRate = 2;
+        team.bank.loanInterest = 2;
+        team.bank.loanInstallmentsPayed = 0;
+        team.bank.loanInstallments = 0;
+        team.bank.installmentsValue = 0;
+        team.bank.credit = roundToMultiple(Math.round((team.cash * team.politicalForce)/1000),500)*1000;
+
         team.investments = team.investments ?? {};
         team.investments.aerodynamics = team.investments.aerodynamics ?? 500;
         team.investments.weight = team.investments.weight ?? 500;
@@ -354,7 +363,7 @@ export function StartTeamsStats(){
         team.financialReport["Engine"] = 0;
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
-        team.financialReport["Fees"] = 0;
+        team.financialReport["Loan Payment"] = 0;
 
         team.balanceHistoric = {
             raw: {value:[],legend:[]},
@@ -437,7 +446,8 @@ export function UpdateTeamAfterRace(){
         setBalance("Employees",         "expense",  team.employees * 2.5);
         setBalance("Development Investments", "expense", team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
         setBalance("Constructions",     "expense",  0);
-        setBalance("Fees",              "expense",  0);
+        setBalance("Loan Payment",      "expense",  team.bank.installmentsValue);
+        setBalance("Loan Interest",     "expense",  0);
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
@@ -641,7 +651,7 @@ export function YearUpdateTeamsStats(){
             team.balanceHistoric.year.legend.shift();
         }
         team.balanceHistoric.year.value.push(team.financialReport["Balance"]);
-        team.balanceHistoric.year.legend.push(`${game.year-1}`);
+        team.balanceHistoric.year.legend.push(`${game.year}`);
 
         team.totalInvestments = 0;
 
@@ -660,7 +670,17 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Engine"] = 0;
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
-        team.financialReport["Fees"] = 0;
+        team.financialReport["Loan Payment"] = 0;
+
+        if(team.bank.loanInstallments > 0){
+            team.bank.loanInstallmentsPayed++;
+            team.bank.loanValue -= team.bank.installmentsValue*1000;
+        }
+        if(team.bank.loanInstallmentsPayed == team.bank.loanInstallments){
+            team.bank.loanInstallments = 0;
+            team.bank.loanInstallmentsPayed = 0;
+            team.bank.installmentsValue = 0;
+        }
 
         team.balanceHistoric.raw = {value:[],legend:[]};
         team.balanceHistoric.accumulated = {value:[],legend:[]};

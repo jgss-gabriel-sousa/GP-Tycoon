@@ -14,13 +14,13 @@ export function viewEmployees(teamName){
 
     html += `
     <div id="view-employees">
-        <table id="view-driver-infos">
+        <table id="view-employees-infos">
             <tr>
                 <td><h2>Empregados:</h2></td>
                 <td>${NumberF(team.employees,"",0)}</td>
             </tr>
             <tr>
-                <td><h2>Salário:</h2></td>
+                <td><h2>Folha Salarial:</h2></td>
                 <td>${NumberF(team.employees * 2.5 * 1000,"ext",0)}</td>
             </tr>
             <tr>
@@ -172,7 +172,7 @@ function expandFactory(){
             team.financialReport["Constructions"] -= team.factories*50000;
             team.factories++;
 
-            document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+            document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
         
         }else if(result.isDenied){
             viewEmployees(game.team);
@@ -204,7 +204,7 @@ function reduceFactory(){
             }
             
             team.cash += team.factories*10000;
-            document.querySelector("#money").innerHTML = `<p><img id="money-icon" class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+            document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/money_icon.png" alt="Money Icon"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
             
             team.factories--;
             

@@ -1,0 +1,105 @@
+#main-menu {
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+#main-menu img{
+    display: none;
+    height: 200px;
+    filter: drop-shadow(-2px 1px 0px #ffffff94);
+}
+#main-menu div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+#main-menu h1 {
+    font-size: 36px;
+    background-color: transparent;
+    color: #ffffff;
+    text-shadow: 1px 1px black;
+    text-align: center;
+}
+
+.main-menu-btn {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    width: 15em;
+    margin: 0 1em;
+    padding: 1em 0.5em;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    background-color: transparent;
+}
+@media (max-width: 720px) {
+    #main-menu h1 {
+        font-size: 32px;
+    }
+    .main-menu-btn {
+        font-size: 14px;
+        width: 50%;
+    }
+}
+@media (max-height: 650px) {
+    #main-menu h1 {
+        font-size: 28px;
+    }
+    .main-menu-btn {
+        font-size: 14px;
+    }
+}
+@media (max-height: 600px) {
+    .main-menu-btn {
+        font-size: 12px;
+        max-width: 200px;
+        padding: 0.5em;
+    }
+}
+@media (max-height: 480px) {
+    #main-menu {
+        padding: 5px;
+    }
+    .main-menu-btn {
+        font-size: 10px;
+        padding: 0.25em;
+        max-width: 100px;
+    }
+}
+@media (max-height: 400px) {
+    body {
+        padding: 5px;
+        background-size: contain !important;
+        background-color: black !important;
+    }
+}
+
+.main-menu-btn,
+.main-menu-btn *:before,
+.main-menu-btn *:after {
+    transition: 0.5s ease-in-out;
+}
+
+.main-menu-btn {
+    color: #ffff;
+}
+.main-menu-btn:hover {
+    color: #000;
+    background-color: #ddd;
+    transform: scale(1.1, 1.1);
+}
+#main-menu small {
+    color: #e5e5e5;
+    background-color: #222;
+    border-radius: 0.25em;
+    box-shadow: 1px 1px 5px #111;
+    padding: 2px 4px;
+    position: absolute;
+    top: 95%;
+}

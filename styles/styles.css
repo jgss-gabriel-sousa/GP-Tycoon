@@ -1,0 +1,855 @@
+@import url("./race.css");
+@import url("./ui.css");
+@import url("./main-menu.css");
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../font/Montserrat.ttf");
+}
+@font-face {
+    font-family: F1;
+    src: url("../font/Formula1-Bold_web_0.ttf");
+}
+
+* {
+    font-family: Montserrat, Helvetica, sans-serif;
+    transition: 0.1s all;
+}
+
+:root {
+    --bg: #f0f0f0;
+    --text: #000000;
+    --border: #000000;
+    height: 100%;
+    overflow: hidden;
+}
+
+nav {
+    display: block;
+    width: 100%;
+    margin: 0px;
+}
+
+body {
+    background: radial-gradient(circle at center, #1e1e1e , #0f0f0f);
+    height: 100%;
+    padding-right: 0 !important;
+    overflow: overlay;
+    margin: 0;
+    background-image: url("../img/ui/background.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+}
+
+ul{
+    display: inline-flex;
+	list-style: none;
+    margin-block-start: 0px;
+    padding-inline-start: 5px;
+    align-items: stretch;
+    color: #ddd;
+    font-weight: bold;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+}
+
+li button{
+    height: 100%;
+    display: flex;
+}
+
+button{
+	border: 1px solid black;
+	border-radius: 5px;
+	background-color: #c5c5c5;
+	padding: 5px;
+	margin: 3px;
+	transition: background-color 0.25s;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+button:hover{
+	background-color: #ddd;
+    font-weight: bold;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 2px black);
+}
+
+a {
+    text-decoration: none;
+	color: #ddd;
+}
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+input[type=file] {
+    color: black;
+    padding: 5px;
+}
+input[type=file]::file-selector-button {
+    color: black;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+h1 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: F1;
+    background-color: var(--border);
+    color: var(--titles);
+    padding: 5px;
+    margin: 0;
+}
+
+h2 {
+    font-family: F1;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;  
+    font-weight: normal;
+}
+
+nav img {
+    width: 24px;
+}
+
+abbr {
+    text-decoration: none;
+}
+
+.interface {
+    display: flex;
+    display: none;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+#team-menu {
+    color: var(--text);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    display: none;
+}
+#button-list p {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+#button-list button {
+    background-color: transparent;
+    color: white;
+    border: 0;
+    display: flex;
+    width: 95%;
+    font-size: 10px;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    text-align: start;
+}
+#button-list button:hover {
+    background-color: #e5e5e531;
+}
+#button-list button img {
+    filter: invert(100%);
+    margin: 4px;
+    width: 18px;
+}
+#btn-news span {
+    background-color: #ff3434;
+    padding: 2px;
+    margin-left: 5px;
+    min-width: 1.5em;
+    border-radius: 100%;
+    text-align: center;
+}
+.no-news {
+    opacity: 0;
+}
+
+#team-menu-interface {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: overlay;
+    align-items: flex-start;
+}
+#team-menu-interface > div {
+    margin: 0 5px;
+}
+
+#drivers-car-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#drivers {
+    margin-bottom: 10px;
+    display: flex;
+    border: 2px solid var(--border);
+    height: 100%;
+    width: 100%;
+}
+.driver-card {
+    background-color: var(--bg);
+    border-right: 2px solid var(--border);
+    text-align: center;
+    width: 100%;
+}
+.driver-card:last-child{
+    border-right: 0;
+}
+.driver-card img {
+    max-width: 100%;
+    max-height: 128px;
+    border: 1px solid #222;
+}
+.driver-card-portrait {
+    min-width: 98px;
+    min-height: 130px;
+}
+.driver-card h1 {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.driver-card .country-flag {
+    margin-right: 5px;
+}
+.driver-info-bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.driver-info-bars h2 {
+    width: 70px;
+    text-align: end;
+    margin-right: 5px;
+}
+.driver-info-bars .progress-bar-background {
+    width: 100px;
+    border-radius: 0px;
+    box-shadow: 0px 0px #222;
+    height: auto;
+}
+.driver-info-bars .progress-bar {
+    letter-spacing: 0.5px;
+    border-radius: 0px;
+    font-size: 12px;
+    padding-top: 1px;
+}
+.btn-driver-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--border);
+    color: var(--titles);
+	border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-driver-name:hover {
+    background-color: var(--border);
+    cursor: pointer;
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    text-shadow: 0px 0px 1px black;
+}
+.btn-driver-name h1 {
+    margin-bottom: 0 !important;
+}
+
+#test-driver .btn-driver-name,
+#academy-drivers .btn-driver-name {
+    background-color: transparent;
+    color: var(--text);
+    font-size: 12px;
+    width: 95%;
+    padding: 0;
+    justify-content: flex-start;
+    text-align: start;
+}
+
+#test-driver, #academy-drivers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#test-driver h1, #academy-drivers h1 {
+    width: 95%;
+}
+
+#test-driver .btn-driver-name:hover,
+#academy-drivers .btn-driver-name:hover {
+    filter: 0;
+    text-shadow: 0;
+    background-color: var(--border);
+    color: var(--titles);
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--border);
+    box-shadow: 1px 1px #222;
+    text-align: center;
+    background-color: var(--bg);
+    white-space: nowrap;
+}
+#info h1{
+    padding: 5px 0px 5px 0px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#info .country-flag{
+    margin-right: 5px;
+}
+#info h2{
+    white-space: wrap;
+}
+
+#team p {
+    margin: 0;
+}
+#team div:nth-child(n+2) {
+    text-align: center;
+    padding: 5px;
+}
+#team div:hover:nth-child(n+2) {
+    font-weight: bold;
+    cursor: pointer;
+    transform: scale(1.1, 1.1);
+}
+#team div:nth-child(n+2) img {
+    align-self: center;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+#team-logo {
+    margin: 5px;
+}
+
+#coach {
+    align-self: flex-start;
+}
+
+#next-race {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#next-race-name {
+    margin: 10px;
+    font-size: 14px;
+}
+#next-race-name h2:first-child{
+    margin-bottom: 5px;
+}
+#next-race-name .country-flag{
+    margin-right: 5px;
+}
+#next-race-track-img{
+    filter: drop-shadow(0px 0px 4px black);
+}
+
+#btn-play{    
+    padding: 0.2em 0.5em;
+    display: block;
+    line-height: 40px;
+    font-size: 18px;
+    font-family: sans-serif;
+    text-decoration: none;
+    font-family: "f1";
+    font-weight: bold;
+    border: 2px solid #333;
+    letter-spacing: 1px;
+    text-align: center;
+    transition: all .35s;
+}
+
+#players {
+    margin: 10px;
+}
+
+#trust {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+#trust h2 {
+    margin-bottom: 5px;
+}
+#trust div {
+    margin: 0;
+}
+#trust > div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+}
+
+#car {
+    border: 2px solid var(--border);
+    text-align: center;
+    display: flex;
+    width: 100%;
+}
+#car > div{
+    background-color: var(--bg);
+    width: 100%;
+}
+#car > div:nth-child(n+2){
+    border-left: 2px solid var(--border);
+}
+#car > div > table {
+    border-spacing: 0px;
+    margin: 5px 0px;
+}
+#engine h2{
+    margin: 5px;
+    font-size: 12px;
+}
+
+.bars-table {
+    display: flex;
+    justify-content: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 5px 0;
+}
+.bars-table td {
+    padding: 0;
+    text-align: start;
+}
+.bars-table td:nth-child(1) {
+    padding: 0 5px;
+    padding-right: 2px;
+    text-align: end;
+}
+.bars-table td:nth-child(2) {
+    font-size: 12px;
+    padding: 0 5px;
+    padding-left: 2px;
+}
+.no-border {
+    border: 0 !important;
+}
+
+#engineering > div {
+    min-width: fit-content;
+}
+
+#engineering {
+    text-align: center;
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+}
+#engineering table,
+#development table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+#engineering th,
+#development th {
+    padding-right: 5px;
+    background-color: var(--border);
+    color: var(--titles);
+    text-align: end;
+    height: 20px;
+    padding: 0px 2px;
+}
+#development th {
+    padding: 4px;
+}
+#engineers-name td:first-child {
+    text-align: end;
+}
+#engineers-name button {
+    margin: 0;
+}
+#new-car {
+    width: 100%;
+    margin-bottom: 10px;
+}
+#new-car th{
+    font-family: "F1";
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+#new-car tr:nth-child(2) > td {
+    padding-top: 5px;
+}
+#new-car td{
+    padding: 0px;
+}
+#new-car td:first-child{
+    text-align: end;
+    padding-right: 5px;
+}
+#new-car > tbody > tr:nth-child(7) > td:nth-child(2) {
+    max-width: 100px;
+}
+
+#dev-pts td:first-child {
+    text-align: end;
+    width: 50%;
+}
+#dev-pts {
+    display: flex;
+    flex-direction: row;
+    border: 0px solid var(--border);
+    border-top: 2px solid var(--border);
+    justify-content: center;
+}
+#dev-pts div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+#dev-pts > div:first-child {
+    border-right: 2px solid var(--border);
+}
+#dev-pts h1 {
+    font-size: 12px;
+    background-color: transparent;
+    color: var(--text);
+}
+#dev-pts h2 {
+    padding: 5px 0;
+}
+#dev-focus td,
+#dev-focus td {
+    text-align: start;
+}
+#dev-focus td:first-child {
+    width: 100%;
+}
+#dev-focus td {
+    min-width: 45px;
+    text-align: center;
+}
+
+#development {
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--border);
+}
+#development div {
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+}
+#development table {
+    width: 100%;
+    padding: 5px;
+}
+#development td:nth-child(2) {
+    min-width: 40px;
+}
+#development th {
+    text-align: center;
+    font-size: 12px;
+}
+#development .total-investments {
+    text-align: end;
+}
+#development td:nth-child(1) {
+    padding: 4px 2px;
+}
+
+.btn-eng-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--text);
+	border-radius: 0;
+    max-width: 100px;
+}
+.btn-eng-name:hover {
+    background-color: var(--border);
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    color: var(--titles);
+    cursor: pointer;
+}
+
+.progress-bar-background {
+    width: 80px;
+    height: 18px;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+    justify-content: center;
+}
+#engineers-name > tbody > tr:nth-child(7) > td > div {
+    width: 98%;
+}
+
+.progress-bar {
+    width: 50%;
+    height: 100%;
+    background-color: var(--border);
+    justify-content: center;    
+    text-align: center;
+    font-size: 12px;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
+}
+
+.progress-bar span {
+    display: flex;
+    padding: 0px 40px;
+    justify-content: center;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(1px 1px #222);
+}
+
+.navbar-icon {  
+    width: 32px;
+    height: 32px;
+    filter: drop-shadow(1px 1px #222);
+}
+
+.country-flag{
+    width: 27px;
+    height: 18px;
+    vertical-align: middle;
+    border: 1px solid #222 !important;
+    border-radius: 0 !important;
+}
+
+.slidercontainer {
+    width: 100%;
+}
+  
+.slider {
+    -webkit-appearance: none;
+    height: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    width: 100px;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    background: var(--border);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 20px;
+    border-radius: 0;
+    background: var(--border);
+    cursor: pointer;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-track-piece  {
+	background-color: #d6dee1;
+	-webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	background-color: #666;
+	-webkit-border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+	background-color: #666;
+	-webkit-border-radius: 6px;
+}
+
+@media (max-width: 1200px) {
+    h1, h2, td, th, .btn-driver-name, #new-car th, .btn-eng-name,
+    .bars-table td:nth-child(2), #new-car > tbody > tr:nth-child(7) > td:nth-child(2),
+    #engineers-name > tbody > tr:nth-child(2) > td > button {
+        font-size: 10px;
+    }
+    p {
+        font-size: 8px;
+    }
+    .progress-bar {
+        font-size: 10px;
+    }
+    .progress-bar-background {
+        width: 40px;
+    }
+    .progress-bar span {
+        padding: 0px 20px;
+    }
+    .slider {
+        width: 80px;
+    }
+    button {
+        padding: 2px;
+        font-size: 10px;
+    }
+    #btn-play {
+        padding: 10px 1em;
+        font-size: 10px;
+    }
+    #engineering th, #development th {
+        width: 50px;
+        font-size: 10px;
+    }
+    #team-logo {
+        width: 75px;
+    }
+}
+
+@media (max-width: 800px) {
+    body, :root {
+        padding-bottom: 10px;
+    }
+    button {
+        padding: 5px;
+    }
+    #button-list p {
+        font-size: 0;
+    }
+    #team-menu > nav > ul {
+        display: flex;
+    }
+    #info {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-bottom: 10px;
+        justify-content: space-around;
+    }
+    #info h1 {
+        padding: 5px;
+    }
+    #next-race {
+        justify-content: space-between;
+    }
+    #drivers {
+        justify-content: center;
+    }
+    #team-menu-interface {
+        align-items: flex-start;
+    }
+    #test-driver, #academy-drivers {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #test-driver h1, #academy-drivers h1 {
+        width: 98%;
+    }
+    #test-driver .btn-driver-name,
+    #academy-drivers .btn-driver-name {
+        font-size: 10px;
+        width: max-content;
+        padding: 5px;
+    }
+    #car,
+    #drivers{
+        border: 0;
+    }
+    #car,
+    #engineering{
+        display: flex;
+        width: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #car{
+        flex-direction: row;
+        flex-wrap: nowrap;
+        margin-bottom: 15px;
+    }
+    #car h1,
+    #engineering h1{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    #engineering > div{
+        border: 1px solid var(--border);
+    }   
+    #drivers-car-section {
+        margin-left: 0;
+    }
+    .driver-card {
+        border: 2px solid var(--border) !important; 
+    }
+    #main-menu img {
+        height: 128px;
+    }
+}

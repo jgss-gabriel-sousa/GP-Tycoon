@@ -62,17 +62,17 @@ export function calcTeamsReputation(){
         performance[t] = roundToMultiple((performance[t]*5), 0.5);
     }
 
-    const fans = {};
-    let maxFans;
+    const supporters = {};
+    let maxSupporters;
     for(const t in game.teams){
         const team = game.teams[t];
 
-        if(team.fans > maxFans || !maxFans)
-            maxFans = team.fans;
+        if(team.supporters > maxSupporters || !maxSupporters)
+            maxSupporters = team.supporters;
     }
     for(const t in game.teams){
-        fans[t] = game.teams[t].fans / maxFans;
-        fans[t] = roundToMultiple((fans[t]*5), 0.5);
+        supporters[t] = game.teams[t].supporters / maxSupporters;
+        supporters[t] = roundToMultiple((supporters[t]*5), 0.5);
     }
 
     const political = {};
@@ -123,9 +123,9 @@ export function calcTeamsReputation(){
         const team = game.teams[t];
 
         const oldReputation = team.reputation;
-        team.reputation = roundToMultiple(((performance[team.name]*4) + (dev[team.name]*2) + (political[team.name]*2) + fans[team.name] + tradition[team.name]) / 10, 0.5);
+        team.reputation = roundToMultiple(((performance[team.name]*4) + (dev[team.name]*2) + (political[team.name]*2) + supporters[team.name] + tradition[team.name]) / 10, 0.5);
         team.performance = performance[team.name];
-        team.fansReputation = fans[team.name];
+        team.supportersReputation = supporters[team.name];
         team.tradition = tradition[team.name];
         team.developmentReputation = dev[team.name];
         team.politicalReputation = political[team.name];
