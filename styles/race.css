@@ -52,7 +52,7 @@
 }
 
 #podium {
-    background-image: url("./img/podium.webp");
+    background-image: url("/img/podium.webp");
     min-height: 387px;
     min-width: 387px;
     max-height: 387px;

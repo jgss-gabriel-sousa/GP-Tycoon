@@ -93,8 +93,6 @@ export function getNewsSchema(type, args){
 
         const championships = args[0];
 
-        console.log(championships)
-
         for(const championship in championships){
             const c = championships[championship];
             
