@@ -35,10 +35,17 @@ export function viewEng(name, returnToMarket, scrollPos){
                     <tr>
                         <td colspan="2" style="text-align: center">${eng.gender}</td>
                     </tr>
+                `
+                    
+                /*
+                    
                     <tr>
                         <td>Personalidade:</td>
                         <td class="persona-${accentsTidy(eng.personality)}">${eng.personality}</td>
                     </tr>
+                */
+                    
+                html += `
                     <tr>
                         <td>País:</td>
                         <td>
