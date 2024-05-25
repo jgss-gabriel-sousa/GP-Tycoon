@@ -17,7 +17,7 @@ export const game = {
     uiTeamColors: true,
     team: "Red Bull",
     year: 2023,
-    championship: new Championship(),
+    championship: Championship,
     othersSeries: {},
     drivers: {},
     teams: {},
@@ -25,6 +25,7 @@ export const game = {
     engineers: {},
     contractsFailed: [],
     news: [],
+    game_language: "PT",
 }
 
 function gameBootstrap(){
@@ -33,9 +34,12 @@ function gameBootstrap(){
     game.settings = loadGameSettings();
     SoundStart();
 
+    console.log(game.championship)
+
 } gameBootstrap();
 
 export function startNewGame(){
+    game.championship.init();
     game.drivers = driversData;
     game.teams = teamsData;
     game.engines = enginesData;
