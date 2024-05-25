@@ -5,6 +5,7 @@ export let audio = new Audio();
 const NUMBER_OF_SONGS = 7;
 
 const stylesNotSelected = [];
+let lastPlayedSong = "";
 const songs = {
     "Soundtrack": [
         "Stronger - Savfk"
@@ -25,15 +26,44 @@ export function SoundStart(){
     window.setTimeout(soundtrack, rand(1500,5000));
 }
 
+function selectSong(){
+    const SONGS_PATH = "../audio/songs/";
+    const SONGS_EXT = ".mp3";
+    let song_name;
+
+    if(stylesNotSelected.length == Object.keys(songs).length)
+        return; //All music styles were deselected
+
+    let themeID;
+    let theme;
+    do {
+        themeID = rand(0, Object.keys(songs).length);
+        theme = Object.keys(songs)[themeID];
+
+    } while (stylesNotSelected.includes(theme));
+
+
+    let songID;
+    do { //Not repeat song
+        songID = rand(0, songs[theme].length);
+        song_name = songs[theme][songID];
+
+    } while (songs[theme].length > 1 && song_name == lastPlayedSong);
+
+    console.log(SONGS_PATH+song_name+SONGS_EXT)
+    lastPlayedSong = song_name;
+    audio = new Audio(SONGS_PATH+song_name+SONGS_EXT);
+}
+
 export function soundtrack(){
     if(audio.paused){
         const SongID = rand(0,NUMBER_OF_SONGS);
-        //audio = new Audio("../audio/songs/"+SongID+".mp3");
+        
+        selectSong();
+        
         audio.volume = game.settings.volume;
 
         const tryToPlay = setInterval(() => { 
-            console.log(SongID)
-
             audio.play()
             .then(() => {
                 clearInterval(tryToPlay);
