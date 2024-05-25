@@ -74,7 +74,7 @@ export function startDriversStats(){
         const driver = game.drivers[d];
         
         driver.contractInterest = [];
-        if(!driver.gender) driver.gender = "M";
+        if(!driver.gender) driver.gender = "Male";
         if(!driver.image) driver.image = driver.name;
         if(!driver.newTeam) driver.newTeam = "";
         if(!driver.newStatus) driver.newStatus = "";
