@@ -18,7 +18,7 @@ export function LOC(key){
 
 function dictAppend(filename){
     const request = new XMLHttpRequest();
-    request.open("GET", `./localization/${filename}.json`, false);
+    request.open("GET", `/localization/${filename}.json`, false);
     request.send(null)
     const json = JSON.parse(request.responseText);
 
