@@ -51,7 +51,7 @@
 
 #season-overview{
     overflow-y: scroll;
-    height: 550px;
+    height: 500px;
 }
 #season-overview table{
     color: #202122;

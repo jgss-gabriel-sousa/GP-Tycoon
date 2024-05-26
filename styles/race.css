@@ -48,7 +48,7 @@
 }
 #time-table .tire-strategy {
     letter-spacing: 2px;
-    width: 50px;
+    width: max-content;
 }
 
 #podium {

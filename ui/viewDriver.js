@@ -5,6 +5,7 @@ import { market } from "./market.js";
 import { getSalary } from "../scripts/drivers.js";
 import { genTeamHTML } from "../scripts/main.js";
 import { publishNews } from "./news.js";
+import { LOC } from "../scripts/translation.js";
 
 export function viewDriver(name, returnToMarket, scrollPos){
     let html = "";
@@ -15,6 +16,9 @@ export function viewDriver(name, returnToMarket, scrollPos){
             <img id="view-driver-driver-img" src="img/drivers/${driver.image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <table id="view-driver-infos">
                 <th colspan="2">Dados Pessoais</th>
+                <tr>
+                    <td colspan="2" style="text-align: center">${LOC("gender_"+driver.gender)}</td>
+                </tr>
                 <tr>
                     <td>País:</td>
                     <td>

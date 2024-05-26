@@ -220,7 +220,7 @@ export function loadGameScreen(){
 
             game.team = newGame.team,
             game.year = newGame.year,
-            game.championship = new Championship(newGame.championship),
+            game.championship = newGame.championship,
             game.othersSeries = newGame.othersSeries,
             game.drivers = newGame.drivers,
             game.teams = newGame.teams,
