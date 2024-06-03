@@ -1,6 +1,8 @@
 @import url("./financialReport.css");
 @import url("./financialBalance.css");
 
+@import url("./sponsors.css");
+
 #team-standings{
     border-collapse: collapse;
     border: 1px solid #a2a9b1;
@@ -602,6 +604,7 @@
     flex-direction: row;
     max-width: 100%;
     overflow: overlay;
+    height: 100%;
 }
 #other-series-standings div {
     margin: 5px;
@@ -612,6 +615,7 @@
 #other-series-standings h1 {
     background-color: #333;
     font-size: 14px;
+    color: #f5f5f5;
 }
 
 #buttons-raceSim {
@@ -688,72 +692,4 @@
 #bank-container button:hover {
     font-weight: bold;
     filter: drop-shadow(0px 0px 2px black);
-}
-
-
-#sponsors-container {
-    margin-top: 1em;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    min-height: 50vh;
-}
-#sponsors-container h2 {
-    margin-bottom: 0.5em;
-    font-size: 16px;
-}
-#sponsors-container > div {
-    width: 30%;
-    margin: 2px;
-}
-
-#sponsors-list {    
-    padding: 10px;
-}
-
-#major-sponsor{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 0.5px solid #505050;
-}
-#major-sponsor > h1{
-    font-size: 14px;
-    padding: 5px 0;
-    width: 100%;
-}
-#major-sponsor h2{
-    font-size: 14px;
-}
-#major-sponsor > img{
-    max-height: 64px;
-    max-width: 64px;
-    min-width: 64px;
-    min-height: 64px;
-}
-
-#others-sponsors{
-    display: flex;
-    flex-direction: row;
-}
-#others-sponsors > div{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding-right: 5px;
-    border: 0.5px solid #505050;
-}
-#others-sponsors > div:last-child{
-    padding-right: 0;
-}
-#others-sponsors > div h1{
-    font-size: 12px;
-}
-#others-sponsors > div > img{
-    max-height: 64px;
-    max-width: 64px;
-    min-width: 64px;
-    min-height: 64px;
 }
