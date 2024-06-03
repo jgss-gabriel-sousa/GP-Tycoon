@@ -350,6 +350,25 @@ function approbationCalc(driverName){
     if(status != "Piloto da Academia" && (salary / driver.salary) < 1){
         chance *=  Math.pow(salary / driver.salary,8);
     }
+    if(status == "1º Piloto" || status == "2º Piloto"){
+        let marketHeat = 0;
+        let availableVacancies = 0;
+
+        game.teams.forEach(team => {
+            if(!game.championship.teams.includes(team.name)){
+                return;
+            }
+
+            if(team.new1driver == ""){
+                availableVacancies++;
+            }
+            if(team.new2driver == ""){
+                availableVacancies++;
+            }
+        });
+
+        marketHeat = (availableVacancies / game.championship.teams*2)
+    }
 
     if(chance > 100) chance = 100;
     if(chance < 5) chance = 0;
