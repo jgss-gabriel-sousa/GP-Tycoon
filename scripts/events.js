@@ -11,7 +11,7 @@ import { market, marketEng } from "../ui/market.js";
 import { newsUI } from "../ui/news.js";
 import { viewReputation } from "../ui/viewReputation.js";
 import { bankUI } from "../ui/bank.js";
-import { sponsorsUI } from "../ui/sponsors.js";
+import { viewSponsors } from "../ui/viewSponsors.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();
@@ -36,7 +36,7 @@ document.querySelector("#btn-bank").addEventListener("click", () => {
     bankUI();
 });
 document.querySelector("#btn-sponsors").addEventListener("click", () => {
-    sponsorsUI();
+    viewSponsors();
 });
 
 document.querySelector("#btn-historic").addEventListener("click", () => {
