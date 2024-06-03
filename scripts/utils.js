@@ -166,3 +166,16 @@ export function hoursBetweenDates(first, second){
     const msBetweenDates = Math.abs(first - second);
     return msBetweenDates / (60 * 60 * 1000); //minutes * seconds * ms
 }
+
+export function timeConvert(minutes){ //Convert minutes in race lap time format
+    const minutesInt = Math.floor(minutes);
+    const seconds = Math.floor((minutes - minutesInt) * 60);
+    const milliseconds = Math.floor(((minutes - minutesInt) * 60 - seconds) * 1000);
+    const secondsStr = seconds.toString().padStart(2, '0');
+    const millisecondsStr = milliseconds.toString().padStart(3, '0');
+
+    if(minutesInt <= 0)
+        return secondsStr + ':' + millisecondsStr;
+    if(minutesInt > 0)
+        return minutesInt + ':' + secondsStr + ':' + millisecondsStr;
+}

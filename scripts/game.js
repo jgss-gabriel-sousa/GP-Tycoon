@@ -1,7 +1,7 @@
 import { rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
 import { genTeamHTML } from "./main.js"
-import { Championship } from "./championship.js";
+import { Championship, Championship_Init } from "./championship.js";
 import { driversData } from "../data/driversData.js";
 import { teamsData } from "../data/teamsData.js";
 import { enginesData } from "../data/enginesData.js";
@@ -34,12 +34,9 @@ function gameBootstrap(){
     game.settings = loadGameSettings();
     SoundStart();
 
-    console.log(game.championship)
-
 } gameBootstrap();
 
-export function startNewGame(){
-    game.championship.init();
+export function startGameData(){
     game.drivers = driversData;
     game.teams = teamsData;
     game.engines = enginesData;
@@ -47,6 +44,8 @@ export function startNewGame(){
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
+    
+    Championship_Init();
 }
 
 

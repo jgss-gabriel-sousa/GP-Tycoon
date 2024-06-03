@@ -535,7 +535,7 @@ export function genDevelopmentHTML(){
 }
 
 export function genTeamHTML(){
-    game.championship.createStandings();
+    game.championship.CreateStandings();
     genDriversHTML();
     genCarHTML();
     genEngHTML();

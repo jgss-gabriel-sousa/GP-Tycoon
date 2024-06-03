@@ -1,11 +1,11 @@
-import { game, startNewGame } from "../scripts/game.js";
+import { game, startGameData } from "../scripts/game.js";
 import { genTeamHTML } from "../scripts/main.js";
 import { changeScreen } from "../scripts/screens.js"
-import { Championship } from "../scripts/championship.js";
+import { Championship, Championship_Init } from "../scripts/championship.js";
 import { createTooltip } from "../scripts/tooltips.js";
 
 function newGame(){
-    startNewGame();
+    startGameData();
 
     const teams = game.championship.teams;
     teams.sort();
@@ -93,12 +93,13 @@ export async function selectDatabase(){
 
         const db = DBs[DBname];
 
-        game.championship.teams = db.championship.teams;
-        game.teams = db.teams;
+        game.championship = db.championship;
         game.drivers = db.drivers;
-        
-        console.log(db)
-        console.log(game)
+        game.teams = db.teams;
+        game.engines = db.engines;
+        game.engineers = db.engineers;
+
+        startGameData();
     }
 
     function genHTML(){
@@ -220,7 +221,6 @@ export function loadGameScreen(){
 
             game.team = newGame.team,
             game.year = newGame.year,
-            game.championship = newGame.championship,
             game.othersSeries = newGame.othersSeries,
             game.drivers = newGame.drivers,
             game.teams = newGame.teams,
@@ -228,6 +228,9 @@ export function loadGameScreen(){
             game.engineers = newGame.engineers,
             game.contractsFailed = newGame.contractsFailed,
             game.news = newGame.news,
+            game.championship = newGame.championship,
+            Championship_Init();
+            
 
             changeScreen("team-menu");
             genTeamHTML();

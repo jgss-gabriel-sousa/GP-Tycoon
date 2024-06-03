@@ -379,7 +379,7 @@ export function StartTeamsStats(){
 }
 
 export function UpdateTeamAfterRace(){
-    game.championship.createStandings();
+    game.championship.CreateStandings();
 
     let sumOfTeamsPows = 0;
     for (let i = 0; i < game.championship.teamStandings.length; i++) {

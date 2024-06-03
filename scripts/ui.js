@@ -119,7 +119,7 @@ export function historicUI(){
 export function teamRankingUI(){
     let html = ``;
 
-    game.championship.createStandings();
+    game.championship.CreateStandings();
 
     html += `<table id="team-standings">
                 <tr>
@@ -159,7 +159,7 @@ export function teamRankingUI(){
 export function seasonOverviewUI(thenCall){
     let html = ``;
 
-    game.championship.createStandings();
+    game.championship.CreateStandings();
 
     html += `
     <div id="season-overview">
