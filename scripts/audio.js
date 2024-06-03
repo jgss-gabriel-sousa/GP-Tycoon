@@ -27,7 +27,7 @@ export function SoundStart(){
 }
 
 function selectSong(){
-    const SONGS_PATH = "../audio/songs/";
+    const SONGS_PATH = "./audio/songs/";
     const SONGS_EXT = ".mp3";
     let song_name;
 
