@@ -27,7 +27,7 @@ export function SoundStart(){
 }
 
 function selectSong(){
-    const SONGS_PATH = "./audio/songs/";
+    const SONGS_PATH = "../audio/songs/";
     const SONGS_EXT = ".mp3";
     let song_name;
 
@@ -50,7 +50,8 @@ function selectSong(){
 
     } while (songs[theme].length > 1 && song_name == lastPlayedSong);
 
-    console.log(SONGS_PATH+song_name+SONGS_EXT)
+    console.log("Song: "+song_name)
+    
     lastPlayedSong = song_name;
     audio = new Audio(SONGS_PATH+song_name+SONGS_EXT);
 }

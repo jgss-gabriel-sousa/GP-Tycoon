@@ -6,12 +6,6 @@ export function viewSponsors(){
     let html = "";
     const team = game.teams[game.team];
     
-    for(let i = 0; i < team.driversAcademy.length; i++){
-        if(game.drivers[driverName].team != team.name){
-            team.driversAcademy.splice(i, 1);
-        }
-    }
-    
     const totalSponsorsValue = (team.sponsor_value * team.sponsors.length) + team.majorSponsor_value + team.factorySponsor_value
 
     let majorSponsorValue = 0;

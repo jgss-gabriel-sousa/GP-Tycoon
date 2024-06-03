@@ -427,7 +427,7 @@ export function UpdateTeamAfterRace(){
         }
         
         const driversSalary = (1000*game.drivers[team.driver1].salary) + (game.drivers[team.driver2].salary*1000) + (game.drivers[team.test_driver].salary*1000);
-        
+
         let driversAcademySalary = 0;
         for(let i = 0; i < team.driversAcademy.length; i++){
             const driver = game.drivers[team.driversAcademy[i]];    
@@ -581,6 +581,12 @@ export function YearUpdateTeamsStats(){
         if(game.drivers[team.driver1].contractRemainingYears == 0)  team.new1driver = "";
         if(game.drivers[team.driver2].contractRemainingYears == 0)  team.new2driver = "";
         if(game.drivers[team.test_driver].contractRemainingYears == 0)  team.newTdriver = "";
+
+        for(let i = 0; i < team.driversAcademy.length; i++){
+            if(game.drivers[driverName].team != team.name){
+                team.driversAcademy.splice(i, 1);
+            }
+        }
 
         car.aerodynamic = team.newCar.aerodynamic;
         car.downforce = team.newCar.downforce;
