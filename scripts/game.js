@@ -7,9 +7,10 @@ import { teamsData } from "../data/teamsData.js";
 import { enginesData } from "../data/enginesData.js";
 import { engineersData } from "../data/engineersData.js";
 import { startDriversStats, YearUpdateDriversStats } from "./drivers.js";
-import { StartTeamsStats, YearUpdateTeamsStats } from "./teams.js";
+import { YearUpdateTeamsStats } from "./teams.js";
 import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
 import { SoundStart } from "./audio.js";
+import { StartTeamsStats } from "./teams/startTeamStats.js";
 
 export const game = {
     settings: {},
