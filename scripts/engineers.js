@@ -65,26 +65,29 @@ export function StartEngStats(){
         if(eng.gender == "M") eng.gender = "Homem";
         if(eng.gender == "F") eng.gender = "Mulher";
 
-        if(!eng.personality){
-            const personality = rand(0,17);
-
-            if(personality == 0)    eng.personality = "Perfeccionista";
-            if(personality == 1)    eng.personality = "Inovador";
-            if(personality == 2)    eng.personality = "Líder Nato";
-            if(personality == 3)    eng.personality = "Colaborador";
-            if(personality == 4)    eng.personality = "Ambicioso";
-            if(personality == 5)    eng.personality = "Estrategista";
-            if(personality == 6)    eng.personality = "Comprometido";
-            if(personality == 7)    eng.personality = "Comunicativo";
-            if(personality == 8)    eng.personality = "Analítico";
-            if(personality == 9)    eng.personality = "Versátil";
-            if(personality == 10)   eng.personality = "Adaptável";
-            if(personality == 11)   eng.personality = "Resiliente";
-            if(personality == 12)   eng.personality = "Metódico";
-            if(personality == 13)   eng.personality = "Independente";
-            if(personality == 14)   eng.personality = "Diplomático";
-            if(personality == 15)   eng.personality = "Otimista";
-            if(personality == 16)   eng.personality = "Eficiente";
+        if (!eng.personality) {
+            const personalities = [
+                "Perfeccionista",
+                "Inovador",
+                "Líder Nato",
+                "Colaborador",
+                "Ambicioso",
+                "Estrategista",
+                "Comprometido",
+                "Comunicativo",
+                "Analítico",
+                "Versátil",
+                "Adaptável",
+                "Resiliente",
+                "Metódico",
+                "Independente",
+                "Diplomático",
+                "Otimista",
+                "Eficiente"
+            ];
+            
+            const personalityIndex = Math.floor(Math.random() * personalities.length);
+            eng.personality = personalities[personalityIndex];
         }
     }
 
