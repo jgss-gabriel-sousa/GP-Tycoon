@@ -1,8 +1,8 @@
 import { game } from "./game.js"
 import { circuitsData } from "../data/circuits.js"
-import { gameOptions } from "../ui/gameOptions.js"
+import { gameOptions } from "../views/gameOptions.js"
 import { accentsTidy, NumberF } from "./utils.js"
-import { genEngHTML } from "../ui/mainMenu.js"
+import { genEngHTML } from "../views/mainMenu.js"
 
 export function gameOptionsUI(){
     gameOptions();

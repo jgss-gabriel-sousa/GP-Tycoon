@@ -1,7 +1,7 @@
 import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
-import { genTeamMainMenu } from "../../ui/mainMenu.js";
+import { genTeamMainMenu } from "../../views/mainMenu.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "../teams.js";
 
 export const RunRaceSimulation = () => {

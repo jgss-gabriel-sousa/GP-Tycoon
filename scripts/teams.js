@@ -1,7 +1,7 @@
 import { game } from "./game.js";
-import { selectEngine } from "../ui/selectEngine.js";
+import { selectEngine } from "../views/selectEngine.js";
 import { rand, rollDice, roundToMultiple } from "./utils.js";
-import { publishNews } from "../ui/news.js";
+import { publishNews } from "../views/news.js";
 import { calcTeamsReputation } from "./teams/calcTeamsReputation.js";
 
 export function CalcTeamDevPoints(teamName){

@@ -1,17 +1,17 @@
 import { game } from "./game.js";
 import { gameOptionsUI, teamRankingUI, historicUI, seasonOverviewUI, UpdateDataInfo } from "./ui.js";
-import { viewDriver } from "../ui/viewDriver.js"
-import { viewEng } from "../ui/viewEng.js"
-import { viewEmployees } from "../ui/viewEmployees.js";
-import { viewFinancialReport } from "../ui/viewFinancialReport.js";
-import { viewFinancialBalance } from "../ui/viewFinancialBalance.js";
-import { selectDatabase, loadGameScreen, saveGame } from "../ui/start-load-save.js";
-import { selectEngine } from "../ui/selectEngine.js";
-import { market, marketEng } from "../ui/market.js";
-import { newsUI } from "../ui/news.js";
-import { viewReputation } from "../ui/viewReputation.js";
-import { bankUI } from "../ui/bank.js";
-import { viewSponsors } from "../ui/viewSponsors.js";
+import { viewDriver } from "../views/viewDriver.js"
+import { viewEng } from "../views/viewEng.js"
+import { viewEmployees } from "../views/viewEmployees.js";
+import { viewFinancialReport } from "../views/viewFinancialReport.js";
+import { viewFinancialBalance } from "../views/viewFinancialBalance.js";
+import { selectDatabase, loadGameScreen, saveGame } from "../views/start-load-save.js";
+import { selectEngine } from "../views/selectEngine.js";
+import { market, marketEng } from "../views/market.js";
+import { newsUI } from "../views/news.js";
+import { viewReputation } from "../views/viewReputation.js";
+import { bankUI } from "../views/bank.js";
+import { viewSponsors } from "../views/viewSponsors.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();

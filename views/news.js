@@ -95,7 +95,7 @@ export function publishNews(type, args){
     }
 
     if(news.image){
-        news.image = `/img/ui/news/${news.image}.webp`;
+        news.image = `/img/views/news/${news.image}.webp`;
     }
 
     game.news.unshift(news);

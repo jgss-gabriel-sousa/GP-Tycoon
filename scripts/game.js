@@ -1,6 +1,6 @@
 import { rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
-import { genTeamMainMenu } from "../ui/mainMenu.js"
+import { genTeamMainMenu } from "../views/mainMenu.js"
 import { Championship, Championship_Init } from "./championship.js";
 import { driversData } from "../data/driversData.js";
 import { teamsData } from "../data/teamsData.js";

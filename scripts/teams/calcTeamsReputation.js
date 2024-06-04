@@ -1,4 +1,4 @@
-import { publishNews } from "../../ui/news.js";
+import { publishNews } from "../../views/news.js";
 import { game } from "../game.js";
 import { roundToMultiple } from "../utils.js";
 
