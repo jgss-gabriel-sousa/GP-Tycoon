@@ -1,7 +1,7 @@
 import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
-import { genTeamHTML } from "../main.js";
+import { genTeamMainMenu } from "../../ui/mainMenu.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "../teams.js";
 
 export const RunRaceSimulation = () => {
@@ -157,7 +157,7 @@ export const RunRaceSimulation = () => {
         Championship.actualRound++;
 
         UpdateTeamAfterRace();
-        genTeamHTML();
+        genTeamMainMenu();
 
         Championship.race = {
             grid: {},

@@ -1,6 +1,6 @@
 import { NumberF, accentsTidy, rand } from "../scripts/utils.js";
 import { game } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 import { getNewsSchema } from "./newsSchemas.js";
@@ -49,7 +49,7 @@ export function newsUI(){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(e => {
-        genTeamHTML();
+        genTeamMainMenu();
     });
 
 

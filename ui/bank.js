@@ -1,5 +1,5 @@
 import { game } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 import { NumberF } from "../scripts/utils.js";
 
 export function bankUI(){
@@ -86,7 +86,7 @@ export function bankUI(){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(e => {
-        genTeamHTML();
+        genTeamMainMenu();
     });
 
 

@@ -2,7 +2,7 @@ import { NumberF, accentsTidy } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../scripts/game.js";
 import { CalcTeamDevPoints, CalcTeamMorale } from "../scripts/teams.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu as genTeamMainMenu } from "./mainMenu.js";
 import { marketEng } from "./market.js";
 import { createTooltip } from "../scripts/tooltips.js";
 
@@ -168,7 +168,7 @@ function dismissEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamHTML();
+        genTeamMainMenu();
     });
 }
 
@@ -263,7 +263,7 @@ function contractEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamHTML();
+        genTeamMainMenu();
     });
 }
 
@@ -378,7 +378,7 @@ function changeEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamHTML();
+        genTeamMainMenu();
     });
     
     const buttonMappings = {

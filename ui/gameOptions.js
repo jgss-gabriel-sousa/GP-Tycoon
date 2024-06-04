@@ -1,6 +1,6 @@
 import { audio } from "../scripts/audio.js";
 import { game } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 
 export function gameOptions(){
     const raceSpeedValue = game.settings["race-simulation-speed"];
@@ -62,6 +62,6 @@ export function gameOptions(){
 
     document.querySelector("#ui-team-colors input").addEventListener("change", () => {
         game.settings["ui-team-colors"] = document.querySelector("#ui-team-colors input").checked;
-        genTeamHTML();
+        genTeamMainMenu();
     });
 }

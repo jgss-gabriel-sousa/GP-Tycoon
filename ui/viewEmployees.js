@@ -1,11 +1,11 @@
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 import { game } from "../scripts/game.js";
 import { CalcTeamDevPoints } from "../scripts/teams.js";
 import { NumberF } from "../scripts/utils.js";
 
 function updateScreen(){
     CalcTeamDevPoints(game.team);
-    genTeamHTML();
+    genTeamMainMenu();
 }
 
 export function viewEmployees(teamName){

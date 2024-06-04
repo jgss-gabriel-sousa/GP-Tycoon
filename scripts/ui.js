@@ -2,7 +2,7 @@ import { game } from "./game.js"
 import { circuitsData } from "../data/circuits.js"
 import { gameOptions } from "../ui/gameOptions.js"
 import { accentsTidy, NumberF } from "./utils.js"
-import { genEngHTML } from "./main.js"
+import { genEngHTML } from "../ui/mainMenu.js"
 
 export function gameOptionsUI(){
     gameOptions();

@@ -1,5 +1,5 @@
 import { game } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "../scripts/mainMenu.js";
 import { NumberF } from "../scripts/utils.js";
 
 export function sponsorsUI(){

@@ -1,9 +1,9 @@
-import { blankSpaceRmv, accentsTidy, NumberF } from "./utils.js"
-import { game } from "./game.js"
+import { blankSpaceRmv, accentsTidy, NumberF } from "../scripts/utils.js"
+import { game } from "../scripts/game.js"
 import { circuitsData } from "../data/circuits.js";
 import { enginesData } from "../data/enginesData.js";
-import { UpdateDataInfo } from "./ui.js";
-import { tooltips } from "./tooltips.js";
+import { UpdateDataInfo } from "../scripts/ui.js";
+import { tooltips } from "../scripts/tooltips.js";
 
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
@@ -534,7 +534,7 @@ export function genDevelopmentHTML(){
     el.innerHTML = html;
 }
 
-export function genTeamHTML(){
+export function genTeamMainMenu(){
     game.championship.CreateStandings();
     genDriversHTML();
     genCarHTML();

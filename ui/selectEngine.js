@@ -1,6 +1,6 @@
 import { NumberF } from "../scripts/utils.js";
 import { game } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 
 export function selectEngine(endSeason){
     let html = "";
@@ -103,7 +103,7 @@ function negotiate(engineName, endSeason){
                 game.teams[game.team].financialReport["Balance"] -= value;
             }
             
-            genTeamHTML();
+            genTeamMainMenu();
         }
         else if(result.isDenied){
             selectEngine();

@@ -1,6 +1,6 @@
 import { rand, hoursBetweenDates } from "./utils.js"
 import { changeScreen } from "./screens.js"
-import { genTeamHTML } from "./main.js"
+import { genTeamMainMenu } from "../ui/mainMenu.js"
 import { Championship, Championship_Init } from "./championship.js";
 import { driversData } from "../data/driversData.js";
 import { teamsData } from "../data/teamsData.js";
@@ -227,5 +227,5 @@ export function YearUpdate(){
     game.championship.results = {};
     game.championship.teamStandings = [];
 
-    genTeamHTML();
+    genTeamMainMenu();
 }

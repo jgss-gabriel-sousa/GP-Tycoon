@@ -3,7 +3,7 @@ import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../scripts/game.js";
 import { market } from "./market.js";
 import { getSalary } from "../scripts/drivers.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 import { publishNews } from "./news.js";
 import { LOC } from "../scripts/translation.js";
 
@@ -292,7 +292,7 @@ function negotiate(driverName, returnToMarket){
                     });
                 }
                 
-                genTeamHTML();
+                genTeamMainMenu();
             }
         }
         else if(result.isDenied){

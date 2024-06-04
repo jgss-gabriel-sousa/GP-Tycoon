@@ -1,5 +1,5 @@
 import { game, startGameData } from "../scripts/game.js";
-import { genTeamHTML } from "../scripts/main.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 import { changeScreen } from "../scripts/screens.js"
 import { Championship, Championship_Init } from "../scripts/championship.js";
 import { createTooltip } from "../scripts/tooltips.js";
@@ -34,7 +34,7 @@ function newGame(){
             });
 
             changeScreen("team-menu");
-            genTeamHTML();
+            genTeamMainMenu();
         }
     });
 }
@@ -233,7 +233,7 @@ export function loadGameScreen(){
             
 
             changeScreen("team-menu");
-            genTeamHTML();
+            genTeamMainMenu();
         }
         else if(result.isDenied){
             deleteGame(document.querySelector("#select-team").value, savedGames);
