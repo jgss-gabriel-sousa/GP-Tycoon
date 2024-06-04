@@ -17,12 +17,12 @@ export function LOC(key){
 }
 
 function dictAppend(filename){
-    const request = new XMLHttpRequest();
-    request.open("GET", `./localization/${filename}.json`, false);
-    request.send(null)
-    const json = JSON.parse(request.responseText);
-
-    dict = Object.assign(dict, json);
+    fetch(`./localization/${filename}.json`)
+    .then(response => response.json())
+    .then(json => {
+        dict = Object.assign(dict, json);
+    })
+    .catch(error => console.error('Erro:', error));
 }
 
 dictAppend("base_PT");
