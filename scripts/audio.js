@@ -49,8 +49,6 @@ function selectSong(){
         song_name = songs[theme][songID];
 
     } while (songs[theme].length > 1 && song_name == lastPlayedSong);
-
-    console.log("Song: "+song_name)
     
     lastPlayedSong = song_name;
     audio = new Audio(SONGS_PATH+song_name+SONGS_EXT);

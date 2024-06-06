@@ -450,7 +450,6 @@ export function YearUpdateTeamsStats(){
     
     for(const t in game.teams){
         const team = JSON.parse(JSON.stringify(game.teams[t]))
-        console.log(team)
     }
 
     for(const t in game.teams) {

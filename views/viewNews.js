@@ -70,8 +70,6 @@ export function viewNews(){
             element.innerHTML = html;
             news[el.value].viewed = true;
 
-            //console.log(`#headlines > li:nth-child(${el.value})`)
-
             document.querySelector(`#headlines > li:nth-child(${el.value+1})`).classList.remove("not-viewed-news");
         });
     });

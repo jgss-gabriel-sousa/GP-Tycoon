@@ -5,8 +5,6 @@ let dict = {};
 export function LOC(key){
     key = key.toLowerCase();
 
-    console.log(key+"_"+game.game_language)
-
     try {
         return dict[key+"_"+game.game_language];
     
