@@ -3,7 +3,7 @@ import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../scripts/game.js";
 import { CalcTeamDevPoints, CalcTeamMorale } from "../scripts/teams.js";
 import { genTeamMainMenu as genTeamMainMenu } from "./mainMenu.js";
-import { marketEng } from "./market.js";
+import { viewMarketEng } from "./viewMarket.js";
 import { createTooltip } from "../scripts/tooltips.js";
 
 export function viewEng(name, returnToMarket, scrollPos){
@@ -112,7 +112,7 @@ export function viewEng(name, returnToMarket, scrollPos){
         showConfirmButton: false,
     }).then(r => {
         if(returnToMarket)
-            marketEng(scrollPos);
+            viewMarketEng(scrollPos);
     });
 
     if(eng.team == game.team){

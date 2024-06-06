@@ -2,7 +2,7 @@ import { audio } from "../scripts/audio.js";
 import { game } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 
-export function gameOptions(){
+export function viewGameOptions(){
     const raceSpeedValue = game.settings["race-simulation-speed"];
     const visualRaceSim = game.settings["visual-race-simulation"];
     const uiTeamColors = game.settings["ui-team-colors"];

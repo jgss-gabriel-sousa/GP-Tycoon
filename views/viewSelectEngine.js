@@ -2,7 +2,7 @@ import { NumberF } from "../scripts/utils.js";
 import { game } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 
-export function selectEngine(endSeason){
+export function viewSelectEngine(endSeason){
     let html = "";
     const engines = game.engines;
 
@@ -106,7 +106,7 @@ function negotiate(engineName, endSeason){
             genTeamMainMenu();
         }
         else if(result.isDenied){
-            selectEngine();
+            viewSelectEngine();
         }
     });
 

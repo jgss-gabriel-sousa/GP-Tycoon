@@ -1,12 +1,8 @@
 import { game } from "./game.js"
 import { circuitsData } from "../data/circuits.js"
-import { gameOptions } from "../views/gameOptions.js"
+import { viewGameOptions } from "../views/viewGameOptions.js"
 import { accentsTidy, NumberF } from "./utils.js"
 import { genEngHTML } from "../views/mainMenu.js"
-
-export function gameOptionsUI(){
-    gameOptions();
-}
 
 export function UpdateDataInfo(e){
     const team = game.teams[game.team];

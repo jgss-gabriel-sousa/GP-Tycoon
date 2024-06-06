@@ -1,6 +1,6 @@
 import { getCountryEthnicity, getRandomCountry } from "../data/countryRanking.js";
 import { generateName } from "../data/nameData.js";
-import { publishNews } from "../views/news.js";
+import { publishNews } from "../views/viewNews.js";
 import { game } from "./game.js"
 import { rand, rollDice } from "./utils.js"
 

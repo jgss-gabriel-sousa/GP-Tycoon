@@ -1,24 +1,25 @@
 import { game } from "./game.js";
-import { gameOptionsUI, teamRankingUI, historicUI, seasonOverviewUI, UpdateDataInfo } from "./ui.js";
+import { teamRankingUI, historicUI, seasonOverviewUI, UpdateDataInfo } from "./ui.js";
 import { viewDriver } from "../views/viewDriver.js"
 import { viewEng } from "../views/viewEng.js"
 import { viewEmployees } from "../views/viewEmployees.js";
 import { viewFinancialReport } from "../views/viewFinancialReport.js";
 import { viewFinancialBalance } from "../views/viewFinancialBalance.js";
 import { selectDatabase, loadGameScreen, saveGame } from "../views/start-load-save.js";
-import { selectEngine } from "../views/selectEngine.js";
-import { market, marketEng } from "../views/market.js";
-import { newsUI } from "../views/news.js";
+import { viewSelectEngine } from "../views/viewSelectEngine.js";
+import { viewMarket, viewMarketEng } from "../views/viewMarket.js";
+import { viewNews } from "../views/viewNews.js";
 import { viewReputation } from "../views/viewReputation.js";
-import { bankUI } from "../views/bank.js";
+import { viewBank } from "../views/viewBank.js";
 import { viewSponsors } from "../views/viewSponsors.js";
+import { viewGameOptions } from "../views/viewGameOptions.js";
 
 document.querySelector("#btn-play").addEventListener("click", () => {
     game.championship.RunRaceSimulation();
 });
 
 document.querySelector("#btn-options").addEventListener("click", () => {
-    gameOptionsUI();
+    viewGameOptions();
 });
 
 document.querySelector("#btn-standings").addEventListener("click", () => {
@@ -30,10 +31,10 @@ document.querySelector("#btn-team-standings").addEventListener("click", () => {
 });
 
 document.querySelector("#btn-news").addEventListener("click", () => {
-    newsUI();
+    viewNews();
 });
 document.querySelector("#btn-bank").addEventListener("click", () => {
-    bankUI();
+    viewBank();
 });
 document.querySelector("#btn-sponsors").addEventListener("click", () => {
     viewSponsors();
@@ -82,13 +83,13 @@ window.onclick = e => {
         //game.teams[game.team].
     }
     if(e.target.classList.contains("select-engine")){
-        selectEngine();
+        viewSelectEngine();
     }
     if(e.target.classList.contains("market")){
-        market();
+        viewMarket();
     }
     if(e.target.classList.contains("market-eng")){
-        marketEng();
+        viewMarketEng();
     }
 }
 

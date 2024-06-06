@@ -1,7 +1,7 @@
 import { game } from "./game.js";
-import { selectEngine } from "../views/selectEngine.js";
+import { viewSelectEngine } from "../views/viewSelectEngine.js";
 import { rand, rollDice, roundToMultiple } from "./utils.js";
-import { publishNews } from "../views/news.js";
+import { publishNews } from "../views/viewNews.js";
 import { calcTeamsReputation } from "./teams/calcTeamsReputation.js";
 
 export function CalcTeamDevPoints(teamName){
@@ -525,7 +525,7 @@ export function YearUpdateTeamsStats(){
         }
         else if(team.engineContract == -1 && team.newEngine == ""){
             if(team.name == game.team){
-                selectEngine(true);
+                viewSelectEngine(true);
                 team.newEngine = "";
                 team.newEngineContract = "";
             }

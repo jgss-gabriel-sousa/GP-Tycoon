@@ -4,7 +4,7 @@ import { genTeamMainMenu } from "./mainMenu.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 
-export function market(scroll){
+export function viewMarket(scroll){
     let html = "";
     let scrollPos;
 
@@ -175,7 +175,7 @@ export function market(scroll){
     });
 }
 
-export function marketEng(scroll){
+export function viewMarketEng(scroll){
     let html = "";
     let scrollPos;
     

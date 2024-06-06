@@ -2,7 +2,7 @@ import { game } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { NumberF } from "../scripts/utils.js";
 
-export function bankUI(){
+export function viewBank(){
     let html = "";
     const team = game.teams[game.team];
     const bank = team.bank;
@@ -130,7 +130,7 @@ export function bankUI(){
         bank.installmentsValue = calcPerRaceValue();
         bank.loanInstallmentsPayed = 0;
         bank.credit -= bank.loanValue/1000;
-        bankUI();
+        viewBank();
         team.cash += Math.ceil(Number(document.querySelector("#slider-amount").value)/1000)*1000;
     });
 }

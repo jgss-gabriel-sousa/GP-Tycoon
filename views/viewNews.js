@@ -3,9 +3,9 @@ import { game } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
-import { getNewsSchema } from "./newsSchemas.js";
+import { getNewsSchema } from "./news/newsSchemas.js";
 
-export function newsUI(){
+export function viewNews(){
     const news = game.news;
 
     let html = ` 

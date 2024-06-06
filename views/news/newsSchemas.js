@@ -1,4 +1,4 @@
-import { game } from "../scripts/game.js"
+import { game } from "../../scripts/game.js"
 
 export function getNewsSchema(type, args){
     if(type == "Decrease Reputation"){

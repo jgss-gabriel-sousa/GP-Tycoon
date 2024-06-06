@@ -1,10 +1,10 @@
 import { accentsTidy, NumberF } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../scripts/game.js";
-import { market } from "./market.js";
+import { viewMarket } from "./viewMarket.js";
 import { getSalary } from "../scripts/drivers.js";
 import { genTeamMainMenu } from "./mainMenu.js";
-import { publishNews } from "./news.js";
+import { publishNews } from "./viewNews.js";
 import { LOC } from "../scripts/translation.js";
 
 export function viewDriver(name, returnToMarket, scrollPos){
@@ -199,7 +199,7 @@ export function viewDriver(name, returnToMarket, scrollPos){
         showConfirmButton: false,
     }).then(r => {
         if(returnToMarket)
-            market(scrollPos);
+            viewMarket(scrollPos);
     });
 
     if(document.querySelector("#negotiate"))
@@ -280,7 +280,7 @@ function negotiate(driverName, returnToMarket){
 
                     Swal.fire("Contrato Assinado").then(e => {
                         if(returnToMarket)
-                            market(scrollPos);
+                            viewMarket(scrollPos);
                     });
                 }
                 else{
@@ -288,7 +288,7 @@ function negotiate(driverName, returnToMarket){
                         game.contractsFailed.push(driver.name);
 
                         if(returnToMarket)
-                            market(scrollPos);
+                            viewMarket(scrollPos);
                     });
                 }
                 
