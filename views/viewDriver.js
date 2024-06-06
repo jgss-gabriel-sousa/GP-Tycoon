@@ -354,6 +354,7 @@ function approbationCalc(driverName){
         let marketHeat = 0;
         let availableVacancies = 0;
 
+        /*
         game.teams.forEach(team => {
             if(!game.championship.teams.includes(team.name)){
                 return;
@@ -368,6 +369,8 @@ function approbationCalc(driverName){
         });
 
         marketHeat = (availableVacancies / game.championship.teams*2)
+        
+        */
     }
 
     if(chance > 100) chance = 100;
