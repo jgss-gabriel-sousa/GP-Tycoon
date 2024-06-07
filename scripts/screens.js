@@ -1,4 +1,4 @@
-const screens = ["team-menu","main-menu","players-menu"];
+const screens = ["team-menu","main-menu"];
 
 export function changeScreen(newScreen){
     screens.forEach(e => {

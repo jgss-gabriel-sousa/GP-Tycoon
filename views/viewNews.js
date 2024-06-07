@@ -17,12 +17,7 @@ export function viewNews(){
     for(let i = 0; i < news.length; i++){
         
         let divider = "";
-        if(news[i].year != game.year && news[i].year != yearDivider){
-            /*
-            html += `<p>${news[i].year}</p>`
-            yearDivider = news[i].year;
-            */
-            
+        if(news[i].year != game.year && news[i].year != yearDivider){            
             divider = `style="margin-top: 2em;"`;
             yearDivider = news[i].year;
         }
