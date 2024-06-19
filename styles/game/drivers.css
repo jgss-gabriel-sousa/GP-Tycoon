@@ -1,0 +1,112 @@
+#drivers {
+    margin-bottom: 10px;
+    display: flex;
+    border: 2px solid var(--border);
+    height: 100%;
+    width: 100%;
+}
+.driver-card {
+    background-color: var(--bg);
+    border-right: 2px solid var(--border);
+    text-align: center;
+    width: 100%;
+}
+.driver-card:last-child{
+    border-right: 0;
+}
+.driver-card img {
+    max-width: 100%;
+    max-height: 128px;
+    border: 1px solid #222;
+}
+.driver-card-portrait {
+    min-width: 98px;
+    min-height: 130px;
+}
+.driver-card h1 {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.driver-card .country-flag {
+    margin-right: 5px;
+}
+.driver-info-bars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.driver-info-bars h2 {
+    width: 70px;
+    text-align: end;
+    margin-right: 5px;
+}
+.driver-info-bars .progress-bar-background {
+    width: 100px;
+    border-radius: 0px;
+    box-shadow: 0px 0px #222;
+    height: auto;
+}
+.driver-info-bars .progress-bar {
+    letter-spacing: 0.5px;
+    border-radius: 0px;
+    font-size: 12px;
+    padding-top: 1px;
+}
+.btn-driver-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--border);
+    color: var(--titles);
+	border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-driver-name:hover {
+    background-color: var(--border);
+    cursor: pointer;
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    text-shadow: 0px 0px 1px black;
+}
+.btn-driver-name h1 {
+    margin-bottom: 0 !important;
+}
+
+#test-driver .btn-driver-name,
+#academy-drivers .btn-driver-name {
+    background-color: transparent;
+    color: var(--text);
+    font-size: 12px;
+    width: 95%;
+    padding: 0;
+    justify-content: flex-start;
+    text-align: start;
+}
+
+#test-driver, #academy-drivers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#test-driver h1, #academy-drivers h1 {
+    width: 95%;
+}
+
+#test-driver .btn-driver-name:hover,
+#academy-drivers .btn-driver-name:hover {
+    filter: 0;
+    text-shadow: 0;
+    background-color: var(--border);
+    color: var(--titles);
+}
