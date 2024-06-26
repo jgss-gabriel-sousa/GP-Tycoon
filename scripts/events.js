@@ -14,84 +14,47 @@ import { viewBank } from "../views/viewBank.js";
 import { viewSponsors } from "../views/viewSponsors.js";
 import { viewGameOptions } from "../views/viewGameOptions.js";
 
-document.querySelector("#btn-play").addEventListener("click", () => {
-    game.championship.RunRaceSimulation();
-});
-
-document.querySelector("#btn-options").addEventListener("click", () => {
-    viewGameOptions();
-});
-
-document.querySelector("#btn-standings").addEventListener("click", () => {
-    seasonOverviewUI();
-});
-
-document.querySelector("#btn-team-standings").addEventListener("click", () => {
-    teamRankingUI();
-});
-
-document.querySelector("#btn-news").addEventListener("click", () => {
-    viewNews();
-});
-document.querySelector("#btn-bank").addEventListener("click", () => {
-    viewBank();
-});
-document.querySelector("#btn-sponsors").addEventListener("click", () => {
-    viewSponsors();
-});
-
-document.querySelector("#btn-historic").addEventListener("click", () => {
-    historicUI();
-});
-document.querySelector("#money").addEventListener("click", () => {
-    viewFinancialReport(game.team);
-});
-document.querySelector("#reputation").addEventListener("click", () => {
-    viewReputation(game.team);
-});
-document.querySelector("#start-game").addEventListener("click", () => {
-    selectDatabase();
-});
-document.querySelector("#load-game").addEventListener("click", () => {
-    loadGameScreen();
-});
-document.querySelector("#btn-save-game").addEventListener("click", () => {
-    saveGame();
-});
-
-window.onclick = e => {
-
-    if(e.target.classList.contains("view-driver")){
-        const btn = e.target;
-
-        viewDriver(btn.value);
+function addButtonEvent(selector, eventHandler){
+    const button = document.querySelector(selector);
+    if (button) {
+        button.addEventListener("click", eventHandler);
     }
-    if(e.target.classList.contains("view-eng")){
-        const btn = e.target;
+};
 
-        viewEng(btn.value);
-    }
-    if(e.target.classList.contains("view-employees")){
-        const btn = e.target;
+addButtonEvent("#btn-play", () => game.championship.RunRaceSimulation());
+addButtonEvent("#btn-save-game", saveGame);
+addButtonEvent("#btn-options", viewGameOptions);
+addButtonEvent("#btn-standings", seasonOverviewUI);
+addButtonEvent("#btn-team-standings", teamRankingUI);
+addButtonEvent("#btn-news", viewNews);
+addButtonEvent("#btn-bank", viewBank);
+addButtonEvent("#btn-sponsors", viewSponsors);
+addButtonEvent("#btn-historic", historicUI);
+addButtonEvent("#money", () => viewFinancialReport(game.team));
+addButtonEvent("#reputation", () => viewReputation(game.team));
+addButtonEvent("#start-game", selectDatabase);
+addButtonEvent("#load-game", loadGameScreen);
 
-        viewEmployees(btn.value);
-    }
-    if(e.target.classList.contains("dismiss-eng")){
-        const btn = e.target;
-        const name = btn.value;
+function handleClassClick(event) {
+    const btn = event.target;
+    const classActionMap = {
+        "view-driver": viewDriver,
+        "view-eng": viewEng,
+        "view-employees": viewEmployees,
+        "select-engine": viewSelectEngine,
+        "market": viewMarket,
+        "market-eng": viewMarketEng
+    };
 
-        //game.teams[game.team].
-    }
-    if(e.target.classList.contains("select-engine")){
-        viewSelectEngine();
-    }
-    if(e.target.classList.contains("market")){
-        viewMarket();
-    }
-    if(e.target.classList.contains("market-eng")){
-        viewMarketEng();
+    for (let className in classActionMap) {
+        if (btn.classList.contains(className)) {
+            classActionMap[className](btn.value);
+            break;
+        }
     }
 }
+
+window.addEventListener("click", handleClassClick);
 
 window.addEventListener("beforeunload", e => {
     e.returnValue = "\o/";
