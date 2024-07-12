@@ -99,4 +99,9 @@ export function viewSponsors(){
     });
 
 
+    document.querySelectorAll("#others-sponsors > div").forEach(sponsor => {
+        sponsor.addEventListener("click", (e) => {
+            alert(JSON.stringify(sponsor))
+        });
+    });
 }
