@@ -1,0 +1,102 @@
+#editor-menu {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#editor-menu h1 {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+#editor-menu h2 {
+    font-size: 16px;
+    text-align: center;
+}
+#editor-menu h4 {
+    margin-bottom: 0.25em;
+}
+
+#editor-menu-interface {
+    margin: 10px;
+}
+
+#editor-header {
+    display: flex;
+    justify-content: center;
+}
+#editor-header button {
+    padding: 10px 5px;
+    font-size: 14px;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+}
+#editor-header-load-file {
+    display: none;
+}
+
+#editor-main-content {
+}
+#editor-main-content button {
+    font-size: 12px;
+}
+#editor-main-content div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#editor-main-content div p {
+    padding: 0px 5px;
+    font-weight: bold;
+}
+#editor-main-content table {
+    border: 1px solid #333;
+    border-collapse: collapse;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+#editor-main-content table td {
+    border: 1px solid #333;
+    padding: 2px;
+}
+#editor-main-content table th {
+    border: 1px solid #333;
+    font-size: 12px;
+    padding: 2px 5px;
+    background-color: #333;
+    color: white;
+}
+#editor-main-content table button {
+    background-color: transparent;
+    font-size: 12px;
+    border: 0;
+}
+#editor-main-content table button:hover {
+    color: white;
+    background-color: #333;
+    filter: drop-shadow(0px 0px 2px #a8a8a8);
+}
+#editor-main-content tr:hover {
+    background-color: #c5c5c5;
+}
+
+#drivers-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#drivers-buttons-container button {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+}
+#drivers-buttons-container button:hover {
+    color: white;
+    background-color: #333;
+    border-radius: 0;
+}

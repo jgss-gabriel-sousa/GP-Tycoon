@@ -4,8 +4,7 @@ import { viewDriver } from "../views/viewDriver.js"
 import { viewEng } from "../views/viewEng.js"
 import { viewEmployees } from "../views/viewEmployees.js";
 import { viewFinancialReport } from "../views/viewFinancialReport.js";
-import { viewFinancialBalance } from "../views/viewFinancialBalance.js";
-import { selectDatabase, loadGameScreen, saveGame } from "../views/start-load-save.js";
+import { selectDatabase, loadGameScreen, saveGame, editorScreen } from "../views/start-load-save.js";
 import { viewSelectEngine } from "../views/viewSelectEngine.js";
 import { viewMarket, viewMarketEng } from "../views/viewMarket.js";
 import { viewNews } from "../views/viewNews.js";
@@ -34,6 +33,7 @@ addButtonEvent("#money", () => viewFinancialReport(game.team));
 addButtonEvent("#reputation", () => viewReputation(game.team));
 addButtonEvent("#start-game", selectDatabase);
 addButtonEvent("#load-game", loadGameScreen);
+addButtonEvent("#editor", editorScreen);
 
 function handleClassClick(event) {
     const btn = event.target;
@@ -43,7 +43,7 @@ function handleClassClick(event) {
         "view-employees": viewEmployees,
         "select-engine": viewSelectEngine,
         "market": viewMarket,
-        "market-eng": viewMarketEng
+        "market-eng": viewMarketEng,
     };
 
     for (let className in classActionMap) {

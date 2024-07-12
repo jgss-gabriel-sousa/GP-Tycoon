@@ -17,7 +17,7 @@ export const game = {
     activeScreen: "main-menu",
     uiTeamColors: true,
     team: "",
-    year: 0,
+    year: 2023,
     championship: Championship,
     othersSeries: {},
     drivers: {},

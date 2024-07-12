@@ -2,6 +2,7 @@
 @import url("./ui.css");
 @import url("./main-menu.css");
 @import url("./game.css");
+@import url("./editor.css");
 
 @font-face {
     font-family: Montserrat;

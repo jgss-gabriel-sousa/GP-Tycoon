@@ -624,7 +624,3 @@ export function genTeamMainMenu(){
 
     tooltips();
 };
-
-function mainMenu(){
-    document.querySelector("#main-menu").style.display = "flex";
-}
