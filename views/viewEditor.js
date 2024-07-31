@@ -129,6 +129,7 @@ function renderDBData(DB){
     <hr>
     <h4>Drivers:</h4>
     <button>Add Driver</button>
+    <input type="text" id="filter-driver" placeholder="Filter" />
     <div id="drivers-buttons-container">
     `;
 
@@ -150,6 +151,21 @@ function renderDBData(DB){
     document.querySelectorAll(".team-row button").forEach(e => {
         e.addEventListener("click", e => {
             console.log(e.target.value);
+        });
+    });
+
+    document.querySelector("#filter-driver").addEventListener("input", e => {
+        const filter = document.querySelector("#filter-driver").value.toLowerCase();
+
+        const driversBtns = document.querySelectorAll("#drivers-buttons-container button");
+
+        driversBtns.forEach(e => {
+            if(e.innerHTML.toLowerCase().includes(filter)){
+                e.style.display = "block";
+            }
+            else {
+                e.style.display = "none";
+            }
         });
     });
 }
