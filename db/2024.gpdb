@@ -943,10 +943,702 @@
         },
         "Álex Palou": {
             "name": "Álex Palou",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "IndyCar",
             "age": 26,
             "country": "ES",
             "speed": 88,
             "pace": 87
+        },
+        "Pato O’Ward": {
+            "name": "Pato O’Ward",
+            "team": "McLaren",
+            "currentSeries": "IndyCar",
+            "status": "Piloto de Testes",
+            "age": 23,
+            "country": "MX",
+            "speed": 85,
+            "pace": 83
+        },
+        "Valtteri Bottas": {
+            "name": "Valtteri Bottas",
+            "team": "Alfa Romeo",
+            "status": "1º Piloto",
+            "age": 33,
+            "country": "FI",
+            "speed": 88,
+            "pace": 89,
+            "years_in_f1": 10,
+            "gps": 200,
+            "wins": 10,
+            "podiums": 67,
+            "poles": 20,
+            "contractRemainingYears": 1
+        },
+        "Zhou Guanyu": {
+            "name": "Zhou Guanyu",
+            "team": "Alfa Romeo",
+            "status": "2º Piloto",
+            "age": 23,
+            "country": "CN",
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 1,
+            "gps": 22
+        },
+        "Théo Pourchaire": {
+            "name": "Théo Pourchaire",
+            "team": "Alfa Romeo",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "FR",
+            "speed": 85,
+            "pace": 86
+        },
+        "Yuki Tsunoda": {
+            "name": "Yuki Tsunoda",
+            "team": "AlphaTauri",
+            "status": "1º Piloto",
+            "age": 22,
+            "country": "JP",
+            "speed": 91,
+            "pace": 88,
+            "years_in_f1": 2,
+            "gps": 42
+        },
+        "Nyck de Vries": {
+            "name": "Nyck de Vries",
+            "team": "AlphaTauri",
+            "status": "2º Piloto",
+            "age": 27,
+            "country": "NL",
+            "speed": 83,
+            "pace": 84,
+            "years_in_f1": 1,
+            "gps": 1,
+            "contractRemainingYears": 1
+        },
+        "Liam Lawson": {
+            "name": "Liam Lawson",
+            "team": "AlphaTauri",
+            "status": "Piloto de Testes",
+            "currentSeries": "Super Fórmula",
+            "age": 20,
+            "country": "NZ",
+            "speed": 85,
+            "pace": 84
+        },
+        "Esteban Ocon": {
+            "name": "Esteban Ocon",
+            "team": "Alpine",
+            "status": "1º Piloto",
+            "age": 26,
+            "country": "FR",
+            "speed": 88,
+            "pace": 87,
+            "years_in_f1": 6,
+            "gps": 111,
+            "wins": 1,
+            "podiums": 2,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Pierre Gasly": {
+            "name": "Pierre Gasly",
+            "team": "Alpine",
+            "status": "2º Piloto",
+            "age": 26,
+            "country": "FR",
+            "speed": 88,
+            "pace": 87,
+            "years_in_f1": 6,
+            "gps": 108,
+            "wins": 1,
+            "podiums": 3,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Jack Doohan": {
+            "name": "Jack Doohan",
+            "team": "Alpine",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "AU",
+            "speed": 84,
+            "pace": 85
+        },
+        "Kevin Magnussen": {
+            "name": "Kevin Magnussen",
+            "team": "Haas",
+            "status": "1º Piloto",
+            "age": 30,
+            "country": "DK",
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 7,
+            "gps": 141,
+            "wins": 0,
+            "podiums": 1,
+            "poles": 1,
+            "contractRemainingYears": 1
+        },
+        "Nico Hülkenberg": {
+            "name": "Nico Hülkenberg",
+            "team": "Haas",
+            "status": "2º Piloto",
+            "age": 35,
+            "country": "DE",
+            "speed": 87,
+            "pace": 86,
+            "years_in_f1": 11,
+            "gps": 181,
+            "wins": 0,
+            "podiums": 0,
+            "poles": 1,
+            "contractRemainingYears": 0
+        },
+        "Pietro Fittipaldi": {
+            "name": "Pietro Fittipaldi",
+            "team": "Haas",
+            "status": "Piloto de Testes",
+            "currentSeries": "WEC",
+            "age": 26,
+            "country": "BR",
+            "speed": 83,
+            "pace": 83,
+            "years_in_f1": 1,
+            "gps": 2
+        },
+        "Alexander Albon": {
+            "name": "Alexander Albon",
+            "team": "Williams",
+            "status": "1º Piloto",
+            "age": 26,
+            "country": "TH",
+            "speed": 88,
+            "pace": 91,
+            "years_in_f1": 3,
+            "gps": 59,
+            "wins": 0,
+            "podiums": 2,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Logan Sargeant": {
+            "name": "Logan Sargeant",
+            "team": "Williams",
+            "status": "2º Piloto",
+            "age": 22,
+            "country": "US",
+            "speed": 82,
+            "pace": 80
+        },
+        "Jamie Chadwick": {
+            "name": "Jamie Chadwick",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "age": 24,
+            "country": "GB",
+            "speed": 82,
+            "pace": 81
+        },
+        "Frederik Vesti": {
+            "name": "Frederik Vesti",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "age": 20,
+            "country": "DK",
+            "contractRemainingYears": 1
+        },
+        "Ayumu Iwasa": {
+            "name": "Ayumu Iwasa",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "JP"
+        },
+        "Victor Martins": {
+            "name": "Victor Martins",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "FR"
+        },
+        "Oliver Bearman": {
+            "name": "Oliver Bearman",
+            "currentSeries": "Fórmula 2",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "age": 21,
+            "country": "GB",
+            "contractRemainingYears": 1
+        },
+        "Enzo Fittipaldi": {
+            "name": "Enzo Fittipaldi",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "BR"
+        },
+        "Dennis Hauger": {
+            "name": "Dennis Hauger",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "NO",
+            "contractRemainingYears": 1
+        },
+        "Richard Verschoor": {
+            "name": "Richard Verschoor",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "NL"
+        },
+        "Zane Maloney": {
+            "name": "Zane Maloney",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "BB"
+        },
+        "Jehan Daruvala": {
+            "name": "Jehan Daruvala",
+            "currentSeries": "Fórmula 2",
+            "age": 24,
+            "country": "IN"
+        },
+        "Jüri Vips": {
+            "name": "Jüri Vips",
+            "currentSeries": "",
+            "age": 22,
+            "country": "EE"
+        },
+        "Gabriel Bortoleto": {
+            "name": "Gabriel Bortoleto",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "BR",
+            "contractRemainingYears": 2
+        },
+        "Pepe Martí": {
+            "name": "Pepe Martí",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "ES",
+            "contractRemainingYears": 2
+        },
+        "Dino Beganovic": {
+            "name": "Dino Beganovic",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "SE",
+            "contractRemainingYears": 2
+        },
+        "Zak O'Sullivan": {
+            "name": "Zak O'Sullivan",
+            "team": "Williams",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "GB"
+        },
+        "Gabriele Minì": {
+            "name": "Gabriele Minì",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "IT",
+            "contractRemainingYears": 2
+        },
+        "Josef Newgarden": {
+            "name": "Josef Newgarden",
+            "currentSeries": "IndyCar",
+            "age": 32,
+            "country": "US"
+        },
+        "Marcus Ericsson": {
+            "name": "Marcus Ericsson",
+            "currentSeries": "IndyCar",
+            "age": 32,
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 5,
+            "gps": 89,
+            "country": "SE"
+        },
+        "Scott McLaughlin": {
+            "name": "Scott McLaughlin",
+            "currentSeries": "IndyCar",
+            "age": 30,
+            "country": "NZ"
+        },
+        "Christian Lundgaard": {
+            "name": "Christian Lundgaard",
+            "currentSeries": "IndyCar",
+            "age": 21,
+            "country": "DK"
+        },
+        "Alexander Rossi": {
+            "name": "Alexander Rossi",
+            "currentSeries": "IndyCar",
+            "age": 31,
+            "speed": 88,
+            "pace": 88,
+            "years_in_f1": 1,
+            "gps": 5,
+            "country": "US"
+        },
+        "Colton Herta": {
+            "name": "Colton Herta",
+            "currentSeries": "IndyCar",
+            "age": 22,
+            "country": "US"
+        },
+        "Stoffel Vandoorne": {
+            "name": "Stoffel Vandoorne",
+            "currentSeries": "Fórmula E",
+            "age": 30,
+            "speed": 87,
+            "pace": 86,
+            "years_in_f1": 3,
+            "gps": 41,
+            "country": "BE"
+        },
+        "Sébastien Buemi": {
+            "name": "Sébastien Buemi",
+            "currentSeries": "WEC",
+            "age": 34,
+            "speed": 85,
+            "pace": 87,
+            "years_in_f1": 3,
+            "gps": 55,
+            "country": "CH"
+        },
+        "Callum Ilott": {
+            "name": "Callum Ilott",
+            "currentSeries": "IndyCar",
+            "age": 24,
+            "country": "GB"
+        },
+        "Isack Hadjar": {
+            "name": "Isack Hadjar",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 18,
+            "country": "FR",
+            "contractRemainingYears": 1
+        },
+        "Oliver Goethe": {
+            "name": "Oliver Goethe",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "DE",
+            "contractRemainingYears": 1
+        },
+        "Kacper Sztuka": {
+            "name": "Kacper Sztuka",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "PL",
+            "contractRemainingYears": 3
+        },
+        "Tim Tramnitz": {
+            "name": "Tim Tramnitz",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 18,
+            "country": "DE",
+            "contractRemainingYears": 1
+        },
+        "Arvid Lindblad": {
+            "name": "Arvid Lindblad",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "GB",
+            "contractRemainingYears": 4
+        },
+        "Enzo Deligny": {
+            "name": "Enzo Deligny",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 14,
+            "country": "FR",
+            "contractRemainingYears": 5
+        },
+        "Sebastián Montoya": {
+            "name": "Sebastián Montoya",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "CO"
+        },
+        "Souta Arao": {
+            "name": "Souta Arao",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 17,
+            "country": "JP"
+        },
+        "Jak Crawford": {
+            "name": "Jak Crawford",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 17,
+            "country": "US"
+        },
+        "Aiden Neate": {
+            "name": "Aiden Neate",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "GB"
+        },
+        "Nikola Tsolov": {
+            "name": "Nikola Tsolov",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 16,
+            "country": "BG",
+            "contractRemainingYears": 3
+        },
+        "Kush Maini": {
+            "name": "Kush Maini",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "IN",
+            "contractRemainingYears": 1
+        },
+        "Sophia Flörsch": {
+            "name": "Sophia Flörsch",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 22,
+            "country": "DE",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Abbi Pulling": {
+            "name": "Abbi Pulling",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 19,
+            "country": "GB",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Nicola Lacorte": {
+            "name": "Nicola Lacorte",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 15,
+            "country": "IT",
+            "contractRemainingYears": 4
+        },
+        "Maya Weug": {
+            "name": "Maya Weug",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 18,
+            "country": "NL",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Rafael Câmara": {
+            "name": "Rafael Câmara",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 17,
+            "country": "BR",
+            "contractRemainingYears": 3
+        },
+        "Tuukka Taponen": {
+            "name": "Tuukka Taponen",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 16,
+            "country": "FI",
+            "contractRemainingYears": 3
+        },
+        "Aurelia Nobels": {
+            "name": "Aurelia Nobels",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "BR",
+            "gender": "Female",
+            "contractRemainingYears": 4
+        },
+        "Arthur Leclerc": {
+            "name": "Arthur Leclerc",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "MC"
+        },
+        "James Wharton": {
+            "name": "James Wharton",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "AU"
+        },
+        "Ugo Ugochukwu": {
+            "name": "Ugo Ugochukwu",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "US",
+            "contractRemainingYears": 4
+        },
+        "Ryō Hirakawa": {
+            "name": "Ryō Hirakawa",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "WEC",
+            "age": 28,
+            "country": "JP",
+            "contractRemainingYears": 1
+        },
+        "Bianca Bustamante": {
+            "name": "Bianca Bustamante",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 17,
+            "country": "PH",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Andrea Kimi Antonelli": {
+            "name": "Andrea Kimi Antonelli",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 16,
+            "country": "IT",
+            "contractRemainingYears": 4
+        },
+        "Doriane Pin": {
+            "name": "Doriane Pin",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 18,
+            "country": "FR",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Paul Aron": {
+            "name": "Paul Aron",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "EE"
+        },
+        "Marcus Amand": {
+            "name": "Marcus Amand",
+            "team": "Alfa Romeo",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 15,
+            "country": "FR",
+            "contractRemainingYears": 1
+        },
+        "Léna Bühler": {
+            "name": "Léna Bühler",
+            "team": "Alfa Romeo",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 25,
+            "country": "CH",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Franco Colapinto": {
+            "name": "Franco Colapinto",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 19,
+            "country": "AR",
+            "contractRemainingYears": 1
+        },
+        "Luke Browning": {
+            "name": "Luke Browning",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 20,
+            "country": "GB",
+            "contractRemainingYears": 1
+        },
+        "Oleksandr Bondarev": {
+            "name": "Oleksandr Bondarev",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Kart",
+            "age": 13,
+            "country": "UA",
+            "contractRemainingYears": 5
+        },
+        "Lia Block": {
+            "name": "Lia Block",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Rally",
+            "age": 16,
+            "country": "US",
+            "contractRemainingYears": 1
+        },
+        "Oliver Gray": {
+            "name": "Oliver Gray",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "GB"
         }
     }
 }
