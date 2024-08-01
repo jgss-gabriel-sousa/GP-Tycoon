@@ -10,7 +10,7 @@ export function viewEditor(){
             <li><button type="button" id="load-db">Carregar</button></li>
         </ul>
         <div id="editor-header-load-file">
-            <input type="file" id="editor-file-input" name="file" accept=".GPdb" />
+            <input type="file" id="editor-file-input" name="file" accept=".json" />
         </div>
     </div>
     <div id="editor-main-content"></div>
