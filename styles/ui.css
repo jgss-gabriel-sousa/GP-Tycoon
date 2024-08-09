@@ -329,10 +329,6 @@
     background-color: transparent;
 }
 
-#market, #market-eng {
-    max-height: 500px;
-    overflow-y: scroll;
-}
 #market table, #market-eng table {
     width: 100%;
     border-collapse: collapse;
@@ -345,6 +341,9 @@
 #market th, #market-eng th {
     font-size: 16px;
     border-bottom: #555 1px solid;
+}
+#market tr:nth-child(even), #market-eng tr:nth-child(even) {
+    background-color: #f5f5f5ad;
 }
 #market button, #market-eng button {
     margin: 0;
@@ -536,7 +535,8 @@
 }
 #news-driver-hire div:first-child {
     margin: 0 10px;
-    max-width: 30vh;
+    width: 30vh;
+    max-width: 200px;
 }
 #news-driver-hire i {
     font-size: 52px;

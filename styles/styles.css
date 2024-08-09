@@ -253,3 +253,15 @@ abbr {
 	background-color: #666;
 	-webkit-border-radius: 6px;
 }
+
+.swal2-container.swal2-center>.swal2-popup {
+    height: 75vh
+}
+
+.swal2-close {
+    position: absolute !important;
+}
+
+.swal2-popup {
+    grid-template-rows: minmax(0, 10%) !important;
+}
