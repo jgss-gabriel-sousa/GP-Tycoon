@@ -4,6 +4,7 @@ import { circuitsData } from "../data/circuits.js";
 import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "../scripts/ui.js";
 import { tooltips } from "../scripts/tooltips.js";
+import { display } from "../scripts/display.js";
 
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
@@ -540,6 +541,8 @@ export function genTeamMainMenu(){
     genCarHTML();
     genEngHTML();
     genDevelopmentHTML();
+
+    //display("mainMenu.html","mainMenu");
 
     const teams = game.teams;
 
