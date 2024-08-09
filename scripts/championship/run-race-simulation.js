@@ -3,6 +3,8 @@ import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { genTeamMainMenu } from "../../views/mainMenu.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "../teams.js";
+import { seasonOverviewUI } from "../ui.js";
+import { simulateOthersSeries } from "../othersSeries.js";
 
 export const RunRaceSimulation = () => {
     if(Championship.actualRound > Championship.tracks.length){
