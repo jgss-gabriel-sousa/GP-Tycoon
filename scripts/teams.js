@@ -351,6 +351,17 @@ export function UpdateTeamAfterRace(){
             driversAcademySalary += driver.salary*1000;
         }
 
+
+        let installmentsValueTotal = 0;
+    
+        team.bank.loans.forEach(loan => {
+            installmentsValueTotal += loan.installmentsValue;
+            loan.installmentsPayed++;
+            loan.value -= loan.installmentsValue*1000;
+            team.bank.credit += loan.installmentsValue;
+        });
+        team.bank.loans = team.bank.loans.filter(loan => loan.installmentsPayed < loan.installments);
+
         setBalance("Prize per Point",   "profit",   teamPoints * 200);
         setBalance("Prize per Place",   "profit",   prizePerPlaceValue);
         setBalance("Major Sponsor",     "profit",   team.majorSponsor_value);
@@ -363,8 +374,9 @@ export function UpdateTeamAfterRace(){
         setBalance("Employees",         "expense",  team.employees * 2.5);
         setBalance("Development Investments", "expense", team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
         setBalance("Constructions",     "expense",  0);
-        setBalance("Loan Payment",      "expense",  team.bank.installmentsValue);
+        setBalance("Loan Payment",      "expense",  installmentsValueTotal);
         setBalance("Loan Interest",     "expense",  0);
+
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
@@ -593,16 +605,6 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
         team.financialReport["Loan Payment"] = 0;
-
-        if(team.bank.loanInstallments > 0){
-            team.bank.loanInstallmentsPayed++;
-            team.bank.loanValue -= team.bank.installmentsValue*1000;
-        }
-        if(team.bank.loanInstallmentsPayed == team.bank.loanInstallments){
-            team.bank.loanInstallments = 0;
-            team.bank.loanInstallmentsPayed = 0;
-            team.bank.installmentsValue = 0;
-        }
 
         team.balanceHistoric.raw = {value:[],legend:[]};
         team.balanceHistoric.accumulated = {value:[],legend:[]};

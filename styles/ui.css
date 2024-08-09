@@ -670,9 +670,6 @@
 #bank-container input {
     width: 50%;
 }
-#bank-container > div:first-child {
-    border-right: 1px solid #5c5c5c;
-}
 #bank-container > div:nth-child(2) {
     border-left: 1px solid #5c5c5c;
 }
@@ -692,4 +689,17 @@
 #bank-container button:hover {
     font-weight: bold;
     filter: drop-shadow(0px 0px 2px black);
+}
+#loans-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+.loan {
+    border: 1px solid #5c5c5c;
+    background-color: #c4c4c4;
+    color: #333;
+    width: 100px;
+    padding: 0.5em;
+    margin: 2px;
 }

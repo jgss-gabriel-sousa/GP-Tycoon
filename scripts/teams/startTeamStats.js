@@ -41,12 +41,8 @@ export function StartTeamsStats(){
         team.factories = Math.ceil(team.employees/250);
 
         team.bank = {};
-        team.bank.loanValue = 0;
-        team.bank.loanInterestRate = 2;
-        team.bank.loanInterest = 2;
-        team.bank.loanInstallmentsPayed = 0;
-        team.bank.loanInstallments = 0;
-        team.bank.installmentsValue = 0;
+        team.bank.loans = [];
+        team.bank.loanInterestRate = 1.5;
         team.bank.credit = roundToMultiple(Math.round((team.cash * team.politicalForce)/1000),500)*1000;
 
         team.investments = team.investments ?? {};
