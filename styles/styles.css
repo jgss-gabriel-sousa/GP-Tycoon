@@ -255,7 +255,8 @@ abbr {
 }
 
 .swal2-container.swal2-center>.swal2-popup {
-    height: 75vh
+    max-height: 75vh;
+    align-content: space-between !important;
 }
 
 .swal2-close {
@@ -264,4 +265,9 @@ abbr {
 
 .swal2-popup {
     grid-template-rows: minmax(0, 10%) !important;
+}
+
+.swal2-title {
+    margin-bottom: 1em !important;
+    letter-spacing: 1px;
 }

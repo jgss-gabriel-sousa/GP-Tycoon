@@ -51,10 +51,6 @@
     padding: 0.2em;
 }
 
-#season-overview{
-    overflow-y: scroll;
-    height: 500px;
-}
 #season-overview table{
     color: #202122;
     margin: 1em 0;
@@ -123,7 +119,7 @@
     display: flex;
 }
 #view-driver table{
-    margin: 5px;
+    margin-bottom: 10px;
     min-width: 300px;
     padding: 0;
     height: fit-content;
@@ -167,18 +163,22 @@
 }
 #view-eng > div{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 #view-eng tr{
     padding: 2px;
 }
 #eng-stats {
-    padding-right: 20px;
     white-space: nowrap;
     border-collapse: collapse;
+    display: flex;
+    flex-direction: row;
 }
 #eng-stats > div{
     margin-bottom: 10px;
+    padding: 5px;
+    width: 120px;
+    font-size: 14px;
 }
 #eng-stats > div h1{
     margin-bottom: 2px;
@@ -259,6 +259,10 @@
     width: 100%;
     text-align: start;
     font-size: 14px;
+}
+#view-employees-infos h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 #view-employees-infos td:first-child{
     text-align: end;
