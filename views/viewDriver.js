@@ -2,7 +2,7 @@ import { accentsTidy, NumberF } from "../scripts/utils.js";
 import { countryCodes } from "../data/countryCodes.js";
 import { game } from "../scripts/game.js";
 import { viewMarket } from "./viewMarket.js";
-import { getSalary } from "../scripts/drivers.js";
+import { contractApprobationCalc, getSalary } from "../scripts/drivers.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { publishNews } from "./viewNews.js";
 import { LOC } from "../scripts/translation.js";
@@ -266,7 +266,7 @@ function negotiate(driverName, returnToMarket){
                 ;
             }
             else{
-                if((Math.random()*100) < approbationCalc(driver.name)){
+                if((Math.random()*100) < contractApprobationCalc(driver.name)){
                     driver.newTeam = game.team;
                     driver.newStatus = document.querySelector("select").value;
                     driver.newSalary = Number(document.querySelector("#slider-salary").value)/1000;
@@ -300,82 +300,34 @@ function negotiate(driverName, returnToMarket){
         }
     });
 
-    approbationCalc(driver.name);
+    contractApprobationCalc(driver.name);
 
     document.querySelector("select").addEventListener("change", () => {
-        approbationCalc(driver.name);
+        updateApprobation();
     });
 
     document.querySelector("#slider-duration").addEventListener("input", () => {
         const sliderValue = Number(document.querySelector("#slider-duration").value);
 
         document.querySelector("#years").innerHTML = sliderValue == 1 ? sliderValue+" ano" : sliderValue+" anos";
-        approbationCalc(driver.name);
+
+        updateApprobation();
     });
 
     document.querySelector("#slider-salary").addEventListener("input", () => {
         const sliderValue = Number(document.querySelector("#slider-salary").value);
 
         document.querySelector("#salary").innerHTML = "Salário: "+NumberF(sliderValue * 1000,"ext-short",0)+" por corrida";
-        approbationCalc(driver.name);
+
+        updateApprobation();
     });
-}
 
-function approbationCalc(driverName){
-    const driver = game.drivers[driverName];
-    const team = game.teams[game.team];
-    let chance;
+    function updateApprobation(){
+        const duration = Number(document.querySelector("#slider-duration").value);
+        const salary = Number(document.querySelector("#slider-salary").value)/1000;
+        const status = document.querySelector("select").value;
 
-    if(!document.querySelector("select").innerText){
-        document.querySelector("#approbation").innerText = "--";
-        return;
+        const approbation = contractApprobationCalc(driver.name, driver.team, duration, salary, status);
+        document.querySelector("#approbation").innerText = approbation;
     }
-
-    const duration = Number(document.querySelector("#slider-duration").value);
-    const salary = Number(document.querySelector("#slider-salary").value)/1000;
-    const status = document.querySelector("select").value;
-    chance = 70;
-    chance *= (duration * 0.5) / ((driver.experience+10)/100);
-    chance *= Math.pow(salary / getSalary(driver),2);
-
-    if(status == "Piloto da Academia" && driver.age <= driver.careerPeak)
-        chance *= ((duration * 0.5) / ((6-team.reputation) * 500)) * 50;
-
-    if(status == "Piloto de Testes" && driver.age <= driver.careerPeak)
-        chance *= ((duration * 0.5) / ((driver.experience+10) * 5)) * 50;
-
-    if(status == "2º Piloto" && driver.age <= driver.careerPeak && driver.titles > 0)
-        chance *= ((salary * 0.5) / ((driver.experience+10) * 5)) * 50;
-
-    if(status != "Piloto da Academia" && (salary / driver.salary) < 1){
-        chance *=  Math.pow(salary / driver.salary,8);
-    }
-    if(status == "1º Piloto" || status == "2º Piloto"){
-        let marketHeat = 0;
-        let availableVacancies = 0;
-
-        /*
-        game.teams.forEach(team => {
-            if(!game.championship.teams.includes(team.name)){
-                return;
-            }
-
-            if(team.new1driver == ""){
-                availableVacancies++;
-            }
-            if(team.new2driver == ""){
-                availableVacancies++;
-            }
-        });
-
-        marketHeat = (availableVacancies / game.championship.teams*2)
-        
-        */
-    }
-
-    if(chance > 100) chance = 100;
-    if(chance < 5) chance = 0;
-
-    document.querySelector("#approbation").innerText = Math.round(chance);
-    return Math.round(chance);
 }

@@ -7,11 +7,14 @@ import { seasonOverviewUI } from "../ui.js";
 import { simulateOthersSeries } from "../othersSeries.js";
 
 export const RunRaceSimulation = () => {
-    if(Championship.actualRound > Championship.tracks.length){
+    if(game.championship.actualRound > Championship.tracks.length){
         seasonOverviewUI("end");
         simulateOthersSeries();
         return;
     }
+
+    console.log(game.championship)
+    console.log(Championship)
 
     BeforeRaceUpdateTeamsStats();
 

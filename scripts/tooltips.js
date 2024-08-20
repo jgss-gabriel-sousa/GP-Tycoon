@@ -50,7 +50,7 @@ export function tooltips(){
             </tr>
         </table>
         <br>
-        <p>Qtd de Empregados: ${employees_pts*100}%</p>
+        <p>Qtd de Empregados: ${(employees_pts*100).toFixed(1)}%</p>
         <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 
@@ -78,7 +78,7 @@ export function tooltips(){
             </tr>
         </table>
         <br>
-        <p>Qtd de Empregados: ${employees_pts*100}%</p>
+        <p>Qtd de Empregados: ${(employees_pts*100).toFixed(1)}%</p>
         <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
 }

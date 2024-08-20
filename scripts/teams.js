@@ -61,12 +61,11 @@ export function BeforeRaceUpdateTeamsStats(){
         car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
         
         team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
-    
+        
         AI_HireDriver(team.name);
         AI_HireEngineer(team.name);
     }
 }
-
 
 function AI_HireDriver(teamName){
     const team = game.teams[teamName];
@@ -78,7 +77,6 @@ function AI_HireDriver(teamName){
     if(team.driversAcademy.length == 0 && team.driversAcademy.length < 10) looking.push("Piloto da Academia");
 
     if(looking.length == 0) return;
-    if(team.name == game.team) return;
     
     const remainingRounds = game.championship.tracks.length - game.championship.actualRound;
     let financeFactor = ((team.financialReport["Balance"]*remainingRounds)+team.cash) / team.cash;
@@ -98,7 +96,10 @@ function AI_HireDriver(teamName){
             const driver = game.drivers[d];
 
             if(driver.salary > maxValue) continue;
-            if(driver.condition != "racing") continue;
+            if(driver.condition != "racing"){
+                console.log(driver.name, driver.condition)
+                continue;
+            }
             if(driver.newTeam != "" || driver.contractRemainingYears > 0) continue;
             if(lookingFor == "Piloto da Academia" && driver.experience > 0) continue;
 
@@ -275,18 +276,23 @@ function AI_HireEngineer(teamName){
             eng.occupation = lookingFor;
             if(lookingFor == "Chefe de Equipe"){
                 team.teamPrincipal = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Diretor Técnico"){
                 team.engineers.technicalDirector = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Designer Chefe"){
                 team.engineers.chiefDesigner = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Aerodinamicista Chefe"){
                 team.engineers.chiefAerodynamicist = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Engenheiro Chefe"){
                 team.engineers.chiefEngineering = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
 
             delete selectedEngs[i];
@@ -511,6 +517,8 @@ export function YearUpdateTeamsStats(){
         if(game.drivers[team.test_driver].contractRemainingYears == 0)  team.newTdriver = "";
 
         for(let i = 0; i < team.driversAcademy.length; i++){
+            const driverName = team.driversAcademy[i];
+
             if(game.drivers[driverName].team != team.name){
                 team.driversAcademy.splice(i, 1);
             }

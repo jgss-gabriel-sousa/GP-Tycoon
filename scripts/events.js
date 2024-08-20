@@ -12,6 +12,7 @@ import { viewReputation } from "../views/viewReputation.js";
 import { viewBank } from "../views/viewBank.js";
 import { viewSponsors } from "../views/viewSponsors.js";
 import { viewGameOptions } from "../views/viewGameOptions.js";
+import { RunRaceSimulation } from "../scripts/championship/run-race-simulation.js";
 
 function addButtonEvent(selector, eventHandler){
     const button = document.querySelector(selector);
@@ -20,7 +21,7 @@ function addButtonEvent(selector, eventHandler){
     }
 };
 
-addButtonEvent("#btn-play", () => game.championship.RunRaceSimulation());
+addButtonEvent("#btn-play", () => RunRaceSimulation());
 addButtonEvent("#btn-save-game", saveGame);
 addButtonEvent("#btn-options", viewGameOptions);
 addButtonEvent("#btn-standings", seasonOverviewUI);
