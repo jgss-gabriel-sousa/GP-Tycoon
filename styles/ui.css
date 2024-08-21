@@ -25,6 +25,9 @@
 #team-standings tr{
     border-top: 1px solid #3c4043;
 }
+#team-standings tr:nth-child(even){
+    background-color: #f0f0f0;
+}
 #team-standings td{
     border: 1px solid #a2a9b1;
     padding: 0.2em 0.4em;
@@ -336,6 +339,7 @@
 #market table, #market-eng table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 5px;
 }
 #market td, #market-eng td {
     font-size: 12px;
@@ -507,7 +511,7 @@
 }
 #news-content img:first-child {
     height: 40%;
-    max-width: 40%;
+    max-width: 60%;
 }
 #news-content p {
     font-size: 12px;
@@ -543,7 +547,7 @@
     max-width: 200px;
 }
 #news-driver-hire i {
-    font-size: 52px;
+    font-size: 48px;
     margin-left: 20px;
 }
 #news-driver-hire img:last-child {

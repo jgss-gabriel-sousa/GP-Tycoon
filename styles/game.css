@@ -58,6 +58,17 @@
     overflow: overlay;
     align-items: flex-start;
 }
+@media screen and (min-height: 580px) {
+    #team-menu-interface {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 660px) {
+    #team-menu-interface {
+        justify-content: flex-start;
+    }
+}
 #team-menu-interface > div {
     margin: 0 5px;
 }
@@ -246,7 +257,7 @@
     color: var(--titles);
     text-align: end;
     height: 20px;
-    padding: 0px 2px;
+    padding: 0px 5px;
 }
 #development th {
     padding: 4px;
@@ -400,10 +411,9 @@
     }
     #btn-play {
         padding: 10px 1em;
-        font-size: 10px;
+        font-size: 14px;
     }
     #engineering th, #development th {
-        width: 50px;
         font-size: 10px;
     }
     #team-logo {
@@ -439,9 +449,6 @@
     }
     #drivers {
         justify-content: center;
-    }
-    #team-menu-interface {
-        align-items: flex-start;
     }
     #test-driver, #academy-drivers {
         flex-direction: row;
