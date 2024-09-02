@@ -4,6 +4,8 @@ import { circuitsData } from "../data/circuits.js";
 import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "../scripts/ui.js";
 import { tooltips } from "../scripts/tooltips.js";
+import { display } from "../scripts/display.js";
+import { CreateStandings } from "../scripts/championship/create-standings.js";
 
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
@@ -535,11 +537,13 @@ export function genDevelopmentHTML(){
 }
 
 export function genTeamMainMenu(){
-    game.championship.CreateStandings();
+    game.championship["CreateStandings"] = CreateStandings;
     genDriversHTML();
     genCarHTML();
     genEngHTML();
     genDevelopmentHTML();
+
+    //display("mainMenu.html","mainMenu");
 
     const teams = game.teams;
 
@@ -624,7 +628,3 @@ export function genTeamMainMenu(){
 
     tooltips();
 };
-
-function mainMenu(){
-    document.querySelector("#main-menu").style.display = "flex";
-}

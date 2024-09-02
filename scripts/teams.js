@@ -61,12 +61,11 @@ export function BeforeRaceUpdateTeamsStats(){
         car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
         
         team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
-    
+        
         AI_HireDriver(team.name);
         AI_HireEngineer(team.name);
     }
 }
-
 
 function AI_HireDriver(teamName){
     const team = game.teams[teamName];
@@ -78,7 +77,6 @@ function AI_HireDriver(teamName){
     if(team.driversAcademy.length == 0 && team.driversAcademy.length < 10) looking.push("Piloto da Academia");
 
     if(looking.length == 0) return;
-    if(team.name == game.team) return;
     
     const remainingRounds = game.championship.tracks.length - game.championship.actualRound;
     let financeFactor = ((team.financialReport["Balance"]*remainingRounds)+team.cash) / team.cash;
@@ -98,7 +96,10 @@ function AI_HireDriver(teamName){
             const driver = game.drivers[d];
 
             if(driver.salary > maxValue) continue;
-            if(driver.condition != "racing") continue;
+            if(driver.condition != "racing"){
+                console.log(driver.name, driver.condition)
+                continue;
+            }
             if(driver.newTeam != "" || driver.contractRemainingYears > 0) continue;
             if(lookingFor == "Piloto da Academia" && driver.experience > 0) continue;
 
@@ -275,18 +276,23 @@ function AI_HireEngineer(teamName){
             eng.occupation = lookingFor;
             if(lookingFor == "Chefe de Equipe"){
                 team.teamPrincipal = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Diretor Técnico"){
                 team.engineers.technicalDirector = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Designer Chefe"){
                 team.engineers.chiefDesigner = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Aerodinamicista Chefe"){
                 team.engineers.chiefAerodynamicist = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
             if(lookingFor == "Engenheiro Chefe"){
                 team.engineers.chiefEngineering = eng.name;
+                publishNews("Hire", [lookingFor, team.name, eng.nam]);
             }
 
             delete selectedEngs[i];
@@ -351,6 +357,17 @@ export function UpdateTeamAfterRace(){
             driversAcademySalary += driver.salary*1000;
         }
 
+
+        let installmentsValueTotal = 0;
+    
+        team.bank.loans.forEach(loan => {
+            installmentsValueTotal += loan.installmentsValue;
+            loan.installmentsPayed++;
+            loan.value -= loan.installmentsValue*1000;
+            team.bank.credit += loan.installmentsValue;
+        });
+        team.bank.loans = team.bank.loans.filter(loan => loan.installmentsPayed < loan.installments);
+
         setBalance("Prize per Point",   "profit",   teamPoints * 200);
         setBalance("Prize per Place",   "profit",   prizePerPlaceValue);
         setBalance("Major Sponsor",     "profit",   team.majorSponsor_value);
@@ -363,8 +380,9 @@ export function UpdateTeamAfterRace(){
         setBalance("Employees",         "expense",  team.employees * 2.5);
         setBalance("Development Investments", "expense", team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability);
         setBalance("Constructions",     "expense",  0);
-        setBalance("Loan Payment",      "expense",  team.bank.installmentsValue);
+        setBalance("Loan Payment",      "expense",  installmentsValueTotal);
         setBalance("Loan Interest",     "expense",  0);
+
 
         team.cash += balance;
         team.financialReport["Balance"] += balance;
@@ -499,6 +517,8 @@ export function YearUpdateTeamsStats(){
         if(game.drivers[team.test_driver].contractRemainingYears == 0)  team.newTdriver = "";
 
         for(let i = 0; i < team.driversAcademy.length; i++){
+            const driverName = team.driversAcademy[i];
+
             if(game.drivers[driverName].team != team.name){
                 team.driversAcademy.splice(i, 1);
             }
@@ -593,16 +613,6 @@ export function YearUpdateTeamsStats(){
         team.financialReport["Fines"] = 0;
         team.financialReport["Constructions"] = 0;
         team.financialReport["Loan Payment"] = 0;
-
-        if(team.bank.loanInstallments > 0){
-            team.bank.loanInstallmentsPayed++;
-            team.bank.loanValue -= team.bank.installmentsValue*1000;
-        }
-        if(team.bank.loanInstallmentsPayed == team.bank.loanInstallments){
-            team.bank.loanInstallments = 0;
-            team.bank.loanInstallmentsPayed = 0;
-            team.bank.installmentsValue = 0;
-        }
 
         team.balanceHistoric.raw = {value:[],legend:[]};
         team.balanceHistoric.accumulated = {value:[],legend:[]};

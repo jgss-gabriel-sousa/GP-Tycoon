@@ -35,76 +35,54 @@ export function roundToMultiple(number, multiple) {
 }
 
 export function NumberF(number,format,precision){    
-    if(format == "ext"){
+    if (format == "ext") {
         if (number === 0) {
             return "-";
         }
-
-        let negative = false;
-        if (number < 0) {
-            negative = true;
-            number = Math.abs(number);
-        }
-
+    
+        let negative = number < 0;
+        number = Math.abs(number);
+    
         let value = "";
-        const M = Math.floor(number/1000000);
-        let K = Math.floor((number%1000000)/1000);
+        const M = Math.floor(number / 1_000_000);
+        const K = Math.floor((number % 1_000_000) / 1_000);
         
         if (M !== 0) {
-            if (Math.abs(M) === 1) {
-                value = M + " milhão ";
-            } else {
-                value = M + " milhões ";
-            }
+            value = M === 1 ? "1 milhão " : `${M} milhões `;
         }
-
-        if(M != 0){
-            K = Math.abs(K);
-        }
-
-        if(K != 0){
-            value += K+" mil";
+    
+        if (K !== 0) {
+            value += `${K} mil`;
         }
         
-        return negative == true ? "-"+value : value;
+        return negative ? `-${value.trim()}` : value.trim();
     }
-    if(format == "ext-short"){
+    
+    if (format == "ext-short") {
         let value = "";
-        const T = parseInt(number / 1000000000000, 10);
-        const B = parseInt((number - T * 1000000000000) / 1000000000, 10);
-        const M = parseInt(number/1000000,10);
-        const K = Math.round((number-(M*1000000))/1000,10);
-        const KK = Math.round((number-(M*1000000))/100000,10);
-
-        /*
-        if(M >= 1000 || M <= 1000){
-            value = B+"Bi "
+        const T = Math.floor(number / 1_000_000_000_000);
+        const B = Math.floor((number % 1_000_000_000_000) / 1_000_000_000);
+        const M = Math.floor((number % 1_000_000_000) / 1_000_000);
+        const K = Math.floor((number % 1_000_000) / 1_000);
+        const KK = Math.floor((number % 1_000_000) / 100_000);
+    
+        if (T > 0) {
+            value = `${T}T `;
+        } else if (B > 0) {
+            value = `${B}B `;
+        } else if (M > 0) {
+            value = `${M}M `;
+            if (K > 0) {
+                value = `${M}.${KK}M`;
+            }
+        } else if (K > 0) {
+            value = `${K}K`;
+        } else {
+            value = `${number}`;
         }
-        else*/ if(M > 0 || M <= 0){
-            value = M+"M ";
-        }
-        if(M > 0 && K > 0){
-            if(K != 0)
-                value = M+"."+KK+"M";
-        }
-        if(M <= 0 && K > 0){
-            if(K != 0)
-                value = K+"K";
-        }
-        if(M == 0 && K == 0){
-            value = K+"K";
-        }
-        else if(M < 0 && K < 0){
-            if(K != 0 && M < 1000)
-                value += -(K)+"K";
-            /*
-            else if(K != 0 && M > 1000)
-                value += -(M)+"M";
-        */
-        }
-
-        return value;
-    }
+    
+        return value.trim();
+    }    
     
     if(precision == 0){
         number = number.toString().replace(".", ",");

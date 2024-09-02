@@ -3,6 +3,7 @@ import { genTeamMainMenu } from "./mainMenu.js";
 import { changeScreen } from "../scripts/screens.js"
 import { Championship, Championship_Init } from "../scripts/championship.js";
 import { createTooltip } from "../scripts/tooltips.js";
+import { viewEditor } from "./viewEditor.js";
 
 function newGame(){
     startGameData();
@@ -267,7 +268,11 @@ export async function saveGame(){
             game.gameName = name;
             Swal.fire(`Jogo salvo com sucesso`);
         }
+        else {
+            return;
+        }
     }
+
     localStorage.setItem("gpTycoon-savegame-"+game.gameName, JSON.stringify(game));
 }
 
@@ -287,4 +292,9 @@ function deleteGame(gameName, savedGames){
         }
         loadGameScreen();
     });
+}
+
+export function editorScreen(){
+    changeScreen("editor-menu");
+    viewEditor();
 }

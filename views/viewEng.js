@@ -156,6 +156,7 @@ function dismissEng(name){
             if(eng.occupation == "Aerodinamicista Chefe")   game.teams[eng.team].engineers.chiefAerodynamicist = "";
             if(eng.occupation == "Engenheiro Chefe")        game.teams[eng.team].engineers.chiefEngineering = "";
             
+            eng.occupation = "";
             eng.team = "";
             
             const team = game.teams[game.team];

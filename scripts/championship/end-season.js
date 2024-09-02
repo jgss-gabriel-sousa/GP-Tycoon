@@ -1,5 +1,6 @@
 import { Championship } from "../championship.js";
-import { game } from "../game.js";
+import { game, YearUpdate } from "../game.js";
+import { accentsTidy } from "../utils.js";
 
 export const endSeason = () => {
     let html = `
@@ -79,6 +80,6 @@ export const endSeason = () => {
         allowOutsideClick: false,
         confirmButtonText: "Ok",
     }).then(() => {
-        Championship.YearUpdate();
+        YearUpdate();
     });
 }

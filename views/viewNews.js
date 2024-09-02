@@ -17,12 +17,7 @@ export function viewNews(){
     for(let i = 0; i < news.length; i++){
         
         let divider = "";
-        if(news[i].year != game.year && news[i].year != yearDivider){
-            /*
-            html += `<p>${news[i].year}</p>`
-            yearDivider = news[i].year;
-            */
-            
+        if(news[i].year != game.year && news[i].year != yearDivider){            
             divider = `style="margin-top: 2em;"`;
             yearDivider = news[i].year;
         }
@@ -83,20 +78,20 @@ export function viewNews(){
 
 export function publishNews(type, args){
     try {
-    const news = getNewsSchema(type, args);
+        const news = getNewsSchema(type, args);
 
-    news.date = game.championship.actualRound-1;
-    news.year = game.year;
-    
-    if(news.content){
-        news.content = news.content[rand(0, news.content.length)];
-    }
+        news.date = game.championship.actualRound-1;
+        news.year = game.year;
+        
+        if(news.content){
+            news.content = news.content[rand(0, news.content.length)];
+        }
 
-    if(news.image){
-        news.image = `/img/views/news/${news.image}.webp`;
-    }
+        if(news.image){
+            news.image = `/img/views/news/${news.image}.webp`;
+        }
 
-    game.news.unshift(news);
+        game.news.unshift(news);
 
     } catch (error) {
         console.error(error)

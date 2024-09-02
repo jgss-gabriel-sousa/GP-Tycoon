@@ -25,6 +25,9 @@
 #team-standings tr{
     border-top: 1px solid #3c4043;
 }
+#team-standings tr:nth-child(even){
+    background-color: #f0f0f0;
+}
 #team-standings td{
     border: 1px solid #a2a9b1;
     padding: 0.2em 0.4em;
@@ -51,10 +54,6 @@
     padding: 0.2em;
 }
 
-#season-overview{
-    overflow-y: scroll;
-    height: 500px;
-}
 #season-overview table{
     color: #202122;
     margin: 1em 0;
@@ -123,7 +122,7 @@
     display: flex;
 }
 #view-driver table{
-    margin: 5px;
+    margin-bottom: 10px;
     min-width: 300px;
     padding: 0;
     height: fit-content;
@@ -167,18 +166,22 @@
 }
 #view-eng > div{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 #view-eng tr{
     padding: 2px;
 }
 #eng-stats {
-    padding-right: 20px;
     white-space: nowrap;
     border-collapse: collapse;
+    display: flex;
+    flex-direction: row;
 }
 #eng-stats > div{
     margin-bottom: 10px;
+    padding: 5px;
+    width: 120px;
+    font-size: 14px;
 }
 #eng-stats > div h1{
     margin-bottom: 2px;
@@ -260,6 +263,10 @@
     text-align: start;
     font-size: 14px;
 }
+#view-employees-infos h2{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
 #view-employees-infos td:first-child{
     text-align: end;
     padding: 5px;
@@ -329,13 +336,10 @@
     background-color: transparent;
 }
 
-#market, #market-eng {
-    max-height: 500px;
-    overflow-y: scroll;
-}
 #market table, #market-eng table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 5px;
 }
 #market td, #market-eng td {
     font-size: 12px;
@@ -345,6 +349,9 @@
 #market th, #market-eng th {
     font-size: 16px;
     border-bottom: #555 1px solid;
+}
+#market tr:nth-child(even), #market-eng tr:nth-child(even) {
+    background-color: #f5f5f5ad;
 }
 #market button, #market-eng button {
     margin: 0;
@@ -504,7 +511,7 @@
 }
 #news-content img:first-child {
     height: 40%;
-    max-width: 40%;
+    max-width: 60%;
 }
 #news-content p {
     font-size: 12px;
@@ -536,10 +543,11 @@
 }
 #news-driver-hire div:first-child {
     margin: 0 10px;
-    max-width: 30vh;
+    width: 30vh;
+    max-width: 200px;
 }
 #news-driver-hire i {
-    font-size: 52px;
+    font-size: 48px;
     margin-left: 20px;
 }
 #news-driver-hire img:last-child {
@@ -670,9 +678,6 @@
 #bank-container input {
     width: 50%;
 }
-#bank-container > div:first-child {
-    border-right: 1px solid #5c5c5c;
-}
 #bank-container > div:nth-child(2) {
     border-left: 1px solid #5c5c5c;
 }
@@ -692,4 +697,17 @@
 #bank-container button:hover {
     font-weight: bold;
     filter: drop-shadow(0px 0px 2px black);
+}
+#loans-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+}
+.loan {
+    border: 1px solid #5c5c5c;
+    background-color: #c4c4c4;
+    color: #333;
+    width: 100px;
+    padding: 0.5em;
+    margin: 2px;
 }

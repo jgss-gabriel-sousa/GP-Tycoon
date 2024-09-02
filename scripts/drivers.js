@@ -203,7 +203,7 @@ export function YearUpdateDriversStats(){
         }
         driver.contractRemainingYears--;
 
-        if(driver.contractRemainingYears <= 0 && driver.age > driver.careerPeak+10 && driver.condition != "retired"){
+        if(driver.contractRemainingYears <= 0 && driver.newTeam == "" && driver.age > driver.careerPeak+10 && driver.condition != "retired"){
             driver.newTeam = "Aposentadoria";
             driver.newContractRemainingYears = 1;
             publishNews("Driver Last Season", [driver]);
@@ -220,4 +220,61 @@ export function YearUpdateDriversStats(){
     for(let i = activeDrivers; i < 3*game.championship.teams.length*2; i++) {
         genDriver();
     }
+}
+
+
+export function contractApprobationCalc(driverName, teamName, duration, salary, status){
+    const driver = game.drivers[driverName];
+    const team = game.teams[teamName];
+    let chance;
+
+    /*
+    if(!document.querySelector("select").innerText){
+        document.querySelector("#approbation").innerText = "--";
+        return;
+    }*/
+
+    chance = 70;
+    chance *= (duration * 0.5) / ((driver.experience+10)/100);
+    chance *= Math.pow(salary / getSalary(driver),2);
+
+    if(status == "Piloto da Academia" && driver.age <= driver.careerPeak)
+        chance *= ((duration * 0.5) / ((6-team.reputation) * 500)) * 50;
+
+    if(status == "Piloto de Testes" && driver.age <= driver.careerPeak)
+        chance *= ((duration * 0.5) / ((driver.experience+10) * 5)) * 50;
+
+    if(status == "2º Piloto" && driver.age <= driver.careerPeak && driver.titles > 0)
+        chance *= ((salary * 0.5) / ((driver.experience+10) * 5)) * 50;
+
+    if(status != "Piloto da Academia" && (salary / driver.salary) < 1){
+        chance *=  Math.pow(salary / driver.salary,8);
+    }
+    if(status == "1º Piloto" || status == "2º Piloto"){
+        let marketHeat = 0;
+        let availableVacancies = 0;
+
+        /*
+        game.teams.forEach(team => {
+            if(!game.championship.teams.includes(team.name)){
+                return;
+            }
+
+            if(team.new1driver == ""){
+                availableVacancies++;
+            }
+            if(team.new2driver == ""){
+                availableVacancies++;
+            }
+        });
+
+        marketHeat = (availableVacancies / game.championship.teams*2)
+        
+        */
+    }
+
+    if(chance > 100) chance = 100;
+    if(chance < 5) chance = 0;
+
+    return Math.round(chance);
 }

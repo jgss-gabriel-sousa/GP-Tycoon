@@ -24,8 +24,6 @@
     <title>Grand Prix Tycoon</title>
 </head>
 <body>
-    <header>
-    </header>
     <main>
         <div id="team-menu">
             <div id="button-list">
@@ -33,8 +31,8 @@
                 <button id="btn-options"><img src="./img/ui/settings.png"> Opções</button>
                 <br>
                 <p>Classificação</p>
-                <button id="btn-standings"><img src="./img/ui/ranking.png"> Pilotos</button>
-                <button id="btn-team-standings"><img src="./img/ui/team-ranking.png"> Equipes</button>
+                <button id="btn-standings"><img src="./img/ui/ranking.png">Class. Pilotos</button>
+                <button id="btn-team-standings"><img src="./img/ui/team-ranking.png">Class. Equipes</button>
                 <br>
                 <p>Mercado</p>
                 <button id="btn-market" class="market"><img src="./img/ui/market.png"> Pilotos</button>
@@ -67,19 +65,31 @@
                         <div id="next-race-name"></div>
                         <button id="btn-play"><span>Continuar</span></button>
                     </div>
-
                 </div>
-                <div id="drivers-car-section">
-                    <div id="drivers"></div>
-                    <div id="car" class="bars-table">
-                        <div id="car-info"></div>
-                        <div id="chassis"></div>
-                        <div id="engine"></div>
+                <!--
+                <div id="tab-button-list">
+                    <button>Carro</button>
+                    <button>Engenheiros</button>
+                    <button>Engenheiros</button>
+                </div>
+                <div id="tab">-->
+                    <div id="drivers-car-section">
+                        <div id="drivers"></div>
+                        <div id="car" class="bars-table">
+                            <div id="car-info"></div>
+                            <div id="chassis"></div>
+                            <div id="engine"></div>
+                        </div>
                     </div>
+                    <div id="engineering"></div>
+                    <div id="development"></div>
                 </div>
-                <div id="engineering"></div>
-                <div id="development"></div>
-            </div>
+        </div>
+
+        <div id="editor-menu">
+            <h1>Editor - GP Tycoon</h1>
+            
+            <div id="editor-menu-interface"></div>
         </div>
 
         <div id="main-menu">
@@ -87,8 +97,9 @@
             <div class="wrap">
                 <button id="start-game" class="main-menu-btn"><span>Novo Jogo</span></button>
                 <button id="load-game" class="main-menu-btn"><span>Carregar Jogo</span></button>
+                <button id="editor" class="main-menu-btn"><span>Editor</span></button>
             </div>
-            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - version 0.14.2 (Nakajima)</small>
+            <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - version 0.15 (Ocon)</small>
         </div>
 
         <div id="players-menu"></div>

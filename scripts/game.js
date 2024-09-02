@@ -16,7 +16,7 @@ export const game = {
     settings: {},
     activeScreen: "main-menu",
     uiTeamColors: true,
-    team: "Red Bull",
+    team: "",
     year: 2023,
     championship: Championship,
     othersSeries: {},

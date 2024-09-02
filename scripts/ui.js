@@ -3,6 +3,8 @@ import { circuitsData } from "../data/circuits.js"
 import { viewGameOptions } from "../views/viewGameOptions.js"
 import { accentsTidy, NumberF } from "./utils.js"
 import { genEngHTML } from "../views/mainMenu.js"
+import { CreateStandings } from "./championship/create-standings.js"
+import { endSeason } from "./championship/end-season.js"
 
 export function UpdateDataInfo(e){
     const team = game.teams[game.team];
@@ -155,7 +157,7 @@ export function teamRankingUI(){
 export function seasonOverviewUI(thenCall){
     let html = ``;
 
-    game.championship.CreateStandings();
+    CreateStandings();
 
     html += `
     <div id="season-overview">
@@ -231,10 +233,10 @@ export function seasonOverviewUI(thenCall){
         width: "100%",
         showCloseButton: true,
         focusConfirm: false,
-        showConfirmButton: false,
+        confirmButtonText: "Ok",
     }).then(e => {
         if(thenCall == "end"){
-            game.championship.EndSeason();
+            endSeason();
         }
     })
 }

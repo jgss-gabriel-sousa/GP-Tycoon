@@ -1,10 +1,11 @@
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { timeConvert } from "../utils.js";
+import { QualifySim } from "./qualify-sim.js";
 
 export const genGridTableHTML = (status) => {
     if(status != "end")
-        Championship.QualifySim();
+        game.championship.QualifySim();
 
     const grid = Championship.race.grid;
 
