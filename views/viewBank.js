@@ -62,8 +62,8 @@ export function viewBank(){
             <p>Parcelas: <span id="installments">${0}</span></p>
             <br>
             <p><span id="value-per-race">${NumberF(0,"ext-short",0)}</span> por corrida</p>
-            <p>Juros: <span id="interest-total"></span></p>
             <p>Dívida Total: <span id="value-total"></span></p>
+            <p>Juros: <span id="interest-total"></span></p>
             <br>
             <button id="confirm" ${bank.credit <= 0 ? "disabled" : 0}>Confirmar</button>
         </div>`
@@ -85,15 +85,15 @@ export function viewBank(){
 
 
     function calcPerRaceValue(){
-        const total = Math.ceil(Number(document.querySelector("#slider-amount").value)/1000)*1000;
+        const total = Number(document.querySelector("#slider-amount").value);
         const interest = bank.loanInterestRate/100;
         const installments = Number(document.querySelector("#slider-installments").value);
-        const interestValue = Math.ceil((total*interest*installments)/1000)*1000;
+        const interestValue = total*interest*installments;
         
-        const perRace = Math.ceil(((interestValue+total) / installments)/1000)*1000;
+        const perRace = (interestValue+total) / installments;
 
-        document.querySelector("#interest-total").innerHTML = `${NumberF((perRace*installments*1000)-(total*1000),"ext-short",0)}`
         document.querySelector("#value-total").innerHTML = `${NumberF(perRace*installments*1000,"ext-short",0)}`
+        document.querySelector("#interest-total").innerHTML = `${NumberF((perRace*installments*1000)-(total*1000),"ext-short",0)}`
 
         return perRace;
     }
