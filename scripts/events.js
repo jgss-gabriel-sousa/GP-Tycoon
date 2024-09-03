@@ -4,7 +4,7 @@ import { viewDriver } from "../views/viewDriver.js"
 import { viewEng } from "../views/viewEng.js"
 import { viewEmployees } from "../views/viewEmployees.js";
 import { viewFinancialReport } from "../views/viewFinancialReport.js";
-import { selectDatabase, loadGameScreen, saveGame, editorScreen } from "../views/start-load-save.js";
+import { loadGameScreen, saveGame, editorScreen } from "../views/start-load-save.js";
 import { viewSelectEngine } from "../views/viewSelectEngine.js";
 import { viewMarket, viewMarketEng } from "../views/viewMarket.js";
 import { viewNews } from "../views/viewNews.js";
@@ -13,6 +13,7 @@ import { viewBank } from "../views/viewBank.js";
 import { viewSponsors } from "../views/viewSponsors.js";
 import { viewGameOptions } from "../views/viewGameOptions.js";
 import { RunRaceSimulation } from "../scripts/championship/run-race-simulation.js";
+import { selectDatabase } from "../views/selectDatabase.js";
 
 function addButtonEvent(selector, eventHandler){
     const button = document.querySelector(selector);

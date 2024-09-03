@@ -1,0 +1,1644 @@
+{
+    "DB_NAME": "F1 2023",
+    "championship": {
+        "teams": ["Red Bull","Mercedes","Ferrari","Aston Martin","AlphaTauri","Sauber","Alpine","Haas","Williams","McLaren"],
+        "tracks": ["Bahrein","Arábia Saudita","Austrália","Japão","China","Miami","Emília-Romanha","Mônaco","Canadá","Espanha","Áustria","Grã-Bretanha","Hungria","Bélgica","Países Baixos","Itália","Azerbaijão","Singapura","Estados Unidos","Cidade do México","São Paulo","Las Vegas","Catar","Abu Dhabi"],
+        "budgetCap": 135000,
+        "pointsSystem": [25,18,15,12,10,8,6,4,2,1],
+        "minDriversInTeams": 2,
+        "maxDriversInTeams": 2
+    },
+    "teams": {
+        "Red Bull": {
+            "name": "Red Bull",
+            "country": "AT",
+            "history": {
+                "titles": 6,
+                "wins": 92,
+                "lastResults": {
+                    "2020": {
+                        "position": 2,
+                        "pts": 319
+                    },
+                    "2021": {
+                        "position": 2,
+                        "pts": 586
+                    },
+                    "2022": {
+                        "position": 1,
+                        "pts": 759
+                    }
+                }
+            },
+            "supporters": 22.4,
+            "politicalForce": 7.7,
+            "engine": "Red Bull PowerTrains",
+            "engineContract": 0,
+            "bg_color": "#23326A",
+            "border_color": "#9E1336",
+            "font_color": "#FABB23",
+            "titles_color": "#efefef",
+            "result_bg_color": "#23326A",
+            "result_font_color": "#efefef",
+            "cash": 500000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Max Verstappen",
+            "driver2": "Sergio Pérez",
+            "test_driver": "Daniel Ricciardo",
+            "driversAcademy": [
+                "Ayumu Iwasa",
+                "Arvid Lindblad",
+                "Isack Hadjar",
+                "Dennis Hauger",
+                "Enzo Deligny",
+                "Pepe Martí",
+                "Tim Tramnitz",
+                "Kacper Sztuka",
+                "Oliver Goethe"
+            ],
+            "car": {
+                "speed": 90,
+                "downforce": 100,
+                "reliability": 100
+            },
+            "teamPrincipal": "Christian Horner",
+            "engineers": {
+                "technicalDirector": "Pierre Waché",
+                "chiefDesigner": "Adrian Newey",
+                "chiefAerodynamicist": "Enrico Balbo",
+                "chiefEngineering": "Paul Monaghan"
+            },
+            "employees": 1000,
+            "majorSponsor": "Oracle",
+            "sponsors": [
+                "BYBIT",
+                "Tag Heuer"
+            ],
+            "majorSponsor_value": 3000,
+            "sponsor_value": 1500,
+            "factorySponsor_value": 2000,
+            "investments": {
+                "aerodynamics": 1500,
+                "downforce": 2000,
+                "weight": 1500,
+                "reliability": 1500
+            }
+        },
+        "Mercedes": {
+            "name": "Mercedes",
+            "country": "DE",
+            "history": {
+                "titles": 8,
+                "wins": 125,
+                "lastResults": {
+                    "2020": {
+                        "position": 1,
+                        "pts": 573
+                    },
+                    "2021": {
+                        "position": 1,
+                        "pts": 614
+                    },
+                    "2022": {
+                        "position": 3,
+                        "pts": 515
+                    }
+                }
+            },
+            "supporters": 24.4,
+            "politicalForce": 8.8,
+            "engine": "Mercedes",
+            "engineContract": -1,
+            "bg_color": "#C8CCCE",
+            "border_color": "#00A79B",
+            "font_color": "#000",
+            "titles_color": "#000",
+            "result_bg_color": "#C8CCCE",
+            "result_font_color": "#000",
+            "cash": 500000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Lewis Hamilton",
+            "driver2": "George Russell",
+            "test_driver": "Mick Schumacher",
+            "driversAcademy": [
+                "Andrea Kimi Antonelli",
+                "Frederik Vesti",
+                "Doriane Pin",
+                "Paul Aron"
+            ],
+            "car": {
+                "speed": 57,
+                "downforce": 85,
+                "reliability": 90
+            },
+            "teamPrincipal": "Toto Wolff",
+            "engineers": {
+                "technicalDirector": "James Allison",
+                "chiefDesigner": "Mike Elliott",
+                "chiefAerodynamicist": "Jarrod Murphy",
+                "chiefEngineering": "John Owen"
+            },
+            "employees": 1200,
+            "majorSponsor": "Petronas",
+            "sponsors": [
+                "INEOS",
+                "IWC"
+            ],
+            "majorSponsor_value": 3000,
+            "sponsor_value": 1500,
+            "factorySponsor_value": 2000,
+            "devFocusActualSeason": 55,
+            "devFocusNextSeason": 45,
+            "investments": {
+                "aerodynamics": 750,
+                "downforce": 2250,
+                "weight": 750,
+                "reliability": 2000
+            }
+        },
+        "Ferrari": {
+            "name": "Ferrari",
+            "country": "IT",
+            "history": {
+                "titles": 16,
+                "wins": 242,
+                "lastResults": {
+                    "2020": {
+                        "position": 6,
+                        "pts": 131
+                    },
+                    "2021": {
+                        "position": 3,
+                        "pts": 324
+                    },
+                    "2022": {
+                        "position": 2,
+                        "pts": 554
+                    }
+                }
+            },
+            "supporters": 25.6,
+            "politicalForce": 9.5,
+            "engine": "Ferrari",
+            "engineContract": -1,
+            "bg_color": "#A6051A",
+            "border_color": "#111",
+            "font_color": "#FFEB00",
+            "titles_color": "#FFF",
+            "result_bg_color": "#A6051A",
+            "result_font_color": "#fff690",
+            "cash": 500000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Charles Leclerc",
+            "driver2": "Carlos Sainz Jr.",
+            "test_driver": "Antonio Giovinazzi",
+            "driversAcademy": [
+                "Dino Beganovic",
+                "Maya Weug",
+                "James Wharton",
+                "Arthur Leclerc",
+                "Oliver Bearman",
+                "Rafael Câmara",
+                "Tuukka Taponen",
+                "Aurelia Nobels"
+            ],
+            "car": {
+                "speed": 76,
+                "downforce": 82,
+                "reliability": 90
+            },
+            "teamPrincipal": "Frédéric Vasseur",
+            "engineers": {
+                "technicalDirector": "Enrico Cardile",
+                "chiefDesigner": "Fabio Montecchi",
+                "chiefAerodynamicist": "David Sanchez",
+                "chiefEngineering": "Enrico Gualtieri"
+            },
+            "employees": 700,
+            "majorSponsor": "",
+            "sponsors": [
+                "Shell",
+                "Santander",
+                "VGW"
+            ],
+            "majorSponsor_value": 6000,
+            "sponsor_value": 1000,
+            "factorySponsor_value": 4000,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 1250,
+                "downforce": 1750,
+                "weight": 1250,
+                "reliability": 2000
+            }
+        },
+        "Aston Martin": {
+            "name": "Aston Martin",
+            "country": "GB",
+            "history": {
+                "titles": 0,
+                "wins": 1,
+                "lastResults": {
+                    "2020": {
+                        "position": 4,
+                        "pts": 195
+                    },
+                    "2021": {
+                        "position": 7,
+                        "pts": 77
+                    },
+                    "2022": {
+                        "position": 7,
+                        "pts": 55
+                    }
+                }
+            },
+            "supporters": 8,
+            "politicalForce": 6.2,
+            "engine": "Mercedes",
+            "engineContract": 3,
+            "bg_color": "#00352f",
+            "border_color": "#00594f",
+            "font_color": "#fff",
+            "titles_color": "#edfd02",
+            "result_bg_color": "#00352f",
+            "result_font_color": "#edfd02",
+            "cash": 200000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Fernando Alonso",
+            "driver2": "Lance Stroll",
+            "test_driver": "Felipe Drugovich",
+            "driversAcademy": [],
+            "car": {
+                "speed": 63,
+                "downforce": 83,
+                "reliability": 90
+            },
+            "teamPrincipal": "Mike Krack",
+            "engineers": {
+                "technicalDirector": "Andrew Green",
+                "chiefDesigner": "Tom McCullough",
+                "chiefAerodynamicist": "Dan Fallows",
+                "chiefEngineering": "Luca Furbatto"
+            },
+            "employees": 500,
+            "majorSponsor": "Cognizant",
+            "sponsors": [
+                "Aramco"
+            ],
+            "majorSponsor_value": 2250,
+            "sponsor_value": 1250,
+            "factorySponsor_value": 1500,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 750,
+                "downforce": 1250,
+                "weight": 1000,
+                "reliability": 2500
+            }
+        },
+        "Alpine": {
+            "name": "Alpine",
+            "country": "FR",
+            "history": {
+                "titles": 2,
+                "wins": 36,
+                "lastResults": {
+                    "2020": {
+                        "position": 5,
+                        "pts": 181
+                    },
+                    "2021": {
+                        "position": 5,
+                        "pts": 155
+                    },
+                    "2022": {
+                        "position": 4,
+                        "pts": 173
+                    }
+                }
+            },
+            "supporters": 6.4,
+            "politicalForce": 5.5,
+            "engine": "Renault",
+            "engineContract": -1,
+            "bg_color": "#005094",
+            "border_color": "#fd4bc7",
+            "font_color": "#fff",
+            "titles_color": "#000",
+            "result_bg_color": "#003d70",
+            "result_font_color": "#ffbaea",
+            "cash": 200000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Pierre Gasly",
+            "driver2": "Esteban Ocon",
+            "test_driver": "Jack Doohan",
+            "driversAcademy": [
+                "Victor Martins",
+                "Abbi Pulling",
+                "Sophia Flörsch",
+                "Gabriele Minì",
+                "Kush Maini",
+                "Nicola Lacorte",
+                "Nikola Tsolov",
+                "Aiden Neate"
+            ],
+            "car": {
+                "speed": 40,
+                "downforce": 80,
+                "reliability": 40
+            },
+            "teamPrincipal": "Otmar Szafnauer",
+            "engineers": {
+                "technicalDirector": "Matt Harman",
+                "chiefDesigner": "Pat Fry",
+                "chiefAerodynamicist": "Dirk de Beer",
+                "chiefEngineering": "Ciaron Pilbeam"
+            },
+            "employees": 950,
+            "majorSponsor": "BWT",
+            "sponsors": [
+                "Castrol"
+            ],
+            "majorSponsor_value": 2250,
+            "sponsor_value": 1500,
+            "factorySponsor_value": 1500,
+            "devFocusActualSeason": 45,
+            "devFocusNextSeason": 55,
+            "investments": {
+                "aerodynamics": 2000,
+                "downforce": 500,
+                "weight": 750,
+                "reliability": 1500
+            }
+        },
+        "Haas": {
+            "name": "Haas",
+            "country": "US",
+            "history": {
+                "titles": 0,
+                "wins": 0,
+                "lastResults": {
+                    "2020": {
+                        "position": 9,
+                        "pts": 3
+                    },
+                    "2021": {
+                        "position": 10,
+                        "pts": 0
+                    },
+                    "2022": {
+                        "position": 8,
+                        "pts": 37
+                    }
+                }
+            },
+            "supporters": 5.4,
+            "politicalForce": 4.3,
+            "engine": "Ferrari",
+            "engineContract": 3,
+            "bg_color": "#efefef",
+            "border_color": "#000",
+            "font_color": "#000",
+            "titles_color": "#ff6156",
+            "result_bg_color": "#efefef",
+            "result_font_color": "#9b1d14",
+            "cash": 50000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Kevin Magnussen",
+            "driver2": "Nico Hülkenberg",
+            "test_driver": "Pietro Fittipaldi",
+            "driversAcademy": [],
+            "car": {
+                "speed": 55,
+                "downforce": 50,
+                "reliability": 90
+            },
+            "teamPrincipal": "Günther Steiner",
+            "engineers": {
+                "technicalDirector": "Simone Resta",
+                "chiefDesigner": "Rob Taylor",
+                "chiefAerodynamicist": "Arron Melvin",
+                "chiefEngineering": "Ben Agathangelou"
+            },
+            "employees": 250,
+            "majorSponsor": "MoneyGram",
+            "sponsors": [],
+            "majorSponsor_value": 1500,
+            "sponsor_value": 500,
+            "factorySponsor_value": 500,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 1500,
+                "downforce": 750,
+                "weight": 1000,
+                "reliability": 1250
+            }
+        },
+        "McLaren": {
+            "name": "McLaren",
+            "country": "GB",
+            "history": {
+                "titles": 8,
+                "wins": 183,
+                "lastResults": {
+                    "2020": {
+                        "position": 3,
+                        "pts": 202
+                    },
+                    "2021": {
+                        "position": 4,
+                        "pts": 275
+                    },
+                    "2022": {
+                        "position": 5,
+                        "pts": 159
+                    }
+                }
+            },
+            "supporters": 23.4,
+            "politicalForce": 7.2,
+            "engine": "Mercedes",
+            "engineContract": 3,
+            "bg_color": "#ff8000",
+            "border_color": "#59ADF5",
+            "font_color": "#111",
+            "titles_color": "#111",
+            "result_bg_color": "#ff8000",
+            "result_font_color": "#000",
+            "cash": 250000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Lando Norris",
+            "driver2": "Oscar Piastri",
+            "test_driver": "Pato O’Ward",
+            "driversAcademy": [
+                "Ugo Ugochukwu",
+                "Ryō Hirakawa",
+                "Gabriel Bortoleto",
+                "Bianca Bustamante",
+                "Álex Palou"
+            ],
+            "car": {
+                "speed": 67,
+                "downforce": 70,
+                "reliability": 95
+            },
+            "teamPrincipal": "Andrea Stella",
+            "engineers": {
+                "technicalDirector": "",
+                "chiefDesigner": "James Key",
+                "chiefAerodynamicist": "Peter Prodromou",
+                "chiefEngineering": "Neil Houldey"
+            },
+            "employees": 900,
+            "majorSponsor": "",
+            "sponsors": [
+                "OKX",
+                "Google"
+            ],
+            "majorSponsor_value": 3000,
+            "sponsor_value": 1000,
+            "factorySponsor_value": 2000,
+            "devFocusActualSeason": 70,
+            "devFocusNextSeason": 30,
+            "investments": {
+                "aerodynamics": 1250,
+                "downforce": 750,
+                "weight": 1000,
+                "reliability": 1250
+            }
+        },
+        "Sauber": {
+            "name": "Sauber",
+            "country": "CH",
+            "history": {
+                "titles": 0,
+                "wins": 1,
+                "lastResults": {
+                    "2020": {
+                        "position": 8,
+                        "pts": 8
+                    },
+                    "2021": {
+                        "position": 9,
+                        "pts": 13
+                    },
+                    "2022": {
+                        "position": 6,
+                        "pts": 55
+                    }
+                }
+            },
+            "supporters": 4.4,
+            "politicalForce": 6.5,
+            "engine": "Ferrari",
+            "engineContract": 3,
+            "bg_color": "#981e32",
+            "border_color": "#002039",
+            "font_color": "#f9f9f8",
+            "titles_color": "#f9f9f8",
+            "result_bg_color": "#981e32",
+            "result_font_color": "#f9f9f8",
+            "cash": 75000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Valtteri Bottas",
+            "driver2": "Zhou Guanyu",
+            "test_driver": "Théo Pourchaire",
+            "driversAcademy": [
+                "Marcus Amand",
+                "Léna Bühler"
+            ],
+            "car": {
+                "speed": 55,
+                "downforce": 45,
+                "reliability": 95
+            },
+            "teamPrincipal": "Andreas Seidl",
+            "engineers": {
+                "technicalDirector": "Jan Monchaux",
+                "chiefDesigner": "",
+                "chiefAerodynamicist": "Franck Sanchez",
+                "chiefEngineering": "Ruth Buscombe"
+            },
+            "employees": 300,
+            "majorSponsor": "Stake",
+            "sponsors": [
+                "KICK"
+            ],
+            "majorSponsor_value": 1500,
+            "sponsor_value": 500,
+            "factorySponsor_value": 2000,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 2250,
+                "downforce": 1000,
+                "weight": 1250,
+                "reliability": 1000
+            }
+        },
+        "Racing Bulls": {
+            "name": "Racing Bulls",
+            "country": "IT",
+            "history": {
+                "titles": 0,
+                "wins": 2,
+                "lastResults": {
+                    "2020": {
+                        "position": 7,
+                        "pts": 107
+                    },
+                    "2021": {
+                        "position": 6,
+                        "pts": 142
+                    },
+                    "2022": {
+                        "position": 9,
+                        "pts": 35
+                    }
+                }
+            },
+            "supporters": 6,
+            "politicalForce": 5.8,
+            "engine": "Red Bull PowerTrains",
+            "engineContract": 3,
+            "bg_color": "#f1f3f4",
+            "border_color": "#00293f",
+            "font_color": "#000",
+            "titles_color": "#fff",
+            "result_bg_color": "#00293f",
+            "result_font_color": "#fff",
+            "cash": 75000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Yuki Tsunoda",
+            "driver2": "Nyck de Vries",
+            "test_driver": "Liam Lawson",
+            "driversAcademy": [
+                "Enzo Fittipaldi",
+                "Zane Maloney",
+                "Sebastián Montoya",
+                "Souta Arao",
+                "Jak Crawford"
+            ],
+            "car": {
+                "speed": 30,
+                "downforce": 45,
+                "reliability": 95
+            },
+            "teamPrincipal": "Franz Tost",
+            "engineers": {
+                "technicalDirector": "Jody Egginton",
+                "chiefDesigner": "Paolo Marabini",
+                "chiefAerodynamicist": "Peter Machin",
+                "chiefEngineering": "Trygve Rangen"
+            },
+            "employees": 400,
+            "majorSponsor": "",
+            "sponsors": [
+                "Orlen",
+                "Honda"
+            ],
+            "majorSponsor_value": 3000,
+            "sponsor_value": 500,
+            "factorySponsor_value": 1000,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 500,
+                "downforce": 750,
+                "weight": 500,
+                "reliability": 3000
+            }
+        },
+        "Williams": {
+            "name": "Williams",
+            "country": "GB",
+            "history": {
+                "titles": 9,
+                "wins": 114,
+                "lastResults": {
+                    "2020": {
+                        "position": 10,
+                        "pts": 0
+                    },
+                    "2021": {
+                        "position": 8,
+                        "pts": 23
+                    },
+                    "2022": {
+                        "position": 10,
+                        "pts": 8
+                    }
+                }
+            },
+            "supporters": 5.4,
+            "politicalForce": 4,
+            "engine": "Mercedes",
+            "engineContract": 3,
+            "bg_color": "#040046",
+            "border_color": "#00a3e0",
+            "font_color": "#d5d5d5",
+            "titles_color": "#000",
+            "result_bg_color": "#040046",
+            "result_font_color": "#d5d5d5",
+            "cash": 75000,
+            "boardTrust": 100,
+            "supportersTrust": 100,
+            "driver1": "Alexander Albon",
+            "driver2": "Logan Sargeant",
+            "test_driver": "Zak O'Sullivan",
+            "driversAcademy": [
+                "Jamie Chadwick",
+                "Franco Colapinto",
+                "Luke Browning",
+                "Oleksandr Bondarev",
+                "Lia Block",
+                "Oliver Gray"
+            ],
+            "car": {
+                "speed": 65,
+                "downforce": 45,
+                "reliability": 80
+            },
+            "teamPrincipal": "James Vowles",
+            "engineers": {
+                "technicalDirector": "Sven Smeets",
+                "chiefDesigner": "Dave Worner",
+                "chiefAerodynamicist": "Adam Kenyon",
+                "chiefEngineering": "Paul Williams"
+            },
+            "employees": 700,
+            "majorSponsor": "",
+            "sponsors": [
+                "Duracell",
+                "Gulf"
+            ],
+            "majorSponsor_value": 3000,
+            "sponsor_value": 500,
+            "factorySponsor_value": 1000,
+            "devFocusActualSeason": 30,
+            "devFocusNextSeason": 70,
+            "investments": {
+                "aerodynamics": 500,
+                "downforce": 750,
+                "weight": 500,
+                "reliability": 1250
+            }
+        }
+    },
+    "drivers": {
+        "Lewis Hamilton": {
+            "name": "Lewis Hamilton",
+            "team": "Mercedes",
+            "status": "1º Piloto",
+            "age": 37,
+            "country": "GB",
+            "speed": 96,
+            "pace": 96,
+            "years_in_f1": 15,
+            "titles": 7,
+            "gps": 310,
+            "wins": 103,
+            "podiums": 191,
+            "poles": 103,
+            "contractRemainingYears": 0
+        },
+        "George Russell": {
+            "name": "George Russell",
+            "team": "Mercedes",
+            "status": "2º Piloto",
+            "age": 24,
+            "country": "GB",
+            "speed": 95,
+            "pace": 94,
+            "years_in_f1": 3,
+            "gps": 82,
+            "wins": 1,
+            "podiums": 9,
+            "poles": 1,
+            "contractRemainingYears": 1
+        },
+        "Mick Schumacher": {
+            "name": "Mick Schumacher",
+            "team": "Mercedes",
+            "status": "Piloto de Testes",
+            "age": 22,
+            "country": "DE",
+            "speed": 82,
+            "pace": 79,
+            "years_in_f1": 1,
+            "gps": 40,
+            "wins": 0,
+            "podiums": 0,
+            "poles": 0,
+            "contractRemainingYears": 0
+        },
+        "Max Verstappen": {
+            "name": "Max Verstappen",
+            "team": "Red Bull",
+            "status": "1º Piloto",
+            "age": 25,
+            "country": "NL",
+            "speed": 98,
+            "pace": 97,
+            "years_in_f1": 6,
+            "titles": 2,
+            "gps": 163,
+            "wins": 35,
+            "podiums": 77,
+            "poles": 20,
+            "contractRemainingYears": 5
+        },
+        "Sergio Pérez": {
+            "name": "Sergio Pérez",
+            "team": "Red Bull",
+            "status": "2º Piloto",
+            "age": 32,
+            "country": "MX",
+            "speed": 88,
+            "pace": 94,
+            "years_in_f1": 11,
+            "gps": 235,
+            "wins": 4,
+            "podiums": 26,
+            "poles": 1,
+            "contractRemainingYears": 1
+        },
+        "Daniel Ricciardo": {
+            "name": "Daniel Ricciardo",
+            "team": "Red Bull",
+            "status": "Piloto de Testes",
+            "age": 33,
+            "country": "AU",
+            "speed": 85,
+            "pace": 90,
+            "years_in_f1": 11,
+            "gps": 232,
+            "wins": 8,
+            "podiums": 32,
+            "poles": 3,
+            "contractRemainingYears": 0
+        },
+        "Charles Leclerc": {
+            "name": "Charles Leclerc",
+            "team": "Ferrari",
+            "status": "1º Piloto",
+            "age": 24,
+            "country": "MC",
+            "speed": 97,
+            "pace": 94,
+            "years_in_f1": 4,
+            "gps": 102,
+            "wins": 5,
+            "podiums": 24,
+            "poles": 18,
+            "contractRemainingYears": 1
+        },
+        "Carlos Sainz Jr.": {
+            "name": "Carlos Sainz Jr.",
+            "team": "Ferrari",
+            "status": "2º Piloto",
+            "age": 24,
+            "country": "ES",
+            "speed": 87,
+            "pace": 91,
+            "years_in_f1": 3,
+            "gps": 82,
+            "wins": 1,
+            "podiums": 9,
+            "poles": 1,
+            "contractRemainingYears": 1
+        },
+        "Antonio Giovinazzi": {
+            "name": "Antonio Giovinazzi",
+            "team": "Ferrari",
+            "status": "Piloto de Testes",
+            "age": 29,
+            "country": "IT",
+            "speed": 84,
+            "pace": 84,
+            "years_in_f1": 3,
+            "gps": 62,
+            "wins": 0,
+            "podiums": 0,
+            "poles": 0,
+            "contractRemainingYears": 0
+        },
+        "Fernando Alonso": {
+            "name": "Fernando Alonso",
+            "team": "Aston Martin",
+            "status": "1º Piloto",
+            "age": 40,
+            "country": "ES",
+            "speed": 97,
+            "pace": 92,
+            "years_in_f1": 18,
+            "titles": 2,
+            "gps": 355,
+            "wins": 32,
+            "podiums": 99,
+            "poles": 22,
+            "contractRemainingYears": 1
+        },
+        "Lance Stroll": {
+            "name": "Lance Stroll",
+            "team": "Aston Martin",
+            "status": "2º Piloto",
+            "age": 23,
+            "country": "CA",
+            "speed": 87,
+            "pace": 84,
+            "years_in_f1": 4,
+            "gps": 122,
+            "wins": 0,
+            "podiums": 3,
+            "poles": 1,
+            "contractRemainingYears": 6
+        },
+        "Felipe Drugovich": {
+            "name": "Felipe Drugovich",
+            "team": "Aston Martin",
+            "status": "Piloto de Testes",
+            "age": 22,
+            "country": "BR",
+            "speed": 87,
+            "pace": 88
+        },
+        "Lando Norris": {
+            "name": "Lando Norris",
+            "team": "McLaren",
+            "status": "1º Piloto",
+            "age": 22,
+            "country": "GB",
+            "speed": 93,
+            "pace": 96,
+            "years_in_f1": 3,
+            "gps": 82,
+            "wins": 0,
+            "podiums": 6,
+            "poles": 1,
+            "contractRemainingYears": 2
+        },
+        "Oscar Piastri": {
+            "name": "Oscar Piastri",
+            "team": "McLaren",
+            "status": "2º Piloto",
+            "age": 21,
+            "country": "AU",
+            "speed": 90,
+            "pace": 89,
+            "contractRemainingYears": 1
+        },
+        "Álex Palou": {
+            "name": "Álex Palou",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "IndyCar",
+            "age": 26,
+            "country": "ES",
+            "speed": 88,
+            "pace": 87
+        },
+        "Pato O’Ward": {
+            "name": "Pato O’Ward",
+            "team": "McLaren",
+            "currentSeries": "IndyCar",
+            "status": "Piloto de Testes",
+            "age": 23,
+            "country": "MX",
+            "speed": 85,
+            "pace": 83
+        },
+        "Valtteri Bottas": {
+            "name": "Valtteri Bottas",
+            "team": "Alfa Romeo",
+            "status": "1º Piloto",
+            "age": 33,
+            "country": "FI",
+            "speed": 88,
+            "pace": 89,
+            "years_in_f1": 10,
+            "gps": 200,
+            "wins": 10,
+            "podiums": 67,
+            "poles": 20,
+            "contractRemainingYears": 1
+        },
+        "Zhou Guanyu": {
+            "name": "Zhou Guanyu",
+            "team": "Alfa Romeo",
+            "status": "2º Piloto",
+            "age": 23,
+            "country": "CN",
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 1,
+            "gps": 22
+        },
+        "Théo Pourchaire": {
+            "name": "Théo Pourchaire",
+            "team": "Alfa Romeo",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "FR",
+            "speed": 85,
+            "pace": 86
+        },
+        "Yuki Tsunoda": {
+            "name": "Yuki Tsunoda",
+            "team": "AlphaTauri",
+            "status": "1º Piloto",
+            "age": 22,
+            "country": "JP",
+            "speed": 91,
+            "pace": 88,
+            "years_in_f1": 2,
+            "gps": 42
+        },
+        "Nyck de Vries": {
+            "name": "Nyck de Vries",
+            "team": "AlphaTauri",
+            "status": "2º Piloto",
+            "age": 27,
+            "country": "NL",
+            "speed": 83,
+            "pace": 84,
+            "years_in_f1": 1,
+            "gps": 1,
+            "contractRemainingYears": 1
+        },
+        "Liam Lawson": {
+            "name": "Liam Lawson",
+            "team": "AlphaTauri",
+            "status": "Piloto de Testes",
+            "currentSeries": "Super Fórmula",
+            "age": 20,
+            "country": "NZ",
+            "speed": 85,
+            "pace": 84
+        },
+        "Esteban Ocon": {
+            "name": "Esteban Ocon",
+            "team": "Alpine",
+            "status": "1º Piloto",
+            "age": 26,
+            "country": "FR",
+            "speed": 88,
+            "pace": 87,
+            "years_in_f1": 6,
+            "gps": 111,
+            "wins": 1,
+            "podiums": 2,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Pierre Gasly": {
+            "name": "Pierre Gasly",
+            "team": "Alpine",
+            "status": "2º Piloto",
+            "age": 26,
+            "country": "FR",
+            "speed": 88,
+            "pace": 87,
+            "years_in_f1": 6,
+            "gps": 108,
+            "wins": 1,
+            "podiums": 3,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Jack Doohan": {
+            "name": "Jack Doohan",
+            "team": "Alpine",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "AU",
+            "speed": 84,
+            "pace": 85
+        },
+        "Kevin Magnussen": {
+            "name": "Kevin Magnussen",
+            "team": "Haas",
+            "status": "1º Piloto",
+            "age": 30,
+            "country": "DK",
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 7,
+            "gps": 141,
+            "wins": 0,
+            "podiums": 1,
+            "poles": 1,
+            "contractRemainingYears": 1
+        },
+        "Nico Hülkenberg": {
+            "name": "Nico Hülkenberg",
+            "team": "Haas",
+            "status": "2º Piloto",
+            "age": 35,
+            "country": "DE",
+            "speed": 87,
+            "pace": 86,
+            "years_in_f1": 11,
+            "gps": 181,
+            "wins": 0,
+            "podiums": 0,
+            "poles": 1,
+            "contractRemainingYears": 0
+        },
+        "Pietro Fittipaldi": {
+            "name": "Pietro Fittipaldi",
+            "team": "Haas",
+            "status": "Piloto de Testes",
+            "currentSeries": "WEC",
+            "age": 26,
+            "country": "BR",
+            "speed": 83,
+            "pace": 83,
+            "years_in_f1": 1,
+            "gps": 2
+        },
+        "Alexander Albon": {
+            "name": "Alexander Albon",
+            "team": "Williams",
+            "status": "1º Piloto",
+            "age": 26,
+            "country": "TH",
+            "speed": 88,
+            "pace": 91,
+            "years_in_f1": 3,
+            "gps": 59,
+            "wins": 0,
+            "podiums": 2,
+            "poles": 0,
+            "contractRemainingYears": 1
+        },
+        "Logan Sargeant": {
+            "name": "Logan Sargeant",
+            "team": "Williams",
+            "status": "2º Piloto",
+            "age": 22,
+            "country": "US",
+            "speed": 82,
+            "pace": 80
+        },
+        "Jamie Chadwick": {
+            "name": "Jamie Chadwick",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "age": 24,
+            "country": "GB",
+            "speed": 82,
+            "pace": 81
+        },
+        "Frederik Vesti": {
+            "name": "Frederik Vesti",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "age": 20,
+            "country": "DK",
+            "contractRemainingYears": 1
+        },
+        "Ayumu Iwasa": {
+            "name": "Ayumu Iwasa",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "JP"
+        },
+        "Victor Martins": {
+            "name": "Victor Martins",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "FR"
+        },
+        "Oliver Bearman": {
+            "name": "Oliver Bearman",
+            "currentSeries": "Fórmula 2",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "age": 21,
+            "country": "GB",
+            "contractRemainingYears": 1
+        },
+        "Enzo Fittipaldi": {
+            "name": "Enzo Fittipaldi",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 21,
+            "country": "BR"
+        },
+        "Dennis Hauger": {
+            "name": "Dennis Hauger",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "NO",
+            "contractRemainingYears": 1
+        },
+        "Richard Verschoor": {
+            "name": "Richard Verschoor",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "NL"
+        },
+        "Zane Maloney": {
+            "name": "Zane Maloney",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 19,
+            "country": "BB"
+        },
+        "Jehan Daruvala": {
+            "name": "Jehan Daruvala",
+            "currentSeries": "Fórmula 2",
+            "age": 24,
+            "country": "IN"
+        },
+        "Jüri Vips": {
+            "name": "Jüri Vips",
+            "currentSeries": "",
+            "age": 22,
+            "country": "EE"
+        },
+        "Gabriel Bortoleto": {
+            "name": "Gabriel Bortoleto",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "BR",
+            "contractRemainingYears": 2
+        },
+        "Pepe Martí": {
+            "name": "Pepe Martí",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "ES",
+            "contractRemainingYears": 2
+        },
+        "Dino Beganovic": {
+            "name": "Dino Beganovic",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "SE",
+            "contractRemainingYears": 2
+        },
+        "Zak O'Sullivan": {
+            "name": "Zak O'Sullivan",
+            "team": "Williams",
+            "status": "Piloto de Testes",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "GB"
+        },
+        "Gabriele Minì": {
+            "name": "Gabriele Minì",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "IT",
+            "contractRemainingYears": 2
+        },
+        "Josef Newgarden": {
+            "name": "Josef Newgarden",
+            "currentSeries": "IndyCar",
+            "age": 32,
+            "country": "US"
+        },
+        "Marcus Ericsson": {
+            "name": "Marcus Ericsson",
+            "currentSeries": "IndyCar",
+            "age": 32,
+            "speed": 86,
+            "pace": 85,
+            "years_in_f1": 5,
+            "gps": 89,
+            "country": "SE"
+        },
+        "Scott McLaughlin": {
+            "name": "Scott McLaughlin",
+            "currentSeries": "IndyCar",
+            "age": 30,
+            "country": "NZ"
+        },
+        "Christian Lundgaard": {
+            "name": "Christian Lundgaard",
+            "currentSeries": "IndyCar",
+            "age": 21,
+            "country": "DK"
+        },
+        "Alexander Rossi": {
+            "name": "Alexander Rossi",
+            "currentSeries": "IndyCar",
+            "age": 31,
+            "speed": 88,
+            "pace": 88,
+            "years_in_f1": 1,
+            "gps": 5,
+            "country": "US"
+        },
+        "Colton Herta": {
+            "name": "Colton Herta",
+            "currentSeries": "IndyCar",
+            "age": 22,
+            "country": "US"
+        },
+        "Stoffel Vandoorne": {
+            "name": "Stoffel Vandoorne",
+            "currentSeries": "Fórmula E",
+            "age": 30,
+            "speed": 87,
+            "pace": 86,
+            "years_in_f1": 3,
+            "gps": 41,
+            "country": "BE"
+        },
+        "Sébastien Buemi": {
+            "name": "Sébastien Buemi",
+            "currentSeries": "WEC",
+            "age": 34,
+            "speed": 85,
+            "pace": 87,
+            "years_in_f1": 3,
+            "gps": 55,
+            "country": "CH"
+        },
+        "Callum Ilott": {
+            "name": "Callum Ilott",
+            "currentSeries": "IndyCar",
+            "age": 24,
+            "country": "GB"
+        },
+        "Isack Hadjar": {
+            "name": "Isack Hadjar",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 18,
+            "country": "FR",
+            "contractRemainingYears": 1
+        },
+        "Oliver Goethe": {
+            "name": "Oliver Goethe",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 18,
+            "country": "DE",
+            "contractRemainingYears": 1
+        },
+        "Kacper Sztuka": {
+            "name": "Kacper Sztuka",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "PL",
+            "contractRemainingYears": 3
+        },
+        "Tim Tramnitz": {
+            "name": "Tim Tramnitz",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 18,
+            "country": "DE",
+            "contractRemainingYears": 1
+        },
+        "Arvid Lindblad": {
+            "name": "Arvid Lindblad",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "GB",
+            "contractRemainingYears": 4
+        },
+        "Enzo Deligny": {
+            "name": "Enzo Deligny",
+            "team": "Red Bull",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 14,
+            "country": "FR",
+            "contractRemainingYears": 5
+        },
+        "Sebastián Montoya": {
+            "name": "Sebastián Montoya",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "CO"
+        },
+        "Souta Arao": {
+            "name": "Souta Arao",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 17,
+            "country": "JP"
+        },
+        "Jak Crawford": {
+            "name": "Jak Crawford",
+            "team": "AlphaTauri",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 17,
+            "country": "US"
+        },
+        "Aiden Neate": {
+            "name": "Aiden Neate",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "GB"
+        },
+        "Nikola Tsolov": {
+            "name": "Nikola Tsolov",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 16,
+            "country": "BG",
+            "contractRemainingYears": 3
+        },
+        "Kush Maini": {
+            "name": "Kush Maini",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "IN",
+            "contractRemainingYears": 1
+        },
+        "Sophia Flörsch": {
+            "name": "Sophia Flörsch",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 22,
+            "country": "DE",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Abbi Pulling": {
+            "name": "Abbi Pulling",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 19,
+            "country": "GB",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Nicola Lacorte": {
+            "name": "Nicola Lacorte",
+            "team": "Alpine",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 15,
+            "country": "IT",
+            "contractRemainingYears": 4
+        },
+        "Maya Weug": {
+            "name": "Maya Weug",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 18,
+            "country": "NL",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Rafael Câmara": {
+            "name": "Rafael Câmara",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 17,
+            "country": "BR",
+            "contractRemainingYears": 3
+        },
+        "Tuukka Taponen": {
+            "name": "Tuukka Taponen",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 16,
+            "country": "FI",
+            "contractRemainingYears": 3
+        },
+        "Aurelia Nobels": {
+            "name": "Aurelia Nobels",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "BR",
+            "gender": "Female",
+            "contractRemainingYears": 4
+        },
+        "Arthur Leclerc": {
+            "name": "Arthur Leclerc",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 2",
+            "age": 22,
+            "country": "MC"
+        },
+        "James Wharton": {
+            "name": "James Wharton",
+            "team": "Ferrari",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 16,
+            "country": "AU"
+        },
+        "Ugo Ugochukwu": {
+            "name": "Ugo Ugochukwu",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 4",
+            "age": 15,
+            "country": "US",
+            "contractRemainingYears": 4
+        },
+        "Ryō Hirakawa": {
+            "name": "Ryō Hirakawa",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "WEC",
+            "age": 28,
+            "country": "JP",
+            "contractRemainingYears": 1
+        },
+        "Bianca Bustamante": {
+            "name": "Bianca Bustamante",
+            "team": "McLaren",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 17,
+            "country": "PH",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Andrea Kimi Antonelli": {
+            "name": "Andrea Kimi Antonelli",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 16,
+            "country": "IT",
+            "contractRemainingYears": 4
+        },
+        "Doriane Pin": {
+            "name": "Doriane Pin",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 18,
+            "country": "FR",
+            "gender": "Female",
+            "contractRemainingYears": 2
+        },
+        "Paul Aron": {
+            "name": "Paul Aron",
+            "team": "Mercedes",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "EE"
+        },
+        "Marcus Amand": {
+            "name": "Marcus Amand",
+            "team": "Alfa Romeo",
+            "status": "Piloto da Academia",
+            "currentSeries": "FRECA",
+            "age": 15,
+            "country": "FR",
+            "contractRemainingYears": 1
+        },
+        "Léna Bühler": {
+            "name": "Léna Bühler",
+            "team": "Alfa Romeo",
+            "status": "Piloto da Academia",
+            "currentSeries": "F1 Academy",
+            "age": 25,
+            "country": "CH",
+            "gender": "Female",
+            "contractRemainingYears": 1
+        },
+        "Franco Colapinto": {
+            "name": "Franco Colapinto",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 19,
+            "country": "AR",
+            "contractRemainingYears": 1
+        },
+        "Luke Browning": {
+            "name": "Luke Browning",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 20,
+            "country": "GB",
+            "contractRemainingYears": 1
+        },
+        "Oleksandr Bondarev": {
+            "name": "Oleksandr Bondarev",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Kart",
+            "age": 13,
+            "country": "UA",
+            "contractRemainingYears": 5
+        },
+        "Lia Block": {
+            "name": "Lia Block",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Rally",
+            "age": 16,
+            "country": "US",
+            "contractRemainingYears": 1
+        },
+        "Oliver Gray": {
+            "name": "Oliver Gray",
+            "team": "Williams",
+            "status": "Piloto da Academia",
+            "currentSeries": "Fórmula 3",
+            "age": 17,
+            "country": "GB"
+        }
+    }
+}
