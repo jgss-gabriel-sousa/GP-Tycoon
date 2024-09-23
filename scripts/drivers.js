@@ -90,7 +90,10 @@ export function startDriversStats(){
         if(!driver.team) driver.team = "";
         if(!driver.status) driver.status = "";
 
-        let ageReducer = 0;
+        if(driver.birthYear)
+            driver.age = driver.birthYear - game.year;
+
+        let ageReducer = 0; //Impact of Age on Generated Driver Performance Stats
         if(driver.age < 18){
             ageReducer = Math.round(1.5 * (18 - driver.age))
         }
@@ -254,24 +257,24 @@ export function contractApprobationCalc(driverName, teamName, duration, salary, 
         let marketHeat = 0;
         let availableVacancies = 0;
 
-        /*
-        game.teams.forEach(team => {
-            if(!game.championship.teams.includes(team.name)){
-                return;
-            }
+        game.championship.teams.forEach(t => {
+            const team = game.teams[t];
 
-            if(team.new1driver == ""){
+            console.log(t)
+            console.log(team)
+
+            if(!team.new1driver){
                 availableVacancies++;
             }
-            if(team.new2driver == ""){
+            if(!team.new2driver){
                 availableVacancies++;
             }
         });
 
-        marketHeat = (availableVacancies / game.championship.teams*2)
-        
-        */
+        marketHeat = (availableVacancies / game.championship.teams.length*2);
+        console.log("marketHeat: "+marketHeat);
     }
+
 
     if(chance > 100) chance = 100;
     if(chance < 5) chance = 0;
