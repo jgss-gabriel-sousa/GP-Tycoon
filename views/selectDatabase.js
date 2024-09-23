@@ -1,3 +1,4 @@
+import { Championship_Init } from "../scripts/championship.js";
 import { game, startGameData } from "../scripts/game.js";
 import { createTooltip } from "../scripts/tooltips.js";
 import { newGame } from "./startGame.js";
@@ -77,13 +78,12 @@ export async function selectDatabase(){
     function setDB(DBname){
         const db = DBs[DBname];
 
-        console.log(db)
-
-        game.championship = db.championship;
         game.drivers = db.drivers;
         game.teams = db.teams;
         game.engines = db.engines;
         game.engineers = db.engineers;
+
+        Championship_Init(db.championship);
 
         startGameData();
     }
