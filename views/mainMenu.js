@@ -6,6 +6,7 @@ import { UpdateDataInfo } from "../scripts/ui.js";
 import { tooltips } from "../scripts/tooltips.js";
 import { display } from "../scripts/display.js";
 import { CreateStandings } from "../scripts/championship/create-standings.js";
+import { LOC } from "../scripts/translation.js";
 
 function genDriversHTML(){
     const el = document.querySelector("#drivers");
@@ -36,11 +37,11 @@ function genDriversHTML(){
         html += `
         <div class="driver-card">`
             if(i == 0)
-                html += "<h1>1º Piloto</h1>"
+                html += `<h1>${LOC("1st_driver")}</h1>`
             if(i == 1)
-                html += "<h1>2º Piloto</h1>"
+                html += `<h1>${LOC("2nd_driver")}</h1>`
             if(i == 2)
-                html += "<h1>Piloto de Testes</h1>"
+                html += `<h1>${LOC("test_driver")}</h1>`
         html += `
             <img class="driver-card-portrait" src="img/drivers/${d.image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <button class="btn-driver-name view-driver" value="${d.name}">
@@ -51,7 +52,7 @@ function genDriversHTML(){
         html += `
             <table class="bars-table">
                 <tr>
-                    <td>Velocidade:</td>
+                    <td>${LOC("speed")}:</td>
                     <td>
                         <div class="progress-bar-background">
                             <div class="progress-bar" style="width:${d.speed}%;"><span>${d.speed}%</span></div>
