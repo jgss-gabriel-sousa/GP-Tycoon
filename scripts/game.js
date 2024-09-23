@@ -38,15 +38,13 @@ function gameBootstrap(){
 } gameBootstrap();
 
 export function startGameData(){
-    game.drivers = driversData;
-    game.teams = teamsData;
+    //game.drivers = driversData;
+    //game.teams = teamsData;
     game.engines = enginesData;
     game.engineers = engineersData;
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
-    
-    Championship_Init();
 }
 
 

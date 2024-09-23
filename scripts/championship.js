@@ -54,7 +54,14 @@ export const Championship = {
 }
 
 
-export function Championship_Init(){       
+export function Championship_Init(db_data){    
+
+    for(const key in db_data){
+        Championship[key] = db_data[key];
+    }
+
+    Championship.teams
+
     Championship.teams.forEach(t => {
         const team = game.teams[t];
 
