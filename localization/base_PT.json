@@ -1,4 +1,8 @@
 {
     "gender_male_PT": "Homem",
-    "gender_female_PT": "Mulher"
+    "gender_female_PT": "Mulher",
+    "1st_driver_PT": "1º Piloto",
+    "2nd_driver_PT": "2º Piloto",
+    "test_driver_PT": "Piloto de Testes",
+    "speed_PT": "Velocidade"
 }
