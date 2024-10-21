@@ -547,12 +547,14 @@ export function genTeamMainMenu(){
     //display("mainMenu.html","mainMenu");
 
     const teams = game.teams;
+    const team = teams[game.team];
+    console.log(team)
 
     if(game.settings["ui-team-colors"]){
-        document.querySelector(":root").style.setProperty("--bg", teams[game.team].bg_color);
-        document.querySelector(":root").style.setProperty("--border", teams[game.team].border_color);
-        document.querySelector(":root").style.setProperty("--text", teams[game.team].font_color);
-        document.querySelector(":root").style.setProperty("--titles", teams[game.team].titles_color);
+        document.querySelector(":root").style.setProperty("--bg", team.bg_color);
+        document.querySelector(":root").style.setProperty("--border", team.border_color);
+        document.querySelector(":root").style.setProperty("--text", team.font_color);
+        document.querySelector(":root").style.setProperty("--titles", team.titles_color);
     }
     else{
         document.querySelector(":root").style.setProperty("--bg", "#afafaf");
@@ -564,12 +566,12 @@ export function genTeamMainMenu(){
     document.querySelector("#team-logo").src = "./img/teams/"+game.team+".png";
 
     document.querySelector("#year").innerText = `${game.year}`;
-    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(teams[game.team].country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(teams[game.team].cash * 1000,"ext",0)}</p>`;
-    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(teams[game.team].supporters * 1000000,"ext-short",0)}</p>`;
+    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(team.country)}.webp"> ${game.team}`;
+    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(team.supporters * 1000000,"ext-short",0)}</p>`;
     
     let reputationHTML = "<div>"
-    let remainingStars = teams[game.team].reputation;
+    let remainingStars = team.reputation;
     for(let i = 0; i < 5; i++, remainingStars -= 1) {
         if(remainingStars > 0 && remainingStars >= 1){
             reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;

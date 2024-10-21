@@ -25,11 +25,12 @@ export function StartTeamsStats(){
         car.straights = (((car.aerodynamic + car.weight)/2)*engine.power)/100;
         car.reliability = (car.chassisReliability * engine.reliability)/100;
 
-        team.newCar = {};
-        team.newCar.aerodynamic = 0;
-        team.newCar.downforce = 0;
-        team.newCar.weight = 0;
-        team.newCar.chassisReliability = 0;
+        team.newCar = {
+            aerodynamic: 0,
+            downforce: 0,
+            weight: 0,
+            chassisReliability: 0,
+        };
         
         team.aeroPts = 0;
         team.engPts = 0;
