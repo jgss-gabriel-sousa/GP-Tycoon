@@ -19,7 +19,7 @@ export function StartTeamsStats(){
         car.aerodynamic = car.speed;
         car.chassisReliability = car.reliability;
 
-        delete car.speed;
+        //delete car.speed;
         
         car.corners = (((car.downforce + car.weight)/2)*engine.drivability)/100;
         car.straights = (((car.aerodynamic + car.weight)/2)*engine.power)/100;
