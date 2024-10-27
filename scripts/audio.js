@@ -20,6 +20,9 @@ const songs = {
     "Progressive House": [
         "Calm Evening - Trellum",
     ],
+    "Trap": [
+        "Infinit - Twinztrack",
+    ],
 }
 
 export function SoundStart(){
