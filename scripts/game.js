@@ -12,6 +12,7 @@ import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
 import { SoundStart } from "./audio.js";
 import { StartTeamsStats } from "./teams/startTeamStats.js";
 import { circuitsData } from "../data/circuits.js";
+import { sponsorsData } from "../data/sponsorsData.js";
 
 export const game = {
     settings: {},
@@ -53,11 +54,15 @@ export function startGameData(){
 
 function StartGameData(){
     StartCircuits();
+    StartSponsors();
     
     function StartCircuits(){
         game.circuits = Object.assign({}, circuitsData, game.circuits);
     }
 
+    function StartSponsors(){
+        game.sponsors = Object.assign({}, sponsorsData, game.sponsors);
+    }
 }
 
 
