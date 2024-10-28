@@ -1649,5 +1649,17 @@
     },
     "sponsors": {
 
+    },
+    "circuits": {
+        "China":{
+            "abbrev": "CHN",
+            "circuit": "Xangai",
+            "country": "CN",
+            "baseLapTime": 1.0,
+            "rainChance": 0,
+            "laps": 56,
+            "straights": 50,
+            "corners": 50
+        }
     }
 }
