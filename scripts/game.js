@@ -42,10 +42,10 @@ function gameBootstrap(){
 export function startGameData(){
     //game.drivers = driversData;
     //game.teams = teamsData;
-    game.engines = enginesData;
     game.engineers = engineersData;
     
     StartGameData();
+    
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
@@ -53,8 +53,13 @@ export function startGameData(){
 
 
 function StartGameData(){
+    StartEngines();
     StartCircuits();
     StartSponsors();
+    
+    function StartEngines(){
+        game.engines = Object.assign({}, enginesData, game.engines);
+    }
     
     function StartCircuits(){
         game.circuits = Object.assign({}, circuitsData, game.circuits);

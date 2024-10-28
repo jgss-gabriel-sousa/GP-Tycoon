@@ -1,6 +1,5 @@
 import { blankSpaceRmv, accentsTidy, NumberF } from "../scripts/utils.js"
 import { game } from "../scripts/game.js"
-import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "../scripts/ui.js";
 import { tooltips } from "../scripts/tooltips.js";
 import { display } from "../scripts/display.js";
@@ -260,7 +259,7 @@ function genCarHTML(){
     `
     elChassis.innerHTML = html;
     
-    const engine = enginesData[game.teams[game.team].engine];
+    const engine = game.engines[game.teams[game.team].engine];
     html = `
     <h1>Motor</h1>
     <table>

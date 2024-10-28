@@ -82,6 +82,7 @@ export async function selectDatabase(){
         game.teams = db.teams;
         game.engines = db.engines;
         game.engineers = db.engineers;
+        game.engines = db.engines;
         game.circuits = db.circuits;
         game.sponsors = db.sponsors;
 
