@@ -1,4 +1,3 @@
-import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { genTeamMainMenu } from "../../views/mainMenu.js";
@@ -108,7 +107,7 @@ export const RunRaceSimulation = () => {
                 timeTable.innerHTML = Championship.genRaceTableHTML();
                 Championship.VisualRaceSim();
 
-                if(Championship.race.lap == circuitsData[raceName].laps){
+                if(Championship.race.lap == game.circuits[raceName].laps){
                     clearInterval(timerInterval);
                     Swal.enableButtons();
                 }

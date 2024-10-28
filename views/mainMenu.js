@@ -1,6 +1,5 @@
 import { blankSpaceRmv, accentsTidy, NumberF } from "../scripts/utils.js"
 import { game } from "../scripts/game.js"
-import { circuitsData } from "../data/circuits.js";
 import { enginesData } from "../data/enginesData.js";
 import { UpdateDataInfo } from "../scripts/ui.js";
 import { tooltips } from "../scripts/tooltips.js";
@@ -608,14 +607,14 @@ export function genTeamMainMenu(){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
         let trackStyle;
 
-        if(circuitsData[nextRace].straights > 60) trackStyle = "Retas";
-        else if(circuitsData[nextRace].straights < 40) trackStyle = "Curvas";
+        if(game.circuits[nextRace].straights > 60) trackStyle = "Retas";
+        else if(game.circuits[nextRace].straights < 40) trackStyle = "Curvas";
         else trackStyle = "Equilibrado";
 
         document.querySelector("#next-race-name").innerHTML = `
-        <h2><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[nextRace].country)}.webp">GP ${nextRace}</h2>
-        <img id="next-race-track-img" src="img/ui/tracks/${circuitsData[nextRace].circuit.toLowerCase()}.png" width="70px">
-        <h2>${circuitsData[nextRace].circuit}</h2><small>${trackStyle}</small>`;
+        <h2><img class="country-flag" src="img/flags/${accentsTidy(game.circuits[nextRace].country)}.webp">GP ${nextRace}</h2>
+        <img id="next-race-track-img" src="img/ui/tracks/${game.circuits[nextRace].circuit.toLowerCase()}.png" width="70px">
+        <h2>${game.circuits[nextRace].circuit}</h2><small>${trackStyle}</small>`;
     }
     else{
         document.querySelector("#next-race-name").innerHTML = `Resumo da Temporada`;

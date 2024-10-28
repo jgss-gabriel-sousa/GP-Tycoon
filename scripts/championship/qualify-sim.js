@@ -1,4 +1,3 @@
-import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { rand } from "../utils.js";
@@ -37,10 +36,11 @@ export const QualifySim = () => {
             continue;
         }
 
-        const base = circuitsData[raceName].baseLapTime;
+        const circuit = game.circuits[raceName];
+        const base = circuit.baseLapTime;
         const car = game.teams[game.drivers[driverName].team].car;
-        const circuitCorners = circuitsData[raceName].corners/100;
-        const circuitStraights = circuitsData[raceName].straights/100;
+        const circuitCorners = circuit.corners/100;
+        const circuitStraights = circuit.straights/100;
         const randomF = 1 + (Math.random() * 1.5 - 0.75);
 
         let speed = game.drivers[driverName].speed;

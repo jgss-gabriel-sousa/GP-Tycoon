@@ -1,4 +1,3 @@
-import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { rand, rollDice } from "../utils.js";
@@ -23,7 +22,7 @@ export const RaceSim = (status) => {
         }
         grid = aux;
         
-        if(Math.floor(Math.random() * 100) < circuitsData[raceName].rainChance) 
+        if(Math.floor(Math.random() * 100) < game.circuits[raceName].rainChance) 
             Championship.race.rain = true;
 
         let i = 0;
@@ -43,7 +42,7 @@ export const RaceSim = (status) => {
                 const strategy = Math.floor(Math.random() * 100);
 
                 if(strategy > 50) raceDrivers[i-1].tire = "S";
-                else if(strategy < 25 && circuitsData[raceName].laps >= 60) raceDrivers[i-1].tire = "H";
+                else if(strategy < 25 && game.circuits[raceName].laps >= 60) raceDrivers[i-1].tire = "H";
                 else raceDrivers[i-1].tire = "M";
             }
             else{
@@ -60,12 +59,12 @@ export const RaceSim = (status) => {
     for(; d < raceDrivers.length; d++) {
         if(!raceDrivers[d].racing)  continue;
 
-        const base = circuitsData[raceName].baseLapTime;
+        const base = game.circuits[raceName].baseLapTime;
         const driverName = Championship.drivers[d];
         const team = game.drivers[driverName].team;
         const car = game.teams[team].car;
     
-        const circuit = circuitsData[raceName];
+        const circuit = game.circuits[raceName];
         const circuitCorners = circuit.corners/100;
         const circuitStraights = circuit.straights/100;
         

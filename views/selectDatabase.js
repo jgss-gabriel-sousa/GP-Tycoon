@@ -82,10 +82,9 @@ export async function selectDatabase(){
         game.teams = db.teams;
         game.engines = db.engines;
         game.engineers = db.engineers;
+        game.circuits = db.circuits;
 
         Championship_Init(db.championship);
-
-        startGameData();
     }
 
     function genHTML(){

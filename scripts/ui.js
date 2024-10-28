@@ -1,5 +1,4 @@
 import { game } from "./game.js"
-import { circuitsData } from "../data/circuits.js"
 import { viewGameOptions } from "../views/viewGameOptions.js"
 import { accentsTidy, NumberF } from "./utils.js"
 import { genEngHTML } from "../views/mainMenu.js"
@@ -169,8 +168,8 @@ export function seasonOverviewUI(thenCall){
                 <th>Equipe</th>
     `;
 
-    game.championship.tracks.forEach(e => {
-        html += `<th><img class="country-flag" src="img/flags/${accentsTidy(circuitsData[e].country)}.webp"><br>${circuitsData[e].abbrev}</th>`;
+    game.championship.tracks.forEach(circuit => {
+        html += `<th><img class="country-flag" src="img/flags/${accentsTidy(game.circuits[circuit].country)}.webp"><br>${game.circuits[circuit].abbrev}</th>`;
     });
     html += "<th>Pts</th></th>";
                 

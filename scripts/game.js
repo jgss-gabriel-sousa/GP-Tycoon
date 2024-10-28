@@ -11,6 +11,7 @@ import { YearUpdateTeamsStats } from "./teams.js";
 import { StartEngStats, YearUpdateEngStats } from "./engineers.js";
 import { SoundStart } from "./audio.js";
 import { StartTeamsStats } from "./teams/startTeamStats.js";
+import { circuitsData } from "../data/circuits.js";
 
 export const game = {
     settings: {},
@@ -42,9 +43,21 @@ export function startGameData(){
     //game.teams = teamsData;
     game.engines = enginesData;
     game.engineers = engineersData;
+    
+    StartGameData();
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
+}
+
+
+function StartGameData(){
+    StartCircuits();
+    
+    function StartCircuits(){
+        game.circuits = Object.assign({}, circuitsData, game.circuits);
+    }
+
 }
 
 

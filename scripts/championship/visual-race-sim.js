@@ -1,4 +1,3 @@
-import { circuitsData } from "../../data/circuits.js";
 import { Championship } from "../championship.js";
 import { game } from "../game.js";
 import { accentsTidy, genID } from "../utils.js";
@@ -73,7 +72,7 @@ export const VisualRaceSim = (status) => {
 
             if(i != finalResult.length){
                 const max = document.querySelector("#race-cars").offsetHeight - 155;
-                const totalLaps = circuitsData[Championship.tracks[Championship.actualRound - 1]].laps;
+                const totalLaps = game.circuits[Championship.tracks[Championship.actualRound - 1]].laps;
                 
                 const diff = (finalResult[i].totalTime - finalResult[0].totalTime)*100;
                 const lapMove = max * ((Championship.race.lap / totalLaps));
