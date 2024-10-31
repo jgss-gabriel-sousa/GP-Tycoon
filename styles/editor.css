@@ -22,20 +22,21 @@
 
 #editor-menu-interface {
     margin: 10px;
+    width: 90%;
 }
 
-#editor-header {
+#editor-crud {
     display: flex;
     justify-content: center;
 }
-#editor-header button {
+#editor-crud button {
     padding: 10px 5px;
     font-size: 14px;
     min-width: 100px;
     display: flex;
     justify-content: center;
 }
-#editor-header-load-file {
+#editor-crud-load-file {
     display: none;
 }
 
@@ -99,4 +100,35 @@
     color: white;
     background-color: #333;
     border-radius: 0;
+}
+
+#editor-tab-selection li {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    border-top: 1px solid #999;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+}
+
+#editor-tab-selection li:hover {
+    background-color: #9e9e9eb8;
+}
+
+#editor-tab-selection button {
+    border: 0;
+    background-color: transparent;
+    border-radius: 0;
+    margin: 0;
+}
+
+#editor-tab-selection button:hover {
+    filter: drop-shadow(0px 0px 0px black);
+    font-weight: 0;
+}
+
+#editor-tab-selection .selected {
+    background-color: #7a7a7ab8;
 }
