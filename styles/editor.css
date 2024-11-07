@@ -114,7 +114,7 @@
 }
 
 #editor-tab-selection li:hover {
-    background-color: #9e9e9eb8;
+    background-color: #9e9e9e86;
 }
 
 #editor-tab-selection button {
@@ -126,9 +126,16 @@
 
 #editor-tab-selection button:hover {
     filter: drop-shadow(0px 0px 0px black);
-    font-weight: 0;
 }
 
 #editor-tab-selection .selected {
     background-color: #7a7a7ab8;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content:not(.hidden) {
+    display: block;
 }
