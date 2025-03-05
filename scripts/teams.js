@@ -363,6 +363,10 @@ export function UpdateTeamAfterRace(){
         let installmentsValueTotal = 0;
     
         team.bank.loans.forEach(loan => {
+            if(loan.gracePeriod > 0){
+                loan.gracePeriod--;
+                return;
+            }
             installmentsValueTotal += loan.installmentsValue;
             loan.installmentsPayed++;
             loan.value -= loan.installmentsValue*1000;
