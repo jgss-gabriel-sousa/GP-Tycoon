@@ -61,9 +61,11 @@ export function BeforeRaceUpdateTeamsStats(){
         car.reliability = Math.round((car.chassisReliability * engine.reliability)/100);
         
         team.totalInvestments += team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability;
-        
-        AI_HireDriver(team.name);
-        AI_HireEngineer(team.name);
+
+        if(t != game.team){
+            AI_HireDriver(t);
+            AI_HireEngineer(t);
+        }
     }
 }
 
