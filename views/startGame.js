@@ -1,5 +1,6 @@
 import { game, startGameData } from "../scripts/game.js";
 import { changeScreen } from "../scripts/screens.js";
+import { startGameScreens } from "./gameMenus.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 
 export function newGame(){
@@ -31,8 +32,14 @@ export function newGame(){
                 content: `A ${game.team} surpreende com a nomeação de um novo líder para sua direção, apesar de ser desconhecido é considerado uma grande promessa no gerenciamento, será ele capaz de fazer história?!`,
             });
 
-            changeScreen("team-menu");
-            genTeamMainMenu();
+            startup();
         }
     });
+}
+
+
+function startup(){
+    changeScreen("game-interface");
+    startGameScreens();
+    genTeamMainMenu();
 }

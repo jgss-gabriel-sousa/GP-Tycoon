@@ -1,0 +1,149 @@
+
+#engineering > div {
+    min-width: fit-content;
+}
+
+#engineering {
+    text-align: center;
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+}
+#engineering table,
+#development table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+#engineering th,
+#development th {
+    padding-right: 5px;
+    background-color: var(--border);
+    color: var(--titles);
+    text-align: end;
+    height: 20px;
+    padding: 0px 5px;
+}
+#development th {
+    padding: 4px;
+}
+#engineers-name td:first-child {
+    text-align: end;
+}
+#engineers-name button {
+    margin: 0;
+}
+#new-car {
+    width: 100%;
+    margin-bottom: 10px;
+}
+#new-car th{
+    font-family: "F1";
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+#new-car tr:nth-child(2) > td {
+    padding-top: 5px;
+}
+#new-car td{
+    padding: 0px;
+}
+#new-car td:first-child{
+    text-align: end;
+    padding-right: 5px;
+}
+#new-car > tbody > tr:nth-child(7) > td:nth-child(2) {
+    max-width: 100px;
+}
+
+#dev-pts td:first-child {
+    text-align: end;
+    width: 50%;
+}
+#dev-pts {
+    display: flex;
+    flex-direction: row;
+    border: 0px solid var(--border);
+    border-top: 2px solid var(--border);
+    justify-content: center;
+}
+#dev-pts div {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+#dev-pts > div:first-child {
+    border-right: 2px solid var(--border);
+}
+#dev-pts h1 {
+    font-size: 12px;
+    background-color: transparent;
+    color: var(--text);
+}
+#dev-pts h2 {
+    padding: 5px 0;
+}
+#dev-focus td,
+#dev-focus td {
+    text-align: start;
+}
+#dev-focus td:first-child {
+    width: 100%;
+}
+#dev-focus td {
+    min-width: 45px;
+    text-align: center;
+}
+
+#development {
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--border);
+}
+#development div {
+    border: 2px solid var(--border);
+    background-color: var(--bg);
+}
+#development table {
+    width: 100%;
+    padding: 5px;
+}
+#development td:nth-child(2) {
+    min-width: 40px;
+}
+#development th {
+    text-align: center;
+    font-size: 12px;
+}
+#development .total-investments {
+    text-align: end;
+}
+#development td:nth-child(1) {
+    padding: 4px 2px;
+}
+
+.btn-eng-name {
+    width: 100%;
+	padding: 5px;
+	margin: 0;
+	background-color: transparent;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    border: 1px solid transparent;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--text);
+	border-radius: 0;
+    max-width: 100px;
+}
+.btn-eng-name:hover {
+    background-color: var(--border);
+    border: 1px solid var(--text);
+    filter: drop-shadow(0px 0px 1px var(--text));
+    color: var(--titles);
+    cursor: pointer;
+}
+
+#engineers-name > tbody > tr:nth-child(7) > td > div {
+    width: 98%;
+}

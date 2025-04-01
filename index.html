@@ -25,65 +25,18 @@
 </head>
 <body>
     <main>
-        <div id="team-menu">
-            <div id="button-list">
-                <button id="btn-save-game"><img src="./img/ui/save.png"> Salvar Jogo</button>
-                <button id="btn-options"><img src="./img/ui/settings.png"> Opções</button>
-                <br>
-                <p>Classificação</p>
-                <button id="btn-standings"><img src="./img/ui/ranking.png">Class. Pilotos</button>
-                <button id="btn-team-standings"><img src="./img/ui/team-ranking.png">Class. Equipes</button>
-                <br>
-                <p>Mercado</p>
-                <button id="btn-market" class="market"><img src="./img/ui/market.png"> Pilotos</button>
-                <button id="btn-market-eng"  class="market-eng"><img src="./img/ui/market-eng.png"> Engenheiros</button>
-                <br>
-                <button id="btn-news"><img src="./img/ui/news.png">Notícias <span></span></button>
-                <button id="btn-sponsors"><img src="./img/ui/money2.png">Patrocinadores</button>
-                <button id="btn-bank"><img src="./img/ui/loan.png">Banco</button>
-                <button id="btn-advertising"><img src="./img/ui/advertising.png">Marketing</button>
-                <button id="btn-agreements"><img src="./img/ui/deal.png">Acordos</button>
-                <button id="btn-rules"><img src="./img/ui/meeting.png">Cúpula de Equipes</button>
-                <br>
-                <button id="btn-search"><img src="./img/ui/search.png">Pesquisar</button>
-                <button id="btn-historic"><img src="./img/ui/past.png">Histórico</button>
+        <div id="game-interface">
+            <div id="topbar-buttons">
+                <button type="button" id="btn-menu-team" class="topbar-active"><img src="./img/ui/steering-wheel.png"> Central da Equipe</button>
+                <button type="button" id="btn-menu-car-development"><img src="./img/ui/f1-car.png"> Desenvolvimento do Carro</button>
+                <button type="button" id="btn-menu-tecnical-team"><img src="./img/ui/market-eng.png"> Equipe Técnica</button>
+                <button type="button" id="btn-menu-race-strategy"><img src="./img/ui/finish-line-flag.png"> Estratégia & Corridas</button>
+                <button type="button" id="btn-menu-standings"><img src="./img/ui/ranking.png"> Temporada & Classificação</button>
+                <button type="button" id="btn-menu-finances"><img src="./img/ui/loan.png"> Gestão Financeira</button>
+                <button type="button" id="btn-menu-regulations"><img src="./img/ui/regulation.png"> Regulamentos & Votações</button>
             </div>
-            <div id="team-menu-interface">
-                <div id="info">
-                    <h1 id="year">2023</h1>
-                    <div id="team">
-                        <div>
-                            <img id="team-logo" class="logo" alt="Team Logo">
-                            <h1 id="name"></h1>
-                        </div>
-                        <div id="reputation"></div>
-                        <div id="money" class="view-financial-report"></div>
-                        <div id="supporters"><p>10M</p></div>
-                    </div>
-                    <div id="next-race">
-                        <h1>Próxima Corrida</h1>
-                        <div id="next-race-name"></div>
-                        <button id="btn-play"><span>Continuar</span></button>
-                    </div>
-                </div>
-                <!--
-                <div id="tab-button-list">
-                    <button>Carro</button>
-                    <button>Engenheiros</button>
-                    <button>Engenheiros</button>
-                </div>
-                <div id="tab">-->
-                    <div id="drivers-car-section">
-                        <div id="drivers"></div>
-                        <div id="car" class="bars-table">
-                            <div id="car-info"></div>
-                            <div id="chassis"></div>
-                            <div id="engine"></div>
-                        </div>
-                    </div>
-                    <div id="engineering"></div>
-                    <div id="development"></div>
-                </div>
+
+            <div id="menu-container"></div>
         </div>
 
         <div id="editor-menu">
@@ -101,8 +54,6 @@
             </div>
             <small>Copyright © <a href="https://jgss-gabriel-sousa.github.io/" target="_blank">JGSS</a> - version 0.15 (Ocon)</small>
         </div>
-
-        <div id="players-menu"></div>
     </main>
 </body>
 </html>

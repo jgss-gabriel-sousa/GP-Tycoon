@@ -3,6 +3,7 @@
 @import url("./main-menu.css");
 @import url("./game.css");
 @import url("./editor.css");
+@import url("./interfaces/game-interface.css");
 
 @font-face {
     font-family: Montserrat;
@@ -42,9 +43,10 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position-x: center;
+    background-position-y: center;
 }
 
-ul{
+ul {
     display: inline-flex;
 	list-style: none;
     margin-block-start: 0px;
@@ -57,12 +59,12 @@ ul{
     align-items: baseline;
 }
 
-li button{
+li button {
     height: 100%;
     display: flex;
 }
 
-button{
+button {
 	border: 1px solid black;
 	border-radius: 5px;
 	background-color: #c5c5c5;
@@ -75,7 +77,7 @@ button{
     -webkit-user-select: none;
     -o-user-select: none;
 }
-button:hover{
+button:hover {
 	background-color: #ddd;
     font-weight: bold;
     cursor: pointer;
@@ -136,11 +138,6 @@ abbr {
     text-decoration: none;
 }
 
-.interface {
-    display: flex;
-    display: none;
-}
-
 .checkmark {
     position: absolute;
     top: 0;
@@ -150,54 +147,10 @@ abbr {
     background-color: #eee;
 }
 
-.progress-bar {
-    width: 50%;
-    height: 100%;
-    background-color: var(--border);
-    justify-content: center;    
-    text-align: center;
-    font-size: 12px;
-    color: white;
-    white-space: nowrap;
-    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black, 1px 1px black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black;
-}
-.progress-bar-background {
-    width: 80px;
-    height: 18px;
-    border: 1px solid black;
-    background-color: #f0f0f0;
-    justify-content: center;
-}
-.progress-bar span {
-    display: flex;
-    padding: 0px 40px;
-    justify-content: center;
-}
-
-.icon {
-    width: 24px;
-    height: 24px;
-    filter: drop-shadow(1px 1px #222);
-}
-
-.navbar-icon {  
-    width: 32px;
-    height: 32px;
-    filter: drop-shadow(1px 1px #222);
-}
-
-.country-flag{
-    width: 27px;
-    height: 18px;
-    vertical-align: middle;
-    border: 1px solid #222 !important;
-    border-radius: 0 !important;
-}
-
 .slidercontainer {
     width: 100%;
 }
-  
+
 .slider {
     -webkit-appearance: none;
     height: 5px;

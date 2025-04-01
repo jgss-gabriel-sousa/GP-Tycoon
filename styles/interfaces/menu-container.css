@@ -1,0 +1,13 @@
+@import url("./menus/team.css");
+@import url("./menus/car-development.css");
+
+#menu-container {
+    display: flex;
+    width: calc(100% - 2em);
+    margin: 0 1em;
+}
+
+.game-menu {
+    display: none;
+    margin: 5px;
+}

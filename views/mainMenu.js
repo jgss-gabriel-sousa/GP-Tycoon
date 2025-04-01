@@ -538,11 +538,9 @@ export function genDevelopmentHTML(){
 export function genTeamMainMenu(){
     game.championship["CreateStandings"] = CreateStandings;
     genDriversHTML();
-    genCarHTML();
-    genEngHTML();
-    genDevelopmentHTML();
-
-    //display("mainMenu.html","mainMenu");
+    //genCarHTML();
+    //genEngHTML();
+    //genDevelopmentHTML();
 
     const teams = game.teams;
     const team = teams[game.team];
@@ -592,13 +590,13 @@ export function genTeamMainMenu(){
         if(!e.viewed)
             newNews++;
     });
-    document.querySelector("#btn-news span").innerHTML = newNews;
+    //document.querySelector("#btn-news span").innerHTML = newNews;
 
     if(newNews == 0){
-        document.querySelector("#btn-news span").classList.add("no-news");
+        //document.querySelector("#btn-news span").classList.add("no-news");
     }
     else{
-        document.querySelector("#btn-news span").classList.remove("no-news");
+        //document.querySelector("#btn-news span").classList.remove("no-news");
     }
 
 

@@ -1,0 +1,56 @@
+@import url("./menu-container.css");
+@import url("./interface-elements.css");
+
+#game-interface {
+    display: flex;
+    flex-direction: column;
+    color: var(--text);
+    align-items: flex-start;
+    display: none;
+}
+
+#topbar-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    justify-content: space-evenly;
+}
+#topbar-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+    cursor: pointer;
+    box-shadow: 0px 0px transparent;
+    font-size: 12px;
+    background-color: transparent;
+    color: white;
+    border-radius: 0;
+    border-color: transparent;
+    padding: 4px;
+}
+#topbar-buttons button:hover{
+    font-weight: bolder;
+    border-color: var(--border);
+    background-color: #e5e5e531;
+    cursor: pointer;
+    filter: drop-shadow(10px 10px 2px rgba(--border , 0.5));
+}
+.topbar-active{
+    font-weight: bolder !important;
+    border-color: var(--border) !important;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom-width: 2px;
+}
+#topbar-buttons button img {
+    filter: invert(100%);
+    margin: 0 4px 0 0;
+    width: 18px;
+}
+
+.interface {
+    display: flex;
+    display: none;
+}

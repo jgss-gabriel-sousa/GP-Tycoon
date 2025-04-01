@@ -1,3 +1,5 @@
+import { rand } from "./utils.js";
+
 export function display(url, selector) {
     setTimeout(e => {
         fetch("../views/templates/" + url)

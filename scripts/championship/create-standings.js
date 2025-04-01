@@ -69,8 +69,9 @@ export const CreateStandings = () => {
                 team.podiums++;
             }
 
-            if(pos < Championship.pointsSystem.length)
+            if(pos < Championship.pointsSystem.length) {
                 team.pts += Championship.pointsSystem[pos];
+            }
 
             if(team.bestFinish > pos+1){
                 team.bestFinish = pos+1;

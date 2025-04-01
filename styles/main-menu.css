@@ -25,6 +25,7 @@
 }
 
 .main-menu-btn {
+    color: #fff;
     position: relative;
     display: block;
     overflow: hidden;
@@ -83,12 +84,10 @@
 .main-menu-btn,
 .main-menu-btn *:before,
 .main-menu-btn *:after {
-    transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out, 
+    color 0s;
 }
 
-.main-menu-btn {
-    color: #ffff;
-}
 .main-menu-btn:hover {
     color: #000;
     background-color: #ddd;

@@ -17,6 +17,7 @@ import { sponsorsData } from "../data/sponsorsData.js";
 export const game = {
     settings: {},
     activeScreen: "main-menu",
+    activeMenu: "drivers",
     uiTeamColors: true,
     team: "",
     year: 2023,
@@ -30,6 +31,50 @@ export const game = {
     news: [],
     game_language: "PT",
 }
+
+function gameMenuManager(){
+    const els = document.querySelectorAll("#topbar-buttons button");
+    
+    els.forEach(el => {
+        el.addEventListener("click", (e) => {
+            gameMenuChange(e.target.id);
+        });
+    });
+} gameMenuManager();
+
+function gameMenuChange(changeTo){
+    const els = document.querySelectorAll("#topbar-buttons button");
+
+    const menuMap = {
+        "btn-menu-team": "team",
+        "btn-menu-car-development": "car-development",
+        "btn-menu-tecnical-team": "tecnical-team",
+        "btn-menu-race-strategy": "race-strategy",
+        "btn-menu-standings": "standings",
+        "btn-menu-finances": "finances",
+        "btn-menu-regulations": "regulations",
+    };
+
+    els.forEach(el => {
+        el.classList.remove("topbar-active");
+        
+        if(el.id == changeTo){
+            el.classList.add("topbar-active");
+            
+            document.querySelectorAll(".game-menu").forEach(e => {
+                e.style.display = "none";
+            })
+            if(document.querySelector(`#menu-${menuMap[changeTo]}`)){
+                document.querySelector(`#menu-${menuMap[changeTo]}`).style.display = "flex";
+            }
+        }
+    });
+    
+    if (menuMap[changeTo]) {
+        game.activeMenu = menuMap[changeTo];
+    }
+}
+
 
 function gameBootstrap(){
     //checkGameKey();

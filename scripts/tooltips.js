@@ -18,6 +18,7 @@ export function tooltips(){
     createTooltip("#supporters", "Fans");
     createTooltip("#reputation", "Reputação");
     
+    /*
     createTooltip("#dev-pts > div:nth-child(1) > h2:nth-child(2)", "Pontos de Desenvolvimento de Aerodinâmica");
     createTooltip("#dev-pts > div:nth-child(2) > h2:nth-child(2)", "Pontos de Desenvolvimento de Engenharia");
     createTooltip("#aero-pts-value","");
@@ -81,4 +82,5 @@ export function tooltips(){
         <p>Qtd de Empregados: ${(employees_pts*100).toFixed(1)}%</p>
         <p>Moral da Equipe: ${Math.round(team.teamMorale)}%</p>
     `);
+    */
 }
