@@ -120,17 +120,17 @@
 
 #view-driver {
     display: flex;
+    align-items: flex-start;
+    height: 100%;
 }
 #view-driver table{
-    margin-bottom: 10px;
     min-width: 300px;
-    padding: 0;
-    height: fit-content;
     border-collapse: collapse;
     border: 2px solid #222;
 }
 #view-driver th{
     padding: 10px;
+    height: 0;
     font-family: "F1";
     background-color: #5c5c5c;
     color: #f5f5f5;
@@ -140,9 +140,9 @@
     margin: 0;
 }
 #view-driver-driver-img {
+    border: 2px solid #333;
     height: 300px;
-    border: 1px solid #333;
-    margin: 5px;
+    height: -webkit-fill-available;
 }
 #view-driver td {
     text-align: start;
@@ -382,6 +382,7 @@
 #negotiate-market{
     display: flex;
     justify-content: space-evenly;
+    height: 100%;
 }
 #negotiate-market select{
     padding: 10px;

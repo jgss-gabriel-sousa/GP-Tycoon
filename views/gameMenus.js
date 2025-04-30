@@ -7,6 +7,12 @@ import { CreateStandings } from "../scripts/championship/create-standings.js";
 import { LOC } from "../scripts/translation.js";
 import { MenuTeam } from "./menus/menu-team.js";
 import { MenuCarDevelopment } from "./menus/menu-car-development.js";
+import { viewGameOptions } from "./viewGameOptions.js";
+import { saveGame } from "./start-load-save.js";
+import { RunRaceSimulation } from "../scripts/championship/run-race-simulation.js";
+import { viewFinancialReport } from "./viewFinancialReport.js";
+import { viewReputation } from "./viewReputation.js";
+import { addButtonEvent } from "../scripts/events.js";
 
 export function startGameScreens(){
     setInterfaceColors();
@@ -17,6 +23,12 @@ export function startGameScreens(){
     MenuCarDevelopment();
 
     document.querySelector(`#menu-team`).style.display = "flex";
+
+    addButtonEvent("#btn-play", () => RunRaceSimulation());
+    addButtonEvent("#btn-save-game", saveGame);
+    addButtonEvent("#btn-options", viewGameOptions);
+    addButtonEvent("#money", () => viewFinancialReport(game.team));
+    addButtonEvent("#reputation", () => viewReputation(game.team));
 }
 
 

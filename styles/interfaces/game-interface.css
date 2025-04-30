@@ -7,6 +7,7 @@
     color: var(--text);
     align-items: flex-start;
     display: none;
+    height: 100%;
 }
 
 #topbar-buttons {

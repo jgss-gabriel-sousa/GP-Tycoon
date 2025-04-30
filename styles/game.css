@@ -1,5 +1,3 @@
-@import url("./game/drivers.css");
-
 #button-list {
     height: 100vh;
 }
@@ -83,6 +81,9 @@
     font-size: 12px;
     margin: 5px 0;
 }
+.bars-table tr {
+    height: 20px;
+}
 .bars-table td {
     padding: 0;
     text-align: start;
@@ -103,13 +104,6 @@
 
 
 @media (max-width: 1200px) {
-    h1, h2, td, th, 
-    #new-car th, 
-    .btn-eng-name,
-    #new-car > tbody > tr:nth-child(7) > td:nth-child(2),
-    #engineers-name > tbody > tr:nth-child(2) > td > button {
-        font-size: 10px;
-    }
     p {
         font-size: 8px;
     }
@@ -124,10 +118,6 @@
     }
     .slider {
         width: 80px;
-    }
-    button {
-        padding: 2px;
-        font-size: 10px;
     }
     #engineering th, #development th {
         font-size: 10px;

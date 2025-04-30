@@ -5,9 +5,11 @@
     display: flex;
     width: calc(100% - 2em);
     margin: 0 1em;
+    height: 100%;
 }
 
 .game-menu {
     display: none;
     margin: 5px;
+    width: 100%;
 }
