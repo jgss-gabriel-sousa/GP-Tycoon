@@ -1,11 +1,11 @@
-import { game, startGameData } from "../scripts/game.js";
+import { game, initGameData } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { changeScreen } from "../scripts/screens.js"
 import { Championship, Championship_Init } from "../scripts/championship.js";
 import { createTooltip } from "../scripts/tooltips.js";
 import { viewEditor } from "./viewEditor.js";
 import { newGame } from "./startGame.js";
-import { startGameScreens } from "./gameMenus.js";
+import { initGameScreens, updateGameScreens } from "./gameMenus.js";
 
 
 export function loadGameScreen(){
@@ -60,8 +60,8 @@ export function loadGameScreen(){
             
 
             changeScreen("game-interface");
-            genTeamMainMenu();
-            startGameScreens();
+            updateGameScreens();
+            initGameScreens();
         }
         else if(result.isDenied){
             deleteGame(document.querySelector("#select-team").value, savedGames);

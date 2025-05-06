@@ -1,6 +1,7 @@
 import { game } from "../scripts/game.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { NumberF } from "../scripts/utils.js";
+import { updateGameScreens } from "./gameMenus.js";
 
 export function viewBank(){
     let html = "";
@@ -85,7 +86,7 @@ export function viewBank(){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(e => {
-        genTeamMainMenu();
+        updateGameScreens();
     });
 
 

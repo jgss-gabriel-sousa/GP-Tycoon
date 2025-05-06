@@ -4,6 +4,7 @@ import { genTeamMainMenu } from "./mainMenu.js";
 import { viewDriver } from "./viewDriver.js";
 import { viewEng } from "./viewEng.js"
 import { getNewsSchema } from "./news/newsSchemas.js";
+import { updateGameScreens } from "./gameMenus.js";
 
 export function viewNews(){
     const news = game.news;
@@ -44,7 +45,7 @@ export function viewNews(){
         focusConfirm: false,
         showConfirmButton: false,
     }).then(e => {
-        genTeamMainMenu();
+        updateGameScreens();
     });
 
 

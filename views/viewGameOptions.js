@@ -1,5 +1,6 @@
 import { audio } from "../scripts/audio.js";
 import { game } from "../scripts/game.js";
+import { updateGameScreens } from "./gameMenus.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 
 export function viewGameOptions(){
@@ -62,6 +63,6 @@ export function viewGameOptions(){
 
     document.querySelector("#ui-team-colors input").addEventListener("change", () => {
         game.settings["ui-team-colors"] = document.querySelector("#ui-team-colors input").checked;
-        genTeamMainMenu();
+        updateGameScreens();
     });
 }

@@ -6,6 +6,7 @@ import { contractApprobationCalc, getSalary } from "../scripts/drivers.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { publishNews } from "./viewNews.js";
 import { LOC } from "../scripts/translation.js";
+import { updateGameScreens } from "./gameMenus.js";
 
 export function viewDriver(name, returnToMarket, scrollPos){
     let html = "";
@@ -292,7 +293,7 @@ function negotiate(driverName, returnToMarket){
                     });
                 }
                 
-                genTeamMainMenu();
+                updateGameScreens();
             }
         }
         else if(result.isDenied){

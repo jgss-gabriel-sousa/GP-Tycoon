@@ -5,22 +5,23 @@ import { tooltips } from "../scripts/tooltips.js";
 import { display } from "../scripts/display.js";
 import { CreateStandings } from "../scripts/championship/create-standings.js";
 import { LOC } from "../scripts/translation.js";
-import { MenuTeam } from "./menus/menu-team.js";
-import { MenuCarDevelopment } from "./menus/menu-car-development.js";
+import { initMenuTeam, updateMenuTeam } from "./menus/menu-team.js";
+import { initMenuCarDevelopment, updateMenuCarDevelopment } from "./menus/menu-car-development.js";
 import { viewGameOptions } from "./viewGameOptions.js";
 import { saveGame } from "./start-load-save.js";
 import { RunRaceSimulation } from "../scripts/championship/run-race-simulation.js";
 import { viewFinancialReport } from "./viewFinancialReport.js";
 import { viewReputation } from "./viewReputation.js";
 import { addButtonEvent } from "../scripts/events.js";
+import { genTeamMainMenu } from "./mainMenu.js";
 
-export function startGameScreens(){
+export function initGameScreens(){
     setInterfaceColors();
 
     document.querySelector("#menu-container").innerHTML = ""
 
-    MenuTeam();
-    MenuCarDevelopment();
+    initMenuTeam();
+    initMenuCarDevelopment();
 
     document.querySelector(`#menu-team`).style.display = "flex";
 
@@ -29,6 +30,17 @@ export function startGameScreens(){
     addButtonEvent("#btn-options", viewGameOptions);
     addButtonEvent("#money", () => viewFinancialReport(game.team));
     addButtonEvent("#reputation", () => viewReputation(game.team));
+
+    tooltips();
+}
+
+export function updateGameScreens(){
+    updateMenuTeam();
+    updateMenuCarDevelopment();
+    
+    setInterfaceColors();
+
+    genTeamMainMenu() //OLD GEN
 }
 
 
@@ -50,7 +62,7 @@ function setInterfaceColors(){
     }
 }
 
-
+/*
 export function genTeamMainMenu(){
     game.championship["CreateStandings"] = CreateStandings;
     genDriversHTML();
@@ -128,4 +140,4 @@ export function genTeamMainMenu(){
     }
 
     tooltips();
-};
+};*/

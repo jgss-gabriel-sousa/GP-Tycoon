@@ -5,6 +5,7 @@ import { CalcTeamDevPoints, CalcTeamMorale } from "../scripts/teams.js";
 import { genTeamMainMenu as genTeamMainMenu } from "./mainMenu.js";
 import { viewMarketEng } from "./viewMarket.js";
 import { createTooltip } from "../scripts/tooltips.js";
+import { updateGameScreens } from "./gameMenus.js";
 
 export function viewEng(name, returnToMarket, scrollPos){
     let html = "";
@@ -169,7 +170,7 @@ function dismissEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamMainMenu();
+        updateGameScreens();
     });
 }
 
@@ -264,7 +265,7 @@ function contractEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamMainMenu();
+        updateGameScreens();
     });
 }
 
@@ -379,7 +380,7 @@ function changeEng(name){
         }
         
         CalcTeamDevPoints(game.team);
-        genTeamMainMenu();
+        updateGameScreens();
     });
     
     const buttonMappings = {

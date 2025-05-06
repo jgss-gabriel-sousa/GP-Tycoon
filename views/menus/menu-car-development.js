@@ -1,4 +1,4 @@
-export function MenuCarDevelopment(){
+export function initMenuCarDevelopment(){
     document.querySelector("#menu-container").innerHTML += `
     <div class="game-menu" id="menu-car-development">
         <div id="car" class="bars-table">
@@ -10,4 +10,9 @@ export function MenuCarDevelopment(){
         </div>
     </div>
     `
+}
+
+
+export function updateMenuCarDevelopment(){
+
 }

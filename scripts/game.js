@@ -13,6 +13,7 @@ import { SoundStart } from "./audio.js";
 import { StartTeamsStats } from "./teams/startTeamStats.js";
 import { circuitsData } from "../data/circuits.js";
 import { sponsorsData } from "../data/sponsorsData.js";
+import { updateGameScreens } from "../views/gameMenus.js";
 
 export const game = {
     settings: {},
@@ -84,37 +85,31 @@ function gameBootstrap(){
 
 } gameBootstrap();
 
-export function startGameData(){
+export function initGameData(){
     //game.drivers = driversData;
     //game.teams = teamsData;
     game.engineers = engineersData;
     
-    StartGameData();
+    StartEngines();
+    StartCircuits();
+    StartSponsors();
     
     StartEngStats();
     StartTeamsStats();
     startDriversStats();
 }
 
-
-function StartGameData(){
-    StartEngines();
-    StartCircuits();
-    StartSponsors();
+function StartEngines(){
+    game.engines = Object.assign({}, enginesData, game.engines);
+}
     
-    function StartEngines(){
-        game.engines = Object.assign({}, enginesData, game.engines);
-    }
-    
-    function StartCircuits(){
-        game.circuits = Object.assign({}, circuitsData, game.circuits);
-    }
-
-    function StartSponsors(){
-        game.sponsors = Object.assign({}, sponsorsData, game.sponsors);
-    }
+function StartCircuits(){
+    game.circuits = Object.assign({}, circuitsData, game.circuits);
 }
 
+function StartSponsors(){
+    game.sponsors = Object.assign({}, sponsorsData, game.sponsors);
+}
 
 function loadGameSettings(){
     let settings;
@@ -293,5 +288,5 @@ export function YearUpdate(){
     game.championship.results = {};
     game.championship.teamStandings = [];
 
-    genTeamMainMenu();
+    updateGameScreens();
 }

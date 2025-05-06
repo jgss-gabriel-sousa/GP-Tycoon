@@ -1,10 +1,10 @@
-import { game, startGameData } from "../scripts/game.js";
+import { game, initGameData } from "../scripts/game.js";
 import { changeScreen } from "../scripts/screens.js";
-import { startGameScreens } from "./gameMenus.js";
+import { initGameScreens, updateGameScreens } from "./gameMenus.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 
 export function newGame(){
-    startGameData();
+    initGameData();
 
     const teams = game.championship.teams;
     teams.sort();
@@ -40,6 +40,6 @@ export function newGame(){
 
 function startup(){
     changeScreen("game-interface");
-    startGameScreens();
-    genTeamMainMenu();
+    initGameScreens();
+    updateGameScreens();
 }

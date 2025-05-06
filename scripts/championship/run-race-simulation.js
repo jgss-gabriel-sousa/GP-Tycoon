@@ -4,6 +4,7 @@ import { genTeamMainMenu } from "../../views/mainMenu.js";
 import { BeforeRaceUpdateTeamsStats, UpdateTeamAfterRace } from "../teams.js";
 import { seasonOverviewUI } from "../ui.js";
 import { simulateOthersSeries } from "../othersSeries.js";
+import { updateGameScreens } from "../../views/gameMenus.js";
 
 export const RunRaceSimulation = () => {
     if(game.championship.actualRound > Championship.tracks.length){
@@ -161,7 +162,7 @@ export const RunRaceSimulation = () => {
         Championship.actualRound++;
 
         UpdateTeamAfterRace();
-        genTeamMainMenu();
+        updateGameScreens();
 
         Championship.race = {
             grid: {},

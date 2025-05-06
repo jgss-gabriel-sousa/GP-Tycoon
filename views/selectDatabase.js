@@ -1,5 +1,5 @@
 import { Championship_Init } from "../scripts/championship.js";
-import { game, startGameData } from "../scripts/game.js";
+import { game, initGameData } from "../scripts/game.js";
 import { createTooltip } from "../scripts/tooltips.js";
 import { newGame } from "./startGame.js";
 
@@ -50,7 +50,7 @@ export async function selectDatabase(){
             DBs[key] = dbs[key];
         }
 
-    }getDBsSaved();
+    } getDBsSaved();
 
     async function getDBsOnline(){
         try {
