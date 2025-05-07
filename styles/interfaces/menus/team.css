@@ -197,6 +197,9 @@
 #academy-drivers .btn-driver-name{
     margin: 2px;
 }
+#test-driver > button {
+    margin: 2px;
+}
 
 #test-driver .btn-driver-name:hover,
 #academy-drivers .btn-driver-name:hover {
