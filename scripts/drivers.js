@@ -31,6 +31,10 @@ function genDriver(){
 
     } while(game.drivers.hasOwnProperty(name));
 
+    if(driver.hasOwnProperty("birthYear")){
+        driver.age = game.year - driver.birthYear;
+    }
+
     let driver = {};
     driver.name = name;
     driver.country = country
