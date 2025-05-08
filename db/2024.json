@@ -6,7 +6,20 @@
         "budgetCap": 135000,
         "pointsSystem": [25,18,15,12,10,8,6,4,2,1],
         "minDriversInTeams": 2,
-        "maxDriversInTeams": 2
+        "maxDriversInTeams": 2,
+        "historic": [
+            {
+                "year": 2023,
+                "driverChampion": "Max Verstappen",
+                "driverCountry": "NL",
+                "driverTeam": "Red Bull Racing",
+                "driverEngine": "Honda RBPT",
+    
+                "constructorChampion": "Red Bull Racing",
+                "constructorCountry": "AT",
+                "constructorEngine": "Honda RBPT"
+            }
+        ]
     },
     "teams": {
         "Red Bull": {
