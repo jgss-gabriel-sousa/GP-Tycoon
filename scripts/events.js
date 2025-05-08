@@ -29,7 +29,10 @@ addButtonEvent("#load-game", loadGameScreen);
 addButtonEvent("#editor", editorScreen);
 
 function handleClassClick(event) {
-    const btn = event.target;
+    const btn = event.target.closest("button");
+
+    if (!btn) return;
+
     const classActionMap = {
         "view-driver": viewDriver,
         "view-eng": viewEng,

@@ -38,7 +38,10 @@ function gameMenuManager(){
     
     els.forEach(el => {
         el.addEventListener("click", (e) => {
-            gameMenuChange(e.target.id);
+            const button = e.target.closest("button");
+            if(button){
+                gameMenuChange(button.id);
+            }
         });
     });
 } gameMenuManager();

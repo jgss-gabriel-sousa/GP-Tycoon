@@ -222,7 +222,6 @@ abbr {
 }
 
 .swal2-container.swal2-center>.swal2-popup {
-    max-height: 75vh;
     align-content: space-between !important;
 }
 

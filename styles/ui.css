@@ -141,8 +141,7 @@
 }
 #view-driver-driver-img {
     border: 2px solid #333;
-    height: 300px;
-    height: -webkit-fill-available;
+    height: 400px;
 }
 #view-driver td {
     text-align: start;
