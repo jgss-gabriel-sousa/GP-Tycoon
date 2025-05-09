@@ -157,128 +157,9 @@ export function genEngHTML(){
     el.innerHTML = html;
 }
 
-
-export function genDevelopmentHTML(){
-    const el = document.querySelector("#development");
-    let html = "";
-
-    const team = game.teams[game.team];
-    const eng = game.engineers;
-
-    html = `
-    <div>
-        <h1>Desenvolvimento</h1>
-        <table>
-            <tr><th colspan="2">Foco de Desenvolvimento</th></tr>
-            <tr>
-                <td colspan="2">Temporada Atual</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-dev-focus-actual-season" class="slider" type="range" min="30" value="${team.devFocusActualSeason}" step="5" max="70"></td>
-                <td id="dev-focus-actual">${team.devFocusActualSeason}%</td>
-            </tr>
-
-            <tr>
-                <td colspan="2">Próxima Temporada</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-dev-focus-next-season" class="slider" type="range" min="30" value="${team.devFocusNextSeason}" step="5" max="70"></td>
-                <td id="dev-focus-next">${team.devFocusNextSeason}%</td>
-            </tr>
-        </table>
-
-        <table id="investments">
-            <tr><th colspan="2">Investimentos</th></tr>
-            <tr>
-                <td colspan="2">Aerodinâmica</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-investment-aerodynamics" class="slider" type="range" min="500" value="${team.investments.aerodynamics}" step="250" max="5000"></td>
-                <td id="investment-aerodynamics">${NumberF(team.investments.aerodynamics *1000,"ext-short",0)}</td>
-            </tr>
-
-            <tr>
-                <td colspan="2">Downforce</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-investment-downforce" class="slider" type="range" min="500" value="${team.investments.downforce}" step="250" max="5000"></td>
-                <td id="investment-downforce">${NumberF(team.investments.downforce *1000,"ext-short",0)}</td>
-            </tr>
-
-            <tr>
-                <td colspan="2">Peso</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-investment-weight" class="slider" type="range" min="500" value="${team.investments.weight}" step="250" max="5000"></td>
-                <td id="investment-weight">${NumberF(team.investments.weight *1000,"ext-short",0)}</td>
-            </tr>
-
-            <tr>
-                <td colspan="2">Confiabilidade</td>
-            </tr>
-            <tr class="slidercontainer">
-                <td><input id="slider-investment-reliability" class="slider" type="range" min="500" value="${team.investments.reliability}" step="250" max="5000"></td>
-                <td id="investment-reliability">${NumberF(team.investments.reliability *1000,"ext-short",0)}</td>
-            </tr>
-            <tr>
-                <td class="total-investments">Total da Próxima Corrida: </td>
-                <th id="race-total-investment">${NumberF((team.investments.aerodynamics+team.investments.downforce+team.investments.weight+team.investments.reliability) *1000,"ext-short",0)}</th>
-            </tr>
-            <tr>
-                <th class="total-investments">Total da Temporada: </th>
-                <th id="total-investment">${NumberF(team.totalInvestments *1000,"ext-short",0)}</th>
-            </tr>
-            `
-    
-    if(game.championship.budgetCap > 0){
-        html += `
-            <tr>
-                <th class="total-investments">Restante para o Teto: </th>
-                <th id="total-investment">${NumberF((game.championship.budgetCap-team.totalInvestments) *1000,"ext-short",0)}</th>
-            </tr>
-            <tr>
-                <th class="total-investments">Teto de Gastos: </th>
-                <th id="budget-cap">${NumberF(game.championship.budgetCap *1000,"ext-short",0)}</th>
-            </tr>
-            `
-    }
-        
-    html += `
-        </table>
-    </div>`;
-    el.innerHTML = html;
-}
-
 export function genTeamMainMenu(){
     game.championship["CreateStandings"] = CreateStandings;
     //genEngHTML();
-    //genDevelopmentHTML();
-
-    const teams = game.teams;
-    const team = teams[game.team];
-
-    document.querySelector("#team-logo").src = "./img/teams/"+game.team+".png";
-
-    document.querySelector("#year").innerText = `${game.year}`;
-    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(team.country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
-    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(team.supporters * 1000000,"ext-short",0)}</p>`;
-    
-    let reputationHTML = "<div>"
-    let remainingStars = team.reputation;
-    for(let i = 0; i < 5; i++, remainingStars -= 1) {
-        if(remainingStars > 0 && remainingStars >= 1){
-            reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
-        }
-        else if(remainingStars == 0.5){
-            reputationHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
-        }
-        else{
-            reputationHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
-        }
-    }
-    reputationHTML += "</div>"
-    document.querySelector("#reputation").innerHTML = reputationHTML;
 
     while(game.news.length > 99){
         game.news.pop();
@@ -297,24 +178,6 @@ export function genTeamMainMenu(){
         //document.querySelector("#btn-news span").classList.remove("no-news");
     }
 
-
-    if(game.championship.actualRound <= game.championship.tracks.length){
-        const nextRace = game.championship.tracks[game.championship.actualRound-1];
-        let trackStyle;
-
-        if(game.circuits[nextRace].straights > 60) trackStyle = "Retas";
-        else if(game.circuits[nextRace].straights < 40) trackStyle = "Curvas";
-        else trackStyle = "Equilibrado";
-
-        document.querySelector("#next-race-name").innerHTML = `
-        <h2><img class="country-flag" src="img/flags/${accentsTidy(game.circuits[nextRace].country)}.webp">GP ${nextRace}</h2>
-        <img id="next-race-track-img" src="img/ui/tracks/${game.circuits[nextRace].circuit.toLowerCase()}.png" width="70px">
-        <h2>${game.circuits[nextRace].circuit}</h2><small>${trackStyle}</small>`;
-    }
-    else{
-        document.querySelector("#next-race-name").innerHTML = `Resumo da Temporada`;
-    }
-    
     for(let i = 0; i < document.querySelectorAll(".slider").length; i++){
         const el = document.querySelectorAll(".slider")[i];
         
