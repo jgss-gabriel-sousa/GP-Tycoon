@@ -59,6 +59,10 @@ export function NumberF(number,format,precision){
     }
     
     if (format == "ext-short") {
+        if (number === 0) {
+            return "-";
+        }
+        
         let value = "";
         const T = Math.floor(number / 1_000_000_000_000);
         const B = Math.floor((number % 1_000_000_000_000) / 1_000_000_000);

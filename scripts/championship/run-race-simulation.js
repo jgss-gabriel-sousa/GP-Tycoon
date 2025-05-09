@@ -13,9 +13,6 @@ export const RunRaceSimulation = () => {
         return;
     }
 
-    console.log(game.championship)
-    console.log(Championship)
-
     BeforeRaceUpdateTeamsStats();
 
     const raceName = Championship.tracks[Championship.actualRound-1];

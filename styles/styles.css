@@ -173,7 +173,7 @@ abbr {
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
-    width: 100px;
+    margin: 8px 0;
 }
 
 .slider:hover {

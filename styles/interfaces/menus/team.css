@@ -221,6 +221,13 @@
     display: flex;
     flex-direction: column;
 }
+#menu-buttons button {
+    display: flex;
+    align-items: center;
+}
+#menu-buttons button img {
+    margin-right: 5px;
+}
 
 #btn-news span {
     background-color: #ff3434;
