@@ -1,5 +1,6 @@
 @import url("./menus/team.css");
 @import url("./menus/car-development.css");
+@import url("./menus/standings.css");
 
 #menu-container {
     display: flex;

@@ -1,0 +1,132 @@
+#menu-standings {
+    width: 100vw;
+    overflow-x: auto;
+}
+
+#drivers-standings-container {
+    margin-right: 0.5em;
+}
+
+#season-overview table{
+    color: #202122;
+    border-collapse: collapse;
+    border: 1px solid #222;
+    background-color: #f8f9fa;
+    text-align: center;
+    font-size: 12px;
+}
+#season-overview td{
+    border: 1px solid #cbcbcc;
+    border-bottom: 1px solid #888;
+    padding: 0.2em 0.4em;
+    white-space: nowrap;
+}
+#season-overview th{
+    background-color: #101014;
+    color: #f8f9fa;
+    border: 1px solid #222;
+    padding: 0.1em 0.2em;
+    white-space: nowrap;
+    max-width: 35px;
+}
+#season-overview td:nth-child(2){
+    font-weight: bold;
+}
+#season-overview tr:hover{
+    background-color: #ffff99;
+    font-weight: bold;
+}
+#season-overview td:nth-child(2){
+    max-width: fit-content;
+}
+
+#season-overview td:first-child,
+#season-overview td:last-child
+{
+    background-color: #eaecf0;
+    background-color: #101014;
+    color: #f8f9fa;
+    border: 1px solid #222;
+    text-align: center;
+}
+
+#season-overview .country-flag,
+#team-standings .country-flag 
+{
+    width: 20px;
+    height: 13.3px;
+}
+
+.first-position {
+    background-color: #FFFFBF;
+}
+.second-position {
+    background-color: #DFDFDF;
+}
+.third-position {
+    background-color: #FFDF9F;
+}
+.scorer-position {
+    background-color: #DFFFDF;
+}
+.non-scorer-position {
+    background-color: #CFCFFF;
+}
+.retired-position {
+    background-color: #EFCFFF;
+}
+
+
+#team-standings{
+    border-collapse: collapse;
+    background-color: #f8f9fa;
+    color: #202122;
+    text-align: center;
+    font-size: 12px;
+}
+#team-standings th{
+    background-color: #101014;
+    color: #eaecf0;
+    border: 1px solid #222;
+    padding: 0.2em 0.4em;
+    white-space: nowrap;
+}
+#team-standings tr{
+    border-top: 1px solid #3c4043;
+}
+#team-standings tr:nth-child(even){
+    background-color: #f0f0f0;
+}
+#team-standings td{
+    border: 1px solid #222;
+    padding: 0.2em 0.4em;
+    max-width: 100px;
+}
+#team-standings tr:hover{
+    background-color: #ffff99;
+    font-weight: bold;
+}
+#team-standings td:first-child{
+    background-color: #101014;
+    color: #eaecf0;
+    max-width: 50px;
+    padding: 0.2em;
+    font-weight: bold;
+}
+#team-standings td:nth-child(2){
+    font-weight: bold;
+    text-align: center;
+}
+#team-standings td:nth-child(3){
+    max-width: 50px;
+    padding: 0.2em;
+}
+
+@media (max-width: 1550px) {
+    #season-overview table {
+        font-size: 10px;
+    }
+    #team-standings {
+        font-size: 10px;
+    }
+}
