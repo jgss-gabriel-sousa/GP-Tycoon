@@ -14,6 +14,7 @@ import { viewFinancialReport } from "./viewFinancialReport.js";
 import { viewReputation } from "./viewReputation.js";
 import { addButtonEvent } from "../scripts/events.js";
 import { genTeamMainMenu } from "./mainMenu.js";
+import { initMenuStandings, updateMenuStandings } from "./menus/menu-standings.js";
 
 export function initGameScreens(){
     setInterfaceColors();
@@ -22,6 +23,7 @@ export function initGameScreens(){
 
     initMenuTeam();
     initMenuCarDevelopment();
+    initMenuStandings();
 
     document.querySelector(`#menu-team`).style.display = "flex";
 
@@ -37,6 +39,7 @@ export function initGameScreens(){
 export function updateGameScreens(){
     updateMenuTeam();
     updateMenuCarDevelopment();
+    updateMenuStandings();
     
     setInterfaceColors();
 
