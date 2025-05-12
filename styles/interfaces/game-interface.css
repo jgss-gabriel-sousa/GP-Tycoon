@@ -15,6 +15,7 @@
     justify-content: center;
     width: 100%;
     justify-content: space-evenly;
+    align-items: baseline;
 }
 #topbar-buttons button {
     display: flex;
@@ -49,6 +50,24 @@
     filter: invert(100%);
     margin: 0 4px 0 0;
     width: 18px;
+}
+#topbar-buttons button:first-child img{
+    margin: 0;
+    filter: invert(0%);
+}
+#topbar-buttons button:first-child{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #c5c5c5;
+    padding: 5px;
+    margin: 3px;
+    transition: background-color 0.25s;
+}
+#topbar-buttons button:first-child:hover {
+	background-color: #ddd;
+    font-weight: bold;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 2px black);
 }
 
 .interface {

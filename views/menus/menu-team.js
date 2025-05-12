@@ -1,6 +1,6 @@
 import { game } from "../../scripts/game.js";
 import { LOC } from "../../scripts/translation.js";
-import { UpdateDataInfo } from "../../scripts/ui.js";
+import { starsRating, UpdateDataInfo } from "../../scripts/ui.js";
 import { accentsTidy, NumberF } from "../../scripts/utils.js";
 
 export function initMenuTeam(){
@@ -19,22 +19,18 @@ export function initMenuTeam(){
                     <div id="money" class="view-financial-report no-select"></div>
                     <div id="supporters" class="no-select"><p></p></div>
                 </div>
-                <div id="next-race">
-                    <h1>Próxima Corrida</h1>
-                    <div id="next-race-name"></div>
-                    <button id="btn-play"><span>Continuar</span></button>
-                </div>
+            </div>
+            <div id="next-race">
+                <h1>Próxima Corrida</h1>
+                <div id="next-race-name"></div>
+                <button id="btn-play"><span>Continuar</span></button>
             </div>
         </div>
 
-        <div id="team-details">
-            <div id="drivers-section">
-                <div id="drivers"></div>
-                <div id="car" class="bars-table">
-                    <div id="car-info"></div>
-                    <div id="chassis"></div>
-                    <div id="engine"></div>
-                </div>
+        <div id="drivers-section">
+            <div id="principal-drivers"></div>
+            <div id="secundary-drivers">
+                <div id="test-drivers-container"></div>
             </div>
         </div>
 
@@ -49,36 +45,15 @@ export function initMenuTeam(){
 
 
 export function updateMenuTeam(){
-    genDriversHTML();
-    genCarHTML();
+    genPrincipalDriversHTML();
+    genSecondaryDriversHTML();
+    //genCarHTML();
+    genTeamInfosHTML();
+    genNextRaceHTML();
+}
 
-    const teams = game.teams;
-    const team = teams[game.team];
 
-    document.querySelector("#team-logo").src = "./img/teams/"+game.team+".png";
-
-    document.querySelector("#year").innerText = `${game.year}`;
-    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(team.country)}.webp"> ${game.team}`;
-    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
-    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(team.supporters * 1000000,"ext-short",0)}</p>`;
-    
-    let reputationHTML = "<div>"
-    let remainingStars = team.reputation;
-    for(let i = 0; i < 5; i++, remainingStars -= 1) {
-        if(remainingStars > 0 && remainingStars >= 1){
-            reputationHTML += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
-        }
-        else if(remainingStars == 0.5){
-            reputationHTML += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
-        }
-        else{
-            reputationHTML += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
-        }
-    }
-    reputationHTML += "</div>"
-    document.querySelector("#reputation").innerHTML = reputationHTML;
-
-    
+function genNextRaceHTML(){
     if(game.championship.actualRound <= game.championship.tracks.length){
         const nextRace = game.championship.tracks[game.championship.actualRound-1];
         let trackStyle;
@@ -98,8 +73,22 @@ export function updateMenuTeam(){
 }
 
 
-function genDriversHTML() {
-    const el = document.querySelector("#drivers");
+function genTeamInfosHTML(){
+    const teams = game.teams;
+    const team = teams[game.team];
+
+    document.querySelector("#team-logo").src = "./img/teams/"+game.team+".png";
+
+    document.querySelector("#year").innerText = `${game.year}`;
+    document.querySelector("#name").innerHTML = `<img class="country-flag" src="img/flags/${accentsTidy(team.country)}.webp"> ${game.team}`;
+    document.querySelector("#money").innerHTML = `<p><img class="icon" src="img/ui/money.png"> ${NumberF(team.cash * 1000,"ext",0)}</p>`;
+    document.querySelector("#supporters").innerHTML = `<p><img class="icon" src="img/ui/supporters.png"> ${NumberF(team.supporters * 1000000,"ext-short",0)}</p>`;
+    document.querySelector("#reputation").innerHTML = starsRating(team.reputation);
+}
+
+
+function genPrincipalDriversHTML() {
+    const el = document.querySelector("#principal-drivers");
     const team = game.teams[game.team];
     let html = "";
 
@@ -114,7 +103,6 @@ function genDriversHTML() {
         switch (index) {
             case 0: return LOC("1st_driver");
             case 1: return LOC("2nd_driver");
-            case 2: return LOC("test_driver");
             default: return "";
         }
     };
@@ -181,15 +169,31 @@ function genDriversHTML() {
         const driver = game.drivers[id];
         html += renderDriverCard(driver, index);
     });
+    
+    el.innerHTML = html;
+}
+
+
+function genSecondaryDriversHTML() {
+    const el = document.querySelector("#test-drivers-container");
+    const team = game.teams[game.team];
+    let html = "";
+
+    const getCareerStage = (driver) => {
+        if (driver.age < driver.careerPeak - 1 && driver.experience < 5) return "Novato";
+        if (driver.age < driver.careerPeak - 1) return "Em Ascensão";
+        if (driver.age <= driver.careerPeak + 1) return "Ápice";
+        return "Veterano";
+    };
 
     // Piloto de testes
     const testDriver = game.drivers[team.test_driver];
     const testAbility = Math.round((testDriver.speed + testDriver.pace) / 2);
 
     html += `
-    <div class="driver-card">
-        <div id="test-driver">
-            <h1>Piloto de Testes</h1>
+        <div id="test-driver" class="driver-card">
+            <h1>${LOC("test_driver")}</h1>
+            <img class="driver-card-portrait" src="img/drivers/${testDriver.image}.webp" onerror="this.onerror=null;this.src='img/drivers/generic.webp';">
             <button class="btn-driver-name view-driver" value="${testDriver.name}">
                 <img class="country-flag" src="img/flags/${accentsTidy(testDriver.country)}.webp"> ${testDriver.name}
             </button>
@@ -227,7 +231,7 @@ function genDriversHTML() {
     `;
 
     // Academia de pilotos
-    html += `<div id="academy-drivers"><h1>Academia de Pilotos</h1>`;
+    html += `<div id="academy-drivers" class="driver-card"><h1>Academia de Pilotos</h1>`;
     team.driversAcademy.forEach(id => {
         const driver = game.drivers[id];
         html += `
@@ -236,125 +240,8 @@ function genDriversHTML() {
             </button>
         `;
     });
-    html += `</div></div>`;
+    html += `</div>`;
 
     el.innerHTML = html;
 }
 
-
-function genCarHTML(){
-    const elCarInfo = document.querySelector("#car-info");
-    const elChassis = document.querySelector("#chassis");
-    const elEngine = document.querySelector("#engine");
-    let html = "";
-
-    const team = game.teams[game.team];
-    const car = team.car;
-
-    html = `
-    <table>
-        <h1>Carro</h1>
-        
-        <tr>
-            <td>Curvas:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(car.corners)}%;"><span>${Math.round(car.corners)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Retas:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(car.straights)}%;"><span>${Math.round(car.straights)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr><td><span>&shy;</span></td></tr>
-        <tr>
-            <td>Confiabilidade:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar"style="width:${Math.round(car.reliability)}%;"><span>${Math.round(car.reliability)}%</span></div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    `
-    elCarInfo.innerHTML = html;
-
-    html = `
-    <h1>Chassis</h1>
-    <table>
-        <tr>
-            <td>Aerodinâmica:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(car.aerodynamic)}%;"><span>${Math.round(car.aerodynamic)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Downforce:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(car.downforce)}%;"><span>${Math.round(car.downforce)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Peso:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(car.weight)}%;"><span>${Math.round(car.weight)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr><td><span>&shy;</span></td></tr>
-        <tr>
-            <td>Confiabilidade:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar"style="width:${Math.round(car.chassisReliability)}%;"><span>${Math.round(car.chassisReliability)}%</span></div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    `
-    elChassis.innerHTML = html;
-    
-    const engine = game.engines[game.teams[game.team].engine];
-    html = `
-    <h1>Motor</h1>
-    <table>
-        <h2>${game.teams[game.team].engine}</h2>
-        <tr>
-            <td>Potência:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(engine.power)}%;"><span>${Math.round(engine.power)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>Dirigibilidade:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar" style="width:${Math.round(engine.drivability)}%;"><span>${Math.round(engine.drivability)}%</span></div>
-                </div>
-            </td>
-        </tr>
-        <tr><td><span>&shy;</span></td></tr>
-        <tr>
-            <td>Confiabilidade:</td>
-            <td>
-                <div class="progress-bar-background">
-                    <div class="progress-bar"style="width:${Math.round(engine.reliability)}%;"><span>${Math.round(engine.reliability)}%</span></div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    `
-    elEngine.innerHTML = html;
-}

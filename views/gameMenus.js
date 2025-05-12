@@ -15,6 +15,7 @@ import { viewReputation } from "./viewReputation.js";
 import { addButtonEvent } from "../scripts/events.js";
 import { genTeamMainMenu } from "./mainMenu.js";
 import { initMenuStandings, updateMenuStandings } from "./menus/menu-standings.js";
+import { initMenuTechnicalTeam } from "./menus/menu-tecnical-team.js";
 
 export function initGameScreens(){
     setInterfaceColors();
@@ -23,6 +24,7 @@ export function initGameScreens(){
 
     initMenuTeam();
     initMenuCarDevelopment();
+    initMenuTechnicalTeam();
     initMenuStandings();
 
     document.querySelector(`#menu-team`).style.display = "flex";

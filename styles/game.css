@@ -51,27 +51,6 @@
     padding: 5px;
 }
 
-#car {
-    border: 2px solid var(--border);
-    text-align: center;
-    display: flex;
-    width: 100%;
-}
-#car > div{
-    background-color: var(--bg);
-    width: 100%;
-}
-#car > div:nth-child(n+2){
-    border-left: 2px solid var(--border);
-}
-#car > div > table {
-    border-spacing: 0px;
-    margin: 5px 0px;
-}
-#engine h2{
-    margin: 5px;
-    font-size: 12px;
-}
 
 .bars-table {
     display: flex;

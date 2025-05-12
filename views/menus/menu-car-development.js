@@ -8,9 +8,9 @@ export function initMenuCarDevelopment(){
             <div id="car-info"></div>
             <div id="chassis"></div>
             <div id="engine"></div>
-            <div id="engineering"></div>
-            <div id="development"></div>
         </div>
+        <div id="engineering" class="bars-table"></div>
+        <div id="development" class="bars-table"></div>
     </div>
     `
 }
@@ -18,7 +18,127 @@ export function initMenuCarDevelopment(){
 
 export function updateMenuCarDevelopment(){
     genDevelopmentHTML();
+    genCarHTML();
 }
+
+
+function genCarHTML(){
+    const elCarInfo = document.querySelector("#car-info");
+    const elChassis = document.querySelector("#chassis");
+    const elEngine = document.querySelector("#engine");
+    let html = "";
+
+    const team = game.teams[game.team];
+    const car = team.car;
+
+    html = `
+    <table>
+        <h1>Carro</h1>
+        
+        <tr>
+            <td>Curvas:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(car.corners)}%;"><span>${Math.round(car.corners)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Retas:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(car.straights)}%;"><span>${Math.round(car.straights)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr><td><span>&shy;</span></td></tr>
+        <tr>
+            <td>Confiabilidade:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${Math.round(car.reliability)}%;"><span>${Math.round(car.reliability)}%</span></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    `
+    elCarInfo.innerHTML = html;
+
+    html = `
+    <h1>Chassis</h1>
+    <table>
+        <tr>
+            <td>Aerodinâmica:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(car.aerodynamic)}%;"><span>${Math.round(car.aerodynamic)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Downforce:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(car.downforce)}%;"><span>${Math.round(car.downforce)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Peso:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(car.weight)}%;"><span>${Math.round(car.weight)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr><td><span>&shy;</span></td></tr>
+        <tr>
+            <td>Confiabilidade:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${Math.round(car.chassisReliability)}%;"><span>${Math.round(car.chassisReliability)}%</span></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    `
+    elChassis.innerHTML = html;
+    
+    const engine = game.engines[game.teams[game.team].engine];
+    html = `
+    <h1>Motor</h1>
+    <table>
+        <h2>${game.teams[game.team].engine}</h2>
+        <tr>
+            <td>Potência:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(engine.power)}%;"><span>${Math.round(engine.power)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Dirigibilidade:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar" style="width:${Math.round(engine.drivability)}%;"><span>${Math.round(engine.drivability)}%</span></div>
+                </div>
+            </td>
+        </tr>
+        <tr><td><span>&shy;</span></td></tr>
+        <tr>
+            <td>Confiabilidade:</td>
+            <td>
+                <div class="progress-bar-background">
+                    <div class="progress-bar"style="width:${Math.round(engine.reliability)}%;"><span>${Math.round(engine.reliability)}%</span></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    `
+    elEngine.innerHTML = html;
+}
+
 
 function genDevelopmentHTML(){
     const el = document.querySelector("#development");

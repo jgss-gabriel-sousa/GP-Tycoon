@@ -1,3 +1,26 @@
+#car {
+    border: 2px solid var(--border);
+    text-align: center;
+    display: flex;
+    height: fit-content;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: fit-content;
+}
+#car > div{
+    background-color: var(--bg);
+}
+#car > div:nth-child(n+2){
+    border-left: 2px solid var(--border);
+}
+#car > div > table {
+    border-spacing: 0px;
+    margin: 5px 0px;
+}
+#engine h2{
+    margin: 5px;
+    font-size: 12px;
+}
 
 #engineering > div {
     min-width: fit-content;
@@ -7,6 +30,7 @@
     text-align: center;
     border: 2px solid var(--border);
     background-color: var(--bg);
+    height: fit-content;
 }
 #engineering table,
 #development table {
@@ -99,6 +123,7 @@
     text-align: center;
     white-space: nowrap;
     background-color: var(--border);
+    height: fit-content;
 }
 #development div {
     border: 2px solid var(--border);
