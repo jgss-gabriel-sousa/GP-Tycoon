@@ -5,6 +5,26 @@ import { genEngHTML } from "../views/mainMenu.js"
 import { CreateStandings } from "./championship/create-standings.js"
 import { endSeason } from "./championship/end-season.js"
 
+
+export function starsRating(rating){
+    let html = "<div>"
+
+    for(let i = 0; i < 5; i++, rating -= 1) {
+        if(rating > 0 && rating >= 1){
+            html += `<span><iconify-icon icon="fa:star"></iconify-icon></span>`;
+        }
+        else if(rating == 0.5){
+            html += `<span><iconify-icon icon="fa:star-half-empty"></iconify-icon></span>`;
+        }
+        else{
+            html += `<span><iconify-icon icon="fa:star-o"></iconify-icon></span>`;
+        }
+    }
+    html += "</div>"
+    return html;
+}
+
+
 export function UpdateDataInfo(e){
     const team = game.teams[game.team];
 
